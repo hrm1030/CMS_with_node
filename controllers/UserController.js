@@ -25,14 +25,26 @@ var transporter = nodemailer.createTransport({
 });
 
 exports.info = function(req, res) {
-    res.render('pages/user/info', {title : 'CMS | Info', session : req.session, recent_url : req.url});
+    Training.findOne({type : 'info'}, (err, info) => {
+        res.render('pages/user/info', {title : 'CMS | Info', session : req.session, recent_url : req.url, info : info});
+    });
 }
 
 exports.training = function(req, res) {
-    Training.find({type : 'training'}, (err, trainings) => {
+    if(req.session.language)
+    {
+        var language = req.session.language;
+    } else {
+        var language = 'EN';
+    }
+    Training.find({
+        type : 'training',
+        language : language
+    }, (err, trainings) => {
         if(err) {
             console.log(err);
         } else {
+            console.log(trainings)
             res.render('pages/user/training', {title : 'CMS | Training', session : req.session, trainings : trainings, recent_url : req.url});
         }
     });
@@ -104,13 +116,59 @@ exports.search = function(req, res, next) {
     res.render('pages/user/search', {title : 'CMS | Search', session : req.session, recent_url : req.url});
 }
 
+exports.search_all = function(req, res) {
+    Category.find({
+        language : req.session.language
+    }, (err, categories) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.json({categories : categories});
+        }
+    }).sort({name : 1});
+}
+exports.get_category = function(req, res) {
+    if(req.body.keyword == ''){
+        Category.find({}, (err, categories) => {
+            if(err) {
+                console.log(err);
+            } else {
+                res.json({categories : categories});
+            }
+        }).sort({name : 1});
+    } else {
+        Category.find({
+            language : req.session.language
+        }, (err, categories) => {
+            if(err) {
+                console.log(err);
+            }else {
+                var new_categories = Array();
+                for(var i = 0 ; i < categories.length ; i ++) 
+                {
+                    if(categories[i].name.toLowerCase().match(req.body.keyword.toLowerCase()+'.*') || categories[i].name.toLowerCase().match('^.*'+req.body.keyword.toLowerCase())) 
+                    {
+                        new_categories.push(categories[i]);
+                    }
+                }
+                res.json({categories : new_categories});
+            }
+        });
+    }
+    
+}
+
 exports.faq = function(req, res) {
-    Category.find({}, (err, categories) => {
+    Category.find({
+        language : req.session.language
+    }, (err, categories) => {
         if(err) {
             console.log(err);
         } else {
             
-                Faq.find({}, (err, faqs) => {
+                Faq.find({
+                    language : req.session.language
+                }, (err, faqs) => {
                     if(err) {
                         console.log(err);
                     } else {
@@ -205,7 +263,9 @@ exports.recommend_category_save = function(req, res) {
 }
 
 exports.ask_for_post = function(req, res) {
-    Category.find({}, (err, categories) => {
+    Category.find({
+        language : req.session.language
+    }, (err, categories) => {
         if(err) {
             console.log(err);
         } else {
@@ -216,6 +276,7 @@ exports.ask_for_post = function(req, res) {
 
 exports.ask_for_post_save = function(req, res) {
     Faq.create({
+        language : req.session.language,
         title : req.body.title,
         category : req.body.category,
         email : req.body.email,
@@ -245,43 +306,6 @@ exports.ask_for_post_save = function(req, res) {
     })
 }
 
-exports.search_all = function(req, res) {
-    Category.find({}, (err, categories) => {
-        if(err) {
-            console.log(err);
-        } else {
-            res.json({categories : categories});
-        }
-    }).sort({name : 1});
-}
-exports.get_category = function(req, res) {
-    if(req.body.keyword == ''){
-        Category.find({}, (err, categories) => {
-            if(err) {
-                console.log(err);
-            } else {
-                res.json({categories : categories});
-            }
-        }).sort({name : 1});
-    } else {
-        Category.find({}, (err, categories) => {
-            if(err) {
-                console.log(err);
-            }else {
-                var new_categories = Array();
-                for(var i = 0 ; i < categories.length ; i ++) 
-                {
-                    if(categories[i].name.toLowerCase().match(req.body.keyword.toLowerCase()+'.*') || categories[i].name.toLowerCase().match('^.*'+req.body.keyword.toLowerCase())) 
-                    {
-                        new_categories.push(categories[i]);
-                    }
-                }
-                res.json({categories : new_categories});
-            }
-        });
-    }
-    
-}
 
 exports.membership_update = function(req, res) {
     if(req.body.membership > 1) {

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
+    language : String,
     name : String,
     surname : String,
     phone : String,

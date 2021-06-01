@@ -13,14 +13,6 @@
                     
                 <% if(!session.token) {%>
                     <!-- <li><a href="/training">Training</a></li> -->
-                    <li>
-                        <a style="margin-top: -3px!important; padding-bottom: 0px!important;">
-                            <select name="country" id="select_lang" style="min-width: 50px; width: 100px;">
-                                <option value="EN">EN</option>
-                                <option value="GR">GR</option>
-                            </select>
-                        </a>
-                    </li>
                     <li <%if(recent_url == '/training') {%> class="active" <%}%>><a href="/training"><i class="icon-social-youtube"></i> Training</a></li>
                     <li <%if(recent_url == '/info') {%> class="active" <%}%>><a href="/info"><i class="icon-info"></i> Info</a></li>
                     <li <%if(recent_url == '/login') {%> class="active" <%}%>><a href="/auth/login"><i class="icon-login"></i> Sign in</a></li>
@@ -37,6 +29,7 @@
                     <li <%if(recent_url == '/search' || recent_url == 'post') {%> class="active" <%}%>><a href="/search"><i class="icon-magnifier"></i> Search</a></li>
                     <%}%>
                     <% if(session.permission == 1) {%>
+                        <li <%if(recent_url == '/admin/faq') {%> class="active" <%}%>><a href="/admin/faq"><i class="icon-question"></i> FAQ</a></li>    
                     <li <%if(recent_url == '/admin/videos') {%> class="active" <%}%>><a href="/admin/videos"><i class="icon-social-youtube"></i> Video Management</a></li>    
                     <li <%if(recent_url == '/admin') {%> class="active" <%}%>><a href="/admin"><i class="icon-equalizer"></i> Admin</a></li>
                     <%}%>

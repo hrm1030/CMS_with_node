@@ -38,36 +38,43 @@ $(document).ready(function() {
     }); //default
 
     var form_submit = function() {
-        $.ajax({
-            url : '/auth/signup',
-            method: 'post',
-            data : {
-                name : $('#name').val(),
-                surname : $('#surname').val(),
-                phone : $('#phone').val(),
-                email : $('#email').val(),
-                password : $('#password').val(),
-                repassword : $('#repassword').val(),
-                industry : $('input[name=industry]:checked').val()
-            },
-            success : function(data) {
-                var errors = data.errors;
-                console.log(errors)
-                if(errors.length > 0) {
-                    for(var i = 0 ; i < errors.length ; i ++){
-                        toastr['error'](errors[i]);
+        if($('input[name=industry]:checked').val() == undefined)
+        {
+            toastr['error']('Please select industry.');
+        } else {
+            $.ajax({
+                url : '/auth/signup',
+                method: 'post',
+                data : {
+                    language : $('#language').val(),
+                    name : $('#name').val(),
+                    surname : $('#surname').val(),
+                    phone : $('#phone').val(),
+                    email : $('#email').val(),
+                    password : $('#password').val(),
+                    repassword : $('#repassword').val(),
+                    industry : $('input[name=industry]:checked').val()
+                },
+                success : function(data) {
+                    var errors = data.errors;
+                    console.log(errors)
+                    if(errors.length > 0) {
+                        for(var i = 0 ; i < errors.length ; i ++){
+                            toastr['error'](errors[i]);
+                        }
+                    } else{
+                        toastr['info']('Please buy your membership');
+                        $('#btn_confirm').attr('user_id', data.user_id);
+                        $('#membershipModal').modal('show');
                     }
-                } else{
-                    toastr['info']('Please buy your membership');
-                    $('#btn_confirm').attr('user_id', data.user_id);
-                    $('#membershipModal').modal('show');
+                    
+                },
+                error : function() {
+                    toastr['error']('Happening any errors on user register.');
                 }
-                
-            },
-            error : function() {
-                toastr['error']('Happening any errors on user register.');
-            }
-        })
+            });
+        }
+        
     }
 
     $('#btn_submit').click(function() {

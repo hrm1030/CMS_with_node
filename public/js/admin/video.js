@@ -26,10 +26,10 @@ $(document).ready(function() {
                     [1, 'asc']
                 ],
                 "lengthMenu": [
-                    [5, 15, 20, -1],
-                    [5, 15, 20, "All"] // change per page values here
+                    [5, 10, 20, -1],
+                    [5, 10, 20, "All"] // change per page values here
                 ],
-                "pageLength": 5, // set the initial value,
+                "pageLength": 10, // set the initial value,
                 "columnDefs": [{  // set default column settings
                     'orderable': false,
                     'targets': [0]
@@ -108,6 +108,7 @@ $(document).ready(function() {
                                     url : '/admin/training_save',
                                     method : 'post',
                                     data : {
+                                        video_lang : $('#video_lang').val(),
                                         title : title,
                                         type : video_type,
                                         description : description,
@@ -118,8 +119,16 @@ $(document).ready(function() {
                                         var video_html = `<video style="width: 100%;" controls title="${data.video.description}" class="video_li">
                                                             <source src="${data.video.url}" type="video/mp4">
                                                         </video>`;
+                                        if(data.video.language === 'EN')
+                                        {
+                                            var text_color = 'text-danger';
+                                        }
+                                        if(data.video.language === 'GR')
+                                        {
+                                            var text_color = 'text-primary';
+                                        }
                                         var button_html = `<button class="btn btn-danger btn_delete" title="delete"><i class="fa fa-trash"></i></button>`
-                                        oTable.fnAddData([video_html, `<span class="label label-primary">${video_type}</span>`, data.video.title, data.video.description, button_html]);
+                                        oTable.fnAddData([video_html, `<label class="bold ${text_color}">${data.video.language}</label>`, `<span class="label label-primary">${video_type}</span>`, data.video.title, data.video.description, button_html]);
                                         $('#videoModal').modal('hide');
                                     }
                                 });
@@ -142,6 +151,7 @@ $(document).ready(function() {
                                     url : '/admin/training_save',
                                     method : 'post',
                                     data : {
+                                        video_lang : $('#video_lang').val(),
                                         title : title,
                                         type : video_type,
                                         description : description,
@@ -152,8 +162,16 @@ $(document).ready(function() {
                                         var video_html = `<video style="width: 100%;" controls title="${data.video.description}" class="video_li">
                                                             <source src="${data.video.url}" type="video/mp4">
                                                         </video>`;
+                                        if(data.video.language === 'EN')
+                                        {
+                                            var text_color = 'text-danger';
+                                        }
+                                        if(data.video.language === 'GR')
+                                        {
+                                            var text_color = 'text-primary';
+                                        }
                                         var button_html = `<button class="btn btn-danger btn_delete" title="delete"><i class="fa fa-trash"></i></button>`
-                                        oTable.fnAddData([video_html, `<span class="label label-danger">${video_type}</span>`, data.video.title, data.video.description, button_html]);
+                                        oTable.fnAddData([video_html, `<label class="bold ${text_color}">${data.video.language}</label>`, `<span class="label label-danger">${video_type}</span>`, data.video.title, data.video.description, button_html]);
                                         $('#videoModal').modal('hide');
                                     }
                                 });

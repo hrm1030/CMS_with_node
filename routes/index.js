@@ -48,6 +48,12 @@ router.post('/admin/infoupload', admin.infoupload);
 router.post('/admin/training_save', admin.training_save);
 router.post('/admin/video_delete', admin.video_delete);
 
+router.get('/admin/faq', auth_middleware.index, admin_middleware.index, admin.faq);
+router.post('/admin/faq/change_language', admin.change_language);
+router.post('/admin/faq/save', admin.faq_save);
+router.post('/admin/faq/update', admin.faq_update);
+router.post('/admin/faq/delete', admin.faq_delete);
+
 router.get('/post/get', post.get);
 router.post('/post/save', post.save);
 router.post('/post/preview', post.preview);

@@ -5,6 +5,7 @@ var Post = require('../models/Post');
 const Training = require('../models/Training');
 var formidable = require('formidable');
 var fs = require('fs');
+const Faq = require('../models/Faq');
 
 exports.index = function(req, res, next) {
     User.find({}, (err, users) => {
@@ -99,6 +100,7 @@ exports.category_save = function(req, res) {
     var category;
     if(cat_id == '') {
         Category.create({
+            language : req.body.language,
             name : category_name
         }, (err, category)=> {
             if(err) {
@@ -116,7 +118,8 @@ exports.category_save = function(req, res) {
             } else {
                 category = {
                     _id : cat_id,
-                    name : category_name
+                    name : category_name,
+                    language : req.body.language
                 }
                 res.json({msg:'update', category : category})
             }
@@ -201,20 +204,45 @@ exports.post_delete = function(req, res) {
 exports.training_save = function(req, res) {
     if(req.body.type === 'info')
     {
-        Training.findOneAndUpdate({type : 'info'}, {$set : {
-            title : req.body.title,
-            type : req.body.type,
-            description : req.body.description,
-            url : req.body.url
-        }}, (err, training) => {
+        Training.findOne({type : 'info'}, (err, training) => {
             if(err) {
                 console.log(err);
             } else {
-                res.json({video : training});
+                if(training) {
+                    Training.findOneAndUpdate({type : 'info'}, {$set : {
+                        language : req.body.video_lang,
+                        title : req.body.title,
+                        type : req.body.type,
+                        description : req.body.description,
+                        url : req.body.url
+                    }}, (err, training) => {
+                        if(err) {
+                            console.log(err);
+                        } else {
+                            res.json({video : training});
+                        }
+                    })
+                } else {
+                    Training.create({
+                        language : req.body.video_lang,
+                        title : req.body.title,
+                        type : req.body.type,
+                        description : req.body.description,
+                        url : req.body.url
+                    }, (err, training) => {
+                        if(err) {
+                            console.log(err);
+                        } else {
+                            res.json({video : training});
+                        }
+                    })
+                }
             }
         })
+        
     } else {
         Training.create({
+            language : req.body.video_lang,
             title : req.body.title,
             type : req.body.type,
             description : req.body.description,
@@ -281,8 +309,80 @@ exports.video_delete = function(req, res) {
             console.log(err);
         } else {
             var urls = video.url.split('/');
-            fs.unlinkSync('public/videos/trainings/'+ urls[4]);
+            if(urls[4] == 'info.mp4')
+            {
+                fs.unlinkSync('public/videos/'+ urls[4]);
+            } else {
+                fs.unlinkSync('public/videos/trainings/'+ urls[4]);
+            }
             res.json({msg : 'delete'});
         }
     });
+}
+
+exports.faq = function(req, res) {
+    Faq.find({}, (err, faqs) => {
+        if(err) {
+            console.log(err);
+        } else {
+            Category.find({
+                language : 'EN'
+            }, (err, categories) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                    res.render('pages/admin/faq', {title : 'CMS | FAQ', session : req.session, categories : categories, faqs : faqs, recent_url : req.url});                   
+                }
+            })
+        }
+    })
+}
+
+exports.change_language = function(req, res) {
+    Category.find({
+        language : req.body.language
+    }, (err, categories) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.json({categories : categories});
+        }
+    })
+}
+
+exports.faq_save = function(req, res) {
+    Faq.create({
+        language : req.body.language,
+        category : req.body.category,
+        email : req.session.email,
+        title : req.body.title,
+        content : req.body.content
+    }, (err, faq) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.json({faq : faq});
+        }
+    })
+}
+
+exports.faq_update = function(req, res) {
+    Faq.findByIdAndUpdate(req.body.faq_id, {$set : {
+        language : req.body.language,
+        category : req.body.category,
+        title : req.body.title,
+        content : req.body.content
+    }}, (err, faq) => {
+        res.json({faq : faq});
+    })
+}
+
+exports.faq_delete = function(req, res) {
+    Faq.findByIdAndDelete(req.body.faq_id, (err) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.json({msg : 'success'});
+        }
+    })
 }

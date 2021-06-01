@@ -105,6 +105,7 @@ exports.signup = function (req, res, next) {
                                     var today = new Date();
                                     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + '.' + today.getMilliseconds();
                                     User.create({
+                                        language : req.body.language,
                                         name: name,
                                         surname: surname,
                                         phone: phone,
@@ -154,6 +155,7 @@ exports.signup = function (req, res, next) {
                         var today = new Date();
                         var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + '.' + today.getMilliseconds();
                         User.create({
+                            language : req.body.language,
                             name: name,
                             surname: surname,
                             phone: phone,
@@ -342,7 +344,7 @@ exports.signin = function (req, res, next) {
                                 req.session.token = token;
                                 req.session.share_cnt = user.shared_cnt;
                                 req.session.ask = user.ask;
-                                req.session.language = req.body.language;
+                                req.session.language = user.language;
                                 var today = new Date();
                                 var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + '.' + today.getMilliseconds();
 

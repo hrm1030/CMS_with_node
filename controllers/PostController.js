@@ -76,7 +76,7 @@ exports.list = function(req, res) {
         if(err) {
             console.log(err);
         } else {
-            Category.find({}, (err, categories) => {
+            Category.find({language : req.session.language}, (err, categories) => {
                 if(err) {
                     console.log(err);
                 } else {
@@ -102,7 +102,7 @@ exports.selected_category = function(req, res) {
 
 exports.view = function(req, res) {
     var post_id = req.query.post;
-    Category.find({}, (err, categories) => {
+    Category.find({language : req.session.language}, (err, categories) => {
         if(err) {
             console.log(err);
         } else {

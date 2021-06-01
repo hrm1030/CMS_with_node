@@ -171,21 +171,32 @@ $(document).ready(function() {
             function editRow(oTable, nRow) {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-                jqTds[0].innerHTML = '<input type="text" class="form-control input-small category" style="width:100%!important;" value="' + aData[0] + '" autofocus>';
-                jqTds[1].innerHTML = '<a class="edit btn btn-sm blue save" href="" title="save"><i class="fa fa-save"></i></a>&nbsp;<a class="cancel btn btn-sm yellow" href="" title="cancel"><i class="fa fa-times"></i></a>';
+                jqTds[0].innerHTML = '<input type="text" class="form-control input-small language" style="width:100%!important;" value="' + aData[0] + '" autofocus>';
+                jqTds[1].innerHTML = '<input type="text" class="form-control input-small category" style="width:100%!important;" value="' + aData[1] + '" autofocus>';
+                jqTds[2].innerHTML = '<a class="edit btn btn-sm blue save" href="" title="save"><i class="fa fa-save"></i></a>&nbsp;<a class="cancel btn btn-sm yellow" href="" title="cancel"><i class="fa fa-times"></i></a>';
             }
     
             function saveRow(oTable, nRow, cat_id) {
                 var jqInputs = $('input', nRow);
-                if(jqInputs[0].value == ''){
+                if(jqInputs[1].value == ''){
                     toastr['error']('Please enter category.');
                     return false;
-                }else {
+                }
+                if(jqInputs[0].value == ''){
+                    toastr['error']('Please enter language.');
+                    return false;
+                }
+                if(jqInputs[0].value != 'EN' || jqInputs[0].value != 'GR')
+                {
+                    toastr['error']('Please type language "EN" or "GR".');
+                }
+                if((jqInputs[0].value == 'EN' || jqInputs[0].value == 'GR') && jqInputs[1].value != '') {
                     $.ajax({
                         url : '/admin/category/save',
                         method : 'post',
                         data : {
-                            category : jqInputs[0].value,
+                            language : jqInputs[0].value,
+                            category : jqInputs[1].value,
                             cat_id : cat_id
                         },
                         success : function (data) {
@@ -203,8 +214,17 @@ $(document).ready(function() {
                                     }
                                 })
                             }
-                            oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-                            oTable.fnUpdate('<a class="edit btn btn-sm btn-success" href="" title="edit"><i class="fa fa-pencil"></i></a>&nbsp;<a class="delete btn btn-sm btn-danger" href="" title="delete"><i class="fa fa-trash"></i></a>', nRow, 1, false);
+                            if(jqInputs[0].value == 'EN')
+                            {
+                                var text_color = 'text-danger';
+                            }
+                            if(jqInputs[0].value == 'GR')
+                            {
+                                var text_color = 'text-primary';
+                            }
+                            oTable.fnUpdate(`<label class="bold ${text_color}">${jqInputs[0].value}</label>`, nRow, 0, false);
+                            oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
+                            oTable.fnUpdate('<a class="edit btn btn-sm btn-success" href="" title="edit"><i class="fa fa-pencil"></i></a>&nbsp;<a class="delete btn btn-sm btn-danger" href="" title="delete"><i class="fa fa-trash"></i></a>', nRow, 2, false);
                             oTable.fnDraw();
                             
                             $('.edit').removeAttr('disabled');
@@ -225,7 +245,8 @@ $(document).ready(function() {
             function cancelEditRow(oTable, nRow) {
                 var jqInputs = $('input', nRow);
                 oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-                oTable.fnUpdate('<a class="edit btn btn-sm btn-success" href="" title="edit"><i class="fa fa-pencil"></i></a>', nRow, 1, false);
+                oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
+                oTable.fnUpdate('<a class="edit btn btn-sm btn-success" href="" title="edit"><i class="fa fa-pencil"></i></a>', nRow, 2, false);
                 oTable.fnDraw();
             }
     
@@ -263,7 +284,7 @@ $(document).ready(function() {
                     "targets": [0]
                 }],
                 "order": [
-                    [0, "asc"]
+                    [1, "asc"]
                 ] // set first column as a default sort by asc
             });
     
@@ -283,7 +304,7 @@ $(document).ready(function() {
                 $('.delete').attr('disabled', 'disabled');
                 $(this).attr('disabled', 'disabled');
     
-                var aiNew = oTable.fnAddData(['', '']);
+                var aiNew = oTable.fnAddData(['', '', '']);
                 var nRow = oTable.fnGetNodes(aiNew[0]);
                 editRow(oTable, nRow);
                 nEditing = nRow;
@@ -374,6 +395,7 @@ $(document).ready(function() {
                 $('.edit').attr('disabled', 'disabled');
                 $('.delete').attr('disabled', 'disabled');
                 $('#btn_add').attr('disabled', 'disabled');
+                $('.save').removeAttr('disabled', 'disabled');
                 /* Get the row as a parent of the link that was clicked on */
                 var nRow = $(this).parents('tr')[0];
     

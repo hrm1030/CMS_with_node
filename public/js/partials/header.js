@@ -9,7 +9,7 @@ $(document).ready(function() {
     }
 
 
-    $("#select_lang").select2({
+    $("#language").select2({
         placeholder: '<i class="fa fa-map-marker"></i>&nbsp;Select a language',
         allowClear: true,
         formatResult: format,

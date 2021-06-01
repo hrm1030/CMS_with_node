@@ -11,7 +11,7 @@
  Target Server Version : 40404
  File Encoding         : 65001
 
- Date: 17/06/2021 08:57:30
+ Date: 01/06/2021 00:53:00
 */
 
 
@@ -27,201 +27,277 @@ db.createCollection("categories");
 db.getCollection("categories").insert([ {
     _id: ObjectId("60b4f367705ba95c4813c999"),
     name: "Article",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60b700033a4f000027002e12"),
     name: "Report",
-    __v: 0
+    __v: 0,
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60b705a304f1d5202cfaa881"),
     name: "Music",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60b705d4f4b21d39786cc9bf"),
     name: "Novel",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60b7070018da12192cab8774"),
     name: "Movie",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60b708856714e93290647af4"),
     name: "Book",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60b70a76b2794a3cd06af42e"),
     name: "Picture",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60b70b3857fd8a05e0b830c8"),
     name: "Sport",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60b70c43f2d0483c58581b53"),
     name: "Art",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60b70c99f2d0483c58581b55"),
     name: "Content",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60b70cc556897839f874a1d6"),
     name: "Golf",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60b70eccada3ef35742f5bc7"),
     name: "Football",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60b799ee714c7b32d4da3165"),
     name: "Basketball",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60b799f6714c7b32d4da3166"),
     name: "Game",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60b799fc714c7b32d4da3167"),
     name: "Dance",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c040d665536b1c58d2dc26"),
     name: "Valleyball",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c0410265536b1c58d2dc27"),
     name: "Tennis",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c0411765536b1c58d2dc28"),
     name: "Swimming",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c0412c65536b1c58d2dc29"),
     name: "Snow boarding",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c0413865536b1c58d2dc2a"),
     name: "Hunting",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c0417565536b1c58d2dc2b"),
     name: "Scket",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c0418165536b1c58d2dc2c"),
     name: "Running",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c3c46531f2421e5c8d5a42"),
     name: "COVID19",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c8c7c6bab6973b68ef3ada"),
     name: "Science",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c8c7d0bab6973b68ef3adb"),
     name: "Technology",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c8c7ddbab6973b68ef3adc"),
     name: "Medical",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c8c7eabab6973b68ef3add"),
     name: "IT",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c8c830bab6973b68ef3ade"),
     name: "Software",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c8c98c87e2dc2794257bb3"),
     name: "Economy",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c8c9a287e2dc2794257bb4"),
     name: "Internet",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c8c9d987e2dc2794257bb5"),
     name: "Freelancer",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c8cf0bf7f68b07fc83c5ca"),
     name: "City",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c8cf1af7f68b07fc83c5cb"),
     name: "University",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c8cf28f7f68b07fc83c5cc"),
     name: "Hospital",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c8cf2ff7f68b07fc83c5cd"),
     name: "Doctor",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c8d6e53072b30c504f6d78"),
     name: "Hotel",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c8d7933072b30c504f6d79"),
     name: "Education",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c8d79c3072b30c504f6d7a"),
     name: "Industry",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c8d7ae3072b30c504f6d7b"),
     name: "Global Warming",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60cae5a2ca0a973d68f9feb4"),
     name: "Job",
+    __v: NumberInt("0"),
+    language: "EN"
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60cf92b942e8ec079c95907e"),
+    name: "Upwork",
+    __v: NumberInt("0"),
+    language: "EN"
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60cf930cf5ea3531f4468a8f"),
+    name: "Worker",
+    __v: NumberInt("0"),
+    language: "EN"
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60cf9364faf9861680e28f96"),
+    name: "Works",
+    __v: NumberInt("0"),
+    language: "EN"
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60cf9422c09b370f508d9000"),
+    language: "EN",
+    name: "Family",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60cf95a390ffdb0df891210f"),
+    language: "GR",
+    name: "Animal",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60cf9770c353972ecc823e85"),
+    language: "EN",
+    name: "Lancer",
     __v: NumberInt("0")
 } ]);
 
@@ -240,15 +316,17 @@ db.getCollection("faqs").insert([ {
     category: "Article",
     email: "aleksey@gmail.com",
     content: "Hello everyone.\r\nNice to meet you.\r\nThanks.",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("faqs").insert([ {
     _id: ObjectId("60c61a4540023a380cc56541"),
     title: "Article",
     category: "Article",
     email: "aleksey@gmail.com",
-    content: "Report",
-    __v: NumberInt("0")
+    content: "Hello everyone. Nice to meet you.\nI am from Russian Federation.\nMy name is Dmitriy Lotov\nThanks.\nBest regard.",
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("faqs").insert([ {
     _id: ObjectId("60c9fa03c740912cdcce3fda"),
@@ -256,7 +334,17 @@ db.getCollection("faqs").insert([ {
     category: "Article",
     email: "hans@gmail.com",
     content: "Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Cosby sweater eu banh mi, qui irure terry richardson ex squid Aliquip placeat salvia cillum iphone.\r\nDenim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
+} ]);
+db.getCollection("faqs").insert([ {
+    _id: ObjectId("60cfbc158d5102276c3ab668"),
+    category: "Animal",
+    email: "hrm.2021@outlook.com",
+    title: "Hello everybody",
+    content: "Hello everyone, Nice to meet you.\nI am from Russian Federation.\nMy name is Dmitriy Lotov.\nThanks.\nBest regard...\n",
+    __v: NumberInt("0"),
+    language: "GR"
 } ]);
 
 // ----------------------------
@@ -378,7 +466,7 @@ db.getCollection("posts").insert([ {
     "poster_id": "60b63a7ad2a7ea368cf9cf0a",
     "poster_email": "hrm.2021@outlook.com",
     "poster_phone": "+7501458786",
-    "created_at": ISODate("2021-06-10T11:17:35.86Z"),
+    "created_at": ISODate("2021-06-10T11:17:35Z"),
     shared: NumberInt("0"),
     image: "post_60b63a7ad2a7ea368cf9cf0a_20215104177270.jpg",
     __v: NumberInt("0"),
@@ -394,7 +482,7 @@ db.getCollection("posts").insert([ {
     "poster_id": "60b63a7ad2a7ea368cf9cf0a",
     "poster_email": "hrm.2021@outlook.com",
     "poster_phone": "+7501458786",
-    "created_at": ISODate("2021-06-10T11:20:03.388Z"),
+    "created_at": ISODate("2021-06-10T11:20:03Z"),
     shared: NumberInt("9"),
     image: "post_60b63a7ad2a7ea368cf9cf0a_20215104177270.jpg",
     __v: NumberInt("0"),
@@ -410,7 +498,7 @@ db.getCollection("posts").insert([ {
     "poster_id": "60b63a7ad2a7ea368cf9cf0a",
     "poster_email": "hrm.2021@outlook.com",
     "poster_phone": "+7501458786",
-    "created_at": ISODate("2021-06-15T17:08:21.8Z"),
+    "created_at": ISODate("2021-06-15T17:08:21Z"),
     shared: NumberInt("0"),
     image: "post_60b63a7ad2a7ea368cf9cf0a_202151510812504.jpg",
     __v: NumberInt("0"),
@@ -426,7 +514,7 @@ db.getCollection("posts").insert([ {
     "poster_id": "60b63a7ad2a7ea368cf9cf0a",
     "poster_email": "hrm.2021@outlook.com",
     "poster_phone": "+7501458786",
-    "created_at": ISODate("2021-06-15T17:49:02.615Z"),
+    "created_at": ISODate("2021-06-15T17:49:02Z"),
     shared: NumberInt("0"),
     image: "post_60b63a7ad2a7ea368cf9cf0a_2021515104857832.jpg",
     __v: NumberInt("0"),
@@ -442,7 +530,7 @@ db.getCollection("posts").insert([ {
     "poster_id": "60b63a7ad2a7ea368cf9cf0a",
     "poster_email": "hrm.2021@outlook.com",
     "poster_phone": "+7501458786",
-    "created_at": ISODate("2021-06-15T17:52:17.318Z"),
+    "created_at": ISODate("2021-06-15T17:52:17Z"),
     shared: NumberInt("0"),
     image: "post_60b63a7ad2a7ea368cf9cf0a_2021515104857832.jpg",
     __v: NumberInt("0"),
@@ -458,7 +546,7 @@ db.getCollection("posts").insert([ {
     "poster_id": "60b63a7ad2a7ea368cf9cf0a",
     "poster_email": "hrm.2021@outlook.com",
     "poster_phone": "+7501458786",
-    "created_at": ISODate("2021-06-16T08:34:08.662Z"),
+    "created_at": ISODate("2021-06-16T08:34:08Z"),
     shared: NumberInt("0"),
     image: "post_60b63a7ad2a7ea368cf9cf0a_2021516134020.jpg",
     language: "GR",
@@ -474,7 +562,7 @@ db.getCollection("posts").insert([ {
     "poster_id": "60b63a7ad2a7ea368cf9cf0a",
     "poster_email": "hrm.2021@outlook.com",
     "poster_phone": "+7501458786",
-    "created_at": ISODate("2021-06-17T05:59:43.11Z"),
+    "created_at": ISODate("2021-06-17T05:59:43Z"),
     shared: NumberInt("0"),
     image: "post_60b63a7ad2a7ea368cf9cf0a_2021516225913204.jpg",
     language: "EN",
@@ -490,7 +578,7 @@ db.getCollection("posts").insert([ {
     "poster_id": "60b63a7ad2a7ea368cf9cf0a",
     "poster_email": "hrm.2021@outlook.com",
     "poster_phone": "+7501458786",
-    "created_at": ISODate("2021-06-17T06:03:01.207Z"),
+    "created_at": ISODate("2021-06-17T06:03:01Z"),
     shared: NumberInt("0"),
     image: "post_60b63a7ad2a7ea368cf9cf0a_20215162325365.jpg",
     language: "GR",
@@ -506,7 +594,7 @@ db.getCollection("posts").insert([ {
     "poster_id": "60b63a7ad2a7ea368cf9cf0a",
     "poster_email": "hrm.2021@outlook.com",
     "poster_phone": "+7501458786",
-    "created_at": ISODate("2021-06-17T06:03:26.33Z"),
+    "created_at": ISODate("2021-06-17T06:03:26Z"),
     shared: NumberInt("0"),
     image: "post_60b63a7ad2a7ea368cf9cf0a_20215162325365.jpg",
     language: "GR",
@@ -522,7 +610,7 @@ db.getCollection("posts").insert([ {
     "poster_id": "60b63a7ad2a7ea368cf9cf0a",
     "poster_email": "hrm.2021@outlook.com",
     "poster_phone": "+7501458786",
-    "created_at": ISODate("2021-06-17T06:07:01.792Z"),
+    "created_at": ISODate("2021-06-17T06:07:01Z"),
     shared: NumberInt("0"),
     image: "post_60b63a7ad2a7ea368cf9cf0a_202151623654762.jpg",
     language: "EN",
@@ -538,7 +626,7 @@ db.getCollection("posts").insert([ {
     "poster_id": "60b63a7ad2a7ea368cf9cf0a",
     "poster_email": "hrm.2021@outlook.com",
     "poster_phone": "+7501458786",
-    "created_at": ISODate("2021-06-17T06:07:30.264Z"),
+    "created_at": ISODate("2021-06-17T06:07:30Z"),
     shared: NumberInt("0"),
     image: "post_60b63a7ad2a7ea368cf9cf0a_202151623654762.jpg",
     language: "GR",
@@ -554,7 +642,7 @@ db.getCollection("posts").insert([ {
     "poster_id": "60b63a7ad2a7ea368cf9cf0a",
     "poster_email": "hrm.2021@outlook.com",
     "poster_phone": "+7501458786",
-    "created_at": ISODate("2021-06-17T06:09:46.576Z"),
+    "created_at": ISODate("2021-06-17T06:09:46Z"),
     shared: NumberInt("0"),
     image: "post_60b63a7ad2a7ea368cf9cf0a_202151623654762.jpg",
     language: "EN",
@@ -652,6 +740,41 @@ db.getCollection("recommendcategories").insert([ {
     category: "Music",
     email: "hrm.2021@outlook.com",
     content: "I love music\r\n",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("recommendcategories").insert([ {
+    _id: ObjectId("60cba1b16cfeb70d701f67e7"),
+    category: "Article",
+    email: "hrm.2021@outlook.com",
+    content: "sdfadfsafdas",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("recommendcategories").insert([ {
+    _id: ObjectId("60cba2526cfeb70d701f67e8"),
+    category: "Movie",
+    email: "hrm.2021@outlook.com",
+    content: "asdfasdfasdfa",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("recommendcategories").insert([ {
+    _id: ObjectId("60cba28a6cfeb70d701f67e9"),
+    category: "Movie",
+    email: "hrm.2021@outlook.com",
+    content: "asdfasdfasdfa",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("recommendcategories").insert([ {
+    _id: ObjectId("60cba3242ea4fe16b49e87bb"),
+    category: "Article",
+    email: "hrm.2021@outlook.com",
+    content: "asdfasdfasdfas",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("recommendcategories").insert([ {
+    _id: ObjectId("60cba3a03f6b7d2cc0abe305"),
+    category: "Article",
+    email: "hrm.2021@outlook.com",
+    content: "dasfasdfasfdasdfa",
     __v: NumberInt("0")
 } ]);
 
@@ -769,6 +892,69 @@ db.getCollection("supports").insert([ {
     content: "support",
     __v: NumberInt("0")
 } ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60cb9e146ccecd3a3075b075"),
+    name: "Aleksey",
+    email: "hrm.2021@outlook.com",
+    content: "Hello.\r\nNice to meet you.",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60cb9fe27ff9a82c141d8a31"),
+    name: "Aleksey",
+    email: "hrm.2021@outlook.com",
+    content: "sdfasdfasfd",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60cba00a7ff9a82c141d8a32"),
+    name: "Aleksey",
+    email: "hrm.2021@outlook.com",
+    content: "sdfasdfasfd",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60cba02d7ff9a82c141d8a33"),
+    name: "Aleksey",
+    email: "hrm.2021@outlook.com",
+    content: "asdfasfdasfd",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60cba05f7ff9a82c141d8a34"),
+    name: "Aleksey",
+    email: "hrm.2021@outlook.com",
+    content: "asdfafasf",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60cba0d06cfeb70d701f67e3"),
+    name: "Aleksey",
+    email: "hrm.2021@outlook.com",
+    content: "sadfdasdfdadsdfas",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60cba12e6cfeb70d701f67e4"),
+    name: "Aleksey",
+    email: "hrm.2021@outlook.com",
+    content: "sdfasdfasfasf",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60cba15e6cfeb70d701f67e5"),
+    name: "Aleksey",
+    email: "hrm.2021@outlook.com",
+    content: "sdfasdfasfasf",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60cba17e6cfeb70d701f67e6"),
+    name: "Aleksey",
+    email: "hrm.2021@outlook.com",
+    content: "sdfasdfasfasf",
+    __v: NumberInt("0")
+} ]);
 
 // ----------------------------
 // Collection structure for trainings
@@ -780,20 +966,13 @@ db.createCollection("trainings");
 // Documents of trainings
 // ----------------------------
 db.getCollection("trainings").insert([ {
-    _id: ObjectId("60cb2fcf583c502fc4e45813"),
-    title: "Info",
-    type: "info",
-    description: "Information video",
-    url: "../../videos/info.mp4",
-    __v: NumberInt("0")
-} ]);
-db.getCollection("trainings").insert([ {
     _id: ObjectId("60cb3024583c502fc4e45814"),
     title: "Beginner",
     type: "training",
     description: "Training beginner video",
     url: "../../videos/trainings/video_60b63a7ad2a7ea368cf9cf0a_20215174217552.mp4",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("trainings").insert([ {
     _id: ObjectId("60cb3053583c502fc4e45815"),
@@ -801,7 +980,8 @@ db.getCollection("trainings").insert([ {
     type: "training",
     description: "Training professional video",
     url: "../../videos/trainings/video_60b63a7ad2a7ea368cf9cf0a_20215174215529.mp4",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("trainings").insert([ {
     _id: ObjectId("60cb495c0cdc46162cf42c0c"),
@@ -809,6 +989,25 @@ db.getCollection("trainings").insert([ {
     type: "training",
     description: "Training ultimate video",
     url: "../../videos/trainings/video_60b63a7ad2a7ea368cf9cf0a_20215176844455.mp4",
+    __v: NumberInt("0"),
+    language: "EN"
+} ]);
+db.getCollection("trainings").insert([ {
+    _id: ObjectId("60cf9e99ae84990c64943536"),
+    title: "Info",
+    type: "info",
+    description: "Information video",
+    url: "../../videos/info.mp4",
+    __v: NumberInt("0"),
+    language: "EN"
+} ]);
+db.getCollection("trainings").insert([ {
+    _id: ObjectId("60cfa0241303de1888d5ba19"),
+    language: "GR",
+    title: "Homestead",
+    type: "training",
+    description: "Homestead Video",
+    url: "../../videos/trainings/video_60b63a7ad2a7ea368cf9cf0a_2021520138410.mp4",
     __v: NumberInt("0")
 } ]);
 
@@ -829,7 +1028,7 @@ db.getCollection("users").insert([ {
     email: "hrm.2021@outlook.com",
     password: "$2a$08$XjjDIqTWHOBTP4mnPiG2XuBAL69sLQ9RUnuwh.yF2iINgubXTlRre",
     membership: NumberInt("4"),
-    "created_at": ISODate("2021-06-16T14:47:40.826Z"),
+    "created_at": ISODate("2021-06-16T14:47:40Z"),
     permission: NumberInt("1"),
     __v: NumberInt("0"),
     state: NumberInt("1"),
@@ -842,7 +1041,8 @@ db.getCollection("users").insert([ {
     "expire_month": NumberInt("12"),
     "expire_year": NumberInt("2021"),
     "shared_cnt": 0,
-    ask: NumberInt("2")
+    ask: NumberInt("2"),
+    language: "EN"
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60b7c2a8f2667e2ea4ca3a2e"),
@@ -852,7 +1052,7 @@ db.getCollection("users").insert([ {
     email: "maksim@gmail.com",
     password: "$2a$08$ewTyRIC7wqBZ7zwYo7QmEOGdJdWm/I7dSid0u6voOZL2easIHACnC",
     membership: NumberInt("2"),
-    "created_at": ISODate("2021-06-04T19:50:02.412Z"),
+    "created_at": ISODate("2021-06-04T19:50:02Z"),
     permission: NumberInt("2"),
     state: NumberInt("1"),
     __v: NumberInt("0"),
@@ -861,7 +1061,8 @@ db.getCollection("users").insert([ {
     "left_membership": NumberInt("4"),
     industry: "Insurrance",
     "shared_cnt": 0,
-    ask: 0
+    ask: 0,
+    language: "EN"
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60ba112fb661092db48de46d"),
@@ -872,7 +1073,7 @@ db.getCollection("users").insert([ {
     password: "$2a$08$A9SGudWdXGpBNRzOfogvfekPaihyv7IzKmA/t3bUy.JWCNl/hkwGu",
     membership: NumberInt("3"),
     "left_membership": NumberInt("2"),
-    "created_at": ISODate("2021-06-10T17:43:49.995Z"),
+    "created_at": ISODate("2021-06-10T17:43:49Z"),
     permission: NumberInt("2"),
     photo: "60ba112fb661092db48de46d.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
@@ -883,9 +1084,10 @@ db.getCollection("users").insert([ {
     cvc: NumberInt("1541"),
     "expire_month": NumberInt("12"),
     "expire_year": NumberInt("2021"),
-    "started_at": ISODate("2021-06-10T17:43:49.995Z"),
+    "started_at": ISODate("2021-06-10T17:43:49Z"),
     "shared_cnt": 0,
-    ask: 0
+    ask: 0,
+    language: "EN"
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60bdf2f692b1aa3bc89e5154"),
@@ -896,20 +1098,21 @@ db.getCollection("users").insert([ {
     password: "$2a$08$WWWGiAXebueT3eC4OLdAjeUUO1Ox46le7jL8K9nNxB/3HhhBEKXHe",
     membership: NumberInt("4"),
     "left_membership": NumberInt("4"),
-    "created_at": ISODate("2021-06-15T08:15:52.182Z"),
+    "created_at": ISODate("2021-06-15T08:15:52Z"),
     permission: NumberInt("2"),
     photo: "60bdf2f692b1aa3bc89e5154.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
     state: NumberInt("1"),
     industry: "Insurrance",
     __v: NumberInt("0"),
-    "started_at": ISODate("2021-06-15T08:15:52.182Z"),
+    "started_at": ISODate("2021-06-15T08:15:52Z"),
     "card_number": "4111 1111 1111 1111",
     cvc: NumberInt("145"),
     "expire_month": NumberInt("6"),
     "expire_year": NumberInt("2021"),
     "shared_cnt": NumberInt("1"),
-    ask: null
+    ask: null,
+    language: "EN"
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60c04c4165536b1c58d2dc2d"),
@@ -923,8 +1126,8 @@ db.getCollection("users").insert([ {
     "card_number": "1232 2222 2222 1321",
     "expire_month": NumberInt("3"),
     cvc: NumberInt("3234"),
-    "created_at": ISODate("2021-06-16T03:56:20.395Z"),
-    "started_at": ISODate("2021-06-06T15:07:19.454Z"),
+    "created_at": ISODate("2021-06-16T03:56:20Z"),
+    "started_at": ISODate("2021-06-06T15:07:19Z"),
     permission: NumberInt("2"),
     photo: "60c04c4165536b1c58d2dc2d.png",
     introduction: "I'm aleksey...",
@@ -932,7 +1135,8 @@ db.getCollection("users").insert([ {
     __v: NumberInt("0"),
     "expire_year": NumberInt("2021"),
     "shared_cnt": 0,
-    ask: NumberInt("2")
+    ask: NumberInt("2"),
+    language: "EN"
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60c04cbd65536b1c58d2dc2e"),
@@ -946,7 +1150,7 @@ db.getCollection("users").insert([ {
     "card_number": "",
     "expire_month": null,
     cvc: null,
-    "created_at": ISODate("2021-06-09T05:14:37.568Z"),
+    "created_at": ISODate("2021-06-09T05:14:37Z"),
     "started_at": null,
     permission: NumberInt("2"),
     photo: "avatar.png",
@@ -956,7 +1160,8 @@ db.getCollection("users").insert([ {
     __v: NumberInt("0"),
     "expire_year": null,
     "shared_cnt": 0,
-    ask: 0
+    ask: 0,
+    language: "EN"
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60c099f99484a11bb40d0a3d"),
@@ -970,8 +1175,8 @@ db.getCollection("users").insert([ {
     "card_number": "7545 4646 5798 7987",
     "expire_month": NumberInt("12"),
     cvc: NumberInt("245"),
-    "created_at": ISODate("2021-06-11T06:41:46.204Z"),
-    "started_at": ISODate("2021-06-11T06:41:46.204Z"),
+    "created_at": ISODate("2021-06-11T06:41:46Z"),
+    "started_at": ISODate("2021-06-11T06:41:46Z"),
     permission: NumberInt("2"),
     photo: "60c099f99484a11bb40d0a3d.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
@@ -979,7 +1184,8 @@ db.getCollection("users").insert([ {
     __v: NumberInt("0"),
     "expire_year": NumberInt("2021"),
     "shared_cnt": 0,
-    ask: 0
+    ask: 0,
+    language: "EN"
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60c457e17333b936a04dd580"),
@@ -993,8 +1199,8 @@ db.getCollection("users").insert([ {
     "card_number": "1469 8798 7987 9746",
     "expire_month": NumberInt("12"),
     cvc: NumberInt("154"),
-    "created_at": ISODate("2021-06-12T06:45:22.242Z"),
-    "started_at": ISODate("2021-06-12T06:45:22.242Z"),
+    "created_at": ISODate("2021-06-12T06:45:22Z"),
+    "started_at": ISODate("2021-06-12T06:45:22Z"),
     permission: NumberInt("2"),
     photo: "60c457e17333b936a04dd580.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
@@ -1002,7 +1208,8 @@ db.getCollection("users").insert([ {
     "shared_cnt": NumberInt("0"),
     __v: NumberInt("0"),
     "expire_year": NumberInt("2021"),
-    ask: 0
+    ask: 0,
+    language: "EN"
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60c46300e4d19e2864e6111f"),
@@ -1017,15 +1224,16 @@ db.getCollection("users").insert([ {
     "card_number": "4649 8797 9799 6464",
     "expire_month": NumberInt("12"),
     cvc: NumberInt("124"),
-    "created_at": ISODate("2021-06-12T07:32:35.51Z"),
-    "started_at": ISODate("2021-06-12T07:32:35.51Z"),
+    "created_at": ISODate("2021-06-12T07:32:35Z"),
+    "started_at": ISODate("2021-06-12T07:32:35Z"),
     permission: NumberInt("2"),
     photo: "avatar.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
     state: NumberInt("1"),
     "shared_cnt": NumberInt("0"),
     __v: NumberInt("0"),
-    "expire_year": NumberInt("2021")
+    "expire_year": NumberInt("2021"),
+    language: "EN"
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60c6f5b258ec3f34d083255f"),
@@ -1040,8 +1248,8 @@ db.getCollection("users").insert([ {
     "card_number": "4567 9797 9456 9879",
     "expire_month": NumberInt("12"),
     cvc: NumberInt("124"),
-    "created_at": ISODate("2021-06-14T06:23:09.212Z"),
-    "started_at": ISODate("2021-06-14T06:23:09.212Z"),
+    "created_at": ISODate("2021-06-14T06:23:09Z"),
+    "started_at": ISODate("2021-06-14T06:23:09Z"),
     permission: NumberInt("2"),
     photo: "avatar.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
@@ -1049,7 +1257,8 @@ db.getCollection("users").insert([ {
     industry: "Bank",
     "shared_cnt": NumberInt("0"),
     __v: NumberInt("0"),
-    "expire_year": NumberInt("2021")
+    "expire_year": NumberInt("2021"),
+    language: "EN"
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60c85f31e33efe300c29f78c"),
@@ -1064,15 +1273,16 @@ db.getCollection("users").insert([ {
     "card_number": "4256 7890 5678 4532",
     "expire_month": NumberInt("12"),
     cvc: NumberInt("145"),
-    "created_at": ISODate("2021-06-15T08:06:16.354Z"),
-    "started_at": ISODate("2021-06-15T08:06:16.354Z"),
+    "created_at": ISODate("2021-06-15T08:06:16Z"),
+    "started_at": ISODate("2021-06-15T08:06:16Z"),
     permission: NumberInt("2"),
     photo: "avatar.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
     state: NumberInt("1"),
     "shared_cnt": NumberInt("0"),
     __v: NumberInt("0"),
-    "expire_year": NumberInt("2021")
+    "expire_year": NumberInt("2021"),
+    language: "EN"
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60c97528b3c37f1724214173"),
@@ -1087,15 +1297,16 @@ db.getCollection("users").insert([ {
     "card_number": "4111 1111 1111 1111",
     "expire_month": NumberInt("7"),
     cvc: NumberInt("103"),
-    "created_at": ISODate("2021-06-16T03:51:29.21Z"),
-    "started_at": ISODate("2021-06-16T03:51:29.21Z"),
+    "created_at": ISODate("2021-06-16T03:51:29Z"),
+    "started_at": ISODate("2021-06-16T03:51:29Z"),
     permission: NumberInt("2"),
     photo: "avatar.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
     state: NumberInt("1"),
     "shared_cnt": NumberInt("0"),
     __v: NumberInt("0"),
-    "expire_year": NumberInt("2024")
+    "expire_year": NumberInt("2024"),
+    language: "EN"
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60c99640de96cd444c43dd9d"),
@@ -1110,15 +1321,16 @@ db.getCollection("users").insert([ {
     "card_number": "4111 1111 1111 1111",
     "expire_month": NumberInt("11"),
     cvc: NumberInt("115"),
-    "created_at": ISODate("2021-06-16T06:34:40.969Z"),
-    "started_at": ISODate("2021-06-16T06:34:40.969Z"),
+    "created_at": ISODate("2021-06-16T06:34:40Z"),
+    "started_at": ISODate("2021-06-16T06:34:40Z"),
     permission: NumberInt("2"),
     photo: "60c99640de96cd444c43dd9d.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
     state: NumberInt("1"),
     "shared_cnt": NumberInt("0"),
     __v: NumberInt("0"),
-    "expire_year": NumberInt("2021")
+    "expire_year": NumberInt("2021"),
+    language: "EN"
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60c9c61bdb21ee3c0c700608"),
@@ -1133,13 +1345,60 @@ db.getCollection("users").insert([ {
     "card_number": "4111 1111 1111 1111",
     "expire_month": NumberInt("12"),
     cvc: NumberInt("111"),
-    "created_at": ISODate("2021-06-16T09:37:17.429Z"),
-    "started_at": ISODate("2021-06-16T09:37:17.429Z"),
+    "created_at": ISODate("2021-06-16T09:37:17Z"),
+    "started_at": ISODate("2021-06-16T09:37:17Z"),
     permission: NumberInt("2"),
     photo: "avatar.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
     state: NumberInt("1"),
     "shared_cnt": NumberInt("0"),
     __v: NumberInt("0"),
-    "expire_year": NumberInt("2020")
+    "expire_year": NumberInt("2020"),
+    language: "EN"
+} ]);
+db.getCollection("users").insert([ {
+    _id: ObjectId("60cf8ef9b3f4681254292d4c"),
+    name: "Mohammed",
+    surname: "Sharlin",
+    phone: "+4679879878",
+    email: "shalin@gmail.com",
+    password: "$2a$08$1R4q0/OfgZ4wD98qcGdRtum7lsi3rto91l86CTra9agdqTOq8z5.e",
+    membership: NumberInt("4"),
+    "left_membership": NumberInt("4"),
+    ask: NumberInt("2"),
+    "card_number": "",
+    "expire_month": NumberInt("0"),
+    cvc: NumberInt("0"),
+    "created_at": ISODate("2021-06-20T18:54:49Z"),
+    "started_at": "2021-06-16 09:37:17.429",
+    permission: NumberInt("2"),
+    photo: "avatar.png",
+    introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
+    state: NumberInt("1"),
+    "shared_cnt": NumberInt("0"),
+    __v: NumberInt("0"),
+    language: "GR"
+} ]);
+db.getCollection("users").insert([ {
+    _id: ObjectId("60cf98189a7e74354c357124"),
+    language: "GR",
+    name: "Sharlin",
+    surname: "sha",
+    phone: "+4778797987",
+    email: "sharlin@gmail.com",
+    password: "$2a$08$rpUy4kSIMVW.qfUgZa1/bu1NVCwJ23XphBd4BNZUqMMGqMbXkKMXO",
+    membership: NumberInt("4"),
+    "left_membership": NumberInt("4"),
+    ask: NumberInt("2"),
+    "card_number": "",
+    "expire_month": NumberInt("0"),
+    cvc: NumberInt("0"),
+    "created_at": ISODate("2021-06-20T19:33:44Z"),
+    "started_at": "2021-06-16 09:37:17.429",
+    permission: NumberInt("2"),
+    photo: "avatar.png",
+    introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
+    state: NumberInt("1"),
+    "shared_cnt": NumberInt("0"),
+    __v: NumberInt("0")
 } ]);
