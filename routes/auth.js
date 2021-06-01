@@ -1,0 +1,10 @@
+var express = require('express');
+var router = express.Router();
+var auth = require('../controllers/AuthController');
+router.get('/login', auth.login);
+router.get('/register', auth.register);
+router.post('/signup', auth.signup);
+router.post('/signin',auth.signin);
+router.get('/profile', auth.profile);
+router.get('/logout', auth.logout);
+module.exports = router;

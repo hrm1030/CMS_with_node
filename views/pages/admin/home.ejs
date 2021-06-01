@@ -1,0 +1,186 @@
+<div class="main">
+    <div class="admin-container">
+        <ul class="breadcrumb">
+        </ul>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="portlet box blue">
+                    <div class="portlet-title">
+                      <div class="caption">
+                        <i class="icon-users"></i> <span>Users</span>
+                      </div>
+                    </div>
+                    <div class="portlet-body">
+                        <table class="table table-striped table-bordered table-hover" id="user_table">
+							<thead>
+                                <tr>
+                                    <th>
+                                        Full Name
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Phone
+                                    </th>
+                                    <th>
+                                        Membership
+                                    </th>
+                                    <th>
+                                        Created Date
+                                    </th>
+                                    <th>
+                                        State
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+							</thead>
+							<tbody>
+                                <% users.forEach(function(user) {%>
+                                <tr>
+                                    <td>
+                                        <%= user.name%>.<%= user.surname%>
+                                    </td>
+                                    <td>
+                                        <%= user.email%>
+                                    </td>
+                                    <td>
+                                        <%= user.phone%>
+                                    </td>
+                                    <td>
+                                        <%if( user.membership == 0) {%>
+                                            <span class="label label-danger">Not veryfied</span>
+                                        <%} else if (user.membership == 1) {%>
+                                            <span class="label label-warning">Free</span>
+                                        <%} else if(user.membership == 2) {%>
+                                            <span class="label label-info">Common</span>
+                                        <%} else if(user.membership == 3) {%>
+                                            <span class="label label-primary">Medium</span>
+                                        <%} else if(user.membership == 4) {%>
+                                            <span class="label label-success">Advance</span>
+                                        <%}%>
+                                    </td>
+                                    <td>
+                                        <%= user.created_at%>
+                                    </td>
+                                    <td>
+                                        <select class="form-control input-small">
+                                            <%if(user.state == 0){%>
+                                                <option value="0" selected>Inactived</option>
+                                                <option value="1">Actived</option>
+                                            <%} else {%>
+                                                <option value="0">Inactived</option>
+                                                <option value="1" selected>Actived</option>
+                                            <%}%>                                            
+                                            
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm purple">Close</button>
+                                    </td>
+                                </tr>
+                                <%});%>
+							</tbody>
+						</table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="portlet box blue">
+                    <div class="portlet-title">
+                      <div class="caption">
+                        <i class="icon-tag"></i> <span>Categories</span>
+                      </div>
+                      <div class="actions">
+                        <a href="javascript:;" class="btn default btn-sm" id="btn_add">
+                            <i class="fa fa-plus"></i> Add 
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="portlet-body">
+                        <table class="table table-striped table-hover table-bordered" id="category_table">
+							<thead>
+                                <tr>
+                                    <th width="60%">
+                                        Category
+                                    </th>
+                                    <th width="40%">
+                                        Action
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        alex
+                                    </td>
+                                    <td>
+                                        <a class="edit btn btn-sm green" href="javascript:;" title="edit"><i class="fa fa-pencil"></i></a>
+                                        <a class="delete btn btn-sm red" href="javascript:;" title="delete"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+							</tbody>
+							</table>
+                    </div>
+                </div>
+
+            </div>
+
+            
+            <div class="col-md-5">
+                <div class="portlet box blue">
+                    <div class="portlet-title">
+                      <div class="caption">
+                        <i class="icon-note"></i> <span>Post Edit</span>
+                      </div>
+                      <div class="tools">
+                        <a href="#" class="collapse" data-original-title="" title="">
+                        </a>
+                        <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title="">
+                        </a>
+                        <a href="" class="reload" data-original-title="" title="">
+                        </a>
+                        <a href="" class="remove" data-original-title="" title="">
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="portlet-body form">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Category</label>
+                                    <div class="col-md-10">
+                                        <select class="select2me input-xlarge" name="category" id="category">
+                                            <option value="novel">novel</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <textarea class="ckeditor form-control" id="content" name="content" rows="20"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <button type="button" class="btn green" id="btn_save"><i class="fa fa-check"></i> Submit</button>
+                                        <button type="reset" class="btn default" id="btn_reset"><i class="icon-refresh"></i>Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="../../js/admin.js"></script>
