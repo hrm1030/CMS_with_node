@@ -11,7 +11,7 @@
  Target Server Version : 40404
  File Encoding         : 65001
 
- Date: 01/06/2021 00:53:00
+ Date: 01/06/2021 02:27:28
 */
 
 
@@ -966,48 +966,48 @@ db.createCollection("trainings");
 // Documents of trainings
 // ----------------------------
 db.getCollection("trainings").insert([ {
-    _id: ObjectId("60cb3024583c502fc4e45814"),
+    _id: ObjectId("60b5fb9b2577d80a0c4e5f38"),
+    language: "EN",
     title: "Beginner",
     type: "training",
-    description: "Training beginner video",
-    url: "../../videos/trainings/video_60b63a7ad2a7ea368cf9cf0a_20215174217552.mp4",
-    __v: NumberInt("0"),
-    language: "EN"
+    description: "Beginner video",
+    url: "../../videos/trainings/video_60b63a7ad2a7ea368cf9cf0a_20215121923193.mp4",
+    __v: NumberInt("0")
 } ]);
 db.getCollection("trainings").insert([ {
-    _id: ObjectId("60cb3053583c502fc4e45815"),
+    _id: ObjectId("60b5fbab2577d80a0c4e5f39"),
+    language: "GR",
+    title: "Beginner",
+    type: "training",
+    description: "Beginner video",
+    url: "../../videos/trainings/video_60b63a7ad2a7ea368cf9cf0a_20215121939252.mp4",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("trainings").insert([ {
+    _id: ObjectId("60b5fbc62577d80a0c4e5f3a"),
+    language: "GR",
     title: "Professional",
     type: "training",
-    description: "Training professional video",
-    url: "../../videos/trainings/video_60b63a7ad2a7ea368cf9cf0a_20215174215529.mp4",
-    __v: NumberInt("0"),
-    language: "EN"
+    description: "Professional video",
+    url: "../../videos/trainings/video_60b63a7ad2a7ea368cf9cf0a_2021512206666.mp4",
+    __v: NumberInt("0")
 } ]);
 db.getCollection("trainings").insert([ {
-    _id: ObjectId("60cb495c0cdc46162cf42c0c"),
-    title: "Ultimate",
+    _id: ObjectId("60b5fbcc2577d80a0c4e5f3b"),
+    language: "EN",
+    title: "Professional",
     type: "training",
-    description: "Training ultimate video",
-    url: "../../videos/trainings/video_60b63a7ad2a7ea368cf9cf0a_20215176844455.mp4",
-    __v: NumberInt("0"),
-    language: "EN"
+    description: "Professional video",
+    url: "../../videos/trainings/video_60b63a7ad2a7ea368cf9cf0a_20215122012329.mp4",
+    __v: NumberInt("0")
 } ]);
 db.getCollection("trainings").insert([ {
-    _id: ObjectId("60cf9e99ae84990c64943536"),
-    title: "Info",
+    _id: ObjectId("60b5fbdf2577d80a0c4e5f3c"),
+    language: "EN",
+    title: "info",
     type: "info",
     description: "Information video",
     url: "../../videos/info.mp4",
-    __v: NumberInt("0"),
-    language: "EN"
-} ]);
-db.getCollection("trainings").insert([ {
-    _id: ObjectId("60cfa0241303de1888d5ba19"),
-    language: "GR",
-    title: "Homestead",
-    type: "training",
-    description: "Homestead Video",
-    url: "../../videos/trainings/video_60b63a7ad2a7ea368cf9cf0a_2021520138410.mp4",
     __v: NumberInt("0")
 } ]);
 
