@@ -1,4 +1,4 @@
-<div class="main">
+<div class="main" style="min-height: 400px;">
     <div class="container">
     <ul class="breadcrumb">
     </ul>
@@ -8,69 +8,27 @@
         <div class="col-md-12">
         <h1>Search Category</h1>
         <div class="content-page">
-            <form action="#" class="content-search-view2">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-                <button type="submit" class="btn btn-primary">Search</button>
-                </span>
-            </div>
-            </form>
-            <div class="row">
-                <div class="col-md-12">
-                    <p>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                        <button class="btn btn-default">Novel</button>
-                    </p>
-                    
+            <div class="content-search-view2">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="keyword" placeholder="Search...">
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary" id="btn_search">Search</button>
+                    </span>
                 </div>
             </div>
-            <!-- <div class="row">
-                <div class="col-md-4 col-sm-4 items-info">Items 1 to 9 of 10 total</div>
-                <div class="col-md-8 col-sm-8">
-                    <ul class="pagination pull-right">
-                    <li><a href="javascript:;">«</a></li>
-                    <li><a href="javascript:;">1</a></li>
-                    <li><span>2</span></li>
-                    <li><a href="javascript:;">3</a></li>
-                    <li><a href="javascript:;">4</a></li>
-                    <li><a href="javascript:;">5</a></li>
-                    <li><a href="javascript:;">»</a></li>
-                    </ul>
+            <div class="portlet ">
+                <div class="portlet-title">
+                  <div class="caption">
+                    <i class="fa fa-tag"></i>Categories
+                  </div>
                 </div>
-            </div> -->
+                <div class="portlet-body util-btn-margin-bottom-5" id="div_categories">
+                </div>
+              </div>
+            <div class="pull-right">
+                <p id="paginater">
+                </p>
+            </div>
 
         </div>
         </div>
@@ -78,3 +36,4 @@
     </div>
     </div>
 </div>
+<script src='../../js/search.js'></script>

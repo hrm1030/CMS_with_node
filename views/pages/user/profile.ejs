@@ -11,8 +11,13 @@
             <div class="row margin-bottom-40">
               <!-- Pricing -->
               <div class="col-md-3">
-                <div class="pricing hover-effect">
-                  <div class="pricing-head">
+                <% if(session.membership == 1){%>
+                <div class="pricing hover-effect pricing-active" id="pricing_free">
+                  <div class="pricing-head pricing-head-active" id="free_head">
+                <%} else {%>
+                <div class="pricing hover-effect" id="pricing_free">
+                  <div class="pricing-head" id="free_head">
+                <%}%>
                     <h3>Start free
                     <span>
                        One post plan
@@ -24,15 +29,25 @@
                   <div class="pricing-footer">
                     <p>
                     </p>
-                    <a href="javascript:;" class="btn btn-primary">
-                       Sign Up <i class="m-icon-swapright m-icon-white"></i>
-                    </a>
+                    <button type="button" class="btn btn-primary" id="btn_free">
+                      <% if(session.membership == 1){%>
+                        Got
+                      <%} else {%>
+                       Get <i class="m-icon-swapright m-icon-white"></i>
+                      <%}%> 
+                      
+                    </button>
                   </div>
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="pricing hover-effect">
-                  <div class="pricing-head">
+                <% if(session.membership == 2){%>
+                <div class="pricing hover-effect pricing-active" id="pricing_common">
+                  <div class="pricing-head pricing-head-active" id="common_head">
+                <%} else {%>
+                  <div class="pricing hover-effect" id="pricing_common">
+                    <div class="pricing-head" id="common_head">
+                <%}%>
                     <h3>Common plan
                     <span>
                        2 post per week
@@ -48,15 +63,24 @@
                     <p>
                        <h4>Year subscription 190</h4>
                     </p>
-                    <a href="javascript:;" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" id="btn_common">
+                      <% if(session.membership == 2){%>
+                        Got
+                      <%} else {%>
                        Sign Up <i class="m-icon-swapright m-icon-white"></i>
-                    </a>
+                      <%}%>  
+                    </button>
                   </div>
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="pricing hover-effect">
-                  <div class="pricing-head">
+                <% if(session.membership == 3){%>
+                <div class="pricing hover-effect pricing-active" id="pricing_medium">
+                  <div class="pricing-head pricing-head-active" id="medium_head">
+                <%} else {%>
+                  <div class="pricing hover-effect" id="pricing_medium">
+                    <div class="pricing-head" id="medium_head">
+                <%}%>
                     <h3>Medium
                     <span>
                        3 post per week
@@ -70,17 +94,27 @@
                   </div>
                   <div class="pricing-footer">
                     <p>
-                       <h4>Year subscription 340</h4>
+                       <h4>Year subscription 240</h4>
                     </p>
-                    <a href="javascript:;" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" id="btn_medium">
+                      <% if(session.membership == 3){%>
+                        Got
+                      <%} else {%>
                        Sign Up <i class="m-icon-swapright m-icon-white"></i>
-                    </a>
+                      <%}%> 
+                      
+                      </button>
                   </div>
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="pricing hover-effect">
-                  <div class="pricing-head">
+                <% if(session.membership == 4){%>
+                <div class="pricing hover-effect pricing-active" id="pricing_advance">
+                  <div class="pricing-head pricing-head-active" id="advance_head">
+                <%} else {%>
+                  <div class="pricing hover-effect" id="pricing_advance">
+                    <div class="pricing-head" id="advance_head">
+                <%}%>
                     <h3>Advance
                     <span>
                        4 post per week
@@ -96,9 +130,14 @@
                     <p>
                        <h4>Year subscription 290</h4>
                     </p>
-                    <a href="javascript:;" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" id="btn_advance">
+                      <% if(session.membership == 4){%>
+                        Got
+                      <%} else {%>
                        Sign Up <i class="m-icon-swapright m-icon-white"></i>
-                    </a>
+                      <%}%>  
+                      
+                      </button>
                   </div>
                 </div>
               </div>
@@ -110,3 +149,23 @@
       <!-- END CONTENT -->
     </div>
   </div>
+  <div class="modal fade" id="confirmModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title text-success"><i class="icon-credit-card"></i> Buy Membership</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" id="btn_confirm" data-dismiss="modal">Confirm</button>
+                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<script src="../../js/profile.js"></script>

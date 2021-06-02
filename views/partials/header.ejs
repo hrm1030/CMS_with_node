@@ -25,8 +25,14 @@
                     <li class="menu-search">
                         <span class="sep"></span>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                              <%= session.name%> <%= session.surname %>
+                            
+                            <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;" style="margin-top: -8px;">
+                                <%if(session.photo == '' || session.photo == null){%>
+                                    <img src="../../images/avatar.png">
+                                <%} else {%>
+                                    <img src="../../uploads/users/<%=session.photo%>">
+                                <%}%>
+                                <%= session.name%> <%= session.surname %>
                             </a>
                             <ul class="dropdown-menu">
                               <li><a href="/auth/profile"><i class="icon-user"></i> Profile</a></li>

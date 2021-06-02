@@ -84,8 +84,7 @@ exports.signup = function(req, res, next) {
                     if(password === confirm_password) {
                         var hashedPassword = bcrypt.hashSync(req.body.password, 8);
                         var today = new Date();
-
-                        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
                         User.create({
                             name : name,
                             surname : surname,
@@ -95,6 +94,7 @@ exports.signup = function(req, res, next) {
                             membership : 0,
                             created_at : date,
                             permission : 2,
+                            photo : '',
                             state : 0
                         }, (err, user) => {
                             if(err) {
@@ -156,7 +156,7 @@ exports.signin = function(req, res, next) {
                             res.render('pages/auth/login', {title : 'CMS | Login', errors : "Please enter your password exactly.", session : req.session})
                         }else {
                             var session = req.session;
-                            session.id = user._id;
+                            session.userid = user._id;
                             session.name = user.name;
                             session.surname = user.surname;
                             session.phone = user.phone;
@@ -165,6 +165,7 @@ exports.signin = function(req, res, next) {
                             session.membership = user.membership;
                             session.created_at = user.created_at;
                             session.state = user.state;
+                            session.photo = user.photo;
                             req.session.save();
                             if(user.permission == 1) {
                                 res.redirect('/admin');
@@ -182,9 +183,7 @@ exports.signin = function(req, res, next) {
 }
 
 exports.profile = function(req, res, next) {
-    console.log(req.originalUrl);
-    urls = req.originalUrl.split('/');
-    console.log(urls)
+    console.log(req.session);
     res.render('pages/user/profile', {title : 'CMS | Profile', session : req.session});
 }
 

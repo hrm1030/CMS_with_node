@@ -23,6 +23,7 @@
             };
 
             var toastr = {
+                closeButton : true,
                 clear: clear,
                 remove: remove,
                 error: error,
