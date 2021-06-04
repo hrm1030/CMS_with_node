@@ -2,6 +2,8 @@ var Industry = require('../models/Industry');
 var User = require('../models/User');
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
+var path = require('path');
+const multer = require("multer")
 
 exports.login = function(req, res, next) {
     res.render('pages/auth/login', {title : 'CMS | Login', errors : [], session : req.session});
@@ -92,9 +94,11 @@ exports.signup = function(req, res, next) {
                             email : email,
                             password : hashedPassword,
                             membership : 0,
-                            created_at : date,
+                            left_membership : 0,
+                            created_at : today.toUTCString(),
                             permission : 2,
-                            photo : '',
+                            photo : 'avatar.png',
+                            introduction : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.',
                             state : 0
                         }, (err, user) => {
                             if(err) {
@@ -144,7 +148,6 @@ exports.signin = function(req, res, next) {
             if(err) {
                 console.log(err);
             } else {
-                console.log(user);
                 if(user == null){
                     res.render('pages/auth/login', {title : 'CMS | Login', errors : "Please enter your email exactly. ", session : req.session})
                 } else{
@@ -155,23 +158,47 @@ exports.signin = function(req, res, next) {
                         if (!passwordIsValid) {
                             res.render('pages/auth/login', {title : 'CMS | Login', errors : "Please enter your password exactly.", session : req.session})
                         }else {
-                            var session = req.session;
-                            session.userid = user._id;
-                            session.name = user.name;
-                            session.surname = user.surname;
-                            session.phone = user.phone;
-                            session.email = user.email;
-                            session.permission = user.permission;
-                            session.membership = user.membership;
-                            session.created_at = user.created_at;
-                            session.state = user.state;
-                            session.photo = user.photo;
-                            req.session.save();
-                            if(user.permission == 1) {
-                                res.redirect('/admin');
-                            }else {
-                                res.redirect('/search');
+                            req.session.userid = user._id;
+                            req.session.name = user.name;
+                            req.session.surname = user.surname;
+                            req.session.phone = user.phone;
+                            req.session.email = user.email;
+                            req.session.permission = user.permission;
+                            req.session.membership = user.membership;
+                            req.session.created_at = user.created_at;
+                            req.session.state = user.state;
+                            req.session.photo = user.photo;
+                            req.session.introduction = user.introduction;
+                            req.session.left_membership = user.left_membership;
+                            var today = new Date();
+                            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
+                            console.log(new Date(date).getTime() - new Date(user.created_at).getTime()+'=================================');
+                            var currnet_time = new Date(date).getTime();
+                            var created_time = new Date(user.created_at).getTime();
+                            if((currnet_time - created_time) > 596793842) {
+                                User.findByIdAndUpdate(user._id, {$set : {
+                                    left_membership : user.membership
+                                }}, (err) => {
+                                    if(err) {
+                                        console.log(err);
+                                    } else {
+                                        req.session.left_membership = user.membership;
+                                        // req.session.save();
+                                        if(user.permission == 1) {
+                                            res.redirect('/admin');
+                                        }else {
+                                            res.redirect('/search');
+                                        }
+                                    }
+                                })
+                            } else {
+                                if(user.permission == 1) {
+                                    res.redirect('/admin');
+                                }else {
+                                    res.redirect('/search');
+                                }
                             }
+                            
                             
                         }
                     }
@@ -186,6 +213,80 @@ exports.profile = function(req, res, next) {
     console.log(req.session);
     res.render('pages/user/profile', {title : 'CMS | Profile', session : req.session});
 }
+
+exports.profile_save = function(req, res) {
+    console.log(req.body)
+        upload(req,res,function(err) {
+
+            if(err) {
+      
+                // ERROR occured (here it can be occured due
+                // to uploading image of size greater than
+                // 1MB or uploading different file type)
+                res.send(err)
+            }
+            else {
+                req.session.photo = req.session.userid+'.jpg';
+                req.session.introduction = req.body.introduction;
+                // SUCCESS, image successfully uploaded
+                User.findByIdAndUpdate(req.session.userid, {$set : {
+                    introduction : req.body.introduction,
+                    photo : req.session.userid+'.jpg'
+                }}, (err) => {
+                    if(err) {
+                        console.log(err);
+                    } else {
+                        res.redirect('/auth/profile');
+                    }
+                });
+                
+            }
+        });
+    
+}
+
+
+exports.photo_generate = function(req, res,next) {
+    res.render('pages/user/photo_generate', {layout : false});
+}
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+  
+        // Uploads is the Upload_folder_name
+        cb(null, "public/uploads/users")
+    },
+    filename: function (req, file, cb) {
+      cb(null, req.session.userid +".jpg")
+    }
+})
+       
+  // Define the maximum size for uploading
+  // picture i.e. 1 MB. it is optional
+const maxSize = 10 * 1000 * 1000;
+
+var upload = multer({ 
+                storage: storage,
+                limits: { fileSize: maxSize },
+                fileFilter: function (req, file, cb){
+
+                    // Set the filetypes, it is optional
+                    var filetypes = /jpeg|jpg|png/;
+                    var mimetype = filetypes.test(file.mimetype);
+
+                    var extname = filetypes.test(path.extname(
+                                file.originalname).toLowerCase());
+                    
+                    if (mimetype && extname) {
+                        return cb(null, true);
+                    }
+                    
+                    cb("Error: File upload only supports the "
+                            + "following filetypes - " + filetypes);
+                    } 
+
+                // mypic is the name of file attribute
+            }).single("photo");  
 
 exports.logout = function(req, res, next) {
     req.session.destroy((err) => {

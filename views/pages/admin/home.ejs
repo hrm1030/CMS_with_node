@@ -230,14 +230,41 @@
                                 <i class="icon-note"></i> <span>Post Edit</span>
                               </div>
                               <div class="tools">
-                                <a href="#" class="expand" data-original-title="" title="">
+                                <a href="#" class="collapse" data-original-title="" title="">
                                 </a>
                               </div>
                             </div>
         
-                            <div class="portlet-body form" style="display: none;">
+                            <div class="portlet-body form">
                                 <form class="form-horizontal" role="form">
+                                    
                                     <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Name</label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control" id="fullname" name="fullname">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Email</label>
+                                                    <div class="col-md-10">
+                                                        <input type="email" class="form-control" id="email" name="email">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Phone</label>
+                                                    <div class="col-md-10">
+                                                        <input type="text" class="form-control" id="phone" name="phone">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label class="col-md-1 control-label">Category</label>
                                             <div class="col-md-10">
@@ -249,8 +276,20 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
+                                            <label class="col-md-1 control-label">Title</label>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control" name="title" id="title">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <div class="col-md-12">
                                                 <textarea class="ckeditor form-control" id="content" name="content" rows="20"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label">Attachment</label>
+                                            <div class="col-md-10">
+                                                <input type="file" class="form-control" name="files" id="files" multiple>
                                             </div>
                                         </div>
                                     </div>
@@ -281,16 +320,26 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <label class="col-md-1 text-danger">Client :</label>
-                    <label class="bold col-md-3" id="label_name"></label>
-                    <label class="col-md-1 text-danger">Date : </label>
-                    <label class="col-md-3 bold" id="label_created_at"></label>
-                    <label class="col-md-2 text-danger">Category : </label>
-                    <label class="col-md-2 bold" id="label_category"></label>
+                    <div class="col-md-12">
+                        <i class="fa fa-user text-danger pull-left"></i>
+                        <label class="bold col-md-3" id="label_name"></label>
+                        <i class="fa fa-envelope-o text-danger pull-left"></i>
+                        <label class="bold col-md-3" id="label_email"></label>
+                        <i class="fa fa-phone text-danger pull-left"></i>
+                        <label class="bold col-md-2" id="label_phone"></label>
+                        <i class="fa fa-calendar pull-left text-danger"></i>
+                        <label class="col-md-3 bold" id="label_created_at"></label>
+                        <i class="fa fa-tags pull-left text-danger"></i>
+                        <label class="col-md-2 bold" id="label_category"></label>
+                    </div>
+                    
                 </div><hr>
                 <div class="row">
-                    <div class="col-md-12" id="preview_body">
+                    <div class="col-md-12">
+                        <h2 id="post_title"></h2>
+                        <div id="preview_body">
 
+                        </div>
                     </div>
                 </div>
             </div>

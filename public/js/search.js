@@ -59,6 +59,11 @@ $(document).ready(function() {
             }
             $("#div_categories").html(search_html); // or some ajax content loading...
         } else {
+            total = parseInt((categories.length+1)/100);
+            sub = (categories.length+1)%100;
+            if(sub > 0) {
+                total = total + 1;
+            }
             $('#paginater').bootpag({
                 paginationClass: 'pagination pagination-sm',
                 next: '<i class="fa fa-angle-right"></i>',
@@ -68,10 +73,19 @@ $(document).ready(function() {
                 maxVisible: 6 
             }).on('page', function(event, num){
                 console.log(num)
-                var search_html = '';
-                for(var i = (num-1)*100 ; i < 100*num ; i ++) {
-                    search_html = search_html + '<a class="btn btn-default btn-lg" href="/post/list?category='+categories[i]._id+'">'+categories[i].name+'</a>';
+                if((categories.length - (num-1)*100) >= 100 )
+                {
+                    var search_html = '';
+                    for(var i = (num-1)*100 ; i < 100*num ; i ++) {
+                        search_html = search_html + '<a class="btn btn-default btn-lg" href="/post/list?category='+categories[i]._id+'">'+categories[i].name+'</a>';
+                    }
+                } else {
+                    var search_html = '';
+                    for(var i = (num-1)*100 ; i < categories.length ; i ++) {
+                        search_html = search_html + '<a class="btn btn-default btn-lg" href="/post/list?category='+categories[i]._id+'">'+categories[i].name+'</a>';
+                    }
                 }
+                
                 $("#div_categories").html(search_html); // or some ajax content loading...
             });
             var search_html = '';

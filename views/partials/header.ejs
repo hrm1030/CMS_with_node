@@ -1,9 +1,8 @@
 <!-- BEGIN HEADER -->
 <div class="header">
     <div class="container">
-        <a class="site-logo" href="index.html">
-            <!-- <img src="../../assets/frontend/layout/img/logos/logo-corp-red.png" alt="Metronic FrontEnd"> -->
-            <h3 class="text-danger bold">CMS</h3>
+        <a class="site-logo" href="/" style="margin-top: -25px;">
+            <img src="../../images/logo.png" alt="Metronic FrontEnd">
         </a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
@@ -26,12 +25,9 @@
                         <span class="sep"></span>
                         <li class="dropdown">
                             
-                            <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;" style="margin-top: -8px;">
-                                <%if(session.photo == '' || session.photo == null){%>
-                                    <img src="../../images/avatar.png">
-                                <%} else {%>
-                                    <img src="../../uploads/users/<%=session.photo%>">
-                                <%}%>
+                            <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;" style="margin-top: -10px;">
+                                
+                                <img src="../../uploads/users/<%=session.photo%>" style="width: 45px; height: 45px;">
                                 <%= session.name%> <%= session.surname %>
                             </a>
                             <ul class="dropdown-menu">

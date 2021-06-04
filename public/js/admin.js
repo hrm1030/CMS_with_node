@@ -648,15 +648,22 @@ $(document).ready(function() {
             $('#btn_save').click(function() {
                 var category_id = $('#category').val();
                 var content = CKEDITOR.instances.content.getData();
-                console.log($('#category>:selected').text());
                 var category = $('#category>:selected').text();
+                var title = $('#title').val();
+                var files = document.getElementById("files");
+            
+                console.log(files.files[0])
                 $.ajax({
                     url : '/post/save',
                     method : 'post',
                     data : {
                         category_id : category_id,
                         category : category,
-                        content : content
+                        content : content,
+                        title : title,
+                        fullname : $('#fullname').val(),
+                        email : $('#email').val(),
+                        phone : $('#phone').val()
                     },
                     success : function (data) {
                         toastr['success']('Successfully posted.');
@@ -673,9 +680,10 @@ $(document).ready(function() {
 
             var get_skip_content = function(content) {
                 var str = '';
-                cotent = content.split('<p>');
-                for(var j = 0 ; j < cotent.length ; j ++) {
-                    str = str + cotent[j];
+                var content_arr = Array();
+                content_arr = content.split('<p>');
+                for(var j = 0 ; j < content_arr.length ; j ++) {
+                    str = str + content_arr[j];
                 }
                 str_arr = str.split('</p>');
                 var new_str = '';
@@ -711,8 +719,12 @@ $(document).ready(function() {
                         post_id : $(this).attr('post_id')
                     },
                     success : function(data) {
+                        console.log(data.post)
+                        $('#post_title').text(data.post.title);
                         $('#preview_body').html(data.post.content);
                         $('#label_name').html(data.post.poster);
+                        $('#label_email').html(data.post.poster_email);
+                        $('#label_phone').html(data.post.poster_phone);
                         $('#label_created_at').html(data.post.created_at);
                         $('#label_category').html(data.post.category);
                         $('#preview').modal('show');
@@ -745,7 +757,10 @@ $(document).ready(function() {
     PostTable.init();
 
     $('#category').select2();
-
+    $("#phone").inputmask("+9999999999", {
+        placeholder: " ",
+        clearMaskOnLostFocus: true
+    }); //default
     
 
 })

@@ -1,8 +1,103 @@
+<link href="../../css/profile.css" rel="stylesheet"  type="text/css">
+
 <div class="main">
     <div class="container">
       <ul class="breadcrumb">
       </ul>
       <!-- BEGIN CONTENT -->
+      <div class="row margin-bottom-20">
+        <form ref='uploadForm' action='/auth/profile/save' enctype="multipart/form-data" method="POST">
+          <div class="row">
+            <div class="col-md-3 text-center">
+              <div class="fileinput fileinput-new" data-provides="fileinput">
+                <div class="fileinput-new thumbnail" style="width: auto; height: auto;">
+                    <img src="../../uploads/users/<%=session.photo%>" style="width: 250px; height: 250px;" alt=""/>
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail"  style="width: 260px; height: 260px;">
+                </div>
+                <div id="photo_btn_div">
+                  <span class="btn default btn-file">
+                  <span class="fileinput-new"><i class="fa fa-upload"></i> Select </span>
+                  <span class="fileinput-exists"><i class="icon-reload"></i> Change </span>
+                  <input type="file" name="photo">
+                  </span>
+                  <a class="btn btn-success" href="/auth/profile/photo_generate"><i class="icon-pencil"></i> Edit</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="row">
+                <div class="col-md-8 profile-info">
+                  <h1><%= session.name%> <%= session.surname%> <button class="btn blue pull-right btn-sm" type="button" id="btn_profile_edit"><i class="fa fa-pencil"></i> Edit</button><button type="button" class="btn btn-sm btn-default pull-right" id="btn_cancel"><i class="fa fa-times"></i> Cancel</button><button class="btn btn-sm btn-success pull-right" type="submit" id="btn_profile_save"><i class="fa fa-save"></i> Save</button></h1>
+                  <p id="introduction_div"><%= session.introduction%></p><hr>
+                  <ul class="list-inline">
+                    <li>
+                      <i class="fa fa-map-marker"></i> Spain
+                    </li>
+                    <li>
+                      <i class="fa fa-calendar"></i> 18 Jan 1982
+                    </li>
+                    <li>
+                      <i class="fa fa-briefcase"></i> Design
+                    </li>
+                    <li>
+                      <i class="fa fa-star"></i> Top Seller
+                    </li>
+                    <li>
+                      <i class="fa fa-heart"></i> BASE Jumping
+                    </li>
+                  </ul>
+                </div>
+                <!--end col-md-8-->
+                <div class="col-md-4">
+                  <div class="portlet sale-summary">
+                    <div class="portlet-title">
+                      <div class="caption">
+                         Account Summary
+                      </div>
+                    </div>
+                    <div class="portlet-body">
+                      <ul class="list-unstyled">
+                        <li>
+                          <span class="sale-info">
+                          Membership <i class="fa fa-img-up"></i>
+                          </span>
+                          <span class="sale-num" id="membership_summary">
+                            <%= session.membership %>
+                          </span>
+                        </li>
+                        <li>
+                          <span class="sale-info">
+                          Left Membership <i class="fa fa-img-up"></i>
+                          </span>
+                          <span class="sale-num" id="membership_summary">
+                            <%= session.left_membership %>
+                          </span>
+                        </li>
+                        <li>
+                          <span class="sale-info">
+                          State <i class="fa fa-img-down"></i>
+                          </span>
+                          <span class="sale-num">
+                            <%if(session.state == 0) {%>
+                              <i class="fa fa-check text-muted" title="Inactived"></i>
+                            <%} else {%>
+                              <i class="fa fa-check" title="Actived"></i>
+                            <%}%>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!--end col-md-4-->
+              </div>
+              <!--end row-->
+            </div>
+          </div>
+        </form>
+        
+      </div><hr>
       <div class="row margin-bottom-40">
         <!-- BEGIN CONTENT -->
         <div class="col-md-12 col-sm-12">
@@ -154,18 +249,71 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title text-success"><i class="icon-credit-card"></i> Buy Membership</h4>
+                <h4 class="modal-title text-danger"><i class="icon-credit-card"></i> Payment Details</h4>
             </div>
             <div class="modal-body">
 
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-success" id="btn_confirm" data-dismiss="modal">Confirm</button>
-                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+              <div class="row">
+                <div class="col-md-push-1 col-md-10">
+                  <form role="form">
+                    <div class="form-body">
+                      <div class="form-group form-md-line-input has-error">
+                        <div class="input-icon">
+                          <input type="text" class="form-control" id="fullname">
+                          <label for="form_control_1">NAME</label>
+                          <i class="icon-user-following"></i>
+                        </div>
+                      </div>
+                      <div class="form-group form-md-line-input has-error">
+                        <div class="input-icon">
+                          <input type="text" class="form-control" id="card_number">
+                          <label for="form_control_1">CARD NUMBER</label>
+                          <i class="icon-credit-card"></i>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-group form-md-line-input has-error">
+                            <div class="input-icon">
+                              <input type="number" class="form-control" id="month" min="1" max="12">
+                              <label for="form_control_1">MONTH</label>
+                              <i class="icon-calendar"></i>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group form-md-line-input has-error">
+                            <div class="input-icon">
+                              <input type="number" class="form-control" id="year">
+                              <label for="form_control_1">YEAR</label>
+                              <i class="icon-calendar"></i>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group form-md-line-input has-error">
+                            <div class="input-icon">
+                              <input type="number" class="form-control" id="cvc">
+                              <label for="form_control_1">CVC</label>
+                              <i class="icon-lock"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <h3 class="bold text-center ammount_row">Payment ammount : <span id="payment_ammount" class="text-danger payment_span"></span> <span class="text-danger payment_span">$</span></h3>
+                      <div class="row text-center payment_row">
+                        <button type="button" class="btn btn-danger btn-lg" id="btn_confirm" data-dismiss="modal">PAY</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+							
             </div>
         </div>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
-</div>
+  </div>
+
 <script src="../../js/profile.js"></script>

@@ -12,11 +12,13 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/cms', {useNewUrlParser: true, useUnifiedTopology: true});
 /** End DB connect */
 
+/** Import Router */
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
+/** End Import Router */
+
 
 var app = express();
-
 // view engine setup
 app.use(expressLayouts);
 app.set('layout', './layouts/main');

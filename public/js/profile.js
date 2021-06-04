@@ -1,11 +1,37 @@
 $(document).ready(function() {
+    $('#photo_btn_div').hide();
+    $('#btn_profile_save').hide();
+    $('#btn_cancel').hide();
+
+    $('#btn_profile_edit').click(function() {
+        $('#photo_btn_div').show();
+        $('#btn_profile_save').show();
+        $('#btn_cancel').show();
+        $(this).hide();
+        var textarea = '<textarea name="introduction" id="introduction" rows="8" class="form-control">'+$('#introduction_div').text()+'</textarea>';
+        $('#introduction_div').html(textarea);
+    });
+
+    $('#btn_cancel').click(function() {
+        $('#photo_btn_div').hide();
+        $('#btn_profile_save').hide();
+        $('#btn_cancel').hide();
+        $('#btn_profile_edit').show();
+        $('#introduction_div').html($('#introduction').text());
+    })
 
     var payment_confirm = function(membership) {
         $.ajax({
             url : '/membership/update',
             method : 'post',
             data : {
-                membership : membership
+                membership : membership,
+                fullname : $('#fullname').val(),
+                cardnumber : $('#card_number').val(),
+                month : $('#month').val(),
+                year : $('#year').val(),
+                cvc : $('#cvc').val(),
+                ammount : $('#payment_ammount').text()
             },
             success : function(data) {
                 if(data.old_membership == 1) {
@@ -48,7 +74,8 @@ $(document).ready(function() {
                     $('#advance_head').addClass('pricing-head-active');
                     $('#btn_advance').html('Got');
                 }
-                toastr['success']('Successfully upgraded.')
+                toastr['success']('Successfully upgraded.');
+                $('#membership_summary').text(membership);
             },
             error : function() {
                 toastr['error']('Happening any errrors in membership upgrade');
@@ -63,16 +90,19 @@ $(document).ready(function() {
 
     $('#btn_common').click(function() {
         $('#btn_confirm').attr('membership', 2);
+        $('#payment_ammount').text(20);
         $('#confirmModal').modal('show');
     });
 
     $('#btn_medium').click(function() {
         $('#btn_confirm').attr('membership', 3);
+        $('#payment_ammount').text(25);
         $('#confirmModal').modal('show');
     });
 
     $('#btn_advance').click(function() {
         $('#btn_confirm').attr('membership', 4);
+        $('#payment_ammount').text(30);
         $('#confirmModal').modal('show');
     });
 
@@ -80,4 +110,9 @@ $(document).ready(function() {
         var membership = $(this).attr('membership');
         payment_confirm(membership);
     })
+
+    $("#card_number").inputmask("9999 9999 9999 9999", {
+        placeholder: " ",
+        clearMaskOnLostFocus: true
+    }); //default
 })
