@@ -13,16 +13,8 @@ $(document).ready(function() {
               <div id="myCarousel" class="carousel slide">
                 <!-- Carousel items -->
                 <div class="carousel-inner">
-                  <div class="item">
-                    <img src="../../assets/frontend/pages/img/posts/img1.jpg" alt="">
-                  </div>
-                  <div class="item">
-                    <!-- BEGIN VIDEO -->   
-                    <iframe src="http://player.vimeo.com/video/56974716?portrait=0" style="width:100%; border:0" allowfullscreen="" height="259"></iframe>
-                    <!-- END VIDEO -->   
-                  </div>
                   <div class="item active">
-                    <img src="../../assets/frontend/pages/img/posts/img3.jpg" alt="">
+                    <img src="../../uploads/posts/${post.images}" style="height: 250px; width:100%;" alt="">
                   </div>
                 </div>
                 <!-- Carousel nav -->
