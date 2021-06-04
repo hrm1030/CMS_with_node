@@ -10,7 +10,8 @@
                 <div class="content-page">
                     <div class="row">
                         <div class="col-md-12">
-                            <form class="form-horizontal" role="form">
+                            <form ref='uploadForm' class="form-horizontal" action='/post/save' enctype="multipart/form-data" method="POST">
+                                <input type="hidden" name="categoryname" id="categoryname" value="Article">
                                 <div class="form-body">
                                     <div class="row">
                                         <div class="col-md-4">
@@ -51,7 +52,7 @@
                                     <div class="form-group">
                                         <label class="col-md-1 control-label">Title</label>
                                         <div class="col-md-11">
-                                            <input type="text" class="form-control" name="title" id="title">
+                                            <input type="text" class="form-control" name="posttitle" id="title">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -62,14 +63,32 @@
                                     <div class="form-group">
                                         <label class="col-md-1 control-label">Attachment</label>
                                         <div class="col-md-11">
-                                            <input type="file" class="form-control" name="files" id="files" multiple>
+                                            <div class="fileinput fileinput-new" data-provides="fileinput">
+												<div class="input-group input-large">
+													<div class="form-control uneditable-input span3" data-trigger="fileinput">
+														<i class="fa fa-file fileinput-exists"></i>&nbsp; <span class="fileinput-filename">
+														</span>
+													</div>
+													<span class="input-group-addon btn default btn-file">
+													<span class="fileinput-new">
+													Select file </span>
+													<span class="fileinput-exists">
+													Change </span>
+													<input type="file" name="photo" id="photo">
+													</span>
+                                                    
+													<a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">
+													Remove </a>
+												</div>
+											</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-12 text-center">
-                                            <button type="button" class="btn green" id="btn_save"><i class="fa fa-check"></i> Submit</button>
+                                            <!-- <button type="button" class="btn blue" id="btn_upload"><i class="fa fa-upload"></i> Upload</button> -->
+                                            <button type="submit" class="btn green" id="btn_save"><i class="fa fa-check"></i> Submit</button>
                                             <button type="button" class="btn btn-danger" id="btn_preview" data-toggle="modal" data-target="#preview"><i class="fa fa-eye"></i> Preview</button>
                                             <button type="reset" class="btn default" id="btn_back"><i class="fa fa-arrow-circle-o-left"></i> Back</button>
                                         </div>

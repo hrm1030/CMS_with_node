@@ -51,14 +51,8 @@ $(document).ready(function() {
                                     <div class="carousel slide" id="myCarousel">
                                     <!-- Carousel items -->
                                     <div class="carousel-inner">
-                                        <div class="item">
-                                        <img alt="" src="../../assets/frontend/pages/img/works/img1.jpg">
-                                        </div>
-                                        <div class="item">
-                                        <img alt="" src="../../assets/frontend/pages/img/works/img2.jpg">
-                                        </div>
                                         <div class="item active">
-                                        <img alt="" src="../../assets/frontend/pages/img/works/img3.jpg">
+                                        <img alt="" src="../../uploads/posts/${posts[i].images}" style="width:300px; height:150px;">
                                         </div>
                                     </div>
                                     <!-- Carousel nav -->
@@ -118,13 +112,7 @@ $(document).ready(function() {
                                         <!-- Carousel items -->
                                         <div class="carousel-inner">
                                             <div class="item">
-                                            <img alt="" src="../../assets/frontend/pages/img/works/img1.jpg">
-                                            </div>
-                                            <div class="item">
-                                            <img alt="" src="../../assets/frontend/pages/img/works/img2.jpg">
-                                            </div>
-                                            <div class="item active">
-                                            <img alt="" src="../../assets/frontend/pages/img/works/img3.jpg">
+                                            <img alt="" src="../../uploads/posts/${posts[i].images}" style="width:300px; height:150px;">
                                             </div>
                                         </div>
                                         <!-- Carousel nav -->
@@ -166,13 +154,7 @@ $(document).ready(function() {
                                         <!-- Carousel items -->
                                         <div class="carousel-inner">
                                             <div class="item">
-                                            <img alt="" src="../../assets/frontend/pages/img/works/img1.jpg">
-                                            </div>
-                                            <div class="item">
-                                            <img alt="" src="../../assets/frontend/pages/img/works/img2.jpg">
-                                            </div>
-                                            <div class="item active">
-                                            <img alt="" src="../../assets/frontend/pages/img/works/img3.jpg">
+                                            <img alt="" src="../../uploads/posts/${posts[i].images}" style="width:300px; height:150px;">
                                             </div>
                                         </div>
                                         <!-- Carousel nav -->
@@ -216,13 +198,7 @@ $(document).ready(function() {
                                 <!-- Carousel items -->
                                 <div class="carousel-inner">
                                     <div class="item">
-                                    <img alt="" src="../../assets/frontend/pages/img/works/img1.jpg">
-                                    </div>
-                                    <div class="item">
-                                    <img alt="" src="../../assets/frontend/pages/img/works/img2.jpg">
-                                    </div>
-                                    <div class="item active">
-                                    <img alt="" src="../../assets/frontend/pages/img/works/img3.jpg">
+                                    <img alt="" src="../../uploads/posts/${posts[i].images}" style="width:300px; height:150px;">
                                     </div>
                                 </div>
                                 <!-- Carousel nav -->

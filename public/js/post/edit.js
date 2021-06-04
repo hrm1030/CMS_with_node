@@ -1,35 +1,32 @@
 $(document).ready(function() {
-    $('#btn_save').click(function() {
-        var category_id = $('#category').val();
-        var content = CKEDITOR.instances.content.getData();
-        console.log($('#category>:selected').text());
-        var category = $('#category>:selected').text();
-        var title = $('#title').val();
-        var files = document.getElementById("files");
-    
-        console.log(files.files[0])
-        $.ajax({
-            url : '/post/save',
-            method : 'post',
-            data : {
-                category_id : category_id,
-                category : category,
-                content : content,
-                title : title,
-                fullname : $('#fullname').val(),
-                email : $('#email').val(),
-                phone : $('#phone').val()
-            },
-            success : function (data) {
-                toastr['success']('Successfully posted.');
-                $('#post_title').val('');
-                CKEDITOR.instances.content.setData('');
-            },
-            error : function () {
-                toastr['error']('Happening any errors in server.');
-            }
-        });
-    });
+    // $('#btn_save').click(function() {
+    //     var category_id = $('#category').val();
+    //     var content = CKEDITOR.instances.content.getData();
+    //     console.log($('#category>:selected').text());
+    //     var category = $('#category>:selected').text();
+    //     var title = $('#title').val();
+    //     $.ajax({
+    //         url : '/post/save',
+    //         method : 'post',
+    //         data : {
+    //             category_id : category_id,
+    //             category : category,
+    //             content : content,
+    //             title : title,
+    //             fullname : $('#fullname').val(),
+    //             email : $('#email').val(),
+    //             phone : $('#phone').val()
+    //         },
+    //         success : function (data) {
+    //             toastr['success']('Successfully posted.');
+    //             $('#post_title').val('');
+    //             CKEDITOR.instances.content.setData('');
+    //         },
+    //         error : function () {
+    //             toastr['error']('Happening any errors in server.');
+    //         }
+    //     });
+    // });
 
     $('#btn_back').click(function() {
         window.history.back();
@@ -58,4 +55,11 @@ $(document).ready(function() {
         placeholder: " ",
         clearMaskOnLostFocus: true
     }); //default
+
+    $('#category').change(function() {
+        $('#categoryname').val($('#category>:selected').text());
+    });
+
+
+    
 })

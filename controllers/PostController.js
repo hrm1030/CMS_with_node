@@ -2,21 +2,22 @@ var Post = require('../models/Post');
 var Category = require('../models/Category');
 const multer = require("multer");
 const User = require('../models/User');
+var path = require('path');
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
   
         // Uploads is the Upload_folder_name
-        cb(null, "public/uploads/users")
+        cb(null, "public/uploads/posts")
     },
     filename: function (req, file, cb) {
-      cb(null, req.session.userid +".jpg")
+      cb(null, 'post_'+req.session.userid+'_'+new Date().getFullYear()+new Date().getMonth()+new Date().getDate() + new Date().getHours()+new Date().getMinutes() + new Date().getSeconds() +".jpg")
     }
 })
        
   // Define the maximum size for uploading
   // picture i.e. 1 MB. it is optional
 const maxSize = 10 * 1000 * 1000;
-
 var upload = multer({ 
                 storage: storage,
                 limits: { fileSize: maxSize },
@@ -38,41 +39,60 @@ var upload = multer({
                     } 
 
                 // mypic is the name of file attribute
-            }).array("files");  
+            }).single("photo");
 
 exports.save = function(req, res, next) {
-    var today = new Date();
-    console.log(req.body);
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
-    Post.create({
-        category_id : req.body.category_id,
-        category : req.body.category,
-        title : req.body.title,
-        content : req.body.content,
-        poster : req.body.fullname,
-        poster_id : req.session.userid,
-        poster_email : req.body.email,
-        poster_phone : req.body.phone,
-        created_at : date,
-        like : 0,
-        dislike : 0,
-        images : Array()
-    }, (err, post) => {
-        if(err){
-            console.log(err)
+    upload(req,res,function(err) {
+
+        if(err) {
+    
+            // ERROR occured (here it can be occured due
+            // to uploading image of size greater than
+            // 1MB or uploading different file type)
+            res.send(err)
         } else {
-            User.findByIdAndUpdate(req.session.userid, {$set : {
-                left_membership : req.session.left_membership - 1
-            }}, (err) => {
-                if(err) {
-                    console.log(err);
+            var today = new Date();
+            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
+            Post.create({
+                category_id : req.body.category,
+                category : req.body.categoryname,
+                title : req.body.posttitle,
+                content : req.body.content,
+                poster : req.body.fullname,
+                poster_id : req.session.userid,
+                poster_email : req.body.email,
+                poster_phone : req.body.phone,
+                created_at : date,
+                like : 0,
+                dislike : 0,
+                images : 'post_'+req.session.userid+'_'+new Date().getFullYear()+new Date().getMonth()+new Date().getDate() + new Date().getHours()+new Date().getMinutes() + new Date().getSeconds() +".jpg"
+            }, (err, post) => {
+                if(err){
+                    console.log(err)
                 } else {
-                    req.session.left_membership = req.session.left_membership - 1;
-                    res.json({ post : post})
+                    User.findByIdAndUpdate(req.session.userid, {$set : {
+                        left_membership : req.session.left_membership - 1
+                    }}, (err) => {
+                        if(err) {
+                            console.log(err);
+                        } else {
+                            req.session.left_membership = req.session.left_membership - 1;
+                                
+                            if(req.session.permission == 1) {
+                                res.redirect('/admin');
+                            }else {
+                                res.redirect('/post/list?category='+req.body.category);
+                            }
+                            
+                        }
+                    })
                 }
-            })
+            });
         }
-    })
+    });
+    
+    
+    
 }
 
 exports.get = function(req, res) {

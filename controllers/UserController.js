@@ -71,61 +71,62 @@ exports.membership_update = function(req, res) {
             req.session.membership = req.body.membership;
             req.session.left_membership = req.body.membership;
             console.log(req.body)
-            var split_cardnum = req.body.cardnumber.split(' ');
-            var cardnumber = '';
-            for(var i = 0 ; i < split_cardnum.length ; i ++) 
-            {
-                cardnumber = cardnumber + split_cardnum[i];
-            }
+            // if(req.body.membership > 1) {
+            //     var split_cardnum = req.body.cardnumber.split(' ');
+            //     var cardnumber = '';
+            //     for(var i = 0 ; i < split_cardnum.length ; i ++) 
+            //     {
+            //         cardnumber = cardnumber + split_cardnum[i];
+            //     }
+                
+            //     var fullname_arr = req.body.fullname.split(' ');
+            //     var firstname = fullname_arr[0];
+            //     var lastname = fullname_arr[1];
+            //     paypal.payment.create({
+            //         "intent": "sale",
+            //         "payer": {
+            //             "payment_method": "credit_card",
+            //             "funding_instruments": [{
+            //                 "credit_card": {
+            //                     "type": "visa",
+            //                     "number": cardnumber,
+            //                     "expire_month": req.body.month,
+            //                     "expire_year": req.body.year,
+            //                     "cvv2": req.body.cvc,
+            //                     "first_name": firstname,
+            //                     "last_name": lastname,
+            //                     "billing_address": {
+            //                         "line1": "52 N Main ST",
+            //                         "city": "Johnstown",
+            //                         "state": "OH",
+            //                         "postal_code": "43210",
+            //                         "country_code": "US"
+            //                     }
+            //                 }
+            //             }]
+            //         },
+            //         "transactions": [{
+            //             "amount": {
+            //                 "total": req.body.ammount,
+            //                 "currency": "USD",
+            //                 "details": {
+            //                     "subtotal": "5",
+            //                     "tax": "1",
+            //                     "shipping": "1"
+            //                 }
+            //             },
+            //             "description": "This is the payment transaction description."
+            //         }]
+            //     }, function (error, payment) {
+            //         if (error) {
+            //             throw error;
+            //         } else {
+            //             console.log("Create Payment Response");
+            //             console.log(payment);
+            //         }
+            //     });
+            // }
             
-            var fullname_arr = req.body.fullname.split(' ');
-            var firstname = fullname_arr[0];
-            var lastname = fullname_arr[1];
-
-            console.log(cardnumber);
-            paypal.payment.create({
-                "intent": "sale",
-                "payer": {
-                    "payment_method": "credit_card",
-                    "funding_instruments": [{
-                        "credit_card": {
-                            "type": "visa",
-                            "number": cardnumber,
-                            "expire_month": req.body.month,
-                            "expire_year": req.body.year,
-                            "cvv2": req.body.cvc,
-                            "first_name": firstname,
-                            "last_name": lastname,
-                            "billing_address": {
-                                "line1": "52 N Main ST",
-                                "city": "Johnstown",
-                                "state": "OH",
-                                "postal_code": "43210",
-                                "country_code": "US"
-                            }
-                        }
-                    }]
-                },
-                "transactions": [{
-                    "amount": {
-                        "total": req.body.ammount,
-                        "currency": "USD",
-                        "details": {
-                            "subtotal": "5",
-                            "tax": "1",
-                            "shipping": "1"
-                        }
-                    },
-                    "description": "This is the payment transaction description."
-                }]
-            }, function (error, payment) {
-                if (error) {
-                    throw error;
-                } else {
-                    console.log("Create Payment Response");
-                    console.log(payment);
-                }
-            });
             res.json({msg : 'success', old_membership : old_membership});
         }
     })

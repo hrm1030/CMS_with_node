@@ -38,44 +38,53 @@ $(document).ready(function() {
                     $('#pricing_free').removeClass('pricing-active');
                     $('#free_head').removeClass('pricing-head-active');
                     $('#btn_free').html('Get <i class="m-icon-swapright m-icon-white"></i>');
+                    $('#btn_free').removeAttr('disabled', 'disabled');
                 }
                 if(data.old_membership == 2) {
                     $('#pricing_common').removeClass('pricing-active');
                     $('#common_head').removeClass('pricing-head-active');
                     $('#btn_common').html('Sign Up <i class="m-icon-swapright m-icon-white"></i>');
+                    $('#btn_common').removeAttr('disabled', 'disabled');
                 }
                 if(data.old_membership == 3) {
                     $('#pricing_medium').removeClass('pricing-active');
-                    $('#free_medium').removeClass('pricing-head-active');
+                    $('#medium_head').removeClass('pricing-head-active');
                     $('#btn_medium').html('Sign Up <i class="m-icon-swapright m-icon-white"></i>');
+                    $('#btn_medium').removeAttr('disabled', 'disabled');
                 }
                 if(data.old_membership == 4) {
                     $('#pricing_advance').removeClass('pricing-active');
                     $('#advance_head').removeClass('pricing-head-active');
                     $('#btn_advance').html('Sign Up <i class="m-icon-swapright m-icon-white"></i>');
+                    $('#btn_advance').removeAttr('disabled', 'disabled');
                 }
                 if(membership == 1) {
                     $('#pricing_free').addClass('pricing-active');
                     $('#free_head').addClass('pricing-head-active');
                     $('#btn_free').html('Got');
+                    $('#btn_free').attr('disabled', 'disabled');
                 }
                 if(membership == 2) {
                     $('#pricing_common').addClass('pricing-active');
                     $('#common_head').addClass('pricing-head-active');
                     $('#btn_common').html('Got');
+                    $('#btn_common').attr('disabled', 'disabled');
                 }
                 if(membership == 3) {
                     $('#pricing_medium').addClass('pricing-active');
-                    $('#free_medium').addClass('pricing-head-active');
+                    $('#medium_head').addClass('pricing-head-active');
                     $('#btn_medium').html('Got');
+                    $('#btn_medium').attr('disabled', 'disabled');
                 }
                 if(membership == 4) {
                     $('#pricing_advance').addClass('pricing-active');
                     $('#advance_head').addClass('pricing-head-active');
                     $('#btn_advance').html('Got');
+                    $('#btn_advance').attr('disabled', 'disabled');
                 }
                 toastr['success']('Successfully upgraded.');
                 $('#membership_summary').text(membership);
+                $('#left_membership_summary').text(membership);
             },
             error : function() {
                 toastr['error']('Happening any errrors in membership upgrade');
@@ -108,8 +117,56 @@ $(document).ready(function() {
 
     $('#btn_confirm').click(function() {
         var membership = $(this).attr('membership');
-        payment_confirm(membership);
-    })
+        var fullname = $('#fullname').val();
+        var cardnumber = $('#card_number').val();
+        var month = $('#month').val();
+        var year = $('#year').val();
+        var cvc = $('#cvc').val();
+
+        if(fullname == '') {
+            toastr['error']('Please enter your Full Name.');
+            $('#fullname').addClass('edited');
+        }
+        if(cardnumber == '') {
+            toastr['error']('Please enter your Card Number.');
+            $('#card_number').addClass('edited');
+        }
+        if(month == '') {
+            toastr['error']('Please enter Expire Month.');
+            $('#month').addClass('edited');
+        }
+        if(year == '') {
+            toastr['error']('Please enter Expire Year.');
+            $('#year').addClass('edited');
+        }
+        if(cvc == '') {
+            toastr['error']('Please enter CVC.');
+            $('#cvc').addClass('edited');
+        }
+
+        if(fullname != '' && cardnumber != '' && month != '' && year != '' && cvc != ''){
+            payment_confirm(membership);
+            $('#confirmModal').modal('hide');
+        }
+        
+    });
+
+    $('#fullname').keydown(function() {
+        $(this).removeClass('edited');
+    });
+
+    $('#card_number').keydown(function() {
+        $(this).removeClass('edited');
+    });
+    $('#month').keydown(function() {
+        $(this).removeClass('edited');
+    });
+    $('#year').keydown(function() {
+        $(this).removeClass('edited');
+    });
+    $('#cvc').keydown(function() {
+        $(this).removeClass('edited');
+    });
 
     $("#card_number").inputmask("9999 9999 9999 9999", {
         placeholder: " ",

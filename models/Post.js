@@ -12,7 +12,7 @@ const PostSchema = new mongoose.Schema({
     like : Number,
     dislike : Number,
     created_at : Date,
-    images : Array
+    images : String
 });
 
 module.exports = mongoose.model('Post', PostSchema);

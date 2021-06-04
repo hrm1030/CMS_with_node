@@ -646,36 +646,11 @@ $(document).ready(function() {
             tableWrapper.find('.dataTables_length select').select2(); // initialize select2 dropdown
 
             $('#btn_save').click(function() {
-                var category_id = $('#category').val();
-                var content = CKEDITOR.instances.content.getData();
-                var category = $('#category>:selected').text();
-                var title = $('#title').val();
-                var files = document.getElementById("files");
-            
-                console.log(files.files[0])
-                $.ajax({
-                    url : '/post/save',
-                    method : 'post',
-                    data : {
-                        category_id : category_id,
-                        category : category,
-                        content : content,
-                        title : title,
-                        fullname : $('#fullname').val(),
-                        email : $('#email').val(),
-                        phone : $('#phone').val()
-                    },
-                    success : function (data) {
-                        toastr['success']('Successfully posted.');
-                        CKEDITOR.instances.content.setData('');
-                        var content = get_skip_content(data.post.content);
-                        oTable.fnAddData([data.post.category, content, data.post.poster, data.post.created_at, '<button class="btn btn-sm btn-danger btn_view" post_id="'+data.post._id+'"><i class="icon-eye"></i> View</button>']);
-                        
-                    },
-                    error : function () {
-                        toastr['error']('Happening any errors in server.');
-                    }
-                });
+                
+            });
+
+            $('#category').change(function() {
+                $('#categoryname').val($('#category>:selected').text());
             });
 
             var get_skip_content = function(content) {

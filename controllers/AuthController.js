@@ -187,7 +187,7 @@ exports.signin = function(req, res, next) {
                                         if(user.permission == 1) {
                                             res.redirect('/admin');
                                         }else {
-                                            res.redirect('/search');
+                                            res.redirect('/');
                                         }
                                     }
                                 })
@@ -195,7 +195,7 @@ exports.signin = function(req, res, next) {
                                 if(user.permission == 1) {
                                     res.redirect('/admin');
                                 }else {
-                                    res.redirect('/search');
+                                    res.redirect('/');
                                 }
                             }
                             
@@ -212,42 +212,6 @@ exports.signin = function(req, res, next) {
 exports.profile = function(req, res, next) {
     console.log(req.session);
     res.render('pages/user/profile', {title : 'CMS | Profile', session : req.session});
-}
-
-exports.profile_save = function(req, res) {
-    console.log(req.body)
-        upload(req,res,function(err) {
-
-            if(err) {
-      
-                // ERROR occured (here it can be occured due
-                // to uploading image of size greater than
-                // 1MB or uploading different file type)
-                res.send(err)
-            }
-            else {
-                req.session.photo = req.session.userid+'.jpg';
-                req.session.introduction = req.body.introduction;
-                // SUCCESS, image successfully uploaded
-                User.findByIdAndUpdate(req.session.userid, {$set : {
-                    introduction : req.body.introduction,
-                    photo : req.session.userid+'.jpg'
-                }}, (err) => {
-                    if(err) {
-                        console.log(err);
-                    } else {
-                        res.redirect('/auth/profile');
-                    }
-                });
-                
-            }
-        });
-    
-}
-
-
-exports.photo_generate = function(req, res,next) {
-    res.render('pages/user/photo_generate', {layout : false});
 }
 
 var storage = multer.diskStorage({
@@ -286,7 +250,45 @@ var upload = multer({
                     } 
 
                 // mypic is the name of file attribute
-            }).single("photo");  
+            }).single("photo");
+
+exports.profile_save = function(req, res) {
+    console.log(req.body)
+    upload(req,res,function(err) {
+
+        if(err) {
+    
+            // ERROR occured (here it can be occured due
+            // to uploading image of size greater than
+            // 1MB or uploading different file type)
+            res.send(err)
+        }
+        else {
+            req.session.photo = req.session.userid+'.jpg';
+            req.session.introduction = req.body.introduction;
+            // SUCCESS, image successfully uploaded
+            User.findByIdAndUpdate(req.session.userid, {$set : {
+                introduction : req.body.introduction,
+                photo : req.session.userid+'.jpg'
+            }}, (err) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                    res.redirect('/auth/profile');
+                }
+            });
+            
+        }
+    });
+    
+}
+
+
+exports.photo_generate = function(req, res,next) {
+    res.render('pages/user/photo_generate', {layout : false});
+}
+
+  
 
 exports.logout = function(req, res, next) {
     req.session.destroy((err) => {
