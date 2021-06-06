@@ -33,6 +33,28 @@ $(document).ready(function() {
     });
 
     $('#btn_preview').click(function() {
+        var slide_html = `<div class="blog-item-img">
+        <!-- BEGIN CAROUSEL -->            
+        <div class="front-carousel">
+          <div id="myCarousel" class="carousel slide">
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+              <div class="item active">
+                <img src="../../uploads/posts/${post.images}" style="height: 250px; width:100%;" alt="">
+              </div>
+            </div>
+            <!-- Carousel nav -->
+            <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+              <i class="fa fa-angle-left"></i>
+            </a>
+            <a class="carousel-control right" href="#myCarousel" data-slide="next">
+              <i class="fa fa-angle-right"></i>
+            </a>
+          </div>                
+        </div>
+        <!-- END CAROUSEL -->             
+      </div>`;
+      $('#slide_div').html(slide_html);
         var today = new Date();
         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
         $('#label_created_at').html(date);
