@@ -645,13 +645,13 @@ $(document).ready(function() {
             var tableWrapper = $('#post_table_wrapper'); // datatable creates the table wrapper by adding with id {your_table_jd}_wrapper
             tableWrapper.find('.dataTables_length select').select2(); // initialize select2 dropdown
 
-            $('#btn_save').click(function() {
-                
-            });
+            
 
             $('#category').change(function() {
                 $('#categoryname').val($('#category>:selected').text());
             });
+
+            $('#filesTable').hide();
 
             var get_skip_content = function(content) {
                 var str = '';
@@ -695,6 +695,44 @@ $(document).ready(function() {
                     },
                     success : function(data) {
                         console.log(data.post)
+                        if(data.post.images != ''){
+                            var slide_html = `<div class="blog-item-img">
+                            <!-- BEGIN CAROUSEL -->            
+                            <div class="front-carousel">
+                                <div id="myCarousel" class="carousel slide">
+                                <!-- Carousel items -->
+                                <div class="carousel-inner" id="carousel_image">`;
+                            var active ;
+                            var images = data.post.images.split(',');
+                            for(var i = 0; i < images.length-1 ; i++)
+                            {
+                                if(i == 1)
+                                {
+                                    active = 'active';
+                                }else {
+                                    active = '';
+                                }
+                                slide_html = slide_html + `<div class="item ${active}">
+                                    <img src="../../uploads/posts/${images[i]}" style="height: 250px; width:100%;" alt="">
+                                </div>`;
+                            }
+                                    
+                                    
+                            slide_html = slide_html+`</div>
+                                    <!-- Carousel nav -->
+                                    <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                                    <i class="fa fa-angle-left"></i>
+                                    </a>
+                                    <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                                    <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>                
+                                </div>
+                                <!-- END CAROUSEL -->             
+                            </div>`;
+                            $('#slide_div').html(slide_html);
+                        }
+                        
                         $('#post_title').text(data.post.title);
                         $('#preview_body').html(data.post.content);
                         $('#label_name').html(data.post.poster);
@@ -708,6 +746,189 @@ $(document).ready(function() {
                         toastr['error']('Happening any errors in post preview.')
                     }
                 })
+            });
+
+            $('#btn_file_add').hide();
+            $('#btn_save').click(function() {
+    
+                var category_id = $('#category').val();
+                var content = CKEDITOR.instances.content.getData();
+                console.log($('#category>:selected').text());
+                var category = $('#category>:selected').text();
+                var title = $('#title').val();
+                var fullname = $('#fullname').val();
+                var email = $('#email').val();
+                var phone = $('#phone').val();
+                if(fullname == '')
+                {
+                  toastr['warning']('Please enter Full Name.');
+                }
+                if(email == '')
+                {
+                  toastr['warning']('Please enter Email');
+                }
+                if(phone == '')
+                {
+                  toastr['warning']('Please enter Phone Number.');
+                }
+                if(title == '')
+                {
+                  toastr['warning']('Please enter Title.')
+                }
+                if(content == '')
+                {
+                  toastr['warning']('Please enter Content.');
+                }
+                if(fullname != '' && email != '' && phone != '' && title != '' && content != '')
+                {
+                  var images = '';
+                  if($('#file_count').val() != ''){
+                    for(i = 1 ; i <= $('#file_count').val(); i ++)
+                    {
+                      images = images + $('#file'+i).val()+',';
+                    }
+                  }
+                  
+                  $.ajax({
+                      url : '/post/save',
+                      method : 'post',
+                      data : {
+                          category_id : category_id,
+                          categoryname : category,
+                          content : content,
+                          title : title,
+                          fullname : $('#fullname').val(),
+                          email : $('#email').val(),
+                          phone : $('#phone').val(),
+                          files : images
+                      },
+                      success : function (data) {
+                          window.location.reload();
+                      },
+                      error : function () {
+                          toastr['error']('Happening any errors in server.');
+                      }
+                  });
+                }
+                
+            });
+
+            $('#btn_back').click(function() {
+                window.history.back();
+            });
+
+            $('#btn_preview').click(function() {
+                
+                if($('#file_count').val() !=''){
+                    var slide_html = `<div class="blog-item-img">
+                    <!-- BEGIN CAROUSEL -->            
+                    <div class="front-carousel">
+                        <div id="myCarousel" class="carousel slide">
+                        <!-- Carousel items -->
+                        <div class="carousel-inner" id="carousel_image">`;
+                    var active ;
+                    for(var i = 1; i <= $('#file_count').val(); i++)
+                    {
+                        if(i == 1)
+                        {
+                        active = 'active';
+                        }else {
+                        active = '';
+                        }
+                        slide_html = slide_html + `<div class="item ${active}">
+                        <img src="../../uploads/posts/${$('#file'+i).val()}" style="height: 250px; width:100%;" alt="">
+                    </div>`;
+                    }
+                            
+                            
+                    slide_html = slide_html+`</div>
+                            <!-- Carousel nav -->
+                            <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>                
+                        </div>
+                        <!-- END CAROUSEL -->             
+                    </div>`;
+                    $('#pre_slide_div').html(slide_html);
+                }
+                
+                var today = new Date();
+                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
+                $('#pre_label_created_at').html(date);
+                $('#pre_label_category').html($('#category>:selected').text());
+                $('#pre_post_title').html($('#title').val());
+                $('#pre_preview_body').html(CKEDITOR.instances.content.getData());
+                $('#pre_pre_label_email').html($('#email').val());
+                $('#pre_label_phone').html($('#phone').val());
+                $('#pre_label_name').html($('#fullname').val());
+                var count = 0;
+                setInterval(function(){ 
+                    count++;
+                    if(count == 30) {
+                        $('#previewModal').modal('hide');
+                    }
+                }, 1000);
+            })
+
+            $("#phone").inputmask("+9999999999", {
+                placeholder: " ",
+                clearMaskOnLostFocus: true
+            }); //default
+
+            var num = 0;
+            $('#btn_file_add').click(function() {
+                $('#filesTable').show();
+                num++;
+                var html = $('#photo').clone();
+                console.log($('#photo')[0].files[0].name)
+                html.attr('id', 'photo'+num);
+                $('#files_tbody').append(html);
+                $('#photo'+num).hide();
+                $('#files_tbody').append('<tr file_id="'+num+'"><td>'+$('#photo')[0].files[0].name+'</td><td><button type="button" class="btn purple btn-sm btn_file_cancel"><i class="fa fa-times"></i></button></td>');
+                $('#file_count').val(num);
+                });
+
+                $('input[type=file]').change(function () {
+                $('#btn_file_add').show();
+                });
+
+                $('#btn_remove').click(function() {
+                $('#btn_add').hide();
+                });
+                
+                $('#btn_upload').click(function() {
+                var data = new FormData();
+                var file_count = $('#file_count').val();
+                var num = 1;
+                for( var i = 1 ; i<= file_count ; i ++) {
+                    $.each($('#photo'+i)[0].files, function(i, file) {
+                    data.append('file-'+i, file);
+                    });
+                    $.ajax({
+                        url: '/post/filesupload',
+                        data: data,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        method: 'POST',
+                        type: 'POST', // For jQuery < 1.9
+                        success: function(data){
+                        toastr['success']('Successfully uploaded.');
+                        console.log(num);
+                        $('#postForm').append('<input type="hidden" id="file'+num+'" value="'+data.image_name+'">');
+                        num++;
+                        }
+                    });
+                }
+            });
+
+            $('.btn_file_cancel').click(function() {
+                var file_num = $(this).parents('tr').eq(0).attr('file_id');
+                console.log(file_num)
             })
         }
     

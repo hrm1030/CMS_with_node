@@ -287,37 +287,66 @@
                                                 <textarea class="ckeditor form-control" id="content" name="content" rows="20"></textarea>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-md-1 control-label">Attachment</label>
-                                            <div class="col-md-10">
-                                                <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                    <div class="input-group input-large">
-                                                        <div class="form-control uneditable-input span3" data-trigger="fileinput">
-                                                            <i class="fa fa-file fileinput-exists"></i>&nbsp; <span class="fileinput-filename">
-                                                            </span>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Select Image</label>
+                                                    <div class="col-md-7">
+                                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                            <div class="input-group input-large">
+                                                                <div class="form-control uneditable-input span3" data-trigger="fileinput">
+                                                                    <i class="fa fa-file fileinput-exists"></i>&nbsp; <span class="fileinput-filename">
+                                                                    </span>
+                                                                </div>
+                                                                <span class="input-group-addon btn default btn-file">
+                                                                <span class="fileinput-new">
+                                                                Select file </span>
+                                                                <span class="fileinput-exists">
+                                                                Change </span>
+                                                                <input type="file" name="photo" id="photo">
+                                                                </span>
+                                                                
+                                                                <a href="javascript:;" class="input-group-addon btn red fileinput-exists" id="btn_remove" data-dismiss="fileinput">
+                                                                Remove </a>
+                                                            </div>
                                                         </div>
-                                                        <span class="input-group-addon btn default btn-file">
-                                                        <span class="fileinput-new">
-                                                        Select file </span>
-                                                        <span class="fileinput-exists">
-                                                        Change </span>
-                                                        <input type="file" name="file" id="file">
-                                                        </span>
-                                                        <a href="javascript:;"  class="input-group-addon btn blue fileinput-exists" data-dismiss="fileinput" id="but_upload"><i class="fa fa-upload"></i> Upload</a>
-                                                        <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">
-                                                        Remove </a>
                                                     </div>
+                                                    <button type="button" class="btn blue" id="btn_file_add"><i class="fa fa-plus"></i> Add</button>
                                                 </div>
                                             </div>
+                                        </div>
+                                        
+                                        <div class="row" id="filesTable">
+                                            <div class="form-group">
+                                                <label class="col-md-1 control-label">Files : </label>
+                                                <div class="col-md-8">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <th width="50%">File Name</th>
+                                                            <th width="20%"></th>
+                                                        </thead>
+                                                        <tbody id="files_tbody">
+        
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <button type="button" class="btn blue" id="btn_upload"><i class="fa fa-upload"></i> Upload</button>
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <div class="form-actions">
                                         <div class="row">
                                             <div class="col-md-12 text-center">
-                                                <button type="submit" class="btn green" id="btn_save"><i class="fa fa-check"></i> Submit</button>
-                                                <button type="reset" class="btn default" id="btn_reset"><i class="icon-refresh"></i>Cancel</button>
+                                                <input type="hidden" id="file_count">
+                                                <button type="button" class="btn btn-danger" id="btn_preview" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i> Preview</button>
+                                                <button type="button" class="btn green" id="btn_save"><i class="fa fa-check"></i> Submit</button>
+                                                
                                             </div>
                                         </div>
+                                    </div>
+                                    <div id="postForm">
+    
                                     </div>
                                 </form>
                             </div>
@@ -334,7 +363,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title text-success"><i class="icon-eye"></i> Preview</h4>
+                <h4 class="modal-title text-success"><i class="icon-eye"></i> Post Detail</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -353,9 +382,62 @@
                     
                 </div><hr>
                 <div class="row">
+                    <div class="col-md-12" id="slide_div">
+
+                    </div>
+
+                </div>
+                <div class="row">
                     <div class="col-md-12">
                         <h2 id="post_title"></h2>
                         <div id="preview_body">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade bs-modal-lg" id="previewModal" tabindex="-1" role="basic" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title text-success"><i class="icon-eye"></i> Preview</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <i class="fa fa-user text-danger pull-left"></i>
+                        <label class="bold col-md-3" id="pre_label_name"></label>
+                        <i class="fa fa-envelope-o text-danger pull-left"></i>
+                        <label class="bold col-md-3" id="pre_label_email"></label>
+                        <i class="fa fa-phone text-danger pull-left"></i>
+                        <label class="bold col-md-2" id="pre_label_phone"></label>
+                        <i class="fa fa-calendar pull-left text-danger"></i>
+                        <label class="col-md-3 bold" id="pre_label_created_at"></label>
+                        <i class="fa fa-tags pull-left text-danger"></i>
+                        <label class="col-md-2 bold" id="pre_label_category"></label>
+                    </div>
+                    
+                </div><hr>
+                <div class="row">
+                    <div class="col-md-12" id="pre_slide_div">
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 id="pre_post_title"></h2>
+                        <div id="pre_preview_body">
 
                         </div>
                     </div>

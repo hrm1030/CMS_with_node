@@ -99,7 +99,8 @@ exports.signup = function(req, res, next) {
                             permission : 2,
                             photo : 'avatar.png',
                             introduction : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.',
-                            state : 0
+                            state : 0,
+                            industry : req.body.industry
                         }, (err, user) => {
                             if(err) {
                                 console.log(err)
@@ -170,6 +171,7 @@ exports.signin = function(req, res, next) {
                             req.session.photo = user.photo;
                             req.session.introduction = user.introduction;
                             req.session.left_membership = user.left_membership;
+                            req.session.industry = user.industry;
                             var today = new Date();
                             var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
                             console.log(new Date(date).getTime() - new Date(user.created_at).getTime()+'=================================');

@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <form ref='uploadForm' class="form-horizontal" action='/post/save' enctype="multipart/form-data" method="POST">
-                                <input type="hidden" name="categoryname" id="categoryname" value="Article">
+                                
                                 <div class="form-body">
                                     <div class="row">
                                         <div class="col-md-4">
@@ -60,39 +60,66 @@
                                             <textarea class="ckeditor form-control" id="content" name="content" rows="20"></textarea>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-md-1 control-label">Attachment</label>
-                                        <div class="col-md-11">
-                                            <div class="fileinput fileinput-new" data-provides="fileinput">
-												<div class="input-group input-large">
-													<div class="form-control uneditable-input span3" data-trigger="fileinput">
-														<i class="fa fa-file fileinput-exists"></i>&nbsp; <span class="fileinput-filename">
-														</span>
-													</div>
-													<span class="input-group-addon btn default btn-file">
-													<span class="fileinput-new">
-													Select file </span>
-													<span class="fileinput-exists">
-													Change </span>
-													<input type="file" name="photo" id="photo">
-													</span>
-                                                    
-													<a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput">
-													Remove </a>
-												</div>
-											</div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">Select Image</label>
+                                                <div class="col-md-7">
+                                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                        <div class="input-group input-large">
+                                                            <div class="form-control uneditable-input span3" data-trigger="fileinput">
+                                                                <i class="fa fa-file fileinput-exists"></i>&nbsp; <span class="fileinput-filename">
+                                                                </span>
+                                                            </div>
+                                                            <span class="input-group-addon btn default btn-file">
+                                                            <span class="fileinput-new">
+                                                            Select file </span>
+                                                            <span class="fileinput-exists">
+                                                            Change </span>
+                                                            <input type="file" name="photo" id="photo">
+                                                            </span>
+                                                            
+                                                            <a href="javascript:;" class="input-group-addon btn red fileinput-exists" id="btn_remove" data-dismiss="fileinput">
+                                                            Remove </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn blue" id="btn_add"><i class="fa fa-plus"></i> Add</button>
+                                            </div>
                                         </div>
+                                    </div>
+                                    
+                                    <div class="row" id="filesTable">
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label">Files : </label>
+                                            <div class="col-md-8">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <th width="50%">File Name</th>
+                                                        <th width="20%"></th>
+                                                    </thead>
+                                                    <tbody id="files_tbody">
+    
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <button type="button" class="btn blue" id="btn_upload"><i class="fa fa-upload"></i> Upload</button>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-12 text-center">
-                                            <!-- <button type="button" class="btn blue" id="btn_upload"><i class="fa fa-upload"></i> Upload</button> -->
-                                            <button type="submit" class="btn green" id="btn_save"><i class="fa fa-check"></i> Submit</button>
+                                            <input type="hidden" id="file_count">
                                             <button type="button" class="btn btn-danger" id="btn_preview" data-toggle="modal" data-target="#preview"><i class="fa fa-eye"></i> Preview</button>
+                                            <button type="button" class="btn green" id="btn_save"><i class="fa fa-check"></i> Submit</button>
                                             <button type="reset" class="btn default" id="btn_back"><i class="fa fa-arrow-circle-o-left"></i> Back</button>
                                         </div>
                                     </div>
+                                </div>
+                                <div id="postForm">
+
                                 </div>
                             </form>
                         </div>

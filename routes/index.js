@@ -8,7 +8,7 @@ var admin_middleware = require('../middlewares/admin');
 
 /** User Router */
 router.get('/', auth_middleware.index, function(req, res, next) {
-  res.render('index', { title: 'Express', session : req.session });
+  res.render('index', { title: 'CMS', session : req.session });
 });
 
 router.post('/membership/update', user.membership_update);
@@ -36,5 +36,5 @@ router.get('/post/view', auth_middleware.index, post.view);
 router.post('/post/view_ajax', post.view_ajax);
 router.post('/post/send_following', post.send_following);
 router.get('/post/edit', auth_middleware.index, post.edit);
-
+router.post('/post/filesupload', post.filesupload);
 module.exports = router;

@@ -12,7 +12,8 @@ const UserSchema = new mongoose.Schema({
     photo : String,
     introduction : String,
     permission : Number,
-    state : Number
+    state : Number,
+    industry : String
 });
 
 
