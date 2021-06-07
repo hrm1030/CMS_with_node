@@ -174,7 +174,7 @@ exports.signin = function(req, res, next) {
                             req.session.industry = user.industry;
                             var today = new Date();
                             var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
-                            console.log(new Date(date).getTime() - new Date(user.created_at).getTime()+'=================================');
+                            
                             var currnet_time = new Date(date).getTime();
                             var created_time = new Date(user.created_at).getTime();
                             if((currnet_time - created_time) > 596793842) {
