@@ -59,7 +59,7 @@ exports.signup = function(req, res, next) {
         errors.push('Re-password is required.');
     } else {
         if(confirm_password.length < 6) {
-            errors.push('Password must be at least 6 characters.');
+            errors.push('Re-Password must be at least 6 characters.');
         }
     }
 
