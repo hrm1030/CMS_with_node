@@ -130,7 +130,7 @@ $(document).ready(function() {
           </div>                
         </div>
         <!-- END CAROUSEL -->             
-      </div>`;
+      </div><br>`;
       $('#slide_div').html(slide_html);
     }
     

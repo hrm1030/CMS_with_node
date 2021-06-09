@@ -762,7 +762,7 @@ $(document).ready(function() {
                             var images = data.post.images.split(',');
                             for(var i = 0; i < images.length-1 ; i++)
                             {
-                                if(i == 1)
+                                if(i == 0)
                                 {
                                     active = 'active';
                                 }else {
@@ -785,7 +785,7 @@ $(document).ready(function() {
                                 </div>                
                                 </div>
                                 <!-- END CAROUSEL -->             
-                            </div>`;
+                            </div><br>`;
                             $('#slide_div').html(slide_html);
                         }
                         
@@ -908,7 +908,7 @@ $(document).ready(function() {
                         </div>                
                         </div>
                         <!-- END CAROUSEL -->             
-                    </div>`;
+                    </div><br>`;
                     $('#pre_slide_div').html(slide_html);
                 }
                 
