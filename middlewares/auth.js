@@ -6,7 +6,7 @@ exports.index = function(req, res, next) {
     }
 }
 
-exports.check_membership = function(req, res, nex) {
+exports.check_membership = function(req, res, next) {
     if(req.session.left_membership > 0) {
         next();
     } else {

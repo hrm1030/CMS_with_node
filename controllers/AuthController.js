@@ -202,13 +202,14 @@ exports.signin = function(req, res, next) {
                             var currnet_time = new Date(date).getTime();
                             var created_time = new Date(user.created_at).getTime();
                             var started_time = new Date(user.started_at).getTime();
-                            console.log(new Date('2021-06-30').getTime() - new Date('2021-05-31').getTime())
                             
                             /** Monthly pay */
                             if(req.session.membership > 1)
                             {
+                                console.log(currnet_time - started_time+'******************started_at 1 ********************')
                                 if((currnet_time - started_time) > 2592000000)
                                 {
+                                    console.log(currnet_time - started_time+'******************started_at 2 ********************')
                                     if(req.session.membership == 2)
                                     {
                                         amount = 20;
@@ -270,52 +271,56 @@ exports.signin = function(req, res, next) {
                                     //     } else {
                                     //         console.log("Create Payment Response");
                                     //         console.log(payment);
-                                    //         User.findByIdAndUpdate(req.session.userid, { $set : {
-                                    //             started_at : new Date(new Date(user.started_at).getTime()+2592000000)
-                                    //         }}, (err) => {
-                                    //             if(err) {
-                                    //                 console.log(err); 
-                                    //             } else {
-                                    //                 req.session.started_at = new Date(new Date(user.started_at).getTime()+2592000000);
-                                    //                 if(user.permission == 1) {
-                                    //                     res.redirect('/admin');
-                                    //                 }else {
-                                    //                     res.redirect('/');
-                                    //                 }
-                                    //             }
-                                    //         });
+                                    //         
                                     //     }
                                     // });
-                                }
-                            }
-                            
-                            /** End */
-
-                            if((currnet_time - created_time) > 596793842) {
-                                User.findByIdAndUpdate(user._id, {$set : {
-                                    left_membership : user.membership,
-                                    created_at : new Date(new Date(user.created_at).getTime()+596793842)
-                                }}, (err) => {
-                                    if(err) {
-                                        console.log(err);
+                                    User.findByIdAndUpdate(req.session.userid, { $set : {
+                                                    started_at : new Date(new Date(user.started_at).getTime()+2592000000)
+                                                }}, (err) => {
+                                                    if(err) {
+                                                        console.log(err); 
+                                                    } else {
+                                                        req.session.started_at = new Date(new Date(user.started_at).getTime()+2592000000);
+                                                        if(user.permission == 1) {
+                                                            res.redirect('/admin');
+                                                        }else {
+                                                            res.redirect('/');
+                                                        }
+                                                    }
+                                                });
+                                } else {
+                                    console.log(currnet_time - created_time+'****************1********************')
+                                    if((currnet_time - created_time) > 596793842) {
+                                        console.log(currnet_time - created_time+'****************2********************')
+                                        User.findByIdAndUpdate(user._id, {$set : {
+                                            left_membership : user.membership,
+                                            created_at : new Date(new Date(user.created_at).getTime()+596793842)
+                                        }}, (err) => {
+                                            if(err) {
+                                                console.log(err);
+                                            } else {
+                                                req.session.left_membership = user.membership;
+                                                req.session.created_at = new Date(new Date(user.created_at).getTime()+596793842);
+                                                // req.session.save();
+                                                if(user.permission == 1) {
+                                                    res.redirect('/admin');
+                                                }else {
+                                                    res.redirect('/');
+                                                }
+                                            }
+                                        });
                                     } else {
-                                        req.session.left_membership = user.membership;
-                                        req.session.created_at = new Date(new Date(user.created_at).getTime()+596793842);
-                                        // req.session.save();
                                         if(user.permission == 1) {
                                             res.redirect('/admin');
                                         }else {
                                             res.redirect('/');
                                         }
                                     }
-                                });
-                            } else {
-                                if(user.permission == 1) {
-                                    res.redirect('/admin');
-                                }else {
-                                    res.redirect('/');
                                 }
                             }
+                            
+                            /** End */
+                            
                             
                             
                         }
