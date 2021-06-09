@@ -119,7 +119,7 @@ $(document).ready(function() {
     }
     
     var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
     $('#label_created_at').html(date);
     $('#label_category').html($('#category>:selected').text());
     $('#post_title').html($('#title').val());

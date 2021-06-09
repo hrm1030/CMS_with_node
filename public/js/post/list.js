@@ -88,7 +88,7 @@ $(document).ready(function() {
                             <div class="col-md-8 col-sm-8">
                             <h2><img src="../../uploads/users/${posts[i].poster_id}.jpg" style="width:45px; height:45px;"> ${posts[i].poster}</h2>
                             <ul class="blog-info">
-                                <li><i class="fa fa-calendar"></i> ${posts[i].created_at}</li>
+                                <li><i class="fa fa-calendar"></i> ${new Date(posts[i].created_at).getFullYear()}-${new Date(posts[i].created_at).getMonth()}-${new Date(posts[i].created_at).getDate()} ${new Date(posts[i].created_at).getHours()}:${new Date(posts[i].created_at).getMinutes()}:${new Date(posts[i].created_at).getSeconds()}</li>
                                 <li><i class="fa fa-thumbs-up"></i> ${posts[i].like}</li>
                                 <li><i class="fa fa-thumbs-down"></i> ${posts[i].dislike}</li>
                                 <li><i class="fa fa-tags"></i> ${posts[i].category}</li>
@@ -166,7 +166,7 @@ $(document).ready(function() {
                                     <div class="col-md-8 col-sm-8">
                                     <h2><img src="../../uploads/users/${posts[i].poster_id}.jpg" style="width:45px; height:45px;"> ${posts[i].poster}</h2>
                                     <ul class="blog-info">
-                                        <li><i class="fa fa-calendar"></i> ${posts[i].created_at}</li>
+                                        <li><i class="fa fa-calendar"></i> ${new Date(posts[i].created_at).getFullYear()}-${new Date(posts[i].created_at).getMonth()}-${new Date(posts[i].created_at).getDate()} ${new Date(posts[i].created_at).getHours()}:${new Date(posts[i].created_at).getMinutes()}:${new Date(posts[i].created_at).getSeconds()}</li>
                                         <li><i class="fa fa-thumbs-up"></i> ${posts[i].like}</li>
                                         <li><i class="fa fa-thumbs-down"></i> ${posts[i].dislike}</li>
                                         <li><i class="fa fa-tags"></i> ${posts[i].category}</li>
@@ -227,7 +227,7 @@ $(document).ready(function() {
                                 <div class="col-md-8 col-sm-8">
                                 <h2><img src="../../uploads/users/${posts[i].poster_id}.jpg" style="width:45px; height:45px;"> ${posts[i].poster}</h2>
                                 <ul class="blog-info">
-                                    <li><i class="fa fa-calendar"></i> ${posts[i].created_at}</li>
+                                    <li><i class="fa fa-calendar"></i> ${new Date(posts[i].created_at).getFullYear()}-${new Date(posts[i].created_at).getMonth()}-${new Date(posts[i].created_at).getDate()} ${new Date(posts[i].created_at).getHours()}:${new Date(posts[i].created_at).getMinutes()}:${new Date(posts[i].created_at).getSeconds()}</li>
                                     <li><i class="fa fa-thumbs-up"></i> ${posts[i].like}</li>
                                     <li><i class="fa fa-thumbs-down"></i> ${posts[i].dislike}</li>
                                     <li><i class="fa fa-tags"></i> ${posts[i].category}</li>
@@ -289,7 +289,7 @@ $(document).ready(function() {
                             <div class="col-md-8 col-sm-8">
                             <h2><img src="../../uploads/users/${posts[i].poster_id}.jpg" style="width:45px; height:45px;"> ${posts[i].poster}</h2>
                             <ul class="blog-info">
-                                <li><i class="fa fa-calendar"></i> ${posts[i].created_at}</li>
+                                <li><i class="fa fa-calendar"></i> ${new Date(posts[i].created_at).getFullYear()}-${new Date(posts[i].created_at).getMonth()}-${new Date(posts[i].created_at).getDate()} ${new Date(posts[i].created_at).getHours()}:${new Date(posts[i].created_at).getMinutes()}:${new Date(posts[i].created_at).getSeconds()}</li>
                                 <li><i class="fa fa-thumbs-up"></i> ${posts[i].like}</li>
                                 <li><i class="fa fa-thumbs-down"></i> ${posts[i].dislike}</li>
                                 <li><i class="fa fa-tags"></i> ${posts[i].category}</li>

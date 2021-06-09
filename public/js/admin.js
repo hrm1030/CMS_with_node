@@ -776,7 +776,7 @@ $(document).ready(function() {
                         $('#label_name').html(data.post.poster);
                         $('#label_email').html(data.post.poster_email);
                         $('#label_phone').html(data.post.poster_phone);
-                        $('#label_created_at').html(data.post.created_at);
+                        $('#label_created_at').html(new Date(data.post.created_at).getFullYear()+'-'+new Date(data.post.created_at).getMonth()+'-'+new Date(data.post.created_at).getDate()+' '+new Date(data.post.created_at).getHours()+':'+new Date(data.post.created_at).getMinutes()+':'+new Date(data.post.created_at).getSeconds());
                         $('#label_category').html(data.post.category);
                         $('#preview').modal('show');
                     },
@@ -896,7 +896,7 @@ $(document).ready(function() {
                 
                 var today = new Date();
                 console.log($('#email').val())
-                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
+                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
                 $('#pre_label_created_at').html(date);
                 $('#pre_label_category').html($('#category>:selected').text());
                 $('#pre_post_title').html($('#title').val());
