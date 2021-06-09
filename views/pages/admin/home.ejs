@@ -108,7 +108,7 @@
                                         <%}%>
                                     </td>
                                     <td>
-                                        <%= new Date(user.created_at).getFullYear()%>-<%= new Date(user.created_at).getMonth()%>-<%= new Date(user.created_at).getDate()%> <%= new Date(user.created_at).getHours()%>:<%= new Date(user.created_at).getMinutes()%>:<%= new Date(user.created_at).getSeconds()%>
+                                        <%= new Date(user.created_at).getFullYear()%>-<%= new Date(user.created_at).getMonth()+1%>-<%= new Date(user.created_at).getDate()%> <%= new Date(user.created_at).getHours()%>:<%= new Date(user.created_at).getMinutes()%>:<%= new Date(user.created_at).getSeconds()%>
                                     </td>
                                     <td>
                                         <select class="form-control input-small state" name="state">

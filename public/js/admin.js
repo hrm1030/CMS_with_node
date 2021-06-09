@@ -23,7 +23,7 @@ $(document).ready(function() {
                     "zeroRecords": "No matching records found"
                 },
                 "order": [
-                    [0, 'asc']
+                    [4, 'asc']
                 ],
                 "lengthMenu": [
                     [5, 15, 20, -1],
@@ -695,7 +695,7 @@ $(document).ready(function() {
                         var content = get_skip_content(data.posts[i].content);
                         console.log(content)
                         
-                        oTable.fnAddData([data.posts[i].category, content, data.posts[i].poster, new Date(data.posts[i].created_at).getFullYear()+'-'+new Date(data.posts[i].created_at).getMonth()+'-'+new Date(data.posts[i].created_at).getDate()+' '+new Date(data.posts[i].created_at).getHours()+':'+new Date(data.posts[i].created_at).getMinutes()+':'+new Date(data.posts[i].created_at).getSeconds(), '<button class="btn btn-sm blue btn_view" post_id="'+data.posts[i]._id+'"><i class="icon-eye"></i> View</button>&nbsp;<button class="btn btn-sm btn-danger btn_post_delete" post_id="'+data.posts[i]._id+'"><i class="fa fa-trash"></i></button>']);
+                        oTable.fnAddData([data.posts[i].category, content, data.posts[i].poster, new Date(data.posts[i].created_at).getFullYear()+'-'+(new Date(data.posts[i].created_at).getMonth()+1)+'-'+new Date(data.posts[i].created_at).getDate()+' '+new Date(data.posts[i].created_at).getHours()+':'+new Date(data.posts[i].created_at).getMinutes()+':'+new Date(data.posts[i].created_at).getSeconds(), '<button class="btn btn-sm blue btn_view" post_id="'+data.posts[i]._id+'"><i class="icon-eye"></i> View</button>&nbsp;<button class="btn btn-sm btn-danger btn_post_delete" post_id="'+data.posts[i]._id+'"><i class="fa fa-trash"></i></button>']);
                         
                     }
                 },
