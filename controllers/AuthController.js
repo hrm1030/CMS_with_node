@@ -317,6 +317,12 @@ exports.signin = function(req, res, next) {
                                         }
                                     }
                                 }
+                            } else {
+                                if(user.permission == 1) {
+                                    res.redirect('/admin');
+                                }else {
+                                    res.redirect('/');
+                                }
                             }
                             
                             /** End */
