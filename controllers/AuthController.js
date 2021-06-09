@@ -6,6 +6,7 @@ var path = require('path');
 const multer = require("multer");
 var Post = require('../models/Post');
 const paypal = require('paypal-rest-sdk');
+var fs = require('fs');
 
 paypal.configure({
     'mode': 'sandbox', //sandbox or live
@@ -116,10 +117,17 @@ exports.signup = function(req, res, next) {
                             state : 0,
                             industry : req.body.industry
                         }, (err, user) => {
+                            
                             if(err) {
                                 console.log(err)
                             } else {
-                                res.redirect('/auth/login');
+                                fs.copyFile('public/uploads/users/avatar.png', 'public/uploads/users/'+user._id+'.jpg', (err) => {
+                                    if (err) {
+                                        console.log(err);
+                                    }else {
+                                        res.redirect('/auth/login');
+                                    }
+                                });
                             }
                         })
                     }else {

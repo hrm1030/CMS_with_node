@@ -794,7 +794,7 @@ $(document).ready(function() {
                         $('#label_name').html(data.post.poster);
                         $('#label_email').html(data.post.poster_email);
                         $('#label_phone').html(data.post.poster_phone);
-                        $('#label_created_at').html(new Date(data.post.created_at).getFullYear()+'-'+new Date(data.post.created_at).getMonth()+'-'+new Date(data.post.created_at).getDate()+' '+new Date(data.post.created_at).getHours()+':'+new Date(data.post.created_at).getMinutes()+':'+new Date(data.post.created_at).getSeconds());
+                        $('#label_created_at').html(new Date(data.post.created_at).getFullYear()+'-'+(new Date(data.post.created_at).getMonth()+1)+'-'+new Date(data.post.created_at).getDate()+' '+new Date(data.post.created_at).getHours()+':'+new Date(data.post.created_at).getMinutes()+':'+new Date(data.post.created_at).getSeconds());
                         $('#label_category').html(data.post.category);
                         $('#preview').modal('show');
                     },

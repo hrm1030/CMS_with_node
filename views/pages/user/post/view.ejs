@@ -17,7 +17,7 @@
                 </div>
                 <ul class="blog-info">
                   <li><i class="fa fa-user"></i> <%= post.poster%></li>
-                  <li><i class="fa fa-calendar"></i> <%= new Date(post.created_at).getFullYear()%>-<%= new Date(post.created_at).getMonth()%>-<%= new Date(post.created_at).getDate()%> <%= new Date(post.created_at).getHours()%>:<%= new Date(post.created_at).getMinutes()%>:<%= new Date(post.created_at).getSeconds()%></li>
+                  <li><i class="fa fa-calendar"></i> <%= new Date(post.created_at).getFullYear()%>-<%= new Date(post.created_at).getMonth()+1%>-<%= new Date(post.created_at).getDate()%> <%= new Date(post.created_at).getHours()%>:<%= new Date(post.created_at).getMinutes()%>:<%= new Date(post.created_at).getSeconds()%></li>
                   <% if(session.userid == post.poster_id) {%>
                     <li><i class="fa fa-thumbs-up" title="like"></i> <span id="like_cnt"><%= post.like%></span></li>
                     <li><i class="fa fa-thumbs-down" title="dislike"></i> <span id="dislike_cnt"><%= post.dislike%></span></li>
