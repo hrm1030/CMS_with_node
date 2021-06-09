@@ -63,13 +63,21 @@ exports.membership_update = function(req, res) {
     User.findByIdAndUpdate(req.session.userid, {$set : {
         membership : req.body.membership,
         left_membership : req.body.membership,
-        created_at : date
+        created_at : date,
+        card_number : req.body.cardnumber,
+        expire_month : req.body.month,
+        expire_year : req.body.year,
+        cvc : req.body.cvc
     }}, (err) => {
         if(err) {
             console.log(err);
         } else {
             req.session.membership = req.body.membership;
             req.session.left_membership = req.body.membership;
+            req.session.card_number = req.body.cardnumber;
+            req.session.expire_month = req.body.month;
+            req.session.expire_year = req.body.year;
+            req.session.cvc = req.body.cvc;
             console.log(req.body)
             // if(req.body.membership > 1) {
             //     var split_cardnum = req.body.cardnumber.split(' ');
@@ -126,19 +134,9 @@ exports.membership_update = function(req, res) {
             //         }
             //     });
             // }
-            User.findByIdAndUpdate(req.session.userid, { $set : {
-                card_number : req.body.cardnumber
-            }}, (err) => {
-                if(err) {
-                    console.log(err)
-                } else {
-                    req.session.card_number = req.body.cardnumber;
-                    req.session.expire_month = req.body.month;
-                    req.session.expire_year = req.body.year;
-                    req.session.cvc = req.body.cvc;
-                    res.json({msg : 'success', old_membership : old_membership});
-                }
-            })
+            
+            res.json({msg : 'success', old_membership : old_membership, date: date});
+               
             
         }
     })

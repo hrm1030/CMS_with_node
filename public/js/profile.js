@@ -85,6 +85,8 @@ $(document).ready(function() {
                 toastr['success']('Successfully upgraded.');
                 $('#membership_summary').text(membership);
                 $('#left_membership_summary').text(membership);
+                console.log(data.date)
+                $('#left_date').html(new Date(data.date).getFullYear()+' / ' +new Date(data.date).getMonth()+' / ' +new Date(data.date).getDate()+' ~ ' +(new Date(data.date).getDate()+7))
             },
             error : function() {
                 toastr['error']('Happening any errrors in membership upgrade');
