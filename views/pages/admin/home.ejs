@@ -108,7 +108,7 @@
                                         <%}%>
                                     </td>
                                     <td>
-                                        <%= user.created_at%>
+                                        <%= new Date(user.created_at).getFullYear()%>-<%= new Date(user.created_at).getMonth()%>-<%= new Date(user.created_at).getDate()%> <%= new Date(user.created_at).getHours()%>:<%= new Date(user.created_at).getMinutes()%>:<%= new Date(user.created_at).getSeconds()%>
                                     </td>
                                     <td>
                                         <select class="form-control input-small state" name="state">
@@ -124,6 +124,7 @@
                                     </td>
                                     <td>
                                         <button class="btn btn-sm purple">Close</button>
+                                        <button class="btn btn-sm btn-danger btn_user_delete"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
                                 <%});%>

@@ -42,6 +42,16 @@ exports.change_state = function(req, res) {
     });
 }
 
+exports.user_delete = function(req, res) {
+    User.findByIdAndDelete(req.body.user_id, (err) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.json({ msg : 'success'});
+        }
+    })
+}
+
 exports.category_save = function(req, res) {
     var category_name = req.body.category;
     var cat_id = req.body.cat_id;

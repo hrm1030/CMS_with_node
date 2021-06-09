@@ -20,6 +20,7 @@ router.post('/search/all', user.search_all);
 /** Admin Router */
 router.get('/admin', auth_middleware.index, admin_middleware.index, admin.index);
 router.post('/admin/user/change_state', admin.change_state);
+router.post('/admin/user/delete', admin.user_delete);
 
 router.post('/admin/category/save', admin.category_save);
 router.post('/admin/category/delete', admin.category_delete);
