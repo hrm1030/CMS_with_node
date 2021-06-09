@@ -28,6 +28,10 @@ exports.register = function(req, res, next) {
     })
 }
 
+exports.forgotpassword = function(req, res) {
+    res.render('pages/auth/forgotpassword', { title : 'CMS | Forgot Password' , session : req.session});
+}
+
 exports.signup = function(req, res, next) {
     var name = req.body.name;
     var surname = req.body.surname;

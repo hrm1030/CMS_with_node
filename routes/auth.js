@@ -5,6 +5,7 @@ var auth_middleware = require('../middlewares/auth');
 
 router.get('/login', auth.login);
 router.get('/register', auth.register);
+router.get('/forgotpassword', auth.forgotpassword);
 router.post('/signup', auth.signup);
 router.post('/signin',auth.signin);
 router.get('/profile', auth_middleware.index, auth.profile);
