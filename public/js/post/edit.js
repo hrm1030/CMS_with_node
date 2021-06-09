@@ -63,7 +63,7 @@ $(document).ready(function() {
               $('postForm').append('');
               $('#a_linkedin').attr('href', 'https://www.linkedin.com/cws/share?url=http://localhost:8000/post/view?post='+data.post._id);
               $('#a_facebook').attr('href', 'https://www.facebook.com/sharer.php?u=http://localhost:8000/post/view?post='+data.post._id);
-              $('#a_instagram').attr('href', 'https://www.linkedin.com/cws/share?url=http://localhost:8000/post/view?post='+data.post._id);
+              $('#a_twitter').attr('href', 'https://twitter.com/intent/tweet?url=http://localhost:8000/post/view?post='+data.post._id);
               $('#btn_div').hide(500);
               $('#publish_div').show(500);
             },
