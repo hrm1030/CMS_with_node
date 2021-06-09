@@ -7,7 +7,7 @@ $(document).ready(function() {
                 keyword : keyword
             },
             success : function(data) {
-                toastr['success']('Successfully got categories in server.');
+                toastr['success']('Successfully got categories from server.');
                 var search_html = '';
                 // for(var i = 0 ; i < data.categories.length ; i ++) {
                 //     search_html = search_html + '<a class="btn btn-default btn-lg" href="/post/list?category='+data.categories[i]._id+'">'+data.categories[i].name+'</a>';

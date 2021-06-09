@@ -59,8 +59,8 @@ $(document).ready(function() {
             },
             success : function (data) {
               toastr['success']('Successfully posted.');
-              $('#filesTable').append('');
-              $('postForm').append('');
+              $('#filesTable').html('');
+              $('#postForm').html('');
               $('#a_linkedin').attr('href', 'https://www.linkedin.com/cws/share?url=http://localhost:8000/post/view?post='+data.post._id);
               $('#a_facebook').attr('href', 'https://www.facebook.com/sharer.php?u=http://localhost:8000/post/view?post='+data.post._id);
               $('#a_twitter').attr('href', 'https://twitter.com/intent/tweet?url=http://localhost:8000/post/view?post='+data.post._id);

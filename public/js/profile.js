@@ -153,25 +153,25 @@ $(document).ready(function() {
         
     });
 
-    $('#fullname').keydown(function() {
+    $('#fullname').keypress(function() {
         $(this).removeClass('edited');
     });
 
-    $('#card_number').keydown(function() {
+    $('#card_number').keypress(function() {
         $(this).removeClass('edited');
     });
-    $('#month').keydown(function() {
+    $('#month').keypress(function() {
         $(this).removeClass('edited');
     });
-    $('#year').keydown(function() {
+    $('#year').keypress(function() {
         $(this).removeClass('edited');
     });
-    $('#cvc').keydown(function() {
+    $('#cvc').keypress(function() {
         $(this).removeClass('edited');
     });
 
     $("#card_number").inputmask("9999 9999 9999 9999", {
-        placeholder: " ",
+        placeholder: "",
         clearMaskOnLostFocus: true
     }); //default
 })

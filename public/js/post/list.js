@@ -93,7 +93,7 @@ $(document).ready(function() {
                                 <li><i class="fa fa-thumbs-down"></i> ${posts[i].dislike}</li>
                                 <li><i class="fa fa-tags"></i> ${posts[i].category}</li>
                             </ul>
-                            <p>${content}</p>
+                            <p>${content}</p><br>
                             <a href="/post/view?post=${posts[i]._id}" class="more">Read more <i class="icon-angle-right"></i></a>
                             </div>
                         </div>
@@ -171,7 +171,7 @@ $(document).ready(function() {
                                         <li><i class="fa fa-thumbs-down"></i> ${posts[i].dislike}</li>
                                         <li><i class="fa fa-tags"></i> ${posts[i].category}</li>
                                     </ul>
-                                    <p>${content}</p>
+                                    <p>${content}</p><br>
                                     <a href="/post/view?post=${posts[i]._id}" class="more">Read more <i class="icon-angle-right"></i></a>
                                     </div>
                                 </div>
@@ -232,7 +232,7 @@ $(document).ready(function() {
                                     <li><i class="fa fa-thumbs-down"></i> ${posts[i].dislike}</li>
                                     <li><i class="fa fa-tags"></i> ${posts[i].category}</li>
                                 </ul>
-                                <p>${content}</p>
+                                <p>${content}</p><br>
                                 <a href="/post/view?post=${posts[i]._id}" class="more">Read more <i class="icon-angle-right"></i></a>
                                 </div>
                             </div>
@@ -294,7 +294,7 @@ $(document).ready(function() {
                                 <li><i class="fa fa-thumbs-down"></i> ${posts[i].dislike}</li>
                                 <li><i class="fa fa-tags"></i> ${posts[i].category}</li>
                             </ul>
-                            <p>${content}</p>
+                            <p>${content}</p><br>
                             <a href="/post/view?post=${posts[i]._id}" class="more">Read more <i class="icon-angle-right"></i></a>
                             </div>
                         </div>
