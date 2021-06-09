@@ -234,72 +234,72 @@ exports.signin = function(req, res, next) {
                                     {
                                         amount = 30;
                                     }
-                                    // var split_cardnum = req.session.card_number.split(' ');
-                                    // var cardnumber = '';
-                                    // for(var i = 0 ; i < split_cardnum.length ; i ++) 
-                                    // {
-                                    //     cardnumber = cardnumber + split_cardnum[i];
-                                    // }
+                                    var split_cardnum = req.session.card_number.split(' ');
+                                    var cardnumber = '';
+                                    for(var i = 0 ; i < split_cardnum.length ; i ++) 
+                                    {
+                                        cardnumber = cardnumber + split_cardnum[i];
+                                    }
                                     
                                     
-                                    // paypal.payment.create({
-                                    //     "intent": "sale",
-                                    //     "payer": {
-                                    //         "payment_method": "credit_card",
-                                    //         "funding_instruments": [{
-                                    //             "credit_card": {
-                                    //                 "type": "visa",
-                                    //                 "number": cardnumber,
-                                    //                 "expire_month": req.session.expire_month,
-                                    //                 "expire_year": req.session.expire_year,
-                                    //                 "cvv2": req.session.cvc,
-                                    //                 "first_name": req.session.name,
-                                    //                 "last_name": req.session.surname,
-                                    //                 "billing_address": {
-                                    //                     "line1": "52 N Main ST",
-                                    //                     "city": "Johnstown",
-                                    //                     "state": "OH",
-                                    //                     "postal_code": "43210",
-                                    //                     "country_code": "US"
-                                    //                 }
-                                    //             }
-                                    //         }]
-                                    //     },
-                                    //     "transactions": [{
-                                    //         "amount": {
-                                    //             "total": ammount,
-                                    //             "currency": "USD",
-                                    //             "details": {
-                                    //                 "subtotal": "5",
-                                    //                 "tax": "1",
-                                    //                 "shipping": "1"
-                                    //             }
-                                    //         },
-                                    //         "description": "This is the payment transaction description."
-                                    //     }]
-                                    // }, function (error, payment) {
-                                    //     if (error) {
-                                    //         throw error;
-                                    //     } else {
-                                    //         console.log("Create Payment Response");
-                                    //         console.log(payment);
-                                    //         
-                                    //     }
-                                    // });
-                                    User.findByIdAndUpdate(req.session.userid, { $set : {
-                                                    started_at : new Date(new Date(user.started_at).getTime()+2592000000)
-                                                }}, (err) => {
-                                                    if(err) {
-                                                        console.log(err); 
-                                                    } else {
-                                                        req.session.started_at = new Date(new Date(user.started_at).getTime()+2592000000);
-                                                        if(user.permission == 1) {
-                                                            res.redirect('/admin');
-                                                        }else {
-                                                            res.redirect('/');
-                                                        }
+                                    paypal.payment.create({
+                                        "intent": "sale",
+                                        "payer": {
+                                            "payment_method": "credit_card",
+                                            "funding_instruments": [{
+                                                "credit_card": {
+                                                    "type": "visa",
+                                                    "number": cardnumber,
+                                                    "expire_month": req.session.expire_month,
+                                                    "expire_year": req.session.expire_year,
+                                                    "cvv2": req.session.cvc,
+                                                    "first_name": req.session.name,
+                                                    "last_name": req.session.surname,
+                                                    "billing_address": {
+                                                        "line1": "52 N Main ST",
+                                                        "city": "Johnstown",
+                                                        "state": "OH",
+                                                        "postal_code": "43210",
+                                                        "country_code": "US"
                                                     }
-                                                });
+                                                }
+                                            }]
+                                        },
+                                        "transactions": [{
+                                            "amount": {
+                                                "total": ammount,
+                                                "currency": "USD",
+                                                "details": {
+                                                    "subtotal": "5",
+                                                    "tax": "1",
+                                                    "shipping": "1"
+                                                }
+                                            },
+                                            "description": "This is the payment transaction description."
+                                        }]
+                                    }, function (error, payment) {
+                                        if (error) {
+                                            throw error;
+                                        } else {
+                                            console.log("Create Payment Response");
+                                            console.log(payment);
+                                            User.findByIdAndUpdate(req.session.userid, { $set : {
+                                                started_at : new Date(new Date(user.started_at).getTime()+2592000000)
+                                            }}, (err) => {
+                                                if(err) {
+                                                    console.log(err); 
+                                                } else {
+                                                    req.session.started_at = new Date(new Date(user.started_at).getTime()+2592000000);
+                                                    if(user.permission == 1) {
+                                                        res.redirect('/admin');
+                                                    }else {
+                                                        res.redirect('/');
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    });
+                                    
                                 } else {
                                     console.log(currnet_time - created_time+'****************1********************')
                                     if((currnet_time - created_time) > 596793842) {
