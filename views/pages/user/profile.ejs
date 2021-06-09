@@ -32,19 +32,19 @@
                   <p id="introduction_div"><%= session.introduction%></p><hr>
                   <ul class="list-inline">
                     <li>
-                      <i class="fa fa-map-marker"></i> Spain
+                      <i class="fa fa-envelope"></i> <%= session.email %>
                     </li>
                     <li>
-                      <i class="fa fa-calendar"></i> 18 Jan 1982
+                      <i class="fa fa-phone"></i> <%= session.phone%>
                     </li>
                     <li>
-                      <i class="fa fa-briefcase"></i> Design
+                      <i class="fa fa-star"></i> <%= post_cnt%> posted
                     </li>
                     <li>
-                      <i class="fa fa-star"></i> Top Seller
+                      <i class="fa fa-thumbs-up"></i> <%= like_cnt%>
                     </li>
                     <li>
-                      <i class="fa fa-heart"></i> BASE Jumping
+                      <i class="fa fa-thumbs-down"></i> <%= dislike_cnt%>
                     </li>
                   </ul>
                 </div>
@@ -72,6 +72,11 @@
                           </span>
                           <span class="sale-num" id="left_membership_summary">
                             <%= session.left_membership %>
+                          </span>
+                        </li>
+                        <li>
+                          <span class="sale-num" id="left_membership_summary">
+                            <%= new Date(session.created_at).getFullYear() %> / <%= new Date(session.created_at).getMonth() %> / <%= new Date(session.created_at).getDate() %> ~ <%= new Date(session.created_at).getDate()+7 %>
                           </span>
                         </li>
                         <li>
@@ -124,11 +129,14 @@
                   <div class="pricing-footer">
                     <p>
                     </p>
-                    <button type="button" class="btn btn-primary" id="btn_free">
                       <% if(session.membership == 1){%>
+                        <button type="button" class="btn btn-primary" id="btn_free" disabled="disabled">
                         Got
+                        </button>
                       <%} else {%>
+                        <button type="button" class="btn btn-primary" id="btn_free">
                        Get <i class="m-icon-swapright m-icon-white"></i>
+                       </button>
                       <%}%> 
                       
                     </button>
@@ -158,11 +166,14 @@
                     <p>
                        <h4>Year subscription 190</h4>
                     </p>
-                    <button type="button" class="btn btn-primary" id="btn_common">
                       <% if(session.membership == 2){%>
+                        <button type="button" class="btn btn-primary" id="btn_common" disabled="disabled">
                         Got
+                        </button>
                       <%} else {%>
+                        <button type="button" class="btn btn-primary" id="btn_common">
                        Sign Up <i class="m-icon-swapright m-icon-white"></i>
+                       </button>
                       <%}%>  
                     </button>
                   </div>
@@ -191,11 +202,14 @@
                     <p>
                        <h4>Year subscription 240</h4>
                     </p>
-                    <button type="button" class="btn btn-primary" id="btn_medium">
                       <% if(session.membership == 3){%>
+                        <button type="button" class="btn btn-primary" id="btn_medium" disabled="disabled">
                         Got
+                        </button>
                       <%} else {%>
+                        <button type="button" class="btn btn-primary" id="btn_medium">
                        Sign Up <i class="m-icon-swapright m-icon-white"></i>
+                       </button>
                       <%}%> 
                       
                       </button>
@@ -225,14 +239,16 @@
                     <p>
                        <h4>Year subscription 290</h4>
                     </p>
-                    <button type="button" class="btn btn-primary" id="btn_advance">
-                      <% if(session.membership == 4){%>
+                    <% if(session.membership == 4){%>
+                    <button type="button" class="btn btn-primary" id="btn_advance" disabled="disabled">
                         Got
-                      <%} else {%>
-                       Sign Up <i class="m-icon-swapright m-icon-white"></i>
-                      <%}%>  
+                    </button>
+                    <%} else {%>
+                    <button type="button" class="btn btn-primary" id="btn_advance">
+                       Sign Up <i class="m-icon-swapright m-icon-white"></i> 
                       
-                      </button>
+                    </button>
+                      <%}%> 
                   </div>
                 </div>
               </div>

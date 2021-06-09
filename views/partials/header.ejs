@@ -11,7 +11,7 @@
         <div class="header-navigation pull-right font-transform-inherit">
             <ul>
                     <li><a href="/"><i class="icon-home"></i> Home</a></li>
-                <% if(!session.email) {%>
+                <% if(!session.token) {%>
                     <!-- <li><a href="/training">Training</a></li> -->
                     <li><a href="/auth/login"><i class="icon-login"></i> Sign in</a></li>
                     <li><a href="/auth/register"><i class="icon-user-follow"></i> Register</a></li>
@@ -23,6 +23,15 @@
                     
                     <li class="menu-search">
                         <span class="sep"></span>
+                        <li>
+                            <% if(session.membership > 0 && session.left_membership > 0) {%>
+                                <a href="/post/edit"><button class="btn btn-danger btn-lg" style="margin-top: -10px;background-color: #f20061;">Post a project</button></a>
+                            <%}%>
+                            <%if(session.left_membership == 0) { %>
+                                <a href="#"><button type="button" class="btn btn-danger btn-lg" style="margin-top: -10px; background-color: #f20061;" id="btn_post">Post a project</button></a>
+                            <%}%>
+                        </li>
+                        
                         <li class="dropdown">
                             
                             <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;" style="margin-top: -10px;">
@@ -43,3 +52,4 @@
         <!-- END NAVIGATION -->
     </div>
 </div>
+<script src="../../js/header.js"></script>

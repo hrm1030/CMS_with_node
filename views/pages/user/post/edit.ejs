@@ -109,7 +109,7 @@
                                     </div>
                                 </div>
                                 <div class="form-actions">
-                                    <div class="row">
+                                    <div class="row" id="btn_div">
                                         <div class="col-md-12 text-center">
                                             <input type="hidden" id="file_count">
                                             <button type="button" class="btn btn-danger" id="btn_preview" data-toggle="modal" data-target="#preview"><i class="fa fa-eye"></i> Preview</button>
@@ -120,6 +120,13 @@
                                 </div>
                                 <div id="postForm">
 
+                                </div>
+                                <div class="row" id="publish_div">
+                                    <div class="col-md-12 text-center margin-top-20">
+                                        <a href="#" id="a_facebook"><button type="button" id="btn_facebook" class="btn blue" title="Share on Facebook"><i class="fa fa-facebook"></i> Share</button></a>
+                                        <a href="#" id="a_linkedin"><button type="button" id="btn_linkedin" class="btn purple" title="Share on Linkedin"><i class="fa fa-linkedin"></i> Share</button></a>
+                                        <a href="#" id="a_instagram"><button type="button" id="btn_instagram" class="btn btn-default" title="Share on Instagram"><i class="fa fa-instagram"></i> Share</button></a>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -162,7 +169,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h2 id="post_title"></h2>
-                        <div id="preview_body">
+                        <div id="preview_body" onCopy="return true" onselectstart="return true">
 
                         </div>
                     </div>

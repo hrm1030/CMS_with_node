@@ -51,7 +51,7 @@ $(document).ready(function() {
                 {
                     post +=`<!-- BEGIN CAROUSEL -->            
                     <div class="front-carousel">
-                        <div class="carousel slide" id="myCarousel">
+                        <div class="carousel slide" id="myCarousel${posts[i]._id}">
                         <!-- Carousel items -->
                         <div class="carousel-inner">`
                     var images = posts[i].images.split(',');
@@ -73,10 +73,10 @@ $(document).ready(function() {
 
                     post  = post +`</div>
                                     <!-- Carousel nav -->
-                                    <a data-slide="prev" href="#myCarousel" class="carousel-control left">
+                                    <a data-slide="prev" href="#myCarousel${posts[i]._id}" class="carousel-control left">
                                         <i class="fa fa-angle-left"></i>
                                     </a>
-                                    <a data-slide="next" href="#myCarousel" class="carousel-control right">
+                                    <a data-slide="next" href="#myCarousel${posts[i]._id}" class="carousel-control right">
                                         <i class="fa fa-angle-right"></i>
                                     </a>
                                     </div>                
@@ -129,7 +129,7 @@ $(document).ready(function() {
                         {
                             post += `<!-- BEGIN CAROUSEL -->            
                             <div class="front-carousel">
-                                <div class="carousel slide" id="myCarousel">
+                                <div class="carousel slide" id="myCarousel${posts[i]._id}">
                                 <!-- Carousel items -->
                                 <div class="carousel-inner">`
                             var images = posts[i].images.split(',');
@@ -151,10 +151,10 @@ $(document).ready(function() {
 
                             post  = post +`</div>
                                             <!-- Carousel nav -->
-                                            <a data-slide="prev" href="#myCarousel" class="carousel-control left">
+                                            <a data-slide="prev" href="#myCarousel${posts[i]._id}" class="carousel-control left">
                                                 <i class="fa fa-angle-left"></i>
                                             </a>
-                                            <a data-slide="next" href="#myCarousel" class="carousel-control right">
+                                            <a data-slide="next" href="#myCarousel${posts[i]._id}" class="carousel-control right">
                                                 <i class="fa fa-angle-right"></i>
                                             </a>
                                             </div>                
@@ -189,7 +189,7 @@ $(document).ready(function() {
                         {
                             post +=`<!-- BEGIN CAROUSEL -->            
                             <div class="front-carousel">
-                                <div class="carousel slide" id="myCarousel">
+                                <div class="carousel slide" id="myCarousel${posts[i]._id}">
                                 <!-- Carousel items -->
                                 <div class="carousel-inner">`
                             var images = posts[i].images.split(',');
@@ -211,10 +211,10 @@ $(document).ready(function() {
 
                             post  = post +`</div>
                                             <!-- Carousel nav -->
-                                            <a data-slide="prev" href="#myCarousel" class="carousel-control left">
+                                            <a data-slide="prev" href="#myCarousel${posts[i]._id}" class="carousel-control left">
                                                 <i class="fa fa-angle-left"></i>
                                             </a>
-                                            <a data-slide="next" href="#myCarousel" class="carousel-control right">
+                                            <a data-slide="next" href="#myCarousel${posts[i]._id}" class="carousel-control right">
                                                 <i class="fa fa-angle-right"></i>
                                             </a>
                                             </div>                
@@ -252,7 +252,7 @@ $(document).ready(function() {
                 {
                     post += `<!-- BEGIN CAROUSEL -->            
                     <div class="front-carousel">
-                        <div class="carousel slide" id="myCarousel">
+                        <div class="carousel slide" id="myCarousel${posts[i]._id}">
                         <!-- Carousel items -->
                         <div class="carousel-inner">`;
                     var images = posts[i].images.split(',');
@@ -274,10 +274,10 @@ $(document).ready(function() {
 
                     post  = post +`</div>
                                     <!-- Carousel nav -->
-                                    <a data-slide="prev" href="#myCarousel" class="carousel-control left">
+                                    <a data-slide="prev" href="#myCarousel${posts[i]._id}" class="carousel-control left">
                                         <i class="fa fa-angle-left"></i>
                                     </a>
-                                    <a data-slide="next" href="#myCarousel" class="carousel-control right">
+                                    <a data-slide="next" href="#myCarousel${posts[i]._id}" class="carousel-control right">
                                         <i class="fa fa-angle-right"></i>
                                     </a>
                                     </div>                
@@ -305,7 +305,5 @@ $(document).ready(function() {
         }
     }
 
-    $('#btn_post').click(function(){
-        toastr['info'](`You can't post. Your membership is 0.`, 'Info!');
-    })
+    
 })

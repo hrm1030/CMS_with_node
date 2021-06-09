@@ -11,9 +11,22 @@
               <input type="hidden" id="post_id" value="<%= post_id%>">
             <div class="row">
               <!-- BEGIN LEFT SIDEBAR -->            
-              <div class="col-md-9 col-sm-9 blog-item" id="post_div">
-                
-                    
+              <div class="col-md-9 col-sm-9 blog-item">
+                <div id="post_div">
+
+                </div>
+                <ul class="blog-info">
+                  <li><i class="fa fa-user"></i> <%= post.poster%></li>
+                  <li><i class="fa fa-calendar"></i> <%= post.created_at%></li>
+                  <% if(session.userid == post.poster_id) {%>
+                    <li><i class="fa fa-thumbs-up" title="like"></i> <span id="like_cnt"><%= post.like%></span></li>
+                    <li><i class="fa fa-thumbs-down" title="dislike"></i> <span id="dislike_cnt"><%= post.dislike%></span></li>
+                  <%} else{%>
+                    <li><i class="fa fa-thumbs-up" title="like" id="like_i"></i> <span id="like_cnt"><%= post.like%></span></li>
+                    <li><i class="fa fa-thumbs-down" id="dislike_i" title="dislike"></i> <span id="dislike_cnt"><%= post.dislike%></span></li>
+                  <%}%>
+                  <li><i class="fa fa-tags"></i> <%= post.category%></li>
+                </ul>
               </div>
               <!-- END LEFT SIDEBAR -->
 

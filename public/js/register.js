@@ -18,7 +18,7 @@ $(document).ready(function() {
         $('#repassword_error').hide();
     });
     $("#phone").inputmask("+9999999999", {
-        placeholder: " ",
+        placeholder: "",
         clearMaskOnLostFocus: true
     }); //default
 })

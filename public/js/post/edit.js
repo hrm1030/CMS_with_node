@@ -2,6 +2,7 @@ $(document).ready(function() {
 
   $('#btn_add').hide();
   $('#filesTable').hide();
+  $('#publish_div').hide();
 
   $('#btn_save').click(function() {
     
@@ -57,7 +58,11 @@ $(document).ready(function() {
                 files : images
             },
             success : function (data) {
-              window.history.back();
+              $('#a_linkedin').attr('href', 'https://www.linkedin.com/cws/share?url=http://localhost:8000/post/view?post='+data.post._id);
+              $('#a_facebook').attr('href', 'https://www.facebook.com/sharer.php?u=http://localhost:8000/post/view?post='+data.post._id);
+              $('#a_instagram').attr('href', 'https://www.linkedin.com/cws/share?url=http://localhost:8000/post/view?post='+data.post._id);
+              $('#btn_div').hide(500);
+              $('#publish_div').show(500);
             },
             error : function () {
                 toastr['error']('Happening any errors in server.');
@@ -90,7 +95,7 @@ $(document).ready(function() {
           active = '';
         }
         slide_html = slide_html + `<div class="item ${active}">
-        <img src="../../uploads/posts/${$('#file'+i).val()}" style="height: 250px; width:100%;" alt="">
+        <img src="../../uploads/posts/${$('#file'+i).val()}" style="height: 350px; width:100%;" alt="">
       </div>`;
       }
             
@@ -129,7 +134,7 @@ $(document).ready(function() {
   })
 
   $("#phone").inputmask("+9999999999", {
-      placeholder: " ",
+      placeholder: "",
       clearMaskOnLostFocus: true
   }); //default
 
@@ -179,5 +184,6 @@ $(document).ready(function() {
       });
     }
     
-  })
-})
+  });
+
+});

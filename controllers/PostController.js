@@ -116,7 +116,14 @@ exports.view = function(req, res) {
         if(err) {
             console.log(err);
         } else {
-            res.render('pages/user/post/view', {title : 'CMS | Post View', post_id : post_id, session : req.session, categories : categories});;
+            Post.findById(req.query.post, (err, post) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                    res.render('pages/user/post/view', {title : 'CMS | Post View', post_id : post_id, session : req.session, categories : categories, post : post});;
+                }
+            })
+            
         }
     });
     
@@ -140,21 +147,23 @@ exports.send_following = function(req, res) {
             if(req.body.flag == 'like'){
                 Post.findByIdAndUpdate(req.body.post_id, {$set : {
                     like : post.like + 1
-                }}, (err, post) =>{
+                }}, (err, new_post) =>{
                     if(err) {
                         console.log(err);
                     } else {
-                        res.json({post : post});
+                        console.log(new_post)
+                        res.json({like : new_post.like+1, dislike : new_post.dislike});
                     }
                 });
             } else {
                 Post.findByIdAndUpdate(req.body.post_id, {$set : {
                     dislike : post.dislike + 1
-                }}, (err, post) =>{
+                }}, (err, new_post) =>{
                     if(err) {
                         console.log(err);
                     } else {
-                        res.json({post : post});
+                        console.log(new_post)
+                        res.json({like : new_post.like, dislike : new_post.dislike+1});
                     }
                 });
             }
@@ -170,4 +179,4 @@ exports.edit = function(req, res) {
             res.render('pages/user/post/edit',{ title : 'CMS | Post Edit', session : req.session, categories : categories});
         }
     })
-}
+};

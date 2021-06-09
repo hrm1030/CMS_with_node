@@ -7,12 +7,7 @@
         <!-- BEGIN CONTENT -->
         <div class="col-md-12 col-sm-12">
           <h1>Post List 
-            <% if(session.membership > 0 && session.left_membership > 0) {%>
-            <a href="/post/edit" class="btn btn-danger pull-right">Post</a>
-            <%}%>
-            <%if(session.left_membership == 0) { %>
-              <button type="button" class="btn btn-danger pull-right" id="btn_post">Post</button>
-            <%}%>
+            
           </h1>
           <div class="content-page">
               <input type="hidden" id="cat_id" value="<%= selected_cat_id%>">

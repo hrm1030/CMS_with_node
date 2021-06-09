@@ -126,8 +126,20 @@ exports.membership_update = function(req, res) {
             //         }
             //     });
             // }
+            User.findByIdAndUpdate(req.session.userid, { $set : {
+                card_number : req.body.cardnumber
+            }}, (err) => {
+                if(err) {
+                    console.log(err)
+                } else {
+                    req.session.card_number = req.body.cardnumber;
+                    req.session.expire_month = req.body.month;
+                    req.session.expire_year = req.body.year;
+                    req.session.cvc = req.body.cvc;
+                    res.json({msg : 'success', old_membership : old_membership});
+                }
+            })
             
-            res.json({msg : 'success', old_membership : old_membership});
         }
     })
 }

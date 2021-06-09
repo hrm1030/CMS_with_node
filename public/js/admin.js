@@ -100,7 +100,7 @@ $(document).ready(function() {
             function editRow(oTable, nRow) {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-                jqTds[0].innerHTML = '<input type="text" class="form-control input-small category" style="width:100%!important;" value="' + aData[0] + '">';
+                jqTds[0].innerHTML = '<input type="text" class="form-control input-small category" autofocus style="width:100%!important;" value="' + aData[0] + '">';
                 jqTds[1].innerHTML = '<a class="edit btn btn-sm blue save" href="" title="save"><i class="fa fa-save"></i></a>&nbsp;<a class="cancel btn btn-sm yellow" href="" title="cancel"><i class="fa fa-times"></i></a>';
             }
     
@@ -364,7 +364,7 @@ $(document).ready(function() {
             function editRow(oTable, nRow) {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-                jqTds[0].innerHTML = '<input type="text" class="form-control input-small industry" focused style="width:100%!important;" value="' + aData[0] + '">';
+                jqTds[0].innerHTML = '<input type="text" class="form-control input-small industry" autofocus style="width:100%!important;" value="' + aData[0] + '">';
                 jqTds[1].innerHTML = '<a class="industry_edit btn btn-sm blue industry_save" href="" title="save"><i class="fa fa-save"></i></a>&nbsp;<a class="industry_cancel btn btn-sm yellow" href="" title="cancel"><i class="fa fa-times"></i></a>';
             }
     
@@ -619,9 +619,9 @@ $(document).ready(function() {
                 "columns": [
                     { "width": "10%" },
                     { "width": "40%" },
+                    { "width": "15%" },
                     { "width": "20%" },
-                    { "width": "20%" },
-                    { "width": "10%" },
+                    { "width": "15%" },
                   ],
                 "order": [
                     [3, 'desc']
@@ -677,13 +677,51 @@ $(document).ready(function() {
                         var content = get_skip_content(data.posts[i].content);
                         console.log(content)
                         
-                        oTable.fnAddData([data.posts[i].category, content, data.posts[i].poster, data.posts[i].created_at, '<button class="btn btn-sm btn-danger btn_view" post_id="'+data.posts[i]._id+'"><i class="icon-eye"></i> View</button>']);
+                        oTable.fnAddData([data.posts[i].category, content, data.posts[i].poster, data.posts[i].created_at, '<button class="btn btn-sm blue btn_view" post_id="'+data.posts[i]._id+'"><i class="icon-eye"></i> View</button>&nbsp;<button class="btn btn-sm btn-danger btn_post_delete" post_id="'+data.posts[i]._id+'"><i class="fa fa-trash"></i></button>']);
                         
                     }
                 },
                 error : function() {
                     toastr['error']('Happening any errors in post side.');
                 }
+            });
+
+            table.on('click', '.btn_post_delete', function() {
+                var post_id = $(this).attr('post_id');
+                var nRow = $(this).parents('tr')[0];
+                bootbox.dialog({
+                    message: "Are you sure to delete this Post ?",
+                    title: "<i class='fa fa-trash'></i> DELETE",
+                    buttons: {
+                      success: {
+                        label: "YES",
+                        className: "green",
+                        callback: function() {
+                            $.ajax({
+                                url : '/admin/post/delete',
+                                method : 'post',
+                                data : {
+                                    post_id : post_id
+                                },
+                                success : function(data) {
+                                    toastr['success']('Successfully deleted post.');
+                                    oTable.fnDeleteRow(nRow);
+                                },
+                                error : function() {
+                                    toastr['error']('Happening any errors on post delete.');
+                                }
+                            })
+                        }
+                      },
+                      danger: {
+                        label: "NO",
+                        className: "red",
+                        callback: function() {
+
+                        }
+                      },
+                    }
+                });
             });
 
             table.on('click', '.btn_view', function() {
@@ -713,7 +751,7 @@ $(document).ready(function() {
                                     active = '';
                                 }
                                 slide_html = slide_html + `<div class="item ${active}">
-                                    <img src="../../uploads/posts/${images[i]}" style="height: 250px; width:100%;" alt="">
+                                    <img src="../../uploads/posts/${images[i]}" style="height: 350px; width:100%;" alt="">
                                 </div>`;
                             }
                                     
@@ -836,7 +874,7 @@ $(document).ready(function() {
                         active = '';
                         }
                         slide_html = slide_html + `<div class="item ${active}">
-                        <img src="../../uploads/posts/${$('#file'+i).val()}" style="height: 250px; width:100%;" alt="">
+                        <img src="../../uploads/posts/${$('#file'+i).val()}" style="height: 350px; width:100%;" alt="">
                     </div>`;
                     }
                             
@@ -857,12 +895,13 @@ $(document).ready(function() {
                 }
                 
                 var today = new Date();
+                console.log($('#email').val())
                 var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
                 $('#pre_label_created_at').html(date);
                 $('#pre_label_category').html($('#category>:selected').text());
                 $('#pre_post_title').html($('#title').val());
                 $('#pre_preview_body').html(CKEDITOR.instances.content.getData());
-                $('#pre_pre_label_email').html($('#email').val());
+                $('#pre_label_email').html($('#email').val());
                 $('#pre_label_phone').html($('#phone').val());
                 $('#pre_label_name').html($('#fullname').val());
                 var count = 0;
@@ -954,7 +993,7 @@ $(document).ready(function() {
 
     $('#category').select2();
     $("#phone").inputmask("+9999999999", {
-        placeholder: " ",
+        placeholder: "",
         clearMaskOnLostFocus: true
     }); //default
     

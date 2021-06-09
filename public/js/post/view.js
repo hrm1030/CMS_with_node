@@ -26,7 +26,7 @@ $(document).ready(function() {
                 active = '';
               }
               post_html = post_html + `<div class="item ${active}">
-                  <img src="../../uploads/posts/${images[i]}" style="height: 250px; width:100%;" alt="">
+                  <img src="../../uploads/posts/${images[i]}" style="height: 450px; width:100%;" alt="">
                 </div>`
             }
                 
@@ -46,19 +46,7 @@ $(document).ready(function() {
 
           post_html +=`</div>
             <h2>${post.title}</h2>
-            ${post.content}
-            <ul class="blog-info">
-              <li><i class="fa fa-user"></i> ${post.poster}</li>
-              <li><i class="fa fa-calendar"></i> ${post.created_at}</li>`;
-              if(data.session.userid == post.poster_id) {
-                post_html += `<li><i class="fa fa-thumbs-up" title="like"></i> <span id="like_cnt">${post.like}</span></li>
-              <li><i class="fa fa-thumbs-down" title="dislike"></i> <span id="dislike_cnt">${post.dislike}</span></li>`;
-              } else{
-                  post_html += `<li><i class="fa fa-thumbs-up" title="like" id="like_i"></i> <span id="like_cnt">${post.like}</span></li>
-                  <li><i class="fa fa-thumbs-down" id="dislike_i" title="dislike"></i> <span id="dislike_cnt">${post.dislike}</span></li>`;
-              }
-              post_html +=`<li><i class="fa fa-tags"></i> ${post.category}</li>
-            </ul>`;
+            ${post.content}`;
           $('#post_div').html(post_html)
         },
         error : function () {
@@ -75,21 +63,32 @@ $(document).ready(function() {
                 flag : flag
             },
             success : function(data) {
-                $('#like_cnt').text(data.post.like);
-                $('#dislike_cnt').text(data.post.dislike);
-                $('#like_i').removeAttr('id');
-                $('#dislike_i').removeAttr('id');
+              is_voted = 'voted';
+                $('#like_cnt').text(data.like);
+                $('#dislike_cnt').text(data.dislike);
+                $('#like_i').removeAttr('id', 'like_i');
+                $('#dislike_i').removeAttr('id', 'dislike_i');
             },
             error : function() {
                 toastr['error']('Happening any errors in following');
             }
         })
     }
-
+    var is_voted = '';
     $('#like_i').click(function() {
+      console.log(is_voted)
+      if(is_voted == '')
+      {
         send_following('like');
+      }
+        
     });
     $('#dislike_i').click(function() {
+      console.log(is_voted)
+      if(is_voted == '')
+      {
         send_following('dislike');
+      }
+        
     });
 });

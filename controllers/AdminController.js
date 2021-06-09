@@ -137,3 +137,13 @@ exports.industry_delete = function(req, res) {
         }
     })
 }
+
+exports.post_delete = function(req, res) {
+    Post.findByIdAndDelete(req.body.post_id, (err) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.json({ msg : 'success'});
+        }
+    })
+}
