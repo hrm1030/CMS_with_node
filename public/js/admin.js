@@ -805,6 +805,8 @@ $(document).ready(function() {
             });
 
             $('#btn_file_add').hide();
+            $('#btn_div').hide();
+
             $('#btn_save').click(function() {
     
                 var category_id = $('#category').val();
@@ -859,7 +861,13 @@ $(document).ready(function() {
                           files : images
                       },
                       success : function (data) {
-                          window.location.reload();
+                        //   window.location.reload();
+                        var content = get_skip_content(data.post.content);
+                        var created_at = new Date(data.post.created_at).getFullYear()+'-'+(new Date(data.post.created_at).getMonth()+1)+'-'+new Date(data.post.created_at).getDate()+' '+new Date(data.post.created_at).getHours()+':'+new Date(data.post.created_at).getMinutes()+':'+new Date(data.post.created_at).getSeconds();
+                        oTable.fnAddData([data.post.category, content, data.post.poster, created_at, '<button class="btn btn-sm blue btn_view" post_id="'+data.post._id+'"><i class="icon-eye"></i> View</button>&nbsp;<button class="btn btn-sm btn-danger btn_post_delete" post_id="'+data.post._id+'"><i class="fa fa-trash"></i></button>'])
+                        toastr['success']('Successfully posted.');
+                        $('#publish_div').show(500);
+                        $('#btn_save').hide(500);
                       },
                       error : function () {
                           toastr['error']('Happening any errors in server.');
@@ -931,10 +939,7 @@ $(document).ready(function() {
                 }, 1000);
             })
 
-            $("#phone").inputmask("+9999999999", {
-                placeholder: " ",
-                clearMaskOnLostFocus: true
-            }); //default
+            $('#publish_div').hide();
 
             var num = 0;
             $('#btn_file_add').click(function() {
@@ -947,17 +952,21 @@ $(document).ready(function() {
                 $('#photo'+num).hide();
                 $('#files_tbody').append('<tr file_id="'+num+'"><td>'+$('#photo')[0].files[0].name+'</td><td><button type="button" class="btn purple btn-sm btn_file_cancel"><i class="fa fa-times"></i></button></td>');
                 $('#file_count').val(num);
-                });
+                $('#photo').val('');
+                $('.fileinput').removeClass('fileinput-exists');
+                $('.fileinput').addClass('fileinput-new');
+                $('.fileinput-filename').text('');
+            });
 
-                $('input[type=file]').change(function () {
+            $('input[type=file]').change(function () {
                 $('#btn_file_add').show();
-                });
+            });
 
-                $('#btn_remove').click(function() {
+            $('#btn_remove').click(function() {
                 $('#btn_add').hide();
-                });
+            });
                 
-                $('#btn_upload').click(function() {
+            $('#btn_upload').click(function() {
                 var data = new FormData();
                 var file_count = $('#file_count').val();
                 var num = 1;
@@ -981,6 +990,7 @@ $(document).ready(function() {
                         }
                     });
                 }
+                $('#btn_div').show(500);
             });
 
             $('.btn_file_cancel').click(function() {

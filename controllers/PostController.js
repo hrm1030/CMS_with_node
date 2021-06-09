@@ -27,18 +27,24 @@ exports.save = function(req, res, next) {
         if(err){
             console.log(err)
         } else {
-            User.findByIdAndUpdate(req.session.userid, {$set : {
-                left_membership : req.session.left_membership - 1
-            }}, (err) => {
-                if(err) {
-                    console.log(err);
-                } else {
-                    req.session.left_membership = req.session.left_membership - 1;
+            if(req.session.permission != 1)
+            {
+                User.findByIdAndUpdate(req.session.userid, {$set : {
+                    left_membership : req.session.left_membership - 1
+                }}, (err) => {
+                    if(err) {
+                        console.log(err);
+                    } else {
+                        req.session.left_membership = req.session.left_membership - 1;
+                            
+                        res.json({post:post});
                         
-                    res.json({post:post});
-                    
-                }
-            })
+                    }
+                })
+            } else {
+                res.json({post:post});
+            }
+            
         }
     });
 }
