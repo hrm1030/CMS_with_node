@@ -120,7 +120,7 @@ exports.signup = function(req, res, next) {
                             introduction : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.',
                             state : 0,
                             industry : req.body.industry,
-                            share_cnt : 0
+                            shared_cnt : 0,
                         }, (err, user) => {
                             
                             if(err) {
@@ -210,7 +210,7 @@ exports.signin = function(req, res, next) {
                             req.session.expore_year = user.expire_year;
                             req.session.cvc = user.cvc;
                             req.session.token = token;
-                            req.session.share_cnt = user.share_cnt;
+                            req.session.share_cnt = user.shared_cnt;
                             var today = new Date();
                             var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
                             
@@ -360,12 +360,7 @@ exports.profile = function(req, res, next) {
             console.log(err);
         } else {
             var post_cnt = posts.length;
-            var shared_cnt = 0;
-            for(var i = 0 ; i < post_cnt ; i ++)
-            {
-                shared_cnt += posts[i].shared;
-            }
-            res.render('pages/user/profile', {title : 'CMS | Profile', session : req.session, post_cnt : post_cnt, shared_cnt : shared_cnt});
+            res.render('pages/user/profile', {title : 'CMS | Profile', session : req.session, post_cnt : post_cnt, shared_cnt : req.session.shared_cnt});
         }
     })
     

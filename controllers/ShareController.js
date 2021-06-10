@@ -47,17 +47,19 @@ exports.share = function(req, res) {
         if(err) {
             console.log(err);
         } else {
-            User.findByIdAndUpdate(user._id, {$set: {
-                left_membership : user.left_membership - 1
+            User.findByIdAndUpdate(req.session.userid, {$set: {
+                left_membership : user.left_membership - 1,
+                shared_cnt : user.shared_cnt + 1
             }}, (err) => {
                 if(err) {
                     console.log(err);
                 } else {
+                    req.session.shared_cnt = user.shared_cnt + 1;
                     Post.findById(req.query.post_id, (err, post) => {
                         if(err) {
                             console.log(err);
                         } else {
-                            Post.findByIdAndUpdate(post._id, { $set : {
+                            Post.findByIdAndUpdate(req.query.post_id, { $set : {
                                 shared : post.shared + 1
                             }}, (err) => {
                                 if(err) {

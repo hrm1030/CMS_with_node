@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
     permission : Number,
     state : Number,
     industry : String,
-    share_cnt : Number,
+    shared_cnt : Number,
 });
 
 
