@@ -18,7 +18,8 @@ const UserSchema = new mongoose.Schema({
     introduction : String,
     permission : Number,
     state : Number,
-    industry : String
+    industry : String,
+    share_cnt : Number,
 });
 
 

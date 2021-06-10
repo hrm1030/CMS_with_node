@@ -16,26 +16,17 @@
                     <li><a href="/auth/login"><i class="icon-login"></i> Sign in</a></li>
                     <li><a href="/auth/register"><i class="icon-user-follow"></i> Register</a></li>
                 <%} else {%>
+                    <% if(session.permission == 2) {%>
                     <li><a href="/search"><i class="icon-magnifier"></i> Search</a></li>
+                    <%}%>
                     <% if(session.permission == 1) {%>
                     <li><a href="/admin"><i class="icon-equalizer"></i> Admin</a></li>
                     <%}%>
                     
                     <li class="menu-search">
                         <span class="sep"></span>
-                        <li>
-                            <% if(session.membership > 0 && session.left_membership > 0) {%>
-                                <a href="/post/edit"><button class="btn btn-danger btn-lg" style="margin-top: -10px;background-color: #f20061;">Post a project</button></a>
-                            <%}%>
-                            <%if(session.left_membership == 0) { %>
-                                <a href="#"><button type="button" class="btn btn-danger btn-lg" style="margin-top: -10px; background-color: #f20061;" id="btn_post">Post a project</button></a>
-                            <%}%>
-                        </li>
-                        
                         <li class="dropdown">
-                            
                             <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;" style="margin-top: -10px;">
-                                
                                 <img src="../../uploads/users/<%=session.photo%>" style="width: 45px; height: 45px;">
                                 <%= session.name%> <%= session.surname %>
                             </a>

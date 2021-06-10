@@ -21,7 +21,6 @@
                   <span class="fileinput-exists"><i class="icon-reload"></i> Change </span>
                   <input type="file" name="photo">
                   </span>
-                  <a class="btn btn-success" href="/auth/profile/photo_generate"><i class="icon-pencil"></i> Edit</a>
                 </div>
               </div>
             </div>
@@ -37,17 +36,22 @@
                     <li>
                       <i class="fa fa-phone"></i> <%= session.phone%>
                     </li>
+                    <% if(session.permission == 1) {%>
                     <li>
                       <i class="fa fa-star"></i> <%= post_cnt%> posted
                     </li>
                     <li>
-                      <i class="fa fa-thumbs-up"></i> <%= like_cnt%>
+                      <i class="fa fa-thumbs-up"></i> <%= shared_cnt%> shared
                     </li>
-                    <li>
-                      <i class="fa fa-thumbs-down"></i> <%= dislike_cnt%>
-                    </li>
+                    <%}%>
+                    <% if(session.permission == 2) {%>
+                      <li>
+                        <i class="fa fa-thumbs-up"></i> <%= session.share_cnt%> shared
+                      </li>
+                      <%}%>
                   </ul>
                 </div>
+                
                 <!--end col-md-8-->
                 <div class="col-md-4">
                   <div class="portlet sale-summary">
@@ -58,6 +62,32 @@
                     </div>
                     <div class="portlet-body">
                       <ul class="list-unstyled">
+                        
+                        <li>
+                          <span class="sale-info">
+                          permission <i class="fa fa-img-down"></i>
+                          </span>
+                          <span class="sale-num">
+                            <%if(session.permission == 1) {%>
+                              Administrator
+                            <%} else {%>
+                              Common User
+                            <%}%>
+                          </span>
+                        </li>
+                        <li>
+                          <span class="sale-info">
+                          State <i class="fa fa-img-down"></i>
+                          </span>
+                          <span class="sale-num">
+                            <%if(session.state == 0) {%>
+                              <i class="fa fa-check text-muted" title="Inactived"></i>
+                            <%} else {%>
+                              <i class="fa fa-check" title="Actived"></i>
+                            <%}%>
+                          </span>
+                        </li>
+                        <% if(session.permission == 2) {%>
                         <li>
                           <span class="sale-info">
                           Membership <i class="fa fa-img-up"></i>
@@ -79,18 +109,8 @@
                             <%= new Date(session.created_at).getFullYear() %> / <%= new Date(session.created_at).getMonth()+1 %> / <%= new Date(session.created_at).getDate() %> ~ <%= new Date(session.created_at).getDate()+7 %>
                           </span>
                         </li>
-                        <li>
-                          <span class="sale-info">
-                          State <i class="fa fa-img-down"></i>
-                          </span>
-                          <span class="sale-num">
-                            <%if(session.state == 0) {%>
-                              <i class="fa fa-check text-muted" title="Inactived"></i>
-                            <%} else {%>
-                              <i class="fa fa-check" title="Actived"></i>
-                            <%}%>
-                          </span>
-                        </li>
+                        <%}%>
+                        
                       </ul>
                     </div>
                   </div>
@@ -102,7 +122,9 @@
           </div>
         </form>
         
-      </div><hr>
+      </div>
+      <% if(session.permission == 2) {%>
+      <hr>
       <div class="row margin-bottom-40">
         <!-- BEGIN CONTENT -->
         <div class="col-md-12 col-sm-12">
@@ -118,7 +140,7 @@
                 <div class="pricing hover-effect" id="pricing_free">
                   <div class="pricing-head" id="free_head">
                 <%}%>
-                    <h3>Start free
+                    <h3>Free
                     <span>
                        One post plan
                     </span>
@@ -151,7 +173,7 @@
                   <div class="pricing hover-effect" id="pricing_common">
                     <div class="pricing-head" id="common_head">
                 <%}%>
-                    <h3>Common plan
+                    <h3>Basic
                     <span>
                        2 post per week
                     </span>
@@ -257,79 +279,81 @@
           </div>
         </div>
       </div>
+      <div class="modal fade" id="confirmModal" tabindex="-1" role="basic" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title text-danger"><i class="icon-credit-card"></i> Payment Details</h4>
+                </div>
+                <div class="modal-body">
+    
+                  <div class="row">
+                    <div class="col-md-push-1 col-md-10">
+                      <form role="form">
+                        <div class="form-body">
+                          <div class="form-group form-md-line-input has-error">
+                            <div class="input-icon">
+                              <input type="text" class="form-control has-error" id="fullname">
+                              <label for="form_control_1">NAME</label>
+                              <i class="icon-user-following"></i>
+                            </div>
+                          </div>
+                          <div class="form-group form-md-line-input has-error">
+                            <div class="input-icon">
+                              <input type="text" class="form-control" id="card_number">
+                              <label for="form_control_1">CARD NUMBER</label>
+                              <i class="icon-credit-card"></i>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4">
+                              <div class="form-group form-md-line-input has-error">
+                                <div class="input-icon">
+                                  <input type="number" class="form-control" id="month" min="1" max="12">
+                                  <label for="form_control_1">MONTH</label>
+                                  <i class="icon-calendar"></i>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group form-md-line-input has-error">
+                                <div class="input-icon">
+                                  <input type="number" class="form-control" id="year">
+                                  <label for="form_control_1">YEAR</label>
+                                  <i class="icon-calendar"></i>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group form-md-line-input has-error">
+                                <div class="input-icon">
+                                  <input type="number" class="form-control" id="cvc">
+                                  <label for="form_control_1">CVC</label>
+                                  <i class="icon-lock"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <h3 class="bold text-center ammount_row">Payment ammount : <span id="payment_ammount" class="text-danger payment_span"></span> <span class="text-danger payment_span">$</span></h3>
+                          <div class="row text-center payment_row">
+                            <button type="button" class="btn btn-danger btn-lg" id="btn_confirm">PAY</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <%}%>
       <!-- END CONTENT -->
     </div>
   </div>
-  <div class="modal fade" id="confirmModal" tabindex="-1" role="basic" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title text-danger"><i class="icon-credit-card"></i> Payment Details</h4>
-            </div>
-            <div class="modal-body">
-
-              <div class="row">
-                <div class="col-md-push-1 col-md-10">
-                  <form role="form">
-                    <div class="form-body">
-                      <div class="form-group form-md-line-input has-error">
-                        <div class="input-icon">
-                          <input type="text" class="form-control has-error" id="fullname">
-                          <label for="form_control_1">NAME</label>
-                          <i class="icon-user-following"></i>
-                        </div>
-                      </div>
-                      <div class="form-group form-md-line-input has-error">
-                        <div class="input-icon">
-                          <input type="text" class="form-control" id="card_number">
-                          <label for="form_control_1">CARD NUMBER</label>
-                          <i class="icon-credit-card"></i>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="form-group form-md-line-input has-error">
-                            <div class="input-icon">
-                              <input type="number" class="form-control" id="month" min="1" max="12">
-                              <label for="form_control_1">MONTH</label>
-                              <i class="icon-calendar"></i>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group form-md-line-input has-error">
-                            <div class="input-icon">
-                              <input type="number" class="form-control" id="year">
-                              <label for="form_control_1">YEAR</label>
-                              <i class="icon-calendar"></i>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group form-md-line-input has-error">
-                            <div class="input-icon">
-                              <input type="number" class="form-control" id="cvc">
-                              <label for="form_control_1">CVC</label>
-                              <i class="icon-lock"></i>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <h3 class="bold text-center ammount_row">Payment ammount : <span id="payment_ammount" class="text-danger payment_span"></span> <span class="text-danger payment_span">$</span></h3>
-                      <div class="row text-center payment_row">
-                        <button type="button" class="btn btn-danger btn-lg" id="btn_confirm">PAY</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-							
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
+  
 
 <script src="../../js/profile.js"></script>

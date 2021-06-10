@@ -119,13 +119,14 @@ exports.signup = function(req, res, next) {
                             photo : 'avatar.png',
                             introduction : 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.',
                             state : 0,
-                            industry : req.body.industry
+                            industry : req.body.industry,
+                            share_cnt : 0
                         }, (err, user) => {
                             
                             if(err) {
                                 console.log(err)
                             } else {
-                                fs.copyFile('public/uploads/users/avatar.png', 'public/uploads/users/'+user._id+'.jpg', (err) => {
+                                fs.copyFile('public/uploads/users/avatar.png', 'public/uploads/users/'+user._id+'.png', (err) => {
                                     if (err) {
                                         console.log(err);
                                     }else {
@@ -181,7 +182,8 @@ exports.signin = function(req, res, next) {
                     if(password.length ==0) {
                         res.render('pages/auth/login', {title : 'CMS | Login', errors : "Password is required.", session : req.session})
                     }else{
-                        var passwordIsValid = bcrypt.compare(password, user.password);
+                        var passwordIsValid = bcrypt.compareSync(password, user.password);
+                        console.log(passwordIsValid+'=============')
                         if (!passwordIsValid) {
                             res.render('pages/auth/login', {title : 'CMS | Login', errors : "Please enter your password exactly.", session : req.session})
                         }else {
@@ -208,6 +210,7 @@ exports.signin = function(req, res, next) {
                             req.session.expore_year = user.expire_year;
                             req.session.cvc = user.cvc;
                             req.session.token = token;
+                            req.session.share_cnt = user.share_cnt;
                             var today = new Date();
                             var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
                             
@@ -357,17 +360,12 @@ exports.profile = function(req, res, next) {
             console.log(err);
         } else {
             var post_cnt = posts.length;
-            var like_cnt = 0;
-            var dislike_cnt = 0;
-            for(var i = 0 ; i < post_cnt ; i ++) 
+            var shared_cnt = 0;
+            for(var i = 0 ; i < post_cnt ; i ++)
             {
-                like_cnt += posts[i].like;
+                shared_cnt += posts[i].shared;
             }
-            for(var i = 0 ; i < post_cnt ; i ++) 
-            {
-                dislike_cnt += posts[i].dislike;
-            }
-            res.render('pages/user/profile', {title : 'CMS | Profile', session : req.session, post_cnt : post_cnt, like_cnt: like_cnt, dislike_cnt : dislike_cnt});
+            res.render('pages/user/profile', {title : 'CMS | Profile', session : req.session, post_cnt : post_cnt, shared_cnt : shared_cnt});
         }
     })
     
@@ -380,7 +378,7 @@ var storage = multer.diskStorage({
         cb(null, "public/uploads/users")
     },
     filename: function (req, file, cb) {
-      cb(null, req.session.userid +".jpg")
+      cb(null, req.session.userid +".png")
     }
 })
        
@@ -423,12 +421,12 @@ exports.profile_save = function(req, res) {
             res.send(err)
         }
         else {
-            req.session.photo = req.session.userid+'.jpg';
+            req.session.photo = req.session.userid+'.png';
             req.session.introduction = req.body.introduction;
             // SUCCESS, image successfully uploaded
             User.findByIdAndUpdate(req.session.userid, {$set : {
                 introduction : req.body.introduction,
-                photo : req.session.userid+'.jpg'
+                photo : req.session.userid+'.png'
             }}, (err) => {
                 if(err) {
                     console.log(err);

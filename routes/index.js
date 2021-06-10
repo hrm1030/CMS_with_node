@@ -5,9 +5,10 @@ var admin = require('../controllers/AdminController');
 var post = require('../controllers/PostController');
 var auth_middleware = require('../middlewares/auth');
 var admin_middleware = require('../middlewares/admin');
+var share = require('../controllers/ShareController');
 
 /** User Router */
-router.get('/', auth_middleware.index, function(req, res, next) {
+router.get('/', function(req, res, next) {
   res.render('index', { title: 'CMS', session : req.session });
 });
 
@@ -36,8 +37,10 @@ router.get('/post/list', auth_middleware.index, post.list);
 router.post('/post/selected_category', post.selected_category);
 router.get('/post/view', auth_middleware.index, post.view);
 router.post('/post/view_ajax', post.view_ajax);
-router.post('/post/send_following', post.send_following);
 router.get('/post/edit', auth_middleware.index, auth_middleware.check_membership, post.edit);
 router.post('/post/filesupload', post.filesupload);
 
+router.post('/share/logo_upload', share.logo_upload);
+router.get('/share/image_jimp', share.image_jimp);
+router.get('/share', share.share);
 module.exports = router;

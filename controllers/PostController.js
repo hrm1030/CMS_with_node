@@ -20,31 +20,13 @@ exports.save = function(req, res, next) {
         poster_email : req.body.email,
         poster_phone : req.body.phone,
         created_at : date,
-        like : 0,
-        dislike : 0,
-        images : req.body.files
+        shared: 0,
+        image : req.body.file
     }, (err, post) => {
         if(err){
             console.log(err)
         } else {
-            if(req.session.permission != 1)
-            {
-                User.findByIdAndUpdate(req.session.userid, {$set : {
-                    left_membership : req.session.left_membership - 1
-                }}, (err) => {
-                    if(err) {
-                        console.log(err);
-                    } else {
-                        req.session.left_membership = req.session.left_membership - 1;
-                            
-                        res.json({post:post});
-                        
-                    }
-                })
-            } else {
-                res.json({post:post});
-            }
-            
+            res.json({post:post});
         }
     });
 }
@@ -141,38 +123,6 @@ exports.view_ajax = function(req, res) {
             console.log(err);
         } else {
             res.json({ post : post, session : req.session});
-        }
-    })
-}
-
-exports.send_following = function(req, res) {
-    Post.findById(req.body.post_id, (err, post) => {
-        if(err){
-            console.log(err);
-        } else {
-            if(req.body.flag == 'like'){
-                Post.findByIdAndUpdate(req.body.post_id, {$set : {
-                    like : post.like + 1
-                }}, (err, new_post) =>{
-                    if(err) {
-                        console.log(err);
-                    } else {
-                        console.log(new_post)
-                        res.json({like : new_post.like+1, dislike : new_post.dislike});
-                    }
-                });
-            } else {
-                Post.findByIdAndUpdate(req.body.post_id, {$set : {
-                    dislike : post.dislike + 1
-                }}, (err, new_post) =>{
-                    if(err) {
-                        console.log(err);
-                    } else {
-                        console.log(new_post)
-                        res.json({like : new_post.like, dislike : new_post.dislike+1});
-                    }
-                });
-            }
         }
     })
 }

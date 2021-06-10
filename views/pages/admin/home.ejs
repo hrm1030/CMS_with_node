@@ -244,23 +244,14 @@
                                         <input type="hidden" id="fullname" value="<%= session.name%> <%= session.surname%>">
                                         <input type="hidden" id="email" value="<%= session.email%>">
                                         <input type="hidden" id="phone" value="<%= session.phone%>">
-                                        <div class="row">
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label">Category</label>
                                             <div class="col-md-10">
-                                                <div class="form-group">
-                                                    <label class="col-md-1 control-label">Category</label>
-                                                    <div class="col-md-10">
-                                                        <select class="select2me input-xlarge" name="category" id="category">
-                                                            <% categories.forEach(function(category) {%>
-                                                            <option value="<%= category._id%>"><%= category.name%></option>
-                                                            <%});%>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2" id="publish_div">
-                                                <a href="#" id="a_facebook"><button type="button" id="btn_facebook" class="btn blue btn-circle btn-icon-only" title="Share on Facebook"><i class="fa fa-facebook"></i></button></a>
-                                                <a href="#" id="a_linkedin"><button type="button" id="btn_linkedin" class="btn purple btn-circle btn-icon-only" title="Share on Linkedin"><i class="fa fa-linkedin"></i></button></a>
-                                                <a href="#" id="a_twitter"><button type="button" id="btn_twitter" class="btn btn-danger btn-circle btn-icon-only" title="Share on Twitter"><i class="fa fa-twitter"></i></button></a>
+                                                <select class="select2me input-xlarge" name="category" id="category">
+                                                    <% categories.forEach(function(category) {%>
+                                                    <option value="<%= category._id%>"><%= category.name%></option>
+                                                    <%});%>
+                                                </select>
                                             </div>
                                         </div>
                                         
@@ -299,42 +290,22 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button type="button" class="btn blue" id="btn_file_add"><i class="fa fa-plus"></i> Add</button>
+                                                    <div id="postForm">
+
+                                                    </div>
+                                                    <button type="button" class="btn blue" id="btn_upload"><i class="fa fa-upload"></i> Upload</button>
                                                 </div>
                                             </div>
-                                        </div>
-                                        
-                                        <div class="row" id="filesTable">
-                                            <div class="form-group">
-                                                <label class="col-md-1 control-label">Files : </label>
-                                                <div class="col-md-8">
-                                                    <table class="table table-striped">
-                                                        <thead>
-                                                            <th width="50%">File Name</th>
-                                                            <th width="20%"></th>
-                                                        </thead>
-                                                        <tbody id="files_tbody">
-        
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <button type="button" class="btn blue" id="btn_upload"><i class="fa fa-upload"></i> Upload</button>
-                                            </div>
-                                            
                                         </div>
                                     </div>
                                     <div class="form-actions" id="btn_div">
                                         <div class="row">
                                             <div class="col-md-12 text-center">
-                                                <input type="hidden" id="file_count">
                                                 <button type="button" class="btn btn-danger" id="btn_preview" data-toggle="modal" data-target="#previewModal"><i class="fa fa-eye"></i> Preview</button>
                                                 <button type="button" class="btn green" id="btn_save"><i class="fa fa-check"></i> Submit</button>
-                                                
+                                                <button type="reset" class="btn purple" id="btn_reset"><i class="icon-refresh"></i> Reset</button>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div id="postForm">
-    
                                     </div>
                                 </form>
                             </div>
@@ -369,12 +340,7 @@
                     </div>
                     
                 </div><hr>
-                <div class="row">
-                    <div class="col-md-12" id="slide_div">
-
-                    </div>
-
-                </div>
+                
                 <div class="row">
                     <div class="col-md-12">
                         <h2 id="post_title"></h2>
@@ -382,6 +348,12 @@
 
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" id="slide_div">
+
+                    </div>
+
                 </div>
             </div>
             <div class="modal-footer">
@@ -416,19 +388,20 @@
                     </div>
                     
                 </div><hr>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 id="pre_post_title"></h2>
+                        <div id="pre_preview_body">
+
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12" id="pre_slide_div">
 
                     </div>
 
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 id="pre_post_title"></h2>
-                        <div id="pre_preview_body" onCopy="return true" onselectstart="return true">
-
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="modal-footer">

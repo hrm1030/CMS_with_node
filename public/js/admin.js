@@ -669,8 +669,6 @@ $(document).ready(function() {
                 $('#categoryname').val($('#category>:selected').text());
             });
 
-            $('#filesTable').hide();
-
             var get_skip_content = function(content) {
                 var str = '';
                 var content_arr = Array();
@@ -751,44 +749,21 @@ $(document).ready(function() {
                     },
                     success : function(data) {
                         console.log(data.post)
-                        if(data.post.images != ''){
                             var slide_html = `<div class="blog-item-img">
-                            <!-- BEGIN CAROUSEL -->            
-                            <div class="front-carousel">
-                                <div id="myCarousel" class="carousel slide">
-                                <!-- Carousel items -->
-                                <div class="carousel-inner" id="carousel_image">`;
-                            var active ;
-                            var images = data.post.images.split(',');
-                            for(var i = 0; i < images.length-1 ; i++)
-                            {
-                                if(i == 0)
-                                {
-                                    active = 'active';
-                                }else {
-                                    active = '';
-                                }
-                                slide_html = slide_html + `<div class="item ${active}">
-                                    <img src="../../uploads/posts/${images[i]}" style="height: 350px; width:100%;" alt="">
-                                </div>`;
-                            }
-                                    
-                                    
-                            slide_html = slide_html+`</div>
-                                    <!-- Carousel nav -->
-                                    <a class="carousel-control left" href="#myCarousel" data-slide="prev">
-                                    <i class="fa fa-angle-left"></i>
-                                    </a>
-                                    <a class="carousel-control right" href="#myCarousel" data-slide="next">
-                                    <i class="fa fa-angle-right"></i>
-                                    </a>
-                                </div>                
-                                </div>
-                                <!-- END CAROUSEL -->             
-                            </div><br>`;
-                            $('#slide_div').html(slide_html);
-                        }
-                        
+                                                <!-- BEGIN CAROUSEL -->            
+                                                <div class="front-carousel">
+                                                    <div id="myCarousel" class="carousel slide">
+                                                        <!-- Carousel items -->
+                                                        <div class="carousel-inner" id="carousel_image">
+                                                            <div class="item active">
+                                                                <img src="../../uploads/posts/${data.post.image}" style="height: 350px; width:100%;" alt="">
+                                                            </div>
+                                                        </div>
+                                                    </div>                
+                                                </div>
+                                                <!-- END CAROUSEL -->             
+                                            </div><br>`;
+                        $('#slide_div').html(slide_html);
                         $('#post_title').text(data.post.title);
                         $('#preview_body').html(data.post.content);
                         $('#label_name').html(data.post.poster);
@@ -804,7 +779,6 @@ $(document).ready(function() {
                 })
             });
 
-            $('#btn_file_add').hide();
             $('#btn_div').hide();
 
             $('#btn_save').click(function() {
@@ -839,13 +813,7 @@ $(document).ready(function() {
                 }
                 if(fullname != '' && email != '' && phone != '' && title != '' && content != '')
                 {
-                  var images = '';
-                  if($('#file_count').val() != ''){
-                    for(i = 1 ; i <= $('#file_count').val(); i ++)
-                    {
-                      images = images + $('#file'+i).val()+',';
-                    }
-                  }
+                  var image = $('#file').val();
                   
                   $.ajax({
                       url : '/post/save',
@@ -858,7 +826,7 @@ $(document).ready(function() {
                           fullname : $('#fullname').val(),
                           email : $('#email').val(),
                           phone : $('#phone').val(),
-                          files : images
+                          file : image
                       },
                       success : function (data) {
                         //   window.location.reload();
@@ -866,8 +834,6 @@ $(document).ready(function() {
                         var created_at = new Date(data.post.created_at).getFullYear()+'-'+(new Date(data.post.created_at).getMonth()+1)+'-'+new Date(data.post.created_at).getDate()+' '+new Date(data.post.created_at).getHours()+':'+new Date(data.post.created_at).getMinutes()+':'+new Date(data.post.created_at).getSeconds();
                         oTable.fnAddData([data.post.category, content, data.post.poster, created_at, '<button class="btn btn-sm blue btn_view" post_id="'+data.post._id+'"><i class="icon-eye"></i> View</button>&nbsp;<button class="btn btn-sm btn-danger btn_post_delete" post_id="'+data.post._id+'"><i class="fa fa-trash"></i></button>'])
                         toastr['success']('Successfully posted.');
-                        $('#publish_div').show(500);
-                        $('#btn_save').hide(500);
                       },
                       error : function () {
                           toastr['error']('Happening any errors in server.');
@@ -877,48 +843,23 @@ $(document).ready(function() {
                 
             });
 
-            $('#btn_back').click(function() {
-                window.history.back();
-            });
-
             $('#btn_preview').click(function() {
                 
-                if($('#file_count').val() !=''){
-                    var slide_html = `<div class="blog-item-img">
-                    <!-- BEGIN CAROUSEL -->            
-                    <div class="front-carousel">
-                        <div id="myCarousel" class="carousel slide">
-                        <!-- Carousel items -->
-                        <div class="carousel-inner" id="carousel_image">`;
-                    var active ;
-                    for(var i = 1; i <= $('#file_count').val(); i++)
-                    {
-                        if(i == 1)
-                        {
-                        active = 'active';
-                        }else {
-                        active = '';
-                        }
-                        slide_html = slide_html + `<div class="item ${active}">
-                        <img src="../../uploads/posts/${$('#file'+i).val()}" style="height: 350px; width:100%;" alt="">
-                    </div>`;
-                    }
-                            
-                            
-                    slide_html = slide_html+`</div>
-                            <!-- Carousel nav -->
-                            <a class="carousel-control left" href="#myCarousel" data-slide="prev">
-                            <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a class="carousel-control right" href="#myCarousel" data-slide="next">
-                            <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>                
-                        </div>
-                        <!-- END CAROUSEL -->             
-                    </div><br>`;
-                    $('#pre_slide_div').html(slide_html);
-                }
+                var slide_html = `<div class="blog-item-img">
+                                    <!-- BEGIN CAROUSEL -->            
+                                    <div class="front-carousel">
+                                        <div id="myCarousel" class="carousel slide">
+                                            <!-- Carousel items -->
+                                            <div class="carousel-inner" id="carousel_image">
+                                                <div class="item active">
+                                                    <img src="../../uploads/posts/${$('#file').val()}" style="height: 350px; width:100%;" alt="">
+                                                </div>
+                                            </div>
+                                        </div>                
+                                    </div>
+                                    <!-- END CAROUSEL -->             
+                                </div><br>`;
+                $('#pre_slide_div').html(slide_html);
                 
                 var today = new Date();
                 console.log($('#email').val())
@@ -937,59 +878,36 @@ $(document).ready(function() {
                         $('#previewModal').modal('hide');
                     }
                 }, 1000);
-            })
-
-            $('#publish_div').hide();
-
-            var num = 0;
-            $('#btn_file_add').click(function() {
-                $('#filesTable').show();
-                num++;
-                var html = $('#photo').clone();
-                console.log($('#photo')[0].files[0].name)
-                html.attr('id', 'photo'+num);
-                $('#files_tbody').append(html);
-                $('#photo'+num).hide();
-                $('#files_tbody').append('<tr file_id="'+num+'"><td>'+$('#photo')[0].files[0].name+'</td><td><button type="button" class="btn purple btn-sm btn_file_cancel"><i class="fa fa-times"></i></button></td>');
-                $('#file_count').val(num);
-                $('#photo').val('');
-                $('.fileinput').removeClass('fileinput-exists');
-                $('.fileinput').addClass('fileinput-new');
-                $('.fileinput-filename').text('');
             });
 
+            $('#btn_upload').hide();
             $('input[type=file]').change(function () {
-                $('#btn_file_add').show();
+                $('#btn_upload').show(500);
             });
 
-            $('#btn_remove').click(function() {
-                $('#btn_add').hide();
-            });
+            $('#btn_reset').click(function() {
+                CKEDITOR.instances.content.setData('');
+                $('#btn_upload').hide(500);
+            })
                 
             $('#btn_upload').click(function() {
                 var data = new FormData();
-                var file_count = $('#file_count').val();
-                var num = 1;
-                for( var i = 1 ; i<= file_count ; i ++) {
-                    $.each($('#photo'+i)[0].files, function(i, file) {
+                $.each($('#photo')[0].files, function(i, file) {
                     data.append('file-'+i, file);
-                    });
-                    $.ajax({
-                        url: '/post/filesupload',
-                        data: data,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        method: 'POST',
-                        type: 'POST', // For jQuery < 1.9
-                        success: function(data){
+                });
+                $.ajax({
+                    url: '/post/filesupload',
+                    data: data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    method: 'POST',
+                    type: 'POST', // For jQuery < 1.9
+                    success: function(data){
                         toastr['success']('Successfully uploaded.');
-                        console.log(num);
-                        $('#postForm').append('<input type="hidden" id="file'+num+'" value="'+data.image_name+'">');
-                        num++;
-                        }
-                    });
-                }
+                        $('#postForm').append('<input type="hidden" id="file" value="'+data.image_name+'">');
+                    }
+                });
                 $('#btn_div').show(500);
             });
 

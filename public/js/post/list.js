@@ -46,51 +46,25 @@ $(document).ready(function() {
                 var content = posts[i].content.slice(0, 100);
                 
                 var post = `<div class="row">
-                            <div class="col-md-4 col-sm-4">`;
-                if(posts[i].images != '')
-                {
-                    post +=`<!-- BEGIN CAROUSEL -->            
-                    <div class="front-carousel">
-                        <div class="carousel slide" id="myCarousel${posts[i]._id}">
-                        <!-- Carousel items -->
-                        <div class="carousel-inner">`
-                    var images = posts[i].images.split(',');
-                    console.log(images)
-                    var active = '';
-                    for(var j = 0 ; j < images.length-1 ; j ++)
-                    {
-                        if(j == 0)
-                        {
-                            active = 'active';
-                        }else {
-                            active = '';
-                        }
-                        post = post +`<div class="item ${active}">
-                        <img alt="" src="../../uploads/posts/${images[j]}" style="width:300px; height:150px;">
-                        </div>`;
-                    }
-                                        
-
-                    post  = post +`</div>
-                                    <!-- Carousel nav -->
-                                    <a data-slide="prev" href="#myCarousel${posts[i]._id}" class="carousel-control left">
-                                        <i class="fa fa-angle-left"></i>
-                                    </a>
-                                    <a data-slide="next" href="#myCarousel${posts[i]._id}" class="carousel-control right">
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                    </div>                
+                                <div class="col-md-4 col-sm-4">
+                                    <!-- BEGIN CAROUSEL -->            
+                                    <div class="front-carousel">
+                                        <div class="carousel slide" id="myCarousel${posts[i]._id}">
+                                        <!-- Carousel items -->
+                                            <div class="carousel-inner">
+                                                <div class="item active">
+                                                <img alt="" src="../../uploads/posts/${posts[i].image}" style="width:300px; height:150px;">
+                                                </div>
+                                            </div>
+                                        </div>                
+                                    </div>
+                                    <!-- END CAROUSEL -->
                                 </div>
-                                <!-- END CAROUSEL -->`;
-                }
-                                         
-                post += `</div>
                             <div class="col-md-8 col-sm-8">
-                            <h2><img src="../../uploads/users/${posts[i].poster_id}.jpg" style="width:45px; height:45px;"> ${posts[i].poster}</h2>
+                            <h2><img src="../../uploads/users/${posts[i].poster_id}.png" style="width:45px; height:45px;"> ${posts[i].poster}</h2>
                             <ul class="blog-info">
                                 <li><i class="fa fa-calendar"></i> ${new Date(posts[i].created_at).getFullYear()}-${new Date(posts[i].created_at).getMonth()+1}-${new Date(posts[i].created_at).getDate()} ${new Date(posts[i].created_at).getHours()}:${new Date(posts[i].created_at).getMinutes()}:${new Date(posts[i].created_at).getSeconds()}</li>
-                                <li><i class="fa fa-thumbs-up"></i> ${posts[i].like}</li>
-                                <li><i class="fa fa-thumbs-down"></i> ${posts[i].dislike}</li>
+                                <li><i class="fa fa-thumbs-up"></i> ${posts[i].shared}</li>
                                 <li><i class="fa fa-tags"></i> ${posts[i].category}</li>
                             </ul>
                             <p><h4>${posts[i].title}</h4></p><br>
@@ -124,51 +98,25 @@ $(document).ready(function() {
                     for(var i = (num-1)*5 ; i < 5*num ; i ++) {
                         var content = posts[i].content.slice(0, 100);
                         var post = `<div class="row">
-                            <div class="col-md-4 col-sm-4">`;
-                        if(posts[i].images != '')
-                        {
-                            post += `<!-- BEGIN CAROUSEL -->            
-                            <div class="front-carousel">
-                                <div class="carousel slide" id="myCarousel${posts[i]._id}">
-                                <!-- Carousel items -->
-                                <div class="carousel-inner">`
-                            var images = posts[i].images.split(',');
-                            console.log(images)
-                            var active = '';
-                            for(var j = 0 ; j < images.length-1 ; j ++)
-                            {
-                                if(j == 0)
-                                {
-                                    active = 'active';
-                                }else {
-                                    active = '';
-                                }
-                                post = post +`<div class="item ${active}">
-                                <img alt="" src="../../uploads/posts/${images[j]}" style="width:300px; height:150px;">
-                                </div>`;
-                            }
-                                                
-
-                            post  = post +`</div>
-                                            <!-- Carousel nav -->
-                                            <a data-slide="prev" href="#myCarousel${posts[i]._id}" class="carousel-control left">
-                                                <i class="fa fa-angle-left"></i>
-                                            </a>
-                                            <a data-slide="next" href="#myCarousel${posts[i]._id}" class="carousel-control right">
-                                                <i class="fa fa-angle-right"></i>
-                                            </a>
-                                            </div>                
-                                        </div>
-                                        <!-- END CAROUSEL -->`;      
-                        }
-                                
-                        post += `</div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <!-- BEGIN CAROUSEL -->            
+                                            <div class="front-carousel">
+                                                <div class="carousel slide" id="myCarousel${posts[i]._id}">
+                                                    <!-- Carousel items -->
+                                                    <div class="carousel-inner">
+                                                        <div class="item active">
+                                                        <img alt="" src="../../uploads/posts/${posts[i].image}" style="width:300px; height:150px;">
+                                                        </div>
+                                                    </div>
+                                                </div>                
+                                            </div>
+                                            <!-- END CAROUSEL -->
+                                    </div>
                                     <div class="col-md-8 col-sm-8">
-                                    <h2><img src="../../uploads/users/${posts[i].poster_id}.jpg" style="width:45px; height:45px;"> ${posts[i].poster}</h2>
+                                    <h2><img src="../../uploads/users/${posts[i].poster_id}.png" style="width:45px; height:45px;"> ${posts[i].poster}</h2>
                                     <ul class="blog-info">
                                         <li><i class="fa fa-calendar"></i> ${new Date(posts[i].created_at).getFullYear()}-${new Date(posts[i].created_at).getMonth()+1}-${new Date(posts[i].created_at).getDate()} ${new Date(posts[i].created_at).getHours()}:${new Date(posts[i].created_at).getMinutes()}:${new Date(posts[i].created_at).getSeconds()}</li>
-                                        <li><i class="fa fa-thumbs-up"></i> ${posts[i].like}</li>
-                                        <li><i class="fa fa-thumbs-down"></i> ${posts[i].dislike}</li>
+                                        <li><i class="fa fa-thumbs-up"></i> ${posts[i].shared}</li>
                                         <li><i class="fa fa-tags"></i> ${posts[i].category}</li>
                                     </ul>
                                     <p><h4>${posts[i].title}</h4></p><br>
@@ -184,52 +132,25 @@ $(document).ready(function() {
                     for(var i = (num-1)*5 ; i < posts.length ; i ++) {
                         var content = posts[i].content.slice(0, 100);
                         var post = `<div class="row">
-                            <div class="col-md-4 col-sm-4">`;
-                        if(posts[i].images != '')
-                        {
-                            post +=`<!-- BEGIN CAROUSEL -->            
-                            <div class="front-carousel">
-                                <div class="carousel slide" id="myCarousel${posts[i]._id}">
-                                <!-- Carousel items -->
-                                <div class="carousel-inner">`
-                            var images = posts[i].images.split(',');
-                            console.log(images)
-                            var active = '';
-                            for(var j = 0 ; j < images.length-1 ; j ++)
-                            {
-                                if(j == 0)
-                                {
-                                    active = 'active';
-                                }else {
-                                    active = '';
-                                }
-                                post = post +`<div class="item ${active}">
-                                <img alt="" src="../../uploads/posts/${images[j]}" style="width:300px; height:150px;">
-                                </div>`;
-                            }
-                                                
-
-                            post  = post +`</div>
-                                            <!-- Carousel nav -->
-                                            <a data-slide="prev" href="#myCarousel${posts[i]._id}" class="carousel-control left">
-                                                <i class="fa fa-angle-left"></i>
-                                            </a>
-                                            <a data-slide="next" href="#myCarousel${posts[i]._id}" class="carousel-control right">
-                                                <i class="fa fa-angle-right"></i>
-                                            </a>
-                                            </div>                
+                                        <div class="col-md-4 col-sm-4">
+                                            <!-- BEGIN CAROUSEL -->            
+                                            <div class="front-carousel">
+                                                <div class="carousel slide" id="myCarousel${posts[i]._id}">
+                                                    <!-- Carousel items -->
+                                                    <div class="carousel-inner">
+                                                        <div class="item active">
+                                                        <img alt="" src="../../uploads/posts/${posts[i].image}" style="width:300px; height:150px;">
+                                                        </div>
+                                                    </div>
+                                                </div>                
+                                            </div>
+                                            <!-- END CAROUSEL -->
                                         </div>
-                                        <!-- END CAROUSEL --> `;
-                        }
-                            
-
-                        post += `</div>
                                 <div class="col-md-8 col-sm-8">
-                                <h2><img src="../../uploads/users/${posts[i].poster_id}.jpg" style="width:45px; height:45px;"> ${posts[i].poster}</h2>
+                                <h2><img src="../../uploads/users/${posts[i].poster_id}.png" style="width:45px; height:45px;"> ${posts[i].poster}</h2>
                                 <ul class="blog-info">
                                     <li><i class="fa fa-calendar"></i> ${new Date(posts[i].created_at).getFullYear()}-${new Date(posts[i].created_at).getMonth()+1}-${new Date(posts[i].created_at).getDate()} ${new Date(posts[i].created_at).getHours()}:${new Date(posts[i].created_at).getMinutes()}:${new Date(posts[i].created_at).getSeconds()}</li>
-                                    <li><i class="fa fa-thumbs-up"></i> ${posts[i].like}</li>
-                                    <li><i class="fa fa-thumbs-down"></i> ${posts[i].dislike}</li>
+                                    <li><i class="fa fa-thumbs-up"></i> ${posts[i].shared}</li>
                                     <li><i class="fa fa-tags"></i> ${posts[i].category}</li>
                                 </ul>
                                 <p><h4>${posts[i].title}</h4></p><br>
@@ -247,51 +168,25 @@ $(document).ready(function() {
             for(var i = 0 ; i < 5 ; i ++) {
                 var content = posts[i].content.slice(0, 100);
                 var post = `<div class="row">
-                            <div class="col-md-4 col-sm-4">`;
-                if(posts[i].images != '')
-                {
-                    post += `<!-- BEGIN CAROUSEL -->            
-                    <div class="front-carousel">
-                        <div class="carousel slide" id="myCarousel${posts[i]._id}">
-                        <!-- Carousel items -->
-                        <div class="carousel-inner">`;
-                    var images = posts[i].images.split(',');
-                    console.log(images)
-                    var active = '';
-                    for(var j = 0 ; j < images.length-1 ; j ++)
-                    {
-                        if(j == 0)
-                        {
-                            active = 'active';
-                        }else {
-                            active = '';
-                        }
-                        post = post +`<div class="item ${active}">
-                        <img alt="" src="../../uploads/posts/${images[j]}" style="width:300px; height:150px;">
-                        </div>`;
-                    }
-                                        
-
-                    post  = post +`</div>
-                                    <!-- Carousel nav -->
-                                    <a data-slide="prev" href="#myCarousel${posts[i]._id}" class="carousel-control left">
-                                        <i class="fa fa-angle-left"></i>
-                                    </a>
-                                    <a data-slide="next" href="#myCarousel${posts[i]._id}" class="carousel-control right">
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                    </div>                
+                                <div class="col-md-4 col-sm-4">
+                                    <!-- BEGIN CAROUSEL -->            
+                                    <div class="front-carousel">
+                                        <div class="carousel slide" id="myCarousel${posts[i]._id}">
+                                            <!-- Carousel items -->
+                                            <div class="carousel-inner">
+                                                <div class="item active">
+                                                <img alt="" src="../../uploads/posts/${posts[i].image}" style="width:300px; height:150px;">
+                                                </div>
+                                            </div>
+                                        </div>                
+                                    </div>
+                                    <!-- END CAROUSEL -->
                                 </div>
-                                <!-- END CAROUSEL -->`;
-                }
-                           
-                post +=`</div>
                             <div class="col-md-8 col-sm-8">
-                            <h2><img src="../../uploads/users/${posts[i].poster_id}.jpg" style="width:45px; height:45px;"> ${posts[i].poster}</h2>
+                            <h2><img src="../../uploads/users/${posts[i].poster_id}.png" style="width:45px; height:45px;"> ${posts[i].poster}</h2>
                             <ul class="blog-info">
                                 <li><i class="fa fa-calendar"></i> ${new Date(posts[i].created_at).getFullYear()}-${new Date(posts[i].created_at).getMonth()+1}-${new Date(posts[i].created_at).getDate()} ${new Date(posts[i].created_at).getHours()}:${new Date(posts[i].created_at).getMinutes()}:${new Date(posts[i].created_at).getSeconds()}</li>
-                                <li><i class="fa fa-thumbs-up"></i> ${posts[i].like}</li>
-                                <li><i class="fa fa-thumbs-down"></i> ${posts[i].dislike}</li>
+                                <li><i class="fa fa-thumbs-up"></i> ${posts[i].shared}</li>
                                 <li><i class="fa fa-tags"></i> ${posts[i].category}</li>
                             </ul>
                             <p><h4>${posts[i].title}</h4></p><br>

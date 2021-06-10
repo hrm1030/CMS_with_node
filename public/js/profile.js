@@ -86,7 +86,7 @@ $(document).ready(function() {
                 $('#membership_summary').text(membership);
                 $('#left_membership_summary').text(membership);
                 console.log(data.date)
-                $('#left_date').html(new Date(data.date).getFullYear()+' / ' +new Date(data.date).getMonth()+' / ' +new Date(data.date).getDate()+' ~ ' +(new Date(data.date).getDate()+7))
+                $('#left_date').html(new Date(data.date).getFullYear()+' / ' +(new Date(data.date).getMonth()+1)+' / ' +new Date(data.date).getDate()+' ~ ' +(new Date(data.date).getDate()+7))
             },
             error : function() {
                 toastr['error']('Happening any errrors in membership upgrade');

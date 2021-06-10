@@ -9,10 +9,9 @@ const PostSchema = new mongoose.Schema({
     poster_id : String,
     poster_email : String,
     poster_phone : String,
-    like : Number,
-    dislike : Number,
+    shared : Number,
     created_at : Date,
-    images : String
+    image : String
 });
 
 module.exports = mongoose.model('Post', PostSchema);

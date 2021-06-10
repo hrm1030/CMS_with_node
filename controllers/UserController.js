@@ -67,7 +67,8 @@ exports.membership_update = function(req, res) {
         card_number : req.body.cardnumber,
         expire_month : req.body.month,
         expire_year : req.body.year,
-        cvc : req.body.cvc
+        cvc : req.body.cvc,
+        started_at : date
     }}, (err) => {
         if(err) {
             console.log(err);
