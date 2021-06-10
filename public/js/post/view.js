@@ -91,7 +91,7 @@ $(document).ready(function() {
         success : function(data){
           $('#left_membership').val(data.left_membership);
           $('#shared_span').text(data.shared);
-          window.open(`https://www.facebook.com/sharer.php?picture=${share_img_url}&title=${title}&description=${content}`, 'NewWindow');
+          window.open(`https://www.facebook.com/sharer.php?image=${share_img_url}&title=${title}&description=${content}`, 'NewWindow');
         },
         error : function() {
           toastr['error']('Happening any errors on update membership');
@@ -163,6 +163,11 @@ $(document).ready(function() {
       toastr['info'](`You can't share post. Your left membership is 0.`);
     }
   });
+
+  // $('#btn_instagram').click(function() {
+
+  //   window.open('', 'NewWindow');
+  // })
 
   $('#btn_upload').click(function() {
     if($('#photo').val() == '') {
