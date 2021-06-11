@@ -20,6 +20,7 @@
     "file-type": "^16.5.0",
     "formidable": "^1.2.2",
     "fs": "0.0.1-security",
+    "http": "0.0.1-security",
     "http-errors": "~1.6.3",
     "https": "^1.0.0",
     "jimp": "^0.16.1",
@@ -32,6 +33,7 @@
     "paypal-rest-sdk": "^1.8.1",
     "promise": "^8.1.0",
     "read-chunk": "^3.2.0",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "websocket": "^1.0.34"
   }
 }

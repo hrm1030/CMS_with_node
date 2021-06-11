@@ -355,7 +355,7 @@ exports.signin = function(req, res, next) {
 
 exports.profile = function(req, res, next) {
     console.log(req.session);
-    Post.find({poster_id : req.session.userid}, (err, posts)=> {
+    Post.find({}, (err, posts)=> {
         if(err) {
             console.log(err);
         } else {

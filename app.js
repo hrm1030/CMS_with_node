@@ -7,6 +7,10 @@ var logger = require('morgan');
 var session = require('express-session');
 var port = 8000;
 
+/** Websocket Server */
+var socket = require('./socket');
+/** End Websocket */
+
 /** MongoDB connect */
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/cms', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -53,6 +57,6 @@ app.use(function(err, req, res, next) {
 
 
 app.listen(port, function() {
-  console.log(`This app is runnin on localhost:${port}`);
+  console.log(`This app is running on localhost:${port}`);
 });
 module.exports = app;
