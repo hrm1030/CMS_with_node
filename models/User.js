@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema({
     password : String,
     membership : Number,
     left_membership : Number,
+    ask : Number,
     card_number : String,
     expire_month : Number,
     expire_year : Number,

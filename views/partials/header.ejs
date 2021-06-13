@@ -10,13 +10,22 @@
         <!-- BEGIN NAVIGATION -->
         <div class="header-navigation pull-right font-transform-inherit">
             <ul>
-                    <li><a href="/"><i class="icon-home"></i> Home</a></li>
+                    
                 <% if(!session.token) {%>
                     <!-- <li><a href="/training">Training</a></li> -->
+                    <li><a href="/training"><i class="icon-social-youtube"></i> Training</a></li>
+                    <li><a href="/info"><i class="icon-info"></i> Info</a></li>
                     <li><a href="/auth/login"><i class="icon-login"></i> Sign in</a></li>
                     <li><a href="/auth/register"><i class="icon-user-follow"></i> Register</a></li>
                 <%} else {%>
                     <% if(session.permission == 2) {%>
+                    <li><a href="/support"><i class="icon-notebook"></i> Suport</a></li>
+                    <li><a href="/training"><i class="icon-social-youtube"></i> Training</a></li>
+                    <li><a href="/info"><i class="icon-info"></i> Info</a></li>
+                    <li><a href="/faq"><i class="icon-question"></i> FAQ</a></li>
+                    <li><a href="/ask_for_post"><i class="icon-speech"></i> Ask for a post</a></li>
+                    <li><a href="/recommend_category"><i class="icon-like"></i> Recommend Category</a></li>
+                    <li><a href="/auth/profile/photo_generate"><i class="icon-picture"></i> Create your logo</a></li>
                     <li><a href="/search"><i class="icon-magnifier"></i> Search</a></li>
                     <%}%>
                     <% if(session.permission == 1) {%>
@@ -36,8 +45,7 @@
                             </ul>
                         </li>
                     </li>
-                <%}%>
-                
+                <%}%>                
             </ul>
         </div>
         <!-- END NAVIGATION -->

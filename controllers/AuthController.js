@@ -23,7 +23,7 @@ exports.register = function(req, res, next) {
         if(err) {
             res.status(500).send(err);
         } else {
-            res.render('pages/auth/register', {title : "CMS | Register", industries : industries, errors : [], session : req.session});
+            res.render('pages/auth/register', {title : "CMS | Register", industries : industries, session : req.session});
         }
     })
 }
@@ -88,13 +88,8 @@ exports.signup = function(req, res, next) {
                 if(user != null) {
                     console.log('This email already exists')
                     errors.push('This email already exists.');
-                    Industry.find({}, (err, industries) => {
-                        if(err) {
-                            res.status(500).send(err);
-                        } else {
-                            res.render('pages/auth/register', {title : "CMS | Register", industries : industries, errors : errors, session : req.session});
-                        }
-                    })
+                    res.json({errors : errors});
+                    
                 } else {
                     if(password === confirm_password) {
                         console.log(phone)
@@ -104,11 +99,12 @@ exports.signup = function(req, res, next) {
                         User.create({
                             name : name,
                             surname : surname,
-                            phone : '+'+phone,
+                            phone : phone,
                             email : email,
                             password : hashedPassword,
                             membership : 0,
                             left_membership : 0,
+                            ask : 0,
                             card_number : '',
                             expire_month : 0,
                             expore_year : 0,
@@ -130,20 +126,14 @@ exports.signup = function(req, res, next) {
                                     if (err) {
                                         console.log(err);
                                     }else {
-                                        res.redirect('/auth/login');
+                                        res.json({msg : 'success', errors : [], user_id : user._id});
                                     }
                                 });
                             }
                         })
                     }else {
                         errors.push('Password is not confirmed.');
-                        Industry.find({}, (err, industries) => {
-                            if(err) {
-                                res.status(500).send(err);
-                            } else {
-                                res.render('pages/auth/register', {title : "CMS | Register", industries : industries, errors : errors, session : req.session});
-                            }
-                        })
+                        res.json({errors : errors});
                     }
                     
                 }
@@ -157,10 +147,97 @@ exports.signup = function(req, res, next) {
             if(err) {
                 res.status(500).send(err);
             } else {
-                res.render('pages/auth/register', {title : "CMS | Register", industries : industries, errors : errors, session : req.session});
+                res.json({errors : errors});
             }
         })
     }
+}
+
+exports.membership_save = function(req, res) {
+    if(req.body.membership == 1) {
+        var ask = 0;
+    }
+    if(req.body.membership == 2 || req.body.membership == 3) {
+        var ask = 1;
+    }
+    if(req.body.membership == 4) {
+        var ask = 2;
+    }
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
+    User.findByIdAndUpdate(req.body.user_id, {$set : {
+        membership : req.body.membership,
+        left_membership : req.body.membership,
+        ask : ask,
+        created_at : date,
+        card_number : req.body.cardnumber,
+        expire_month : req.body.month,
+        expire_year : req.body.year,
+        cvc : req.body.cvc,
+        started_at : date
+    }}, (err) => {
+        if(err) {
+            console.log(err);
+        } else {
+            // if(req.body.membership > 1) {
+            //     var split_cardnum = req.body.cardnumber.split(' ');
+            //     var cardnumber = '';
+            //     for(var i = 0 ; i < split_cardnum.length ; i ++) 
+            //     {
+            //         cardnumber = cardnumber + split_cardnum[i];
+            //     }
+                
+            //     var fullname_arr = req.body.fullname.split(' ');
+            //     var firstname = fullname_arr[0];
+            //     var lastname = fullname_arr[1];
+            //     paypal.payment.create({
+            //         "intent": "sale",
+            //         "payer": {
+            //             "payment_method": "credit_card",
+            //             "funding_instruments": [{
+            //                 "credit_card": {
+            //                     "type": "visa",
+            //                     "number": cardnumber,
+            //                     "expire_month": req.body.month,
+            //                     "expire_year": req.body.year,
+            //                     "cvv2": req.body.cvc,
+            //                     "first_name": firstname,
+            //                     "last_name": lastname,
+            //                     "billing_address": {
+            //                         "line1": "52 N Main ST",
+            //                         "city": "Johnstown",
+            //                         "state": "OH",
+            //                         "postal_code": "43210",
+            //                         "country_code": "US"
+            //                     }
+            //                 }
+            //             }]
+            //         },
+            //         "transactions": [{
+            //             "amount": {
+            //                 "total": req.body.ammount,
+            //                 "currency": "EUR",
+            //                 "details": {
+            //                     "subtotal": "5",
+            //                     "tax": "1",
+            //                     "shipping": "1"
+            //                 }
+            //             },
+            //             "description": "This is the payment transaction description."
+            //         }]
+            //     }, function (error, payment) {
+            //         if (error) {
+            //             throw error;
+            //         } else {
+            //             console.log("Create Payment Response");
+            //             console.log(payment);
+            //         }
+            //     });
+            // }
+            
+            res.json({msg : 'success'});
+        }
+    });
 }
 
 exports.signin = function(req, res, next) {
@@ -211,6 +288,7 @@ exports.signin = function(req, res, next) {
                             req.session.cvc = user.cvc;
                             req.session.token = token;
                             req.session.share_cnt = user.shared_cnt;
+                            req.session.ask = user.ask;
                             var today = new Date();
                             var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
                             
@@ -271,7 +349,7 @@ exports.signin = function(req, res, next) {
                                     //     "transactions": [{
                                     //         "amount": {
                                     //             "total": ammount,
-                                    //             "currency": "USD",
+                                    //             "currency": "EUR",
                                     //             "details": {
                                     //                 "subtotal": "5",
                                     //                 "tax": "1",
@@ -306,10 +384,19 @@ exports.signin = function(req, res, next) {
                                 } else {
                                     console.log(currnet_time - created_time+'****************1********************')
                                     if((currnet_time - created_time) > 596793842) {
-                                        console.log(currnet_time - created_time+'****************2********************')
+                                        console.log(currnet_time - created_time+'****************2********************');
+                                        if(req.session.membership == 4) 
+                                        {
+                                            var ask = 2;
+                                        }
+                                        if(req.session.membership == 2 || req.session.membership == 3)
+                                        {
+                                            var ask = 1;
+                                        }
                                         User.findByIdAndUpdate(user._id, {$set : {
                                             left_membership : user.membership,
-                                            created_at : new Date(new Date(user.created_at).getTime()+596793842)
+                                            created_at : new Date(new Date(user.created_at).getTime()+596793842),
+                                            ask : ask
                                         }}, (err) => {
                                             if(err) {
                                                 console.log(err);

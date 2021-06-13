@@ -7,6 +7,7 @@ router.get('/login', auth.login);
 router.get('/register', auth.register);
 router.get('/forgotpassword', auth.forgotpassword);
 router.post('/signup', auth.signup);
+router.post('/membership_save', auth.membership_save);
 router.post('/signin',auth.signin);
 router.get('/profile', auth_middleware.index, auth.profile);
 router.get('/profile/photo_generate', auth_middleware.index, auth.photo_generate);

@@ -11,12 +11,20 @@ var share = require('../controllers/ShareController');
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'CMS', session : req.session });
 });
-
+router.get('/info', user.info);
+router.get('/training', user.training);
+router.get('/support', auth_middleware.index, user.support);
+router.post('/support_save', user.support_save);
 router.post('/membership/update', user.membership_update);
-
+router.get('/faq', auth_middleware.index, user.faq);
+router.post('/get_faqs', user.get_faqs);
+router.get('/recommend_category', auth_middleware.index, user.recommend_category);
+router.post('/recommend_category_save', user.recommend_category_save);
 router.get('/search', auth_middleware.index, user.search);
 router.post('/search/get_category', user.get_category);
 router.post('/search/all', user.search_all);
+router.get('/ask_for_post', auth_middleware.index, user.ask_for_post);
+router.post('/ask_for_post_save', user.ask_for_post_save);
 
 /** Admin Router */
 router.get('/admin', auth_middleware.index, admin_middleware.index, admin.index);

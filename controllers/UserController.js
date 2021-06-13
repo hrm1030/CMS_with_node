@@ -1,6 +1,9 @@
 var Category = require('../models/Category');
 const User = require('../models/User');
 const paypal = require('paypal-rest-sdk');
+const Faq = require('../models/Faq');
+const RecommendCategory = require('../models/RecommendCategory');
+const Support = require('../models/Support');
 
 paypal.configure({
     'mode': 'sandbox', //sandbox or live
@@ -8,14 +11,135 @@ paypal.configure({
     'client_secret': '####yourclientsecret#####'
 });
 
+exports.info = function(req, res) {
+    res.render('pages/user/info', {title : 'CMS | Info', session : req.session});
+}
+
+exports.training = function(req, res) {
+    res.render('pages/user/training', {title : 'CMS | Training', session : req.session});
+}
+
+exports.support = function(req, res) {
+    res.render('pages/user/support', {title : 'CMS | Support', session : req.session});
+}
+
+exports.support_save = function(req, res) {
+    Support.create({
+        name : req.body.name,
+        email : req.body.email,
+        content : req.body.content
+    }, (err) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.redirect('/support');
+        }
+    })
+}
+
 exports.search = function(req, res, next) {
     Category.find({}, (err, categories) => {
         if(err) {
             console.log(err);
         } else {
-            res.render('pages/user/search',{title : 'CMS | Search',session : req.session, categories : categories});
+            res.render('pages/user/search', {title : 'CMS | Search', session : req.session, categories : categories});
         }
     });
+}
+
+exports.faq = function(req, res) {
+    Category.find({}, (err, categories) => {
+        if(err) {
+            console.log(err);
+        } else {
+            
+                Faq.find({}, (err, faqs) => {
+                    if(err) {
+                        console.log(err);
+                    } else {
+                        res.render('pages/user/faq', {title : 'CMS | FAQ', session : req.session, faqs : faqs, categories : categories});
+                    }
+                })
+            
+        }
+    })
+    
+}
+
+exports.get_faqs = function(req, res) {
+    Faq.find({category : req.body.category}, (err, faqs) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.json({ faqs : faqs});
+        }
+    })
+}
+
+exports.recommend_category = function(req, res) {
+    Category.find({}, (err, categories) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.render('pages/user/recommend_category', { title : 'CMS | Recommend Category', session : req.session, categories : categories});
+        }
+    })
+    
+}
+
+exports.recommend_category_save = function(req, res) {
+    RecommendCategory.create({
+        category : req.body.category,
+        email : req.body.email,
+        content : req.body.content
+    }, (err) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.redirect('/recommend_category');
+        }
+    })
+}
+
+exports.ask_for_post = function(req, res) {
+    Category.find({}, (err, categories) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.render('pages/user/ask_for_post', {title : 'CMS | Ask for a post', session : req.session, categories : categories});
+        }
+    });    
+}
+
+exports.ask_for_post_save = function(req, res) {
+    Faq.create({
+        title : req.body.title,
+        category : req.body.category,
+        email : req.body.email,
+        content : req.body.content
+    }, (err) => {
+        if(err) {
+            console.log(err);
+        } else {
+            User.findById(req.session.userid, (err, user) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                    User.findByIdAndUpdate(req.session.userid, { $set : {
+                        ask : user.ask - 1
+                    }}, (err) => {
+                        if(err) {
+                            console.log(err);
+                        } else {
+                            req.session.ask = user.ask - 1;
+                            res.redirect('/faq');
+                        }
+                    });
+                }
+            })
+            
+        }
+    })
 }
 
 exports.search_all = function(req, res) {
@@ -57,12 +181,22 @@ exports.get_category = function(req, res) {
 }
 
 exports.membership_update = function(req, res) {
+    if(req.body.membership == 1) {
+        var ask = 0;
+    }
+    if(req.body.membership == 2 || req.body.membership == 3) {
+        var ask = 1;
+    }
+    if(req.body.membership == 1) {
+        var ask = 2;
+    }
     var old_membership = req.session.membership;
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
     User.findByIdAndUpdate(req.session.userid, {$set : {
         membership : req.body.membership,
         left_membership : req.body.membership,
+        ask : ask,
         created_at : date,
         card_number : req.body.cardnumber,
         expire_month : req.body.month,
@@ -117,7 +251,7 @@ exports.membership_update = function(req, res) {
             //         "transactions": [{
             //             "amount": {
             //                 "total": req.body.ammount,
-            //                 "currency": "USD",
+            //                 "currency": "EUR",
             //                 "details": {
             //                     "subtotal": "5",
             //                     "tax": "1",

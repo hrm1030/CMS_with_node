@@ -448,6 +448,10 @@ body.page-header-fixed {
 .admin-container {
 	margin: 40px 2%;
 }
+
+.user-container {
+	margin: 40px 12%;
+}
 .header .container {
   position: relative;
 }
