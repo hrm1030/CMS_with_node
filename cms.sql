@@ -11,7 +11,7 @@
  Target Server Version : 40404
  File Encoding         : 65001
 
- Date: 10/06/2021 08:09:30
+ Date: 13/06/2021 09:54:16
 */
 
 
@@ -81,7 +81,7 @@ db.getCollection("categories").insert([ {
 } ]);
 db.getCollection("categories").insert([ {
     _id: ObjectId("60b70eccada3ef35742f5bc7"),
-    name: "Footbal",
+    name: "Football",
     __v: NumberInt("0")
 } ]);
 db.getCollection("categories").insert([ {
@@ -132,6 +132,37 @@ db.getCollection("categories").insert([ {
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c0418165536b1c58d2dc2c"),
     name: "Running",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60c3c46531f2421e5c8d5a42"),
+    name: "COVID19",
+    __v: NumberInt("0")
+} ]);
+
+// ----------------------------
+// Collection structure for faqs
+// ----------------------------
+db.getCollection("faqs").drop();
+db.createCollection("faqs");
+
+// ----------------------------
+// Documents of faqs
+// ----------------------------
+db.getCollection("faqs").insert([ {
+    _id: ObjectId("60c603d865122b3aa0cc9de8"),
+    title: "Hello",
+    category: "Article",
+    email: "aleksey@gmail.com",
+    content: "Hello everyone.\r\nNice to meet you.\r\nThanks.",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("faqs").insert([ {
+    _id: ObjectId("60c61a4540023a380cc56541"),
+    title: "Article",
+    category: "Article",
+    email: "aleksey@gmail.com",
+    content: "Report",
     __v: NumberInt("0")
 } ]);
 
@@ -270,8 +301,49 @@ db.getCollection("posts").insert([ {
     "poster_email": "hrm.2021@outlook.com",
     "poster_phone": "+7501458786",
     "created_at": ISODate("2021-06-10T11:20:03.388Z"),
-    shared: NumberInt("0"),
+    shared: NumberInt("9"),
     image: "post_60b63a7ad2a7ea368cf9cf0a_20215104177270.jpg",
+    __v: NumberInt("0")
+} ]);
+
+// ----------------------------
+// Collection structure for recommendcategories
+// ----------------------------
+db.getCollection("recommendcategories").drop();
+db.createCollection("recommendcategories");
+
+// ----------------------------
+// Documents of recommendcategories
+// ----------------------------
+db.getCollection("recommendcategories").insert([ {
+    _id: ObjectId("60c630887e13990e60acac0e"),
+    category: "Novel",
+    email: "aleksey@gmail.com",
+    content: "I like novel.",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("recommendcategories").insert([ {
+    _id: ObjectId("60c630f610611204dc6a0de7"),
+    category: "Article",
+    email: "aleksey@gmail.com",
+    content: "asdfasdf\r\nasdfsadfa\r\nasdfasdfasd\r\n",
+    __v: NumberInt("0")
+} ]);
+
+// ----------------------------
+// Collection structure for supports
+// ----------------------------
+db.getCollection("supports").drop();
+db.createCollection("supports");
+
+// ----------------------------
+// Documents of supports
+// ----------------------------
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60c630697e13990e60acac0d"),
+    name: "Aleksey",
+    email: "aleksey@gmail.com",
+    content: "Hi, this is my report.",
     __v: NumberInt("0")
 } ]);
 
@@ -304,7 +376,7 @@ db.getCollection("users").insert([ {
     cvc: NumberInt("1545"),
     "expire_month": NumberInt("12"),
     "expire_year": NumberInt("2021"),
-    "share_cnt": 0
+    "shared_cnt": 0
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60b7c2a8f2667e2ea4ca3a2e"),
@@ -320,9 +392,10 @@ db.getCollection("users").insert([ {
     __v: NumberInt("0"),
     photo: "60b7c2a8f2667e2ea4ca3a2e.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
-    "left_membership": NumberInt("1"),
+    "left_membership": NumberInt("4"),
     industry: "Insurrance",
-    "share_cnt": 0
+    "shared_cnt": 0,
+    ask: 0
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60ba112fb661092db48de46d"),
@@ -331,16 +404,22 @@ db.getCollection("users").insert([ {
     phone: "+6594545783",
     email: "xiajing@gmail.com",
     password: "$2a$08$A9SGudWdXGpBNRzOfogvfekPaihyv7IzKmA/t3bUy.JWCNl/hkwGu",
-    membership: NumberInt("4"),
-    "left_membership": NumberInt("0"),
-    "created_at": ISODate("2021-06-08T18:00:34.037Z"),
+    membership: NumberInt("3"),
+    "left_membership": NumberInt("2"),
+    "created_at": ISODate("2021-06-10T17:43:49.995Z"),
     permission: NumberInt("2"),
     photo: "60ba112fb661092db48de46d.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
     state: NumberInt("1"),
     __v: NumberInt("0"),
     industry: "Insurrance",
-    "share_cnt": 0
+    "card_number": "4567 9879 7456 4798",
+    cvc: NumberInt("1541"),
+    "expire_month": NumberInt("12"),
+    "expire_year": NumberInt("2021"),
+    "started_at": ISODate("2021-06-10T17:43:49.995Z"),
+    "shared_cnt": 0,
+    ask: 0
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60bdf2f692b1aa3bc89e5154"),
@@ -349,21 +428,22 @@ db.getCollection("users").insert([ {
     phone: "+7542124548",
     email: "aleksey@gmail.com",
     password: "$2a$08$WWWGiAXebueT3eC4OLdAjeUUO1Ox46le7jL8K9nNxB/3HhhBEKXHe",
-    membership: NumberInt("3"),
+    membership: NumberInt("4"),
     "left_membership": NumberInt("0"),
-    "created_at": ISODate("2021-06-10T09:26:03.877Z"),
+    "created_at": ISODate("2021-06-10T17:15:29.927Z"),
     permission: NumberInt("2"),
     photo: "60bdf2f692b1aa3bc89e5154.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
     state: NumberInt("1"),
     industry: "Insurrance",
     __v: NumberInt("0"),
-    "started_at": ISODate("2021-06-10T09:26:03.877Z"),
-    "card_number": "4646 6464 6464 6456",
-    cvc: NumberInt("154"),
+    "started_at": ISODate("2021-06-10T17:15:29.927Z"),
+    "card_number": "4579 8798 7897 6545",
+    cvc: NumberInt("12545"),
     "expire_month": NumberInt("12"),
-    "expire_year": NumberInt("20"),
-    "share_cnt": 0
+    "expire_year": NumberInt("2021"),
+    "shared_cnt": NumberInt("1"),
+    ask: 0
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60c04c4165536b1c58d2dc2d"),
@@ -385,7 +465,8 @@ db.getCollection("users").insert([ {
     state: NumberInt("1"),
     __v: NumberInt("0"),
     "expire_year": NumberInt("2021"),
-    "share_cnt": 0
+    "shared_cnt": 0,
+    ask: 0
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60c04cbd65536b1c58d2dc2e"),
@@ -395,7 +476,7 @@ db.getCollection("users").insert([ {
     email: "sage.2025@outlook.com",
     password: "$2a$08$6TjowHyfMQoBwtBqdiVNZuvj9qv/Pwqyu9dMuj9aNZk3Qhtf6XjfS",
     membership: NumberInt("1"),
-    "left_membership": NumberInt("0"),
+    "left_membership": NumberInt("2"),
     "card_number": "",
     "expire_month": null,
     cvc: null,
@@ -408,7 +489,8 @@ db.getCollection("users").insert([ {
     industry: "Insurrance",
     __v: NumberInt("0"),
     "expire_year": null,
-    "share_cnt": 0
+    "shared_cnt": 0,
+    ask: 0
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60c099f99484a11bb40d0a3d"),
@@ -417,18 +499,65 @@ db.getCollection("users").insert([ {
     phone: "+7545676454",
     email: "oohs0907@outlook.com",
     password: "$2a$08$OVirYLonZKoXPKpfobeKDewWDGfoqJbnvG5dLBE7z3K/KvaZL9bw2",
-    membership: NumberInt("1"),
-    "left_membership": NumberInt("0"),
-    "card_number": "",
-    "expire_month": null,
-    cvc: null,
-    "created_at": ISODate("2021-06-09T10:38:14.921Z"),
-    "started_at": null,
+    membership: NumberInt("4"),
+    "left_membership": NumberInt("4"),
+    "card_number": "7545 4646 5798 7987",
+    "expire_month": NumberInt("12"),
+    cvc: NumberInt("245"),
+    "created_at": ISODate("2021-06-11T06:41:46.204Z"),
+    "started_at": ISODate("2021-06-11T06:41:46.204Z"),
     permission: NumberInt("2"),
     photo: "60c099f99484a11bb40d0a3d.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
     state: NumberInt("0"),
     __v: NumberInt("0"),
-    "expire_year": null,
-    "share_cnt": 0
+    "expire_year": NumberInt("2021"),
+    "shared_cnt": 0,
+    ask: 0
+} ]);
+db.getCollection("users").insert([ {
+    _id: ObjectId("60c457e17333b936a04dd580"),
+    name: "Shao",
+    surname: "Jing",
+    phone: "+6512457487",
+    email: "shaojing@gmail.com",
+    password: "$2a$08$Oz9NWVwr7xTWysvgtXNg9.oO7vXmc5DJsLy9pk5oHqvss0KwJRiWq",
+    membership: NumberInt("4"),
+    "left_membership": NumberInt("4"),
+    "card_number": "1469 8798 7987 9746",
+    "expire_month": NumberInt("12"),
+    cvc: NumberInt("154"),
+    "created_at": ISODate("2021-06-12T06:45:22.242Z"),
+    "started_at": ISODate("2021-06-12T06:45:22.242Z"),
+    permission: NumberInt("2"),
+    photo: "60c457e17333b936a04dd580.png",
+    introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
+    state: NumberInt("0"),
+    "shared_cnt": NumberInt("0"),
+    __v: NumberInt("0"),
+    "expire_year": NumberInt("2021"),
+    ask: 0
+} ]);
+db.getCollection("users").insert([ {
+    _id: ObjectId("60c46300e4d19e2864e6111f"),
+    name: "Koko",
+    surname: "koko",
+    phone: "+7545789879",
+    email: "koko@mail.ru",
+    password: "$2a$08$PX3p6SIbmDN4rTOs1/c89eShIfMs4s0t7KM1U/ltknyu5bs60cpd.",
+    membership: NumberInt("3"),
+    "left_membership": NumberInt("3"),
+    ask: NumberInt("0"),
+    "card_number": "4649 8797 9799 6464",
+    "expire_month": NumberInt("12"),
+    cvc: NumberInt("124"),
+    "created_at": ISODate("2021-06-12T07:32:35.51Z"),
+    "started_at": ISODate("2021-06-12T07:32:35.51Z"),
+    permission: NumberInt("2"),
+    photo: "avatar.png",
+    introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
+    state: NumberInt("0"),
+    "shared_cnt": NumberInt("0"),
+    __v: NumberInt("0"),
+    "expire_year": NumberInt("2021")
 } ]);
