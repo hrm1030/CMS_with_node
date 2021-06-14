@@ -235,8 +235,6 @@ exports.membership_save = function(req, res) {
                     }
                 });
             }
-            
-            
         }
     });
 }
@@ -429,9 +427,6 @@ exports.signin = function(req, res, next) {
                             }
                             
                             /** End */
-                            
-                            
-                            
                         }
                     }
                     
