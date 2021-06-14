@@ -13,6 +13,7 @@ router.get('/', function(req, res, next) {
 });
 router.get('/info', user.info);
 router.get('/training', user.training);
+router.post('/get_training', user.get_training);
 router.get('/support', auth_middleware.index, user.support);
 router.post('/support_save', user.support_save);
 router.post('/membership/update', user.membership_update);
@@ -37,6 +38,11 @@ router.post('/admin/category/delete', admin.category_delete);
 router.post('/admin/industry/save', admin.industry_save);
 router.post('/admin/industry/delete', admin.industry_delete);
 router.post('/admin/post/delete', admin.post_delete);
+
+router.get('/admin/videos', auth_middleware.index, admin_middleware.index, admin.videos);
+router.post('/admin/videoupload', admin.videoupload);
+router.post('/admin/training_save', admin.training_save);
+router.post('/admin/video_delete', admin.video_delete);
 
 router.get('/post/get', post.get);
 router.post('/post/save', post.save);

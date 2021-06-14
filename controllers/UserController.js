@@ -4,11 +4,22 @@ const paypal = require('paypal-rest-sdk');
 const Faq = require('../models/Faq');
 const RecommendCategory = require('../models/RecommendCategory');
 const Support = require('../models/Support');
+const Training = require('../models/Training');
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'maksim.glazunov2020@gmail.com',
+    pass: '112233@Maksim'
+  }
+});
+
 
 paypal.configure({
     'mode': 'sandbox', //sandbox or live
-    'client_id': '####yourclientid######',
-    'client_secret': '####yourclientsecret#####'
+    'client_id': 'ASvsm6W6v21PwKxhFiY961QXZmSbnx_Bs1Wr4WpkpLX1IvMXzV6o0jMMMrrcTkdzqPHAWP8_fIjYbv_k',
+    'client_secret': 'EEzKZEVYoKQgMZOGetOfacBVzqxJaw37mMi7K_8A1GddTqesPNqqLZgviKrKRpGZQ8xT5ej49Pli04bT'
 });
 
 exports.info = function(req, res) {
@@ -16,7 +27,23 @@ exports.info = function(req, res) {
 }
 
 exports.training = function(req, res) {
-    res.render('pages/user/training', {title : 'CMS | Training', session : req.session});
+    Training.find({}, (err, trainings) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.render('pages/user/training', {title : 'CMS | Training', session : req.session, trainings : trainings});
+        }
+    });
+}
+
+exports.get_training = function(req, res) {
+    Training.findById(req.body.training_id, (err, training) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.json({training : training});
+        }
+    })
 }
 
 exports.support = function(req, res) {
@@ -96,7 +123,39 @@ exports.recommend_category_save = function(req, res) {
         if(err) {
             console.log(err);
         } else {
-            res.redirect('/recommend_category');
+            var mailOptions = {
+                from: 'maksim.glazunov2020@gmail.com',
+                to: req.body.email,
+                subject: 'Recommend Category',
+                text: 'Thank you for your recommendation.'
+              };
+              
+            transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                    var mail = `<label>Category : ${req.body.category}</label>
+                                <label>Email : ${req.body.email}</label>
+                                <p>${req.body.content}</p>`;
+                    var mailOptions = {
+                        from: 'maksim.glazunov2020@gmail.com',
+                        to: 'supportsmmb@gmail.com',
+                        subject: 'Recommend Category',
+                        text: mail
+                    };
+                    
+                    transporter.sendMail(mailOptions, function(error, info){
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log('Email sent: ' + info.response);
+                            res.redirect('/recommend_category');
+                        }
+                    });
+                }
+            });
+            
         }
     })
 }
@@ -214,65 +273,62 @@ exports.membership_update = function(req, res) {
             req.session.expire_year = req.body.year;
             req.session.cvc = req.body.cvc;
             console.log(req.body)
-            // if(req.body.membership > 1) {
-            //     var split_cardnum = req.body.cardnumber.split(' ');
-            //     var cardnumber = '';
-            //     for(var i = 0 ; i < split_cardnum.length ; i ++) 
-            //     {
-            //         cardnumber = cardnumber + split_cardnum[i];
-            //     }
+            if(req.body.membership > 1) {
+                var split_cardnum = req.body.cardnumber.split(' ');
+                var cardnumber = '';
+                for(var i = 0 ; i < split_cardnum.length ; i ++) 
+                {
+                    cardnumber = cardnumber + split_cardnum[i];
+                }
                 
-            //     var fullname_arr = req.body.fullname.split(' ');
-            //     var firstname = fullname_arr[0];
-            //     var lastname = fullname_arr[1];
-            //     paypal.payment.create({
-            //         "intent": "sale",
-            //         "payer": {
-            //             "payment_method": "credit_card",
-            //             "funding_instruments": [{
-            //                 "credit_card": {
-            //                     "type": "visa",
-            //                     "number": cardnumber,
-            //                     "expire_month": req.body.month,
-            //                     "expire_year": req.body.year,
-            //                     "cvv2": req.body.cvc,
-            //                     "first_name": firstname,
-            //                     "last_name": lastname,
-            //                     "billing_address": {
-            //                         "line1": "52 N Main ST",
-            //                         "city": "Johnstown",
-            //                         "state": "OH",
-            //                         "postal_code": "43210",
-            //                         "country_code": "US"
-            //                     }
-            //                 }
-            //             }]
-            //         },
-            //         "transactions": [{
-            //             "amount": {
-            //                 "total": req.body.ammount,
-            //                 "currency": "EUR",
-            //                 "details": {
-            //                     "subtotal": "5",
-            //                     "tax": "1",
-            //                     "shipping": "1"
-            //                 }
-            //             },
-            //             "description": "This is the payment transaction description."
-            //         }]
-            //     }, function (error, payment) {
-            //         if (error) {
-            //             throw error;
-            //         } else {
-            //             console.log("Create Payment Response");
-            //             console.log(payment);
-            //         }
-            //     });
-            // }
-            
-            res.json({msg : 'success', old_membership : old_membership, date: date});
-               
-            
+                var fullname_arr = req.body.fullname.split(' ');
+                var firstname = fullname_arr[0];
+                var lastname = fullname_arr[1];
+                paypal.payment.create({
+                    "intent": "sale",
+                    "payer": {
+                        "payment_method": "credit_card",
+                        "funding_instruments": [{
+                            "credit_card": {
+                                "type": "visa",
+                                "number": cardnumber,
+                                "expire_month": req.body.month,
+                                "expire_year": req.body.year,
+                                "cvv2": req.body.cvc,
+                                "first_name": firstname,
+                                "last_name": lastname,
+                                // "billing_address": {
+                                //     "line1": "52 N Main ST",
+                                //     "city": "Johnstown",
+                                //     "state": "OH",
+                                //     "postal_code": "43210",
+                                //     "country_code": "US"
+                                // }
+                            }
+                        }]
+                    },
+                    "transactions": [{
+                        "amount": {
+                            "total": req.body.ammount,
+                            "currency": "EUR",
+                            "details": {
+                                "subtotal": "5",
+                                "tax": "1",
+                                "shipping": "1"
+                            }
+                        },
+                        "description": "This is the payment transaction description."
+                    }]
+                }, function (error, payment) {
+                    if (error) {
+                        throw error;
+                    } else {
+                        console.log("Create Payment Response");
+                        console.log(payment);
+                        res.json({msg : 'success', old_membership : old_membership, date: date});
+                    }
+                });
+            }
         }
     })
 }

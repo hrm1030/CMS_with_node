@@ -2,6 +2,10 @@ var User = require('../models/User');
 var Category = require('../models/Category');
 var Industry = require('../models/Industry');
 var Post = require('../models/Post');
+const Training = require('../models/Training');
+var formidable = require('formidable');
+var fs = require('fs');
+
 exports.index = function(req, res, next) {
     User.find({}, (err, users) => {
         if(err) {
@@ -156,4 +160,58 @@ exports.post_delete = function(req, res) {
             res.json({ msg : 'success'});
         }
     })
+}
+
+exports.training_save = function(req, res) {
+    Training.create({
+        title : req.body.title,
+        description : req.body.description,
+        url : req.body.url
+    }, (err, training) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.json({video : training});
+        }
+    })
+}
+
+exports.videos = function(req, res) {
+    Training.find({}, (err, trainings) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.render('pages/admin/video', {title : 'CMS | Video Management', session : req.session, trainings : trainings});
+        }
+    });    
+}
+
+exports.videoupload = function(req, res) {
+    var form = new formidable.IncomingForm();
+    // console.log(req);
+    form.parse(req);
+    var video_name = 'video_'+req.session.userid+'_'+new Date().getFullYear()+new Date().getMonth()+new Date().getDate() + new Date().getHours()+new Date().getMinutes() + new Date().getSeconds() + new Date().getMilliseconds() +".mp4";
+
+    form.on('fileBegin', function (name, file){
+        console.log(name)
+        file.path = 'public/videos/trainings/' + video_name;
+    });
+
+    form.on('file', function (name, file){
+        console.log('Uploaded ' + video_name);
+    });
+
+    res.json({msg:'success', video_name : video_name});
+}
+
+exports.video_delete = function(req, res) {
+    Training.findByIdAndDelete(req.body.video_id, (err, video) => {
+        if(err) {
+            console.log(err);
+        } else {
+            var urls = video.url.split('/');
+            fs.unlinkSync('public/videos/trainings/'+ urls[4]);
+            res.json({msg : 'delete'});
+        }
+    });
 }
