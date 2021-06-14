@@ -31,8 +31,6 @@ wsServer.on('request', function(request) {
                 console.log(err);
             } else {
                 connection.sendUTF(users.length);
-                i++;
-                console.log(users_arr);
             }
         });
     }
