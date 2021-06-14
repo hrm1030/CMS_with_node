@@ -13,10 +13,6 @@ websocketserver.listen(9000, (err) => {
 const wsServer = new WebSocketServer({
   httpServer: websocketserver
 });
-
-
-const users_arr = [];
-var i = 1;
 wsServer.on('request', function(request) {
   const connection = request.accept(null, request.origin);
 
@@ -30,8 +26,6 @@ wsServer.on('request', function(request) {
             }
         });
     } else {
-        users_arr.push('user'+i);
-        console.log(`User${i} connected.`);
         User.find({}, (err, users) => {
             if(err) {
                 console.log(err);
