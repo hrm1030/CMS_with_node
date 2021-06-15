@@ -174,7 +174,8 @@ exports.membership_save = function(req, res) {
         expire_month : req.body.month,
         expire_year : req.body.year,
         cvc : req.body.cvc,
-        started_at : date
+        started_at : date,
+        state : 1
     }}, (err) => {
         if(err) {
             console.log(err);
@@ -263,113 +264,149 @@ exports.signin = function(req, res, next) {
                         if (!passwordIsValid) {
                             res.render('pages/auth/login', {title : 'CMS | Login', errors : "Please enter your password exactly.", session : req.session})
                         }else {
-                            var token = jwt.sign({ id: user._id }, 'cmssecret', {
-                                expiresIn: 86400 // expires in 24 hours
-                                });
-                                console.log(token+'************** Token****************')
-                            req.session.userid = user._id;
-                            req.session.name = user.name;
-                            req.session.surname = user.surname;
-                            req.session.phone = user.phone;
-                            req.session.email = user.email;
-                            req.session.permission = user.permission;
-                            req.session.membership = user.membership;
-                            req.session.created_at = user.created_at;
-                            req.session.started_at = user.started_at;
-                            req.session.state = user.state;
-                            req.session.photo = user.photo;
-                            req.session.introduction = user.introduction;
-                            req.session.left_membership = user.left_membership;
-                            req.session.industry = user.industry;
-                            req.session.card_number = user.card_number;
-                            req.session.expire_month = user.expire_month;
-                            req.session.expore_year = user.expire_year;
-                            req.session.cvc = user.cvc;
-                            req.session.token = token;
-                            req.session.share_cnt = user.shared_cnt;
-                            req.session.ask = user.ask;
-                            var today = new Date();
-                            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
-                            
-                            var currnet_time = new Date(date).getTime();
-                            var created_time = new Date(user.created_at).getTime();
-                            var started_time = new Date(user.started_at).getTime();
-                            
-                            /** Monthly pay */
-                            if(req.session.membership > 1)
-                            {
-                                console.log(currnet_time - started_time+'******************started_at 1 ********************')
-                                if((currnet_time - started_time) > 2592000000)
+                            if(user.state == 0) {
+                                res.render('pages/auth/login', {title : 'CMS | Login', errors : "You didn't buy membership. Your account is not allowed and deleted.", session : req.session})
+                            } else {
+                                var token = jwt.sign({ id: user._id }, 'cmssecret', {
+                                    expiresIn: 86400 // expires in 24 hours
+                                    });
+                                    console.log(token+'************** Token****************')
+                                req.session.userid = user._id;
+                                req.session.name = user.name;
+                                req.session.surname = user.surname;
+                                req.session.phone = user.phone;
+                                req.session.email = user.email;
+                                req.session.permission = user.permission;
+                                req.session.membership = user.membership;
+                                req.session.created_at = user.created_at;
+                                req.session.started_at = user.started_at;
+                                req.session.state = user.state;
+                                req.session.photo = user.photo;
+                                req.session.introduction = user.introduction;
+                                req.session.left_membership = user.left_membership;
+                                req.session.industry = user.industry;
+                                req.session.card_number = user.card_number;
+                                req.session.expire_month = user.expire_month;
+                                req.session.expore_year = user.expire_year;
+                                req.session.cvc = user.cvc;
+                                req.session.token = token;
+                                req.session.share_cnt = user.shared_cnt;
+                                req.session.ask = user.ask;
+                                var today = new Date();
+                                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+ ' ' + today.getHours()+':'+today.getMinutes()+':'+today.getSeconds()+'.'+today.getMilliseconds();
+                                
+                                var currnet_time = new Date(date).getTime();
+                                var created_time = new Date(user.created_at).getTime();
+                                var started_time = new Date(user.started_at).getTime();
+                                
+                                /** Monthly pay */
+                                if(req.session.membership > 1)
                                 {
-                                    console.log(currnet_time - started_time+'******************started_at 2 ********************')
-                                    if(req.session.membership == 2)
+                                    console.log(currnet_time - started_time+'******************started_at 1 ********************')
+                                    if((currnet_time - started_time) > 2592000000)
                                     {
-                                        amount = 20;
-                                    }
-                                    if(req.session.membership == 3)
-                                    {
-                                        amount = 25;
-                                    }
-                                    if(req.session.membership == 4)
-                                    {
-                                        amount = 30;
-                                    }
-                                    var split_cardnum = req.session.card_number.split(' ');
-                                    var cardnumber = '';
-                                    for(var i = 0 ; i < split_cardnum.length ; i ++) 
-                                    {
-                                        cardnumber = cardnumber + split_cardnum[i];
-                                    }
-                                    
-                                    
-                                    paypal.payment.create({
-                                        "intent": "sale",
-                                        "payer": {
-                                            "payment_method": "credit_card",
-                                            "funding_instruments": [{
-                                                "credit_card": {
-                                                    "type": "visa",
-                                                    "number": cardnumber,
-                                                    "expire_month": req.session.expire_month,
-                                                    "expire_year": req.session.expire_year,
-                                                    "cvv2": req.session.cvc,
-                                                    "first_name": req.session.name,
-                                                    "last_name": req.session.surname,
-                                                    // "billing_address": {
-                                                    //     "line1": "52 N Main ST",
-                                                    //     "city": "Johnstown",
-                                                    //     "state": "OH",
-                                                    //     "postal_code": "43210",
-                                                    //     "country_code": "US"
-                                                    // }
-                                                }
-                                            }]
-                                        },
-                                        "transactions": [{
-                                            "amount": {
-                                                "total": ammount,
-                                                "currency": "EUR",
-                                                "details": {
-                                                    "subtotal": "5",
-                                                    "tax": "1",
-                                                    "shipping": "1"
-                                                }
+                                        console.log(currnet_time - started_time+'******************started_at 2 ********************')
+                                        if(req.session.membership == 2)
+                                        {
+                                            amount = 20;
+                                        }
+                                        if(req.session.membership == 3)
+                                        {
+                                            amount = 25;
+                                        }
+                                        if(req.session.membership == 4)
+                                        {
+                                            amount = 30;
+                                        }
+                                        var split_cardnum = req.session.card_number.split(' ');
+                                        var cardnumber = '';
+                                        for(var i = 0 ; i < split_cardnum.length ; i ++) 
+                                        {
+                                            cardnumber = cardnumber + split_cardnum[i];
+                                        }
+                                        
+                                        
+                                        paypal.payment.create({
+                                            "intent": "sale",
+                                            "payer": {
+                                                "payment_method": "credit_card",
+                                                "funding_instruments": [{
+                                                    "credit_card": {
+                                                        "type": "visa",
+                                                        "number": cardnumber,
+                                                        "expire_month": req.session.expire_month,
+                                                        "expire_year": req.session.expire_year,
+                                                        "cvv2": req.session.cvc,
+                                                        "first_name": req.session.name,
+                                                        "last_name": req.session.surname,
+                                                        // "billing_address": {
+                                                        //     "line1": "52 N Main ST",
+                                                        //     "city": "Johnstown",
+                                                        //     "state": "OH",
+                                                        //     "postal_code": "43210",
+                                                        //     "country_code": "US"
+                                                        // }
+                                                    }
+                                                }]
                                             },
-                                            "description": "This is the payment transaction description."
-                                        }]
-                                    }, function (error, payment) {
-                                        if (error) {
-                                            throw error;
-                                        } else {
-                                            console.log("Create Payment Response");
-                                            console.log(payment);
-                                            User.findByIdAndUpdate(req.session.userid, { $set : {
-                                                started_at : new Date(new Date(user.started_at).getTime()+2592000000)
+                                            "transactions": [{
+                                                "amount": {
+                                                    "total": ammount,
+                                                    "currency": "EUR",
+                                                    "details": {
+                                                        "subtotal": "5",
+                                                        "tax": "1",
+                                                        "shipping": "1"
+                                                    }
+                                                },
+                                                "description": "This is the payment transaction description."
+                                            }]
+                                        }, function (error, payment) {
+                                            if (error) {
+                                                throw error;
+                                            } else {
+                                                console.log("Create Payment Response");
+                                                console.log(payment);
+                                                User.findByIdAndUpdate(req.session.userid, { $set : {
+                                                    started_at : new Date(new Date(user.started_at).getTime()+2592000000)
+                                                }}, (err) => {
+                                                    if(err) {
+                                                        console.log(err); 
+                                                    } else {
+                                                        req.session.started_at = new Date(new Date(user.started_at).getTime()+2592000000);
+                                                        if(user.permission == 1) {
+                                                            res.redirect('/admin');
+                                                        }else {
+                                                            res.redirect('/');
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        });
+                                        
+                                    } else {
+                                        console.log(currnet_time - created_time+'****************1********************')
+                                        if((currnet_time - created_time) > 596793842) {
+                                            console.log(currnet_time - created_time+'****************2********************');
+                                            if(req.session.membership == 4) 
+                                            {
+                                                var ask = 2;
+                                            }
+                                            if(req.session.membership == 2 || req.session.membership == 3)
+                                            {
+                                                var ask = 1;
+                                            }
+                                            User.findByIdAndUpdate(user._id, {$set : {
+                                                left_membership : user.membership,
+                                                created_at : new Date(new Date(user.created_at).getTime()+596793842),
+                                                ask : ask
                                             }}, (err) => {
                                                 if(err) {
-                                                    console.log(err); 
+                                                    console.log(err);
                                                 } else {
-                                                    req.session.started_at = new Date(new Date(user.started_at).getTime()+2592000000);
+                                                    req.session.left_membership = user.membership;
+                                                    req.session.created_at = new Date(new Date(user.created_at).getTime()+596793842);
+                                                    // req.session.save();
                                                     if(user.permission == 1) {
                                                         res.redirect('/admin');
                                                     }else {
@@ -377,52 +414,20 @@ exports.signin = function(req, res, next) {
                                                     }
                                                 }
                                             });
-                                        }
-                                    });
-                                    
-                                } else {
-                                    console.log(currnet_time - created_time+'****************1********************')
-                                    if((currnet_time - created_time) > 596793842) {
-                                        console.log(currnet_time - created_time+'****************2********************');
-                                        if(req.session.membership == 4) 
-                                        {
-                                            var ask = 2;
-                                        }
-                                        if(req.session.membership == 2 || req.session.membership == 3)
-                                        {
-                                            var ask = 1;
-                                        }
-                                        User.findByIdAndUpdate(user._id, {$set : {
-                                            left_membership : user.membership,
-                                            created_at : new Date(new Date(user.created_at).getTime()+596793842),
-                                            ask : ask
-                                        }}, (err) => {
-                                            if(err) {
-                                                console.log(err);
-                                            } else {
-                                                req.session.left_membership = user.membership;
-                                                req.session.created_at = new Date(new Date(user.created_at).getTime()+596793842);
-                                                // req.session.save();
-                                                if(user.permission == 1) {
-                                                    res.redirect('/admin');
-                                                }else {
-                                                    res.redirect('/');
-                                                }
+                                        } else {
+                                            if(user.permission == 1) {
+                                                res.redirect('/admin');
+                                            }else {
+                                                res.redirect('/');
                                             }
-                                        });
-                                    } else {
-                                        if(user.permission == 1) {
-                                            res.redirect('/admin');
-                                        }else {
-                                            res.redirect('/');
                                         }
                                     }
-                                }
-                            } else {
-                                if(user.permission == 1) {
-                                    res.redirect('/admin');
-                                }else {
-                                    res.redirect('/');
+                                } else {
+                                    if(user.permission == 1) {
+                                        res.redirect('/admin');
+                                    }else {
+                                        res.redirect('/');
+                                    }
                                 }
                             }
                             

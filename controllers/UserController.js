@@ -59,7 +59,39 @@ exports.support_save = function(req, res) {
         if(err) {
             console.log(err);
         } else {
-            res.redirect('/support');
+            var mailOptions = {
+                from: 'gendarme1011@outlook.com',
+                to: req.body.email,
+                subject: 'Support',
+                text: 'Thank you for your support.'
+              };
+              
+            transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                    var mail = `<label>Name : ${req.body.name}</label>
+                                <label>Email : ${req.body.email}</label>
+                                <p>${req.body.content}</p>`;
+                    var mailOptions = {
+                        from: req.body.email,
+                        to: 'gendarme1011@outlook.com',
+                        subject: 'Support',
+                        text: mail
+                    };
+                    
+                    transporter.sendMail(mailOptions, function(error, info){
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log('Email sent: ' + info.response);
+                            res.redirect('/support');
+                        }
+                    });
+                }
+            });
+            
         }
     })
 }
@@ -124,7 +156,7 @@ exports.recommend_category_save = function(req, res) {
             console.log(err);
         } else {
             var mailOptions = {
-                from: 'maksim.glazunov2020@gmail.com',
+                from: 'gendarme1011@outlook.com',
                 to: req.body.email,
                 subject: 'Recommend Category',
                 text: 'Thank you for your recommendation.'
@@ -139,8 +171,8 @@ exports.recommend_category_save = function(req, res) {
                                 <label>Email : ${req.body.email}</label>
                                 <p>${req.body.content}</p>`;
                     var mailOptions = {
-                        from: 'maksim.glazunov2020@gmail.com',
-                        to: 'supportsmmb@gmail.com',
+                        from: req.body.email,
+                        to: 'gendarme1011@outlook.com',
                         subject: 'Recommend Category',
                         text: mail
                     };

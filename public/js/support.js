@@ -18,7 +18,7 @@ $(document).ready(function() {
         }
         if(name != '' && email != '' && content != '')
         {
-            $('#askForm').submit();
+            $('#supportForm').submit();
         }
     }
     $('#btn_save').click(function() {
