@@ -79,7 +79,8 @@ exports.list = function(req, res) {
                 if(err) {
                     console.log(err);
                 } else {
-                    res.render('pages/user/post/list', {title : 'CMS | Post List', session : req.session, posts: posts, categories : categories, selected_cat_id : category_id});
+                    var url_arr = req.url.split('/');
+                    res.render('pages/user/post/list', {title : 'CMS | Post List', session : req.session, posts: posts, categories : categories, selected_cat_id : category_id, recent_url : url_arr[1]});
                 }
             })
             
@@ -108,7 +109,8 @@ exports.view = function(req, res) {
                 if(err) {
                     console.log(err);
                 } else {
-                    res.render('pages/user/post/view', {title : 'CMS | Post View', post_id : post_id, session : req.session, categories : categories, post : post});;
+                    var url_arr = req.url.split('/');
+                    res.render('pages/user/post/view', {title : 'CMS | Post View', post_id : post_id, session : req.session, categories : categories, post : post, recent_url : url_arr[1]});;
                 }
             })
             

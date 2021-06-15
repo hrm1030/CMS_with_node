@@ -17,6 +17,21 @@ $(document).ready(function() {
     $('#repassword').change(function(){
         $('#repassword_error').hide();
     });
+
+    $('#name').val('')
+    $('#surname').val('')
+    $('#phone').val('')
+    $('#email').val('')
+    $('#password').val('')
+    $('#repassword').val('')
+    $('input[name=industry]:checked').val(0)
+
+    $('#fullname').val('')
+    $('#card_number').val('')
+    $('#month').val('')
+    $('#year').val('')
+    $('#cvc').val('')
+
     $("#phone").inputmask("+9999999999", {
         placeholder: "",
         clearMaskOnLostFocus: true

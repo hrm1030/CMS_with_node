@@ -1,8 +1,8 @@
 <!-- BEGIN HEADER -->
 <div class="header">
     <div class="container">
-        <a class="site-logo" href="/" style="margin-top: -25px;">
-            <img src="../../images/logo.png" alt="Metronic FrontEnd">
+        <a class="site-logo" href="/" style="margin-top: -28px; padding-bottom: 0px !important;">
+            <img src="../../images/logo.png" alt="Global poster">
         </a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
@@ -13,30 +13,30 @@
                     
                 <% if(!session.token) {%>
                     <!-- <li><a href="/training">Training</a></li> -->
-                    <li><a href="/training"><i class="icon-social-youtube"></i> Training</a></li>
-                    <li><a href="/info"><i class="icon-info"></i> Info</a></li>
-                    <li><a href="/auth/login"><i class="icon-login"></i> Sign in</a></li>
-                    <li><a href="/auth/register"><i class="icon-user-follow"></i> Register</a></li>
+                    <li <%if(recent_url == '/training') {%> class="active" <%}%>><a href="/training"><i class="icon-social-youtube"></i> Training</a></li>
+                    <li <%if(recent_url == '/info') {%> class="active" <%}%>><a href="/info"><i class="icon-info"></i> Info</a></li>
+                    <li <%if(recent_url == '/login') {%> class="active" <%}%>><a href="/auth/login"><i class="icon-login"></i> Sign in</a></li>
+                    <li <%if(recent_url == '/register') {%> class="active" <%}%>><a href="/auth/register"><i class="icon-user-follow"></i> Register</a></li>
                 <%} else {%>
                     <% if(session.permission == 2) {%>
-                    <li><a href="/support"><i class="icon-notebook"></i> Suport</a></li>
-                    <li><a href="/training"><i class="icon-social-youtube"></i> Training</a></li>
-                    <li><a href="/info"><i class="icon-info"></i> Info</a></li>
-                    <li><a href="/faq"><i class="icon-question"></i> FAQ</a></li>
-                    <li><a href="/ask_for_post"><i class="icon-speech"></i> Ask for a post</a></li>
-                    <li><a href="/recommend_category"><i class="icon-like"></i> Recommend Category</a></li>
+                    <li <%if(recent_url == '/support') {%> class="active" <%}%>><a href="/support"><i class="icon-notebook"></i> Suport</a></li>
+                    <li <%if(recent_url == '/training') {%> class="active" <%}%>><a href="/training"><i class="icon-social-youtube"></i> Training</a></li>
+                    <li <%if(recent_url == '/info') {%> class="active" <%}%>><a href="/info"><i class="icon-info"></i> Info</a></li>
+                    <li <%if(recent_url == '/faq') {%> class="active" <%}%>><a href="/faq"><i class="icon-question"></i> FAQ</a></li>
+                    <li <%if(recent_url == '/ask_for_post') {%> class="active" <%}%>><a href="/ask_for_post"><i class="icon-speech"></i> Ask for a post</a></li>
+                    <li <%if(recent_url == '/recommend_category') {%> class="active" <%}%>><a href="/recommend_category"><i class="icon-like"></i> Recommend Category</a></li>
                     <li><a href="/auth/profile/photo_generate"><i class="icon-picture"></i> Create your logo</a></li>
-                    <li><a href="/search"><i class="icon-magnifier"></i> Search</a></li>
+                    <li <%if(recent_url == '/search' || recent_url == 'post') {%> class="active" <%}%>><a href="/search"><i class="icon-magnifier"></i> Search</a></li>
                     <%}%>
                     <% if(session.permission == 1) {%>
-                        <li><a href="/admin/videos"><i class="icon-social-youtube"></i> Video Management</a></li>    
-                    <li><a href="/admin"><i class="icon-equalizer"></i> Admin</a></li>
+                    <li <%if(recent_url == '/admin/videos') {%> class="active" <%}%>><a href="/admin/videos"><i class="icon-social-youtube"></i> Video Management</a></li>    
+                    <li <%if(recent_url == '/admin') {%> class="active" <%}%>><a href="/admin"><i class="icon-equalizer"></i> Admin</a></li>
                     <%}%>
                     
                     <li class="menu-search">
                         <span class="sep"></span>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;" style="margin-top: -10px;">
+                            <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;" style="padding-top: 18px;padding-bottom: 0px !important;">
                                 <img src="../../uploads/users/<%=session.photo%>" style="width: 45px; height: 45px;">
                                 <%= session.name%> <%= session.surname %>
                             </a>

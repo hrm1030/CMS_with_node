@@ -15,4 +15,6 @@ router.get('/profile/photo_generate', auth_middleware.index, auth.photo_generate
 router.post("/profile/save", auth.profile_save);
 
 router.get('/logout', auth.logout);
+
+router.post('/test_pay', auth.testPay);
 module.exports = router;

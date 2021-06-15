@@ -23,7 +23,7 @@ exports.index = function(req, res, next) {
                                 if(err) {
                                     console.log(err)
                                 } else {
-                                    res.render('pages/admin/home', {title : 'CMS | Admin', session : req.session, users : users, categories : categories, industries : industries, posts : posts});
+                                    res.render('pages/admin/home', {title : 'CMS | Admin', session : req.session, users : users, categories : categories, industries : industries, posts : posts, recent_url : req.url});
                                 }
                             });                            
                         }
@@ -181,7 +181,7 @@ exports.videos = function(req, res) {
         if(err) {
             console.log(err);
         } else {
-            res.render('pages/admin/video', {title : 'CMS | Video Management', session : req.session, trainings : trainings});
+            res.render('pages/admin/video', {title : 'CMS | Video Management', session : req.session, trainings : trainings, recent_url : req.url});
         }
     });    
 }

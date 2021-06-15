@@ -9,7 +9,7 @@ var share = require('../controllers/ShareController');
 
 /** User Router */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'CMS', session : req.session });
+  res.render('index', { title: 'CMS', session : req.session, recent_url : req.url });
 });
 router.get('/info', user.info);
 router.get('/training', user.training);

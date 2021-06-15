@@ -18,12 +18,12 @@ var transporter = nodemailer.createTransport({
 
 paypal.configure({
     'mode': 'sandbox', //sandbox or live
-    'client_id': 'ASvsm6W6v21PwKxhFiY961QXZmSbnx_Bs1Wr4WpkpLX1IvMXzV6o0jMMMrrcTkdzqPHAWP8_fIjYbv_k',
-    'client_secret': 'EEzKZEVYoKQgMZOGetOfacBVzqxJaw37mMi7K_8A1GddTqesPNqqLZgviKrKRpGZQ8xT5ej49Pli04bT'
+    'client_id': 'AdFuEmrrBoeXIJdid3ds6lb547QWY1q_7vnMTZPtF0IMfSeWA9g1JcflEhX0rVLldXXlt_oBWcRNc0X6',
+    'client_secret': 'EJRmCsCRoRu220fUIj07d01FwOwZSvUTBmiLCIkWLsKRaW_BasCj21bHmAS7XXyfOXGZC_9gdSOFH1TQ'
 });
 
 exports.info = function(req, res) {
-    res.render('pages/user/info', {title : 'CMS | Info', session : req.session});
+    res.render('pages/user/info', {title : 'CMS | Info', session : req.session, recent_url : req.url});
 }
 
 exports.training = function(req, res) {
@@ -31,7 +31,7 @@ exports.training = function(req, res) {
         if(err) {
             console.log(err);
         } else {
-            res.render('pages/user/training', {title : 'CMS | Training', session : req.session, trainings : trainings});
+            res.render('pages/user/training', {title : 'CMS | Training', session : req.session, trainings : trainings, recent_url : req.url});
         }
     });
 }
@@ -47,7 +47,7 @@ exports.get_training = function(req, res) {
 }
 
 exports.support = function(req, res) {
-    res.render('pages/user/support', {title : 'CMS | Support', session : req.session});
+    res.render('pages/user/support', {title : 'CMS | Support', session : req.session, recent_url : req.url});
 }
 
 exports.support_save = function(req, res) {
@@ -101,7 +101,7 @@ exports.search = function(req, res, next) {
         if(err) {
             console.log(err);
         } else {
-            res.render('pages/user/search', {title : 'CMS | Search', session : req.session, categories : categories});
+            res.render('pages/user/search', {title : 'CMS | Search', session : req.session, categories : categories, recent_url : req.url});
         }
     });
 }
@@ -116,7 +116,7 @@ exports.faq = function(req, res) {
                     if(err) {
                         console.log(err);
                     } else {
-                        res.render('pages/user/faq', {title : 'CMS | FAQ', session : req.session, faqs : faqs, categories : categories});
+                        res.render('pages/user/faq', {title : 'CMS | FAQ', session : req.session, faqs : faqs, categories : categories, recent_url : req.url});
                     }
                 })
             
@@ -140,7 +140,7 @@ exports.recommend_category = function(req, res) {
         if(err) {
             console.log(err);
         } else {
-            res.render('pages/user/recommend_category', { title : 'CMS | Recommend Category', session : req.session, categories : categories});
+            res.render('pages/user/recommend_category', { title : 'CMS | Recommend Category', session : req.session, categories : categories, recent_url : req.url});
         }
     })
     
@@ -197,7 +197,7 @@ exports.ask_for_post = function(req, res) {
         if(err) {
             console.log(err);
         } else {
-            res.render('pages/user/ask_for_post', {title : 'CMS | Ask for a post', session : req.session, categories : categories});
+            res.render('pages/user/ask_for_post', {title : 'CMS | Ask for a post', session : req.session, categories : categories, recent_url : req.url});
         }
     });    
 }
