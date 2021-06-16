@@ -6,7 +6,7 @@ $(document).ready(function() {
         toastr['info'](`You can't ask for a post. Your left membership is 0.`);
     } else {
         if(ask == 0) {
-            toastr[info](`You can't ask for a post. Your package is 0.`);
+            toastr['info'](`You can't ask for a post. Your package is 0.`);
         }
     }
     var ask_save = function() {
