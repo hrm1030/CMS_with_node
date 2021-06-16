@@ -13,6 +13,14 @@
                     
                 <% if(!session.token) {%>
                     <!-- <li><a href="/training">Training</a></li> -->
+                    <li>
+                        <a style="margin-top: -3px!important; padding-bottom: 0px!important;">
+                            <select name="country" id="select_lang" style="min-width: 50px; width: 100px;">
+                                <option value="US">EN</option>
+                                <option value="GR">GR</option>
+                            </select>
+                        </a>
+                    </li>
                     <li <%if(recent_url == '/training') {%> class="active" <%}%>><a href="/training"><i class="icon-social-youtube"></i> Training</a></li>
                     <li <%if(recent_url == '/info') {%> class="active" <%}%>><a href="/info"><i class="icon-info"></i> Info</a></li>
                     <li <%if(recent_url == '/login') {%> class="active" <%}%>><a href="/auth/login"><i class="icon-login"></i> Sign in</a></li>

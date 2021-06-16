@@ -635,6 +635,7 @@ $(document).ready(function() {
                     "zeroRecords": "No matching records found"
                 },
                 "columns": [
+                    { "width": "5%" },
                     { "width": "10%" },
                     { "width": "40%" },
                     { "width": "15%" },
@@ -642,7 +643,7 @@ $(document).ready(function() {
                     { "width": "15%" },
                   ],
                 "order": [
-                    [3, 'desc']
+                    [4, 'desc']
                 ],
                 "lengthMenu": [
                     [5, 15, 20, -1],
@@ -692,8 +693,15 @@ $(document).ready(function() {
                         
                         var content = get_skip_content(data.posts[i].content);
                         console.log(content)
-                        
-                        oTable.fnAddData([data.posts[i].category, content, data.posts[i].poster, new Date(data.posts[i].created_at).getFullYear()+'-'+(new Date(data.posts[i].created_at).getMonth()+1)+'-'+new Date(data.posts[i].created_at).getDate()+' '+new Date(data.posts[i].created_at).getHours()+':'+new Date(data.posts[i].created_at).getMinutes()+':'+new Date(data.posts[i].created_at).getSeconds(), '<button class="btn btn-sm blue btn_view" post_id="'+data.posts[i]._id+'"><i class="icon-eye"></i> View</button>&nbsp;<button class="btn btn-sm btn-danger btn_post_delete" post_id="'+data.posts[i]._id+'"><i class="fa fa-trash"></i></button>']);
+                        if(data.posts[i].language == 'GR')
+                        {
+                            var color = 'text-primary';
+                        }
+                        if(data.posts[i].language == 'EN')
+                        {
+                            var color = 'text-danger';
+                        }
+                        oTable.fnAddData([`<label class="${color} bold">${data.posts[i].language}</label>`, data.posts[i].category, content, data.posts[i].poster, new Date(data.posts[i].created_at).getFullYear()+'-'+(new Date(data.posts[i].created_at).getMonth()+1)+'-'+new Date(data.posts[i].created_at).getDate()+' '+new Date(data.posts[i].created_at).getHours()+':'+new Date(data.posts[i].created_at).getMinutes()+':'+new Date(data.posts[i].created_at).getSeconds(), '<button class="btn btn-sm blue btn_view" post_id="'+data.posts[i]._id+'"><i class="icon-eye"></i> View</button>&nbsp;<button class="btn btn-sm btn-danger btn_post_delete" post_id="'+data.posts[i]._id+'"><i class="fa fa-trash"></i></button>']);
                         
                     }
                 },
@@ -826,13 +834,22 @@ $(document).ready(function() {
                           fullname : $('#fullname').val(),
                           email : $('#email').val(),
                           phone : $('#phone').val(),
-                          file : image
+                          file : image,
+                          language : $('#select_lang').val()
                       },
                       success : function (data) {
                         //   window.location.reload();
+                        if(data.post.language == 'GR')
+                        {
+                            var color = 'text-primary';
+                        }
+                        if(data.post.language == 'EN')
+                        {
+                            var color = 'text-danger';
+                        }
                         var content = get_skip_content(data.post.content);
                         var created_at = new Date(data.post.created_at).getFullYear()+'-'+(new Date(data.post.created_at).getMonth()+1)+'-'+new Date(data.post.created_at).getDate()+' '+new Date(data.post.created_at).getHours()+':'+new Date(data.post.created_at).getMinutes()+':'+new Date(data.post.created_at).getSeconds();
-                        oTable.fnAddData([data.post.category, content, data.post.poster, created_at, '<button class="btn btn-sm blue btn_view" post_id="'+data.post._id+'"><i class="icon-eye"></i> View</button>&nbsp;<button class="btn btn-sm btn-danger btn_post_delete" post_id="'+data.post._id+'"><i class="fa fa-trash"></i></button>'])
+                        oTable.fnAddData([`<label class="${color} bold">${data.post.language}</label>`, data.post.category, content, data.post.poster, created_at, '<button class="btn btn-sm blue btn_view" post_id="'+data.post._id+'"><i class="icon-eye"></i> View</button>&nbsp;<button class="btn btn-sm btn-danger btn_post_delete" post_id="'+data.post._id+'"><i class="fa fa-trash"></i></button>'])
                         toastr['success']('Successfully posted.');
                       },
                       error : function () {

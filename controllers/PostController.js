@@ -21,7 +21,8 @@ exports.save = function(req, res, next) {
         poster_phone : req.body.phone,
         created_at : date,
         shared: 0,
-        image : req.body.file
+        image : req.body.file,
+        language : req.body.language
     }, (err, post) => {
         if(err){
             console.log(err)
@@ -82,7 +83,7 @@ exports.list = function(req, res) {
                     var url_arr = req.url.split('/');
                     res.render('pages/user/post/list', {title : 'CMS | Post List', session : req.session, posts: posts, categories : categories, selected_cat_id : category_id, recent_url : url_arr[1]});
                 }
-            })
+            }).sort({name : 1});
             
         }
     })
@@ -90,7 +91,7 @@ exports.list = function(req, res) {
 
 exports.selected_category = function(req, res) {
     var cat_id = req.body.cat_id;
-    Post.find({category_id : cat_id}, (err, posts) => {
+    Post.find({category_id : cat_id, language : req.session.language}, (err, posts) => {
         if(err) {
             console.log(err);
         } else {
@@ -115,7 +116,7 @@ exports.view = function(req, res) {
             })
             
         }
-    });
+    }).sort({name : 1});
     
 }
 

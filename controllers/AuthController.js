@@ -342,6 +342,7 @@ exports.signin = function (req, res, next) {
                                 req.session.token = token;
                                 req.session.share_cnt = user.shared_cnt;
                                 req.session.ask = user.ask;
+                                req.session.language = req.body.language;
                                 var today = new Date();
                                 var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + '.' + today.getMilliseconds();
 

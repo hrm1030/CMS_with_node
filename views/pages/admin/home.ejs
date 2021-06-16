@@ -200,6 +200,9 @@
                                     <thead>
                                         <tr>
                                             <th>
+                                                <i class="fa fa-flag"></i> Language
+                                            </th>
+                                            <th>
                                                 <i class="fa fa-tags"></i> Category
                                             </th>
                                             <th>
@@ -245,18 +248,25 @@
                                         <input type="hidden" id="email" value="<%= session.email%>">
                                         <input type="hidden" id="phone" value="<%= session.phone%>">
                                         <div class="form-group">
-                                            <label class="col-md-1 control-label">Category</label>
-                                            <div class="col-md-10">
+                                            <label class="col-md-1 control-label">Category <span class="require">*</span></label>
+                                            <div class="col-md-5">
                                                 <select class="select2me input-xlarge" name="category" id="category">
                                                     <% categories.forEach(function(category) {%>
                                                     <option value="<%= category._id%>"><%= category.name%></option>
                                                     <%});%>
                                                 </select>
                                             </div>
+                                            <label class="col-md-1 control-label">Language <span class="require">*</span></label>
+                                            <div class="col-md-5">
+                                                <select name="country" id="select_lang">
+                                                    <option value="GR">GR</option>
+                                                    <option value="US">EN</option>
+                                                </select>
+                                            </div>
                                         </div>
                                         
                                         <div class="form-group">
-                                            <label class="col-md-1 control-label">Title</label>
+                                            <label class="col-md-1 control-label">Title <span class="require">*</span></label>
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" name="title" id="title">
                                             </div>
