@@ -164,16 +164,12 @@ $(document).ready(function() {
     }
   });
 
-  // $('#btn_instagram').click(function() {
-
-  //   window.open('', 'NewWindow');
-  // })
-
   $('#btn_upload').click(function() {
     if($('#photo').val() == '') {
       toastr['error']('Please select logo.');
     } else {
       Metronic.blockUI({
+        boxed : true,
         message: 'Image Processing...'
       });
       var data = new FormData();

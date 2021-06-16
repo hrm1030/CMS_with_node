@@ -81,6 +81,11 @@ $(document).ready(function() {
     });
 
     var payment_confirm = function(membership) {
+        Metronic.blockUI({
+            target: '.modal-body',
+            boxed: true,
+            message: 'Just a second...'
+        });
         $.ajax({
             url : '/auth/membership_save',
             method : 'post',
@@ -91,7 +96,7 @@ $(document).ready(function() {
                 month : $('#month').val(),
                 year : $('#year').val(),
                 cvc : $('#cvc').val(),
-                ammount : $('#payment_ammount').text(),
+                amount : $('#payment_ammount').text(),
                 user_id : $('#btn_confirm').attr('user_id')
             },
             success : function(data) {
@@ -123,6 +128,7 @@ $(document).ready(function() {
                 window.location.assign('/auth/login');
             },
             error : function() {
+                Metronic.unblockUI();
                 toastr['error']('Happening any errrors in membership upgrade');
             }
         })

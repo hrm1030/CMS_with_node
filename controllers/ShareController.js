@@ -30,7 +30,13 @@ exports.image_jimp = function(req, res) {
                 if(err) {
                     console.log(err);
                 } else {
-                    img.resize(600, 450);
+                    var logo_w = logo.bitmap.width;
+                    var logo_h = logo.bitmap.height;
+                    var img_w = img.bitmap.width;
+                    var img_h = img.bitmap.height;
+
+                    logo.resize(150, 150*(logo_h/logo_w));
+                    img.resize(600, 600*(img_h/img_w));
                     img.blit(logo, 0, 360);
                     var current_time = new Date().getFullYear()+''+new Date().getMonth()+''+new Date().getDate()+''+new Date().getHours()+''+new Date().getMinutes()+''+new Date().getSeconds()+''+new Date().getMilliseconds();
                     var share_img = 'share_'+req.session.userid+'_'+current_time+'.png';

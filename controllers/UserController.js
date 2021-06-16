@@ -1,11 +1,19 @@
 var Category = require('../models/Category');
 const User = require('../models/User');
-const paypal = require('paypal-rest-sdk');
+// const paypal = require('paypal-rest-sdk');
 const Faq = require('../models/Faq');
 const RecommendCategory = require('../models/RecommendCategory');
 const Support = require('../models/Support');
 const Training = require('../models/Training');
 var nodemailer = require('nodemailer');
+const braintree = require("braintree");
+
+const gateway = new braintree.BraintreeGateway({
+  environment: braintree.Environment.Sandbox,
+  merchantId: "useYourMerchantId",
+  publicKey: "useYourPublicKey",
+  privateKey: "useYourPrivateKey"
+});
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -13,13 +21,6 @@ var transporter = nodemailer.createTransport({
     user: 'maksim.glazunov2020@gmail.com',
     pass: '112233@Maksim'
   }
-});
-
-
-paypal.configure({
-    'mode': 'sandbox', //sandbox or live
-    'client_id': 'AdFuEmrrBoeXIJdid3ds6lb547QWY1q_7vnMTZPtF0IMfSeWA9g1JcflEhX0rVLldXXlt_oBWcRNc0X6',
-    'client_secret': 'EJRmCsCRoRu220fUIj07d01FwOwZSvUTBmiLCIkWLsKRaW_BasCj21bHmAS7XXyfOXGZC_9gdSOFH1TQ'
 });
 
 exports.info = function(req, res) {
@@ -60,7 +61,7 @@ exports.support_save = function(req, res) {
             console.log(err);
         } else {
             var mailOptions = {
-                from: 'gendarme1011@outlook.com',
+                from: 'unihelpforstudents@gmail.com',
                 to: req.body.email,
                 subject: 'Support',
                 text: 'Thank you for your support.'
@@ -76,7 +77,7 @@ exports.support_save = function(req, res) {
                                 <p>${req.body.content}</p>`;
                     var mailOptions = {
                         from: req.body.email,
-                        to: 'gendarme1011@outlook.com',
+                        to: 'unihelpforstudents@gmail.com',
                         subject: 'Support',
                         text: mail
                     };
@@ -97,13 +98,7 @@ exports.support_save = function(req, res) {
 }
 
 exports.search = function(req, res, next) {
-    Category.find({}, (err, categories) => {
-        if(err) {
-            console.log(err);
-        } else {
-            res.render('pages/user/search', {title : 'CMS | Search', session : req.session, categories : categories, recent_url : req.url});
-        }
-    });
+    res.render('pages/user/search', {title : 'CMS | Search', session : req.session, recent_url : req.url});
 }
 
 exports.faq = function(req, res) {
@@ -156,7 +151,7 @@ exports.recommend_category_save = function(req, res) {
             console.log(err);
         } else {
             var mailOptions = {
-                from: 'gendarme1011@outlook.com',
+                from: 'unihelpforstudents@gmail.com',
                 to: req.body.email,
                 subject: 'Recommend Category',
                 text: 'Thank you for your recommendation.'
@@ -172,7 +167,7 @@ exports.recommend_category_save = function(req, res) {
                                 <p>${req.body.content}</p>`;
                     var mailOptions = {
                         from: req.body.email,
-                        to: 'gendarme1011@outlook.com',
+                        to: 'unihelpforstudents@gmail.com',
                         subject: 'Recommend Category',
                         text: mail
                     };
@@ -240,7 +235,7 @@ exports.search_all = function(req, res) {
         } else {
             res.json({categories : categories});
         }
-    });
+    }).sort({name : 1});
 }
 exports.get_category = function(req, res) {
     if(req.body.keyword == ''){
@@ -312,52 +307,42 @@ exports.membership_update = function(req, res) {
                 {
                     cardnumber = cardnumber + split_cardnum[i];
                 }
-                
-                var fullname_arr = req.body.fullname.split(' ');
-                var firstname = fullname_arr[0];
-                var lastname = fullname_arr[1];
-                paypal.payment.create({
-                    "intent": "sale",
-                    "payer": {
-                        "payment_method": "credit_card",
-                        "funding_instruments": [{
-                            "credit_card": {
-                                "type": "visa",
-                                "number": cardnumber,
-                                "expire_month": req.body.month,
-                                "expire_year": req.body.year,
-                                "cvv2": req.body.cvc,
-                                "first_name": firstname,
-                                "last_name": lastname,
-                                // "billing_address": {
-                                //     "line1": "52 N Main ST",
-                                //     "city": "Johnstown",
-                                //     "state": "OH",
-                                //     "postal_code": "43210",
-                                //     "country_code": "US"
-                                // }
-                            }
-                        }]
-                    },
-                    "transactions": [{
-                        "amount": {
-                            "total": req.body.ammount,
-                            "currency": "EUR",
-                            "details": {
-                                "subtotal": "5",
-                                "tax": "1",
-                                "shipping": "1"
-                            }
-                        },
-                        "description": "This is the payment transaction description."
-                    }]
-                }, function (error, payment) {
-                    if (error) {
-                        throw error;
+
+                gateway.transaction.sale({
+                    amount: `${req.body.amount}`,
+                    paymentMethodNonce: "fake-valid-nonce",
+                    options: {
+                      submitForSettlement: true,
+                      storeInVaultOnSuccess: true
+                    }
+                  }, function (err, result) {
+                    if (err) {
+                      // handle err
+                    }
+                  
+                    if (result.success) {
+                      console.log('Transaction ID: ' + result.transaction.id);
+                      console.log('Customer ID: ' + result.transaction.customer.id);
+                        var customer_id = result.transaction.customer.id;
+                        let creditCardParams = {
+                            customer_id,
+                            number: `${cardnumber}`,
+                            expirationDate: `${req.body.month}/${req.body.year}`,
+                            cvv: `${req.body.cvc}`
+                          };
+                          
+                          gateway.creditCard.create(creditCardParams, (err, response) => {
+                              if(err) {
+                                  console.log(err);
+                              } else {
+                                  console.log(response);
+                                  res.json({ response : response });
+
+                                  res.json({msg : 'success', old_membership : old_membership, date: date});
+                              }
+                          });
                     } else {
-                        console.log("Create Payment Response");
-                        console.log(payment);
-                        res.json({msg : 'success', old_membership : old_membership, date: date});
+                      console.error(result.message);
                     }
                 });
             }

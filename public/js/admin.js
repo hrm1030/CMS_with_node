@@ -118,7 +118,7 @@ $(document).ready(function() {
             function editRow(oTable, nRow) {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-                jqTds[0].innerHTML = '<input type="text" class="form-control input-small category" autofocus style="width:100%!important;" value="' + aData[0] + '">';
+                jqTds[0].innerHTML = '<input type="text" class="form-control input-small category" style="width:100%!important;" value="' + aData[0] + '" autofocus>';
                 jqTds[1].innerHTML = '<a class="edit btn btn-sm blue save" href="" title="save"><i class="fa fa-save"></i></a>&nbsp;<a class="cancel btn btn-sm yellow" href="" title="cancel"><i class="fa fa-times"></i></a>';
             }
     
@@ -151,7 +151,7 @@ $(document).ready(function() {
                                 })
                             }
                             oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-                            oTable.fnUpdate('<a class="edit btn btn-sm green" href="" title="edit"><i class="fa fa-pencil"></i></a>&nbsp;<a class="delete btn btn-sm red" href="" title="delete"><i class="fa fa-trash"></i></a>', nRow, 1, false);
+                            oTable.fnUpdate('<a class="edit btn btn-sm btn-success" href="" title="edit"><i class="fa fa-pencil"></i></a>&nbsp;<a class="delete btn btn-sm btn-danger" href="" title="delete"><i class="fa fa-trash"></i></a>', nRow, 1, false);
                             oTable.fnDraw();
                             
                             $('.edit').removeAttr('disabled');
@@ -172,7 +172,7 @@ $(document).ready(function() {
             function cancelEditRow(oTable, nRow) {
                 var jqInputs = $('input', nRow);
                 oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-                oTable.fnUpdate('<a class="edit btn btn-sm green" href="" title="edit"><i class="fa fa-pencil"></i></a>', nRow, 1, false);
+                oTable.fnUpdate('<a class="edit btn btn-sm btn-success" href="" title="edit"><i class="fa fa-pencil"></i></a>', nRow, 1, false);
                 oTable.fnDraw();
             }
     
@@ -382,7 +382,7 @@ $(document).ready(function() {
             function editRow(oTable, nRow) {
                 var aData = oTable.fnGetData(nRow);
                 var jqTds = $('>td', nRow);
-                jqTds[0].innerHTML = '<input type="text" class="form-control input-small industry" autofocus style="width:100%!important;" value="' + aData[0] + '">';
+                jqTds[0].innerHTML = '<input type="text" class="form-control input-small industry" style="width:100%!important;" value="' + aData[0] + '" autofocus>';
                 jqTds[1].innerHTML = '<a class="industry_edit btn btn-sm blue industry_save" href="" title="save"><i class="fa fa-save"></i></a>&nbsp;<a class="industry_cancel btn btn-sm yellow" href="" title="cancel"><i class="fa fa-times"></i></a>';
             }
     
@@ -407,7 +407,7 @@ $(document).ready(function() {
                                 toastr['success']('Successfully updated.');
                             }
                             oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-                            oTable.fnUpdate('<a class="industry_edit btn btn-sm green" href="" title="edit"><i class="fa fa-pencil"></i></a>&nbsp;<a class="industry_delete btn btn-sm red" href="" title="delete"><i class="fa fa-trash"></i></a>', nRow, 1, false);
+                            oTable.fnUpdate('<a class="industry_edit btn btn-sm btn-success" href="" title="edit"><i class="fa fa-pencil"></i></a>&nbsp;<a class="industry_delete btn btn-sm btn-danger" href="" title="delete"><i class="fa fa-trash"></i></a>', nRow, 1, false);
                             oTable.fnDraw();
                             
                             $('.industry_edit').removeAttr('disabled');
@@ -428,7 +428,7 @@ $(document).ready(function() {
             function cancelEditRow(oTable, nRow) {
                 var jqInputs = $('input', nRow);
                 oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
-                oTable.fnUpdate('<a class="industry_edit btn btn-sm green" href="" title="edit"><i class="fa fa-pencil"></i></a>', nRow, 1, false);
+                oTable.fnUpdate('<a class="industry_edit btn btn-sm btn-success" href="" title="edit"><i class="fa fa-pencil"></i></a>', nRow, 1, false);
                 oTable.fnDraw();
             }
     
@@ -905,7 +905,7 @@ $(document).ready(function() {
                     type: 'POST', // For jQuery < 1.9
                     success: function(data){
                         toastr['success']('Successfully uploaded.');
-                        $('#postForm').append('<input type="hidden" id="file" value="'+data.image_name+'">');
+                        $('#postForm').html('<input type="hidden" id="file" value="'+data.image_name+'">');
                     }
                 });
                 $('#btn_div').show(500);

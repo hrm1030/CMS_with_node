@@ -5,13 +5,14 @@ var jwt = require('jsonwebtoken');
 var path = require('path');
 const multer = require("multer");
 var Post = require('../models/Post');
-const paypal = require('paypal-rest-sdk');
 var fs = require('fs');
+const braintree = require("braintree");
 
-paypal.configure({
-    'mode': 'sandbox', //sandbox or live
-    'client_id': 'ASvsm6W6v21PwKxhFiY961QXZmSbnx_Bs1Wr4WpkpLX1IvMXzV6o0jMMMrrcTkdzqPHAWP8_fIjYbv_k',
-    'client_secret': 'EEzKZEVYoKQgMZOGetOfacBVzqxJaw37mMi7K_8A1GddTqesPNqqLZgviKrKRpGZQ8xT5ej49Pli04bT'
+const gateway = new braintree.BraintreeGateway({
+  environment: braintree.Environment.Sandbox,
+  merchantId: "s4v9y5nc2tyf46xt",
+  publicKey: "5fb9srb4qzz2gdkn",
+  privateKey: "dce4bafe144194b6e8896116c0dcb63b"
 });
 
 exports.login = function (req, res, next) {
@@ -87,10 +88,64 @@ exports.signup = function (req, res, next) {
                 console.log(err);
             } else {
                 if (user != null) {
-                    console.log('This email already exists')
-                    errors.push('This email already exists.');
-                    res.json({ errors: errors });
-
+                    if(user.state != 0)
+                    {
+                        console.log('This email already exists')
+                        errors.push('This email already exists.');
+                        res.json({ errors: errors });
+                    } else {
+                        User.findByIdAndDelete(user._id, (err) => {
+                            if(err) {
+                                console.log(err);
+                            } else {
+                                if (password === confirm_password) {
+                                    console.log(phone)
+                                    var hashedPassword = bcrypt.hashSync(req.body.password, 8);
+                                    var today = new Date();
+                                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + '.' + today.getMilliseconds();
+                                    User.create({
+                                        name: name,
+                                        surname: surname,
+                                        phone: phone,
+                                        email: email,
+                                        password: hashedPassword,
+                                        membership: 0,
+                                        left_membership: 0,
+                                        ask: 0,
+                                        card_number: '',
+                                        expire_month: 0,
+                                        expore_year: 0,
+                                        cvc: 0,
+                                        created_at: today.toUTCString(),
+                                        started_at: '',
+                                        permission: 2,
+                                        photo: 'avatar.png',
+                                        introduction: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.',
+                                        state: 0,
+                                        industry: req.body.industry,
+                                        shared_cnt: 0,
+                                    }, (err, user) => {
+            
+                                        if (err) {
+                                            console.log(err)
+                                        } else {
+                                            fs.copyFile('public/uploads/users/avatar.png', 'public/uploads/users/' + user._id + '.png', (err) => {
+                                                if (err) {
+                                                    console.log(err);
+                                                } else {
+                                                    res.json({ msg: 'success', errors: [], user_id: user._id });
+                                                }
+                                            });
+                                        }
+                                    })
+                                } else {
+                                    errors.push('Password is not confirmed.');
+                                    res.json({ errors: errors });
+                                }
+                            }
+                        })
+                        
+                    }
                 } else {
                     if (password === confirm_password) {
                         console.log(phone)
@@ -189,52 +244,41 @@ exports.membership_save = function (req, res) {
                 for (var i = 0; i < split_cardnum.length; i++) {
                     cardnumber = cardnumber + split_cardnum[i];
                 }
+                gateway.transaction.sale({
+                    amount: `${req.body.amount}`,
+                    paymentMethodNonce: "fake-valid-nonce",
+                    options: {
+                      submitForSettlement: true,
+                      storeInVaultOnSuccess: true
+                    }
+                  }, function (err, result) {
+                    if (err) {
+                      // handle err
+                    }
+                  
+                    if (result.success) {
+                      console.log('Transaction ID: ' + result.transaction.id);
+                      console.log('Customer ID: ' + result.transaction.customer.id);
+                        var customer_id = result.transaction.customer.id;
+                        let creditCardParams = {
+                            customer_id,
+                            number: `${cardnumber}`,
+                            expirationDate: `${req.body.month}/${req.body.year}`,
+                            cvv: `${req.body.cvc}`
+                          };
+                          
+                          gateway.creditCard.create(creditCardParams, (err, response) => {
+                              if(err) {
+                                  console.log(err);
+                              } else {
+                                  console.log(response);
+                                  res.json({ response : response });
 
-                var fullname_arr = req.body.fullname.split(' ');
-                var firstname = fullname_arr[0];
-                var lastname = fullname_arr[1];
-                paypal.payment.create({
-                    "intent": "sale",
-                    "payer": {
-                        "payment_method": "credit_card",
-                        "funding_instruments": [{
-                            "credit_card": {
-                                "type": "visa",
-                                "number": `${cardnumber}`,
-                                "expire_month": req.body.month,
-                                "expire_year": req.body.year,
-                                "cvv2": `${req.body.cvc}`,
-                                "first_name": `${firstname}`,
-                                "last_name": `${lastname}`,
-                                // "billing_address": {
-                                //     "line1": "52 N Main ST",
-                                //     "city": "Johnstown",
-                                //     "state": "OH",
-                                //     "postal_code": "43210",
-                                //     "country_code": "US"
-                                // }
-                            }
-                        }]
-                    },
-                    "transactions": [{
-                        "amount": {
-                            "total": `${req.body.ammount}`,
-                            "currency": "EUR",
-                            "details": {
-                                "subtotal": 5,
-                                "tax": 1,
-                                "shipping": 1
-                            }
-                        },
-                        "description": "This is the payment transaction description."
-                    }]
-                }, function (error, payment) {
-                    if (error) {
-                        throw error;
+                                  res.json({ msg: 'success' });
+                              }
+                          });
                     } else {
-                        console.log("Create Payment Response");
-                        console.log(payment);
-                        res.json({ msg: 'success' });
+                      console.error(result.message);
                     }
                 });
             }
@@ -247,7 +291,7 @@ exports.signin = function (req, res, next) {
     var password = req.body.password;
 
     if (email.length == 0) {
-        res.render('pages/auth/login', { title: 'CMS | Login', errors: "Email is required.", session: req.session })
+        res.render('pages/auth/login', { title: 'CMS | Login', errors: "Email is required.", session: req.session, recent_url : req.url  })
     } else {
         User.findOne({
             email: email
@@ -256,18 +300,25 @@ exports.signin = function (req, res, next) {
                 console.log(err);
             } else {
                 if (user == null) {
-                    res.render('pages/auth/login', { title: 'CMS | Login', errors: "Please enter your email exactly. ", session: req.session })
+                    res.render('pages/auth/login', { title: 'CMS | Login', errors: "Please enter your email exactly. ", session: req.session, recent_url : req.url  })
                 } else {
                     if (password.length == 0) {
-                        res.render('pages/auth/login', { title: 'CMS | Login', errors: "Password is required.", session: req.session })
+                        res.render('pages/auth/login', { title: 'CMS | Login', errors: "Password is required.", session: req.session, recent_url : req.url  })
                     } else {
                         var passwordIsValid = bcrypt.compareSync(password, user.password);
                         console.log(passwordIsValid + '=============')
                         if (!passwordIsValid) {
-                            res.render('pages/auth/login', { title: 'CMS | Login', errors: "Please enter your password exactly.", session: req.session })
+                            res.render('pages/auth/login', { title: 'CMS | Login', errors: "Please enter your password exactly.", session: req.session, recent_url : req.url  })
                         } else {
                             if (user.state == 0) {
-                                res.render('pages/auth/login', { title: 'CMS | Login', errors: "You didn't buy membership. Your account is not allowed and deleted.", session: req.session })
+                                User.findByIdAndDelete(user._id, (err) => {
+                                    if(err) {
+                                        console.log(err);
+                                    } else {
+                                        res.render('pages/auth/login', { title: 'CMS | Login', errors: "You didn't buy membership. Your account is not allowed and deleted.", session: req.session, recent_url : req.url })
+                                    }
+                                })
+                                
                             } else {
                                 var token = jwt.sign({ id: user._id }, 'cmssecret', {
                                     expiresIn: 86400 // expires in 24 hours
@@ -321,67 +372,58 @@ exports.signin = function (req, res, next) {
                                             cardnumber = cardnumber + split_cardnum[i];
                                         }
 
-
-                                        paypal.payment.create({
-                                            "intent": "sale",
-                                            "payer": {
-                                                "payment_method": "credit_card",
-                                                "funding_instruments": [{
-                                                    "credit_card": {
-                                                        "type": "visa",
-                                                        "number": cardnumber,
-                                                        "expire_month": req.session.expire_month,
-                                                        "expire_year": req.session.expire_year,
-                                                        "cvv2": req.session.cvc,
-                                                        "first_name": req.session.name,
-                                                        "last_name": req.session.surname,
-                                                        // "billing_address": {
-                                                        //     "line1": "52 N Main ST",
-                                                        //     "city": "Johnstown",
-                                                        //     "state": "OH",
-                                                        //     "postal_code": "43210",
-                                                        //     "country_code": "US"
-                                                        // }
-                                                    }
-                                                }]
-                                            },
-                                            "transactions": [{
-                                                "amount": {
-                                                    "total": ammount,
-                                                    "currency": "EUR",
-                                                    "details": {
-                                                        "subtotal": "5",
-                                                        "tax": "1",
-                                                        "shipping": "1"
-                                                    }
-                                                },
-                                                "description": "This is the payment transaction description."
-                                            }]
-                                        }, function (error, payment) {
-                                            if (error) {
-                                                throw error;
-                                            } else {
-                                                console.log("Create Payment Response");
-                                                console.log(payment);
-                                                User.findByIdAndUpdate(req.session.userid, {
-                                                    $set: {
-                                                        started_at: new Date(new Date(user.started_at).getTime() + 2592000000)
-                                                    }
-                                                }, (err) => {
-                                                    if (err) {
-                                                        console.log(err);
-                                                    } else {
-                                                        req.session.started_at = new Date(new Date(user.started_at).getTime() + 2592000000);
-                                                        if (user.permission == 1) {
-                                                            res.redirect('/admin');
-                                                        } else {
-                                                            res.redirect('/');
-                                                        }
-                                                    }
-                                                });
+                                        gateway.transaction.sale({
+                                            amount: `${amount}`,
+                                            paymentMethodNonce: "fake-valid-nonce",
+                                            options: {
+                                              submitForSettlement: true,
+                                              storeInVaultOnSuccess: true
                                             }
-                                        });
-
+                                          }, function (err, result) {
+                                            if (err) {
+                                              // handle err
+                                            }
+                                          
+                                            if (result.success) {
+                                              console.log('Transaction ID: ' + result.transaction.id);
+                                              console.log('Customer ID: ' + result.transaction.customer.id);
+                                                var customer_id = result.transaction.customer.id;
+                                                let creditCardParams = {
+                                                    customer_id,
+                                                    number: `${cardnumber}`,
+                                                    expirationDate: `${req.session.expire_month}/${req.session.expire_year}`,
+                                                    cvv: `${req.session.cvc}`
+                                                  };
+                                                  
+                                                  gateway.creditCard.create(creditCardParams, (err, response) => {
+                                                      if(err) {
+                                                          console.log(err);
+                                                      } else {
+                                                        console.log(response);
+                                                        res.json({ response : response });
+                        
+                                                        User.findByIdAndUpdate(req.session.userid, {
+                                                            $set: {
+                                                                started_at: new Date(new Date(user.started_at).getTime() + 2592000000)
+                                                            }
+                                                        }, (err) => {
+                                                            if (err) {
+                                                                console.log(err);
+                                                            } else {
+                                                                req.session.started_at = new Date(new Date(user.started_at).getTime() + 2592000000);
+                                                                if (user.permission == 1) {
+                                                                    res.redirect('/admin');
+                                                                } else {
+                                                                    res.redirect('/');
+                                                                }
+                                                            }
+                                                        });
+                                                      }
+                                                  });
+                                            } else {
+                                              console.error(result.message);
+                                            }
+                                          });
                                     } else {
                                         console.log(currnet_time - created_time + '****************1********************')
                                         if ((currnet_time - created_time) > 596793842) {
@@ -538,52 +580,40 @@ exports.logout = function (req, res, next) {
 }
 
 exports.testPay = function (req, res) {
-    paypal.payment.create({
-        "intent": "sale",
-        "payer": {
-            "payment_method": "credit_card",
-            "funding_instruments": [{
-                "credit_card": {
-                    "type": "visa",
-                    "number": '4032037725788596',
-                    "expire_month": '08',
-                    "expire_year": '2024',
-                    "cvv2": '822',
-                    "first_name": 'maksim',
-                    "last_name": 'glazunov'
-                    // "billing_address": {
-                    //     "line1": "52 N Main ST",
-                    //     "city": "Johnstown",
-                    //     "state": "OH",
-                    //     "postal_code": "43210",
-                    //     "country_code": "US"
-                    // }
-                }
-            }]
-        },
-        "transactions": [{
-            "amount": {
-                "total": "30.11",
-                "currency": "USD",
-                "details": {
-                    "subtotal": "30.00",
-                    "tax": "0.07",
-                    "shipping": "0.03",
-                    "handling_fee": "1.00",
-                    "shipping_discount": "-1.00",
-                    "insurance": "0.01"
-                }
-            },
-            "description": "This is the payment transaction description."
-        }]
-    }, function (error, payment) {
-        if (error) {
-            console.error(error);
-            res.json({ error: error });
-        } else {
-            console.log("Create Payment Response");
-            console.log(payment);
-            res.json({ msg: 'success' });
+    gateway.transaction.sale({
+        amount: "10.00",
+        paymentMethodNonce: "fake-valid-nonce",
+        options: {
+          submitForSettlement: true,
+          storeInVaultOnSuccess: true
         }
-    });
+      }, function (err, result) {
+        if (err) {
+          // handle err
+        }
+      
+        if (result.success) {
+          console.log('Transaction ID: ' + result.transaction.id);
+          console.log('Customer ID: ' + result.transaction.customer.id);
+            var customer_id = result.transaction.customer.id;
+            let creditCardParams = {
+                customer_id,
+                number: '4111111111111111',
+                expirationDate: '07/2024',
+                cvv: '103'
+              };
+              
+              gateway.creditCard.create(creditCardParams, (err, response) => {
+                  if(err) {
+                      console.log(err);
+                  } else {
+                      console.log(response);
+                      res.json({ response : response });
+                  }
+              });
+        } else {
+          console.error(result.message);
+        }
+      });
+    
 }
