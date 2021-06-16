@@ -565,7 +565,7 @@ exports.profile_save = function (req, res) {
 
 
 exports.photo_generate = function (req, res, next) {
-    res.render('pages/user/photo_generate', { layout: false });
+    res.render('pages/user/photo_generate', { layout : false, title : 'CMS | Logo Generate', recent_url : req.url, session : req.session});
 }
 
 
