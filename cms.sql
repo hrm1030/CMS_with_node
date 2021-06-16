@@ -11,7 +11,7 @@
  Target Server Version : 40404
  File Encoding         : 65001
 
- Date: 13/06/2021 09:54:16
+ Date: 16/06/2021 02:01:04
 */
 
 
@@ -137,6 +137,86 @@ db.getCollection("categories").insert([ {
 db.getCollection("categories").insert([ {
     _id: ObjectId("60c3c46531f2421e5c8d5a42"),
     name: "COVID19",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60c8c7c6bab6973b68ef3ada"),
+    name: "Science",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60c8c7d0bab6973b68ef3adb"),
+    name: "Technology",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60c8c7ddbab6973b68ef3adc"),
+    name: "Medical",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60c8c7eabab6973b68ef3add"),
+    name: "IT",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60c8c830bab6973b68ef3ade"),
+    name: "Software",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60c8c98c87e2dc2794257bb3"),
+    name: "Economy",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60c8c9a287e2dc2794257bb4"),
+    name: "Internet",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60c8c9d987e2dc2794257bb5"),
+    name: "Freelancer",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60c8cf0bf7f68b07fc83c5ca"),
+    name: "City",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60c8cf1af7f68b07fc83c5cb"),
+    name: "University",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60c8cf28f7f68b07fc83c5cc"),
+    name: "Hospital",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60c8cf2ff7f68b07fc83c5cd"),
+    name: "Doctor",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60c8d6e53072b30c504f6d78"),
+    name: "Hotel",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60c8d7933072b30c504f6d79"),
+    name: "Education",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60c8d79c3072b30c504f6d7a"),
+    name: "Industry",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60c8d7ae3072b30c504f6d7b"),
+    name: "Global Warming",
     __v: NumberInt("0")
 } ]);
 
@@ -288,7 +368,8 @@ db.getCollection("posts").insert([ {
     "created_at": ISODate("2021-06-10T11:17:35.86Z"),
     shared: NumberInt("0"),
     image: "post_60b63a7ad2a7ea368cf9cf0a_20215104177270.jpg",
-    __v: NumberInt("0")
+    __v: NumberInt("0"),
+    language: "EN"
 } ]);
 db.getCollection("posts").insert([ {
     _id: ObjectId("60c1f563178aa300f439de29"),
@@ -303,6 +384,71 @@ db.getCollection("posts").insert([ {
     "created_at": ISODate("2021-06-10T11:20:03.388Z"),
     shared: NumberInt("9"),
     image: "post_60b63a7ad2a7ea368cf9cf0a_20215104177270.jpg",
+    __v: NumberInt("0"),
+    language: "EN"
+} ]);
+db.getCollection("posts").insert([ {
+    _id: ObjectId("60c8de8567be4d245c67a92f"),
+    "category_id": "60c8c9d987e2dc2794257bb5",
+    category: "Freelancer",
+    title: "Newbie Freelancer",
+    content: "<p>Hello. everybody. Nice to meet you.</p>\n\n<p>I am a freelancer, I am looking for job that is very serious and long term. If I talk about the serious point, it is not small and short time.</p>\n\n<p>I won&#39;t accept the job and I have not time for spending so small one. <img alt=\"smiley\" src=\"http://localhost:8000/assets/global/plugins/ckeditor/plugins/smiley/images/regular_smile.png\" style=\"height:23px; width:23px\" title=\"smiley\" /></p>\n\n<p>As you know, freelancer is very difficult job. But I don&#39;t regret my way.</p>\n\n<p>If you have big and long term job, please contact me.</p>\n\n<p>My email is hrm.2021@outlook.com</p>\n\n<p>Thank you very much. Best regard.</p>\n",
+    poster: "Dmitriy Lotov",
+    "poster_id": "60b63a7ad2a7ea368cf9cf0a",
+    "poster_email": "hrm.2021@outlook.com",
+    "poster_phone": "+7501458786",
+    "created_at": ISODate("2021-06-15T17:08:21.8Z"),
+    shared: NumberInt("0"),
+    image: "post_60b63a7ad2a7ea368cf9cf0a_202151510812504.jpg",
+    __v: NumberInt("0"),
+    language: "EN"
+} ]);
+db.getCollection("posts").insert([ {
+    _id: ObjectId("60c8e80e67be4d245c67a930"),
+    "category_id": "60c8cf28f7f68b07fc83c5cc",
+    category: "Hospital",
+    title: "Healthy care",
+    content: "<p>Hi. My name is Dmitriy Lotov.</p>\n\n<p>I am a doctor. I care and defend people everyday. I love my job and I have big duty called &quot;Healthy care&quot;.</p>\n\n<p>So, I love my job more and more.</p>\n\n<p><img alt=\"heart\" src=\"http://localhost:8000/assets/global/plugins/ckeditor/plugins/smiley/images/heart.png\" style=\"height:23px; width:23px\" title=\"heart\" /><img alt=\"heart\" src=\"http://localhost:8000/assets/global/plugins/ckeditor/plugins/smiley/images/heart.png\" style=\"height:23px; width:23px\" title=\"heart\" /><img alt=\"heart\" src=\"http://localhost:8000/assets/global/plugins/ckeditor/plugins/smiley/images/heart.png\" style=\"height:23px; width:23px\" title=\"heart\" /></p>\n",
+    poster: "Dmitriy Lotov",
+    "poster_id": "60b63a7ad2a7ea368cf9cf0a",
+    "poster_email": "hrm.2021@outlook.com",
+    "poster_phone": "+7501458786",
+    "created_at": ISODate("2021-06-15T17:49:02.615Z"),
+    shared: NumberInt("0"),
+    image: "post_60b63a7ad2a7ea368cf9cf0a_2021515104857832.jpg",
+    __v: NumberInt("0"),
+    language: "EN"
+} ]);
+db.getCollection("posts").insert([ {
+    _id: ObjectId("60c8e8d167be4d245c67a931"),
+    "category_id": "60c3c46531f2421e5c8d5a42",
+    category: "COVID19",
+    title: "Healthy care from COVID19",
+    content: "<p>Hi. My name is Dmitriy Lotov.</p>\n\n<p>I am a doctor. I care and defend people&nbsp;everyday from<span style=\"font-size:16px\"> </span><span style=\"color:#c0392b\"><strong><span style=\"font-size:16px\">COVID19</span> </strong></span>and so on. I love my job and I have big duty called &quot;<strong><span style=\"font-size:16px\"><span style=\"color:#27ae60\">Healthy care</span></span></strong>&quot;.</p>\n\n<p>So, I love my job more and more.</p>\n\n<p><img alt=\"heart\" src=\"http://localhost:8000/assets/global/plugins/ckeditor/plugins/smiley/images/heart.png\" style=\"height:23px; width:23px\" title=\"heart\" /><img alt=\"heart\" src=\"http://localhost:8000/assets/global/plugins/ckeditor/plugins/smiley/images/heart.png\" style=\"height:23px; width:23px\" title=\"heart\" /><img alt=\"heart\" src=\"http://localhost:8000/assets/global/plugins/ckeditor/plugins/smiley/images/heart.png\" style=\"height:23px; width:23px\" title=\"heart\" /></p>\n",
+    poster: "Dmitriy Lotov",
+    "poster_id": "60b63a7ad2a7ea368cf9cf0a",
+    "poster_email": "hrm.2021@outlook.com",
+    "poster_phone": "+7501458786",
+    "created_at": ISODate("2021-06-15T17:52:17.318Z"),
+    shared: NumberInt("0"),
+    image: "post_60b63a7ad2a7ea368cf9cf0a_2021515104857832.jpg",
+    __v: NumberInt("0"),
+    language: "EN"
+} ]);
+db.getCollection("posts").insert([ {
+    _id: ObjectId("60c9b78051867445d863cf1a"),
+    "category_id": "60b70b3857fd8a05e0b830c8",
+    category: "Sport",
+    title: "I love sport.",
+    content: "<p>Hello, everyone. I am from Greece.</p>\n\n<p>I like sport.</p>\n\n<p>Everyone, love <span style=\"color:#1abc9c\"><span style=\"font-size:18px\"><strong>sport</strong></span></span>.</p>\n",
+    poster: "Dmitriy Lotov",
+    "poster_id": "60b63a7ad2a7ea368cf9cf0a",
+    "poster_email": "hrm.2021@outlook.com",
+    "poster_phone": "+7501458786",
+    "created_at": ISODate("2021-06-16T08:34:08.662Z"),
+    shared: NumberInt("0"),
+    image: "post_60b63a7ad2a7ea368cf9cf0a_2021516134020.jpg",
+    language: "GR",
     __v: NumberInt("0")
 } ]);
 
@@ -329,6 +475,76 @@ db.getCollection("recommendcategories").insert([ {
     content: "asdfasdf\r\nasdfsadfa\r\nasdfasdfasd\r\n",
     __v: NumberInt("0")
 } ]);
+db.getCollection("recommendcategories").insert([ {
+    _id: ObjectId("60c6eea49b5f3f43ecf8e955"),
+    category: "Article",
+    email: "hrm.2021@outlook.com",
+    content: "Hello everyone.",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("recommendcategories").insert([ {
+    _id: ObjectId("60c6f01bfd0f8031883c04f7"),
+    category: "Novel",
+    email: "hrm.2021@outlook.com",
+    content: "I love novel.\r\n",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("recommendcategories").insert([ {
+    _id: ObjectId("60c6f04bc39e9b44d0c13425"),
+    category: "Novel",
+    email: "hrm.2021@outlook.com",
+    content: "I love novel.\r\n",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("recommendcategories").insert([ {
+    _id: ObjectId("60c6f0cbc39e9b44d0c13426"),
+    category: "Article",
+    email: "hrm.2021@outlook.com",
+    content: "I love article.",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("recommendcategories").insert([ {
+    _id: ObjectId("60c6f2fcfe71893d44e3e2a5"),
+    category: "Article",
+    email: "hrm.2021@outlook.com",
+    content: "I love article.",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("recommendcategories").insert([ {
+    _id: ObjectId("60c6f322fe71893d44e3e2a6"),
+    category: "Music",
+    email: "hrm.2021@outlook.com",
+    content: "I love music",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("recommendcategories").insert([ {
+    _id: ObjectId("60c6f4987f53204668afe759"),
+    category: "Music",
+    email: "hrm.2021@outlook.com",
+    content: "I love music",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("recommendcategories").insert([ {
+    _id: ObjectId("60c82e46038ff2443ca1dd1a"),
+    category: "Picture",
+    email: "hrm.2021@outlook.com",
+    content: "I love Picture",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("recommendcategories").insert([ {
+    _id: ObjectId("60c840da034cd22c0cdf6993"),
+    category: "Music",
+    email: "hrm.2021@outlook.com",
+    content: "I love music\r\n",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("recommendcategories").insert([ {
+    _id: ObjectId("60c8415b767735198c4f9109"),
+    category: "Music",
+    email: "hrm.2021@outlook.com",
+    content: "I love music\r\n",
+    __v: NumberInt("0")
+} ]);
 
 // ----------------------------
 // Collection structure for supports
@@ -344,6 +560,128 @@ db.getCollection("supports").insert([ {
     name: "Aleksey",
     email: "aleksey@gmail.com",
     content: "Hi, this is my report.",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60c832e6425d633330533da2"),
+    name: "Dmitriy",
+    email: "hrm.2021@outlook.com",
+    content: "support\r\n",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60c8330b04a5f944a818cf28"),
+    name: "Dmitriy",
+    email: "hrm.2021@outlook.com",
+    content: "support\r\n",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60c8331d04a5f944a818cf29"),
+    name: "hkjlhkl",
+    email: "hrm.2021@outlook.com",
+    content: "hlkyjouiyouioi",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60c833421eaa1e4a48c1c246"),
+    name: "hkjlhkl",
+    email: "hrm.2021@outlook.com",
+    content: "hlkyjouiyouioi",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60c8335a1eaa1e4a48c1c247"),
+    name: "Dmitriy",
+    email: "hrm.2021@outlook.com",
+    content: "support\r\n",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60c835841eaa1e4a48c1c248"),
+    name: "Dmitriy",
+    email: "hrm.2021@outlook.com",
+    content: "support\r\n",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60c835c9fe57cb05485b7f2a"),
+    name: "Dmitriy",
+    email: "hrm.2021@outlook.com",
+    content: "support\r\n",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60c835f7fe57cb05485b7f2b"),
+    name: "Dmitriy",
+    email: "hrm.2021@outlook.com",
+    content: "sdfsafasdfa",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60c83bfd9fbe213018039605"),
+    name: "Dmitriy",
+    email: "hrm.2021@outlook.com",
+    content: "Support",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60c83d1197e77d1738283af3"),
+    name: "Dmitriy",
+    email: "hrm.2021@outlook.com",
+    content: "Support",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60c83d3a2762653ffc4d4f9f"),
+    name: "Dmitriy",
+    email: "aleksey@gmail.com",
+    content: "sdfsafsafasfa",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60c840bd034cd22c0cdf6992"),
+    name: "Dmitriy",
+    email: "aleksey@gmail.com",
+    content: "sdfsafsafasfa",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60c8416f767735198c4f910a"),
+    name: "Dmitriy",
+    email: "hrm.2021@outlook.com",
+    content: "support",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("supports").insert([ {
+    _id: ObjectId("60c844b2de928a4ad02e6591"),
+    name: "Dmitriy",
+    email: "hrm.2021@outlook.com",
+    content: "support",
+    __v: NumberInt("0")
+} ]);
+
+// ----------------------------
+// Collection structure for trainings
+// ----------------------------
+db.getCollection("trainings").drop();
+db.createCollection("trainings");
+
+// ----------------------------
+// Documents of trainings
+// ----------------------------
+db.getCollection("trainings").insert([ {
+    _id: ObjectId("60c6ae2109101f0eacff9001"),
+    title: "Begginer",
+    description: "Beginner's training",
+    url: "../../videos/trainings/begginer.mp4",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("trainings").insert([ {
+    _id: ObjectId("60c6b102017761217c04d19e"),
+    title: "Professional",
+    description: "Professional training",
+    url: "../../videos/trainings/professional.mp4",
     __v: NumberInt("0")
 } ]);
 
@@ -429,21 +767,21 @@ db.getCollection("users").insert([ {
     email: "aleksey@gmail.com",
     password: "$2a$08$WWWGiAXebueT3eC4OLdAjeUUO1Ox46le7jL8K9nNxB/3HhhBEKXHe",
     membership: NumberInt("4"),
-    "left_membership": NumberInt("0"),
-    "created_at": ISODate("2021-06-10T17:15:29.927Z"),
+    "left_membership": NumberInt("4"),
+    "created_at": ISODate("2021-06-15T08:15:52.182Z"),
     permission: NumberInt("2"),
     photo: "60bdf2f692b1aa3bc89e5154.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
     state: NumberInt("1"),
     industry: "Insurrance",
     __v: NumberInt("0"),
-    "started_at": ISODate("2021-06-10T17:15:29.927Z"),
-    "card_number": "4579 8798 7897 6545",
-    cvc: NumberInt("12545"),
-    "expire_month": NumberInt("12"),
+    "started_at": ISODate("2021-06-15T08:15:52.182Z"),
+    "card_number": "4111 1111 1111 1111",
+    cvc: NumberInt("145"),
+    "expire_month": NumberInt("6"),
     "expire_year": NumberInt("2021"),
     "shared_cnt": NumberInt("1"),
-    ask: 0
+    ask: null
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60c04c4165536b1c58d2dc2d"),
@@ -509,7 +847,7 @@ db.getCollection("users").insert([ {
     permission: NumberInt("2"),
     photo: "60c099f99484a11bb40d0a3d.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
-    state: NumberInt("0"),
+    state: NumberInt("1"),
     __v: NumberInt("0"),
     "expire_year": NumberInt("2021"),
     "shared_cnt": 0,
@@ -532,7 +870,7 @@ db.getCollection("users").insert([ {
     permission: NumberInt("2"),
     photo: "60c457e17333b936a04dd580.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
-    state: NumberInt("0"),
+    state: NumberInt("1"),
     "shared_cnt": NumberInt("0"),
     __v: NumberInt("0"),
     "expire_year": NumberInt("2021"),
@@ -556,7 +894,100 @@ db.getCollection("users").insert([ {
     permission: NumberInt("2"),
     photo: "avatar.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
-    state: NumberInt("0"),
+    state: NumberInt("1"),
+    "shared_cnt": NumberInt("0"),
+    __v: NumberInt("0"),
+    "expire_year": NumberInt("2021")
+} ]);
+db.getCollection("users").insert([ {
+    _id: ObjectId("60c6f5b258ec3f34d083255f"),
+    name: "Wiliam",
+    surname: "John",
+    phone: "+1549879878",
+    email: "wiliam@outlook.com",
+    password: "$2a$08$SR.x8uLfmX0Dpb3OlaeUS.rUaae5j5JvRXVbuCVP9cXxcRByC.UOW",
+    membership: NumberInt("4"),
+    "left_membership": NumberInt("4"),
+    ask: NumberInt("2"),
+    "card_number": "4567 9797 9456 9879",
+    "expire_month": NumberInt("12"),
+    cvc: NumberInt("124"),
+    "created_at": ISODate("2021-06-14T06:23:09.212Z"),
+    "started_at": ISODate("2021-06-14T06:23:09.212Z"),
+    permission: NumberInt("2"),
+    photo: "avatar.png",
+    introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
+    state: NumberInt("1"),
+    industry: "Bank",
+    "shared_cnt": NumberInt("0"),
+    __v: NumberInt("0"),
+    "expire_year": NumberInt("2021")
+} ]);
+db.getCollection("users").insert([ {
+    _id: ObjectId("60c85f31e33efe300c29f78c"),
+    name: "Maksim",
+    surname: "Olev",
+    phone: "+7548798798",
+    email: "olev@gmail.com",
+    password: "$2a$08$CutgI1xvFRcdhh3Fd0vy9.2wq8dyIlIs.7NpbBcWOudqPnsf.Ana.",
+    membership: NumberInt("4"),
+    "left_membership": NumberInt("4"),
+    ask: NumberInt("2"),
+    "card_number": "4256 7890 5678 4532",
+    "expire_month": NumberInt("12"),
+    cvc: NumberInt("145"),
+    "created_at": ISODate("2021-06-15T08:06:16.354Z"),
+    "started_at": ISODate("2021-06-15T08:06:16.354Z"),
+    permission: NumberInt("2"),
+    photo: "avatar.png",
+    introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
+    state: NumberInt("1"),
+    "shared_cnt": NumberInt("0"),
+    __v: NumberInt("0"),
+    "expire_year": NumberInt("2021")
+} ]);
+db.getCollection("users").insert([ {
+    _id: ObjectId("60c97528b3c37f1724214173"),
+    name: "Galax",
+    surname: "John",
+    phone: "+4457987979",
+    email: "galax@outlook.com",
+    password: "$2a$08$WW7rqU3ScpmgFI1xH7adNOn/x7KsdYaCUz.eOslpo8YggiTTIhDB.",
+    membership: NumberInt("4"),
+    "left_membership": NumberInt("4"),
+    ask: NumberInt("2"),
+    "card_number": "4111 1111 1111 1111",
+    "expire_month": NumberInt("7"),
+    cvc: NumberInt("103"),
+    "created_at": ISODate("2021-06-16T03:51:29.21Z"),
+    "started_at": ISODate("2021-06-16T03:51:29.21Z"),
+    permission: NumberInt("2"),
+    photo: "avatar.png",
+    introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
+    state: NumberInt("1"),
+    "shared_cnt": NumberInt("0"),
+    __v: NumberInt("0"),
+    "expire_year": NumberInt("2024")
+} ]);
+db.getCollection("users").insert([ {
+    _id: ObjectId("60c99640de96cd444c43dd9d"),
+    name: "Hans",
+    surname: "hans",
+    phone: "+4567987979",
+    email: "hans@gmail.com",
+    password: "$2a$08$yDPuLlHHlKPqmr14Ed0S2OS8u4fdPM3J972krMPGhaXSCMQif/eVi",
+    membership: NumberInt("4"),
+    "left_membership": NumberInt("4"),
+    ask: null,
+    "card_number": "4111 1111 1111 1111",
+    "expire_month": NumberInt("11"),
+    cvc: NumberInt("115"),
+    "created_at": ISODate("2021-06-16T06:34:40.969Z"),
+    "started_at": ISODate("2021-06-16T06:34:40.969Z"),
+    permission: NumberInt("2"),
+    photo: "avatar.png",
+    introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
+    state: NumberInt("1"),
     "shared_cnt": NumberInt("0"),
     __v: NumberInt("0"),
     "expire_year": NumberInt("2021")
