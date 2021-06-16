@@ -9,7 +9,7 @@ var fs = require('fs');
 const braintree = require("braintree");
 
 const gateway = new braintree.BraintreeGateway({
-  environment: braintree.Environment.Sandbox,
+  environment: braintree.Environment.Production,
   merchantId: "s4v9y5nc2tyf46xt",
   publicKey: "5fb9srb4qzz2gdkn",
   privateKey: "dce4bafe144194b6e8896116c0dcb63b"
@@ -80,6 +80,7 @@ exports.signup = function (req, res, next) {
 
     if (email == '') {
         errors.push('Email is required.');
+        res.json({errors : errors})
     } else {
         User.findOne({
             email: email
@@ -87,10 +88,10 @@ exports.signup = function (req, res, next) {
             if (err) {
                 console.log(err);
             } else {
-                if (user != null) {
+                if (user) {
                     if(user.state != 0)
                     {
-                        console.log('This email already exists')
+                        console.log('This email already exists');
                         errors.push('This email already exists.');
                         res.json({ errors: errors });
                     } else {
@@ -196,94 +197,90 @@ exports.signup = function (req, res, next) {
             }
         })
     }
-
-    if (errors.length > 0) {
-        console.log(errors);
-        Industry.find({}, (err, industries) => {
-            if (err) {
-                res.status(500).send(err);
-            } else {
-                res.json({ errors: errors });
-            }
-        })
-    }
 }
 
 exports.membership_save = function (req, res) {
-    if (req.body.membership == 1) {
-        var ask = 0;
-    }
-    if (req.body.membership == 2 || req.body.membership == 3) {
-        var ask = 1;
-    }
-    if (req.body.membership == 4) {
-        var ask = 2;
-    }
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + '.' + today.getMilliseconds();
-    User.findByIdAndUpdate(req.body.user_id, {
-        $set: {
-            membership: req.body.membership,
-            left_membership: req.body.membership,
-            ask: ask,
-            created_at: date,
-            card_number: req.body.cardnumber,
-            expire_month: req.body.month,
-            expire_year: req.body.year,
-            cvc: req.body.cvc,
-            started_at: date,
-            state: 1
+    if (req.body.membership > 1) {
+        var split_cardnum = req.body.cardnumber.split(' ');
+        var cardnumber = '';
+        for (var i = 0; i < split_cardnum.length; i++) {
+            cardnumber = cardnumber + split_cardnum[i];
         }
-    }, (err) => {
-        if (err) {
-            console.log(err);
-        } else {
-            if (req.body.membership > 1) {
-                var split_cardnum = req.body.cardnumber.split(' ');
-                var cardnumber = '';
-                for (var i = 0; i < split_cardnum.length; i++) {
-                    cardnumber = cardnumber + split_cardnum[i];
-                }
-                gateway.transaction.sale({
-                    amount: `${req.body.amount}`,
-                    paymentMethodNonce: "fake-valid-nonce",
-                    options: {
-                      submitForSettlement: true,
-                      storeInVaultOnSuccess: true
-                    }
-                  }, function (err, result) {
-                    if (err) {
-                      // handle err
-                    }
-                  
-                    if (result.success) {
-                      console.log('Transaction ID: ' + result.transaction.id);
-                      console.log('Customer ID: ' + result.transaction.customer.id);
-                        var customer_id = result.transaction.customer.id;
-                        let creditCardParams = {
-                            customer_id,
-                            number: `${cardnumber}`,
-                            expirationDate: `${req.body.month}/${req.body.year}`,
-                            cvv: `${req.body.cvc}`
-                          };
-                          
-                          gateway.creditCard.create(creditCardParams, (err, response) => {
-                              if(err) {
-                                  console.log(err);
-                              } else {
-                                  console.log(response);
-                                  res.json({ response : response });
-
-                                  res.json({ msg: 'success' });
-                              }
-                          });
-                    } else {
-                      console.error(result.message);
-                    }
-                });
+        gateway.transaction.sale({
+            amount: `${req.body.amount}`,
+            paymentMethodNonce: "fake-valid-nonce",
+            options: {
+              submitForSettlement: true,
+              storeInVaultOnSuccess: true
             }
-        }
-    });
+          }, function (err, result) {
+            if (err) {
+              // handle err
+            }
+          
+            if (result.success) {
+              console.log('Transaction ID: ' + result.transaction.id);
+              console.log('Customer ID: ' + result.transaction.customer.id);
+                var customer_id = result.transaction.customer.id;
+                let creditCardParams = {
+                    customer_id,
+                    number: `${cardnumber}`,
+                    expirationDate: `${req.body.month}/${req.body.year}`,
+                    cvv: `${req.body.cvc}`
+                  };
+                  
+                  gateway.creditCard.create(creditCardParams, (err, response) => {
+                      if(err) {
+                          console.log(err.message);
+                      } else {
+                          console.log(response);
+                            if(response.success === true)
+                            {
+                                if (req.body.membership == 1) {
+                                    var ask = 0;
+                                }
+                                if (req.body.membership == 2 || req.body.membership == 3) {
+                                    var ask = 1;
+                                }
+                                if (req.body.membership == 4) {
+                                    var ask = 2;
+                                }
+                                var today = new Date();
+                                var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + '.' + today.getMilliseconds();
+                                User.findByIdAndUpdate(req.body.user_id, {
+                                    $set: {
+                                        membership: req.body.membership,
+                                        left_membership: req.body.membership,
+                                        ask: ask,
+                                        created_at: date,
+                                        card_number: req.body.cardnumber,
+                                        expire_month: req.body.month,
+                                        expire_year: req.body.year,
+                                        cvc: req.body.cvc,
+                                        started_at: date,
+                                        state: 1
+                                    }
+                                }, (err) => {
+                                    if (err) {
+                                        console.log(err);
+                                    } else {
+                                        res.json({ msg: 'success' });
+                                    }
+                                });
+                            } else {
+                                var error_msg = response.message;
+                                console.log(error_msg+'**********')
+                                res.json({msg : 'failed', error_msg : error_msg});
+                            }
+                          
+                      }
+                  });
+            } else {
+              console.error(result.message);
+            }
+        });
+    }
+    
 }
 
 exports.signin = function (req, res, next) {
@@ -598,7 +595,7 @@ exports.testPay = function (req, res) {
             var customer_id = result.transaction.customer.id;
             let creditCardParams = {
                 customer_id,
-                number: '4111111111111111',
+                number: '1234567890123456',
                 expirationDate: '07/2024',
                 cvv: '103'
               };
@@ -608,7 +605,7 @@ exports.testPay = function (req, res) {
                       console.log(err);
                   } else {
                       console.log(response);
-                      res.json({ response : response });
+                      res.json({ response : response.message });
                   }
               });
         } else {

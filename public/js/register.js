@@ -100,35 +100,59 @@ $(document).ready(function() {
                 user_id : $('#btn_confirm').attr('user_id')
             },
             success : function(data) {
-                if(membership == 1) {
-                    $('#pricing_free').addClass('pricing-active');
-                    $('#free_head').addClass('pricing-head-active');
-                    $('#btn_free').html('Got');
-                    $('#btn_free').attr('disabled', 'disabled');
+                if(data.msg === 'success')
+                {
+                    if(membership == 1) {
+                        $('#pricing_free').addClass('pricing-active');
+                        $('#free_head').addClass('pricing-head-active');
+                        $('#btn_free').html('Got');
+                        $('#btn_free').attr('disabled', 'disabled');
+                    }
+                    if(membership == 2) {
+                        $('#pricing_common').addClass('pricing-active');
+                        $('#common_head').addClass('pricing-head-active');
+                        $('#btn_common').html('Got');
+                        $('#btn_common').attr('disabled', 'disabled');
+                    }
+                    if(membership == 3) {
+                        $('#pricing_medium').addClass('pricing-active');
+                        $('#medium_head').addClass('pricing-head-active');
+                        $('#btn_medium').html('Got');
+                        $('#btn_medium').attr('disabled', 'disabled');
+                    }
+                    if(membership == 4) {
+                        $('#pricing_advance').addClass('pricing-active');
+                        $('#advance_head').addClass('pricing-head-active');
+                        $('#btn_advance').html('Got');
+                        $('#btn_advance').attr('disabled', 'disabled');
+                    }
+                    $('#confirmModal').modal('hide');
+                    toastr['success']('Successfully got membership.');
+                    window.location.assign('/auth/login');
+                } else {
+                    Metronic.unblockUI('.modal-body');
+                    toastr['error'](data.error_msg);
+                    if(data.error_msg === 'Credit card number is invalid.')
+                    {
+                        $('#card_number').val('');
+                        $('#card_number').addClass('edited');
+                    }
+                    if(data.error_msg === 'CVV must be 4 digits for American Express and 3 digits for other card types.')
+                    {
+                        $('#cvc').val('');
+                        $('#cvc').addClass('edited');
+                    }
+                    if(data.error_msg === 'Expiration date is invalid.')
+                    {
+                        $('#month').val('');
+                        $('#year').val('');
+                        $('#month').addClass('edited');
+                        $('#year').addClass('edited');
+                    }
                 }
-                if(membership == 2) {
-                    $('#pricing_common').addClass('pricing-active');
-                    $('#common_head').addClass('pricing-head-active');
-                    $('#btn_common').html('Got');
-                    $('#btn_common').attr('disabled', 'disabled');
-                }
-                if(membership == 3) {
-                    $('#pricing_medium').addClass('pricing-active');
-                    $('#medium_head').addClass('pricing-head-active');
-                    $('#btn_medium').html('Got');
-                    $('#btn_medium').attr('disabled', 'disabled');
-                }
-                if(membership == 4) {
-                    $('#pricing_advance').addClass('pricing-active');
-                    $('#advance_head').addClass('pricing-head-active');
-                    $('#btn_advance').html('Got');
-                    $('#btn_advance').attr('disabled', 'disabled');
-                }
-                toastr['success']('Successfully got membership.');
-                window.location.assign('/auth/login');
+                
             },
             error : function() {
-                Metronic.unblockUI();
                 toastr['error']('Happening any errrors in membership upgrade');
             }
         })
@@ -188,7 +212,6 @@ $(document).ready(function() {
 
         if(fullname != '' && cardnumber != '' && month != '' && year != '' && cvc != ''){
             payment_confirm(membership);
-            $('#confirmModal').modal('hide');
         }
         
     });
