@@ -6,6 +6,8 @@ const Support = require('../models/Support');
 const Training = require('../models/Training');
 var nodemailer = require('nodemailer');
 const braintree = require("braintree");
+const master_email = '';
+const master_password = '';
 
 const gateway = new braintree.BraintreeGateway({
     environment: braintree.Environment.Production,
@@ -17,8 +19,8 @@ const gateway = new braintree.BraintreeGateway({
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'maksim.glazunov2020@gmail.com',
-    pass: '112233@Maksim'
+    user: `${master_email}`,
+    pass: `${master_password}`
   }
 });
 
@@ -60,7 +62,7 @@ exports.support_save = function(req, res) {
             console.log(err);
         } else {
             var mailOptions = {
-                from: 'unihelpforstudents@gmail.com',
+                from: `${master_email}`,
                 to: req.body.email,
                 subject: 'Support',
                 text: 'Thank you for your support.'
@@ -71,12 +73,12 @@ exports.support_save = function(req, res) {
                     console.log(error);
                 } else {
                     console.log('Email sent: ' + info.response);
-                    var mail = `<label>Name : ${req.body.name}</label>
-                                <label>Email : ${req.body.email}</label>
-                                <p>${req.body.content}</p>`;
+                    var mail = `Name : ${req.body.name}
+                                Email : ${req.body.email}
+                                ${req.body.content}`;
                     var mailOptions = {
                         from: req.body.email,
-                        to: 'unihelpforstudents@gmail.com',
+                        to: `${master_email}`,
                         subject: 'Support',
                         text: mail
                     };
@@ -150,7 +152,7 @@ exports.recommend_category_save = function(req, res) {
             console.log(err);
         } else {
             var mailOptions = {
-                from: 'unihelpforstudents@gmail.com',
+                from: `${master_email}`,
                 to: req.body.email,
                 subject: 'Recommend Category',
                 text: 'Thank you for your recommendation.'
@@ -161,12 +163,12 @@ exports.recommend_category_save = function(req, res) {
                     console.log(error);
                 } else {
                     console.log('Email sent: ' + info.response);
-                    var mail = `<label>Category : ${req.body.category}</label>
-                                <label>Email : ${req.body.email}</label>
-                                <p>${req.body.content}</p>`;
+                    var mail = `Category : ${req.body.category}
+                                Email : ${req.body.email}
+                                ${req.body.content}`;
                     var mailOptions = {
                         from: req.body.email,
-                        to: 'unihelpforstudents@gmail.com',
+                        to: `${master_email}`,
                         subject: 'Recommend Category',
                         text: mail
                     };
