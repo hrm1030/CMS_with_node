@@ -851,6 +851,9 @@ $(document).ready(function() {
                         var created_at = new Date(data.post.created_at).getFullYear()+'-'+(new Date(data.post.created_at).getMonth()+1)+'-'+new Date(data.post.created_at).getDate()+' '+new Date(data.post.created_at).getHours()+':'+new Date(data.post.created_at).getMinutes()+':'+new Date(data.post.created_at).getSeconds();
                         oTable.fnAddData([`<label class="${color} bold">${data.post.language}</label>`, data.post.category, content, data.post.poster, created_at, '<button class="btn btn-sm blue btn_view" post_id="'+data.post._id+'"><i class="icon-eye"></i> View</button>&nbsp;<button class="btn btn-sm btn-danger btn_post_delete" post_id="'+data.post._id+'"><i class="fa fa-trash"></i></button>'])
                         toastr['success']('Successfully posted.');
+                        $('#title').val('');
+                        CKEDITOR.instances.content.setData('');
+                        $('#postForm').html('<input type="hidden" id="file" value="">');
                       },
                       error : function () {
                           toastr['error']('Happening any errors in server.');

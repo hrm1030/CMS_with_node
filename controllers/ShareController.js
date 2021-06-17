@@ -37,7 +37,8 @@ exports.image_jimp = function(req, res) {
 
                     logo.resize(150, 150*(logo_h/logo_w));
                     img.resize(600, 600*(img_h/img_w));
-                    img.blit(logo, 0, 360);
+                    var new_img_h = img.bitmap.height;
+                    img.blit(logo, 0, 0.85*new_img_h);
                     var current_time = new Date().getFullYear()+''+new Date().getMonth()+''+new Date().getDate()+''+new Date().getHours()+''+new Date().getMinutes()+''+new Date().getSeconds()+''+new Date().getMilliseconds();
                     var share_img = 'share_'+req.session.userid+'_'+current_time+'.png';
                     img.write('public/uploads/shares/'+share_img);
