@@ -13,8 +13,19 @@
               <input type="hidden" id="cat_id" value="<%= selected_cat_id%>">
             <div class="row">
               <!-- BEGIN LEFT SIDEBAR -->            
-              <div class="col-md-9 col-sm-9 blog-posts" id="div_posts">
-                    
+              <div class="col-md-9 col-sm-9 blog-posts">
+                <div class="row">
+                  <div id="div_posts" class="col-md-12">
+
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <p id="paginater">
+                    </p>
+                </div>
+                </div>
+                  
               </div>
               <!-- END LEFT SIDEBAR -->
 
@@ -29,7 +40,7 @@
                     <input type="text" class="form-control" id="search" placeholder="Type category">
                   </div>
                 </div><hr>
-                <div class="scroller" style="height: 700px;" data-always-visible="0" data-rail-visible1="0" data-handle-color="#D7DCE2">
+                <div class="scroller" style="height: 1000px;" data-always-visible="0" data-rail-visible1="0" data-handle-color="#D7DCE2">
                     <ul class="nav sidebar-categories margin-bottom-40" id="categories">
                         <% categories.forEach(function(category) {%>
                             <%if(category.id == selected_cat_id) {%>
@@ -45,10 +56,7 @@
               </div>
               <!-- END RIGHT SIDEBAR -->            
             </div>
-            <div class="text-center">
-                <p id="paginater">
-                </p>
-            </div>
+            
           </div>
         </div>
         <!-- END CONTENT -->
