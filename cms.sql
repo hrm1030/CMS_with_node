@@ -11,7 +11,7 @@
  Target Server Version : 40404
  File Encoding         : 65001
 
- Date: 16/06/2021 02:01:04
+ Date: 17/06/2021 08:57:30
 */
 
 
@@ -219,6 +219,11 @@ db.getCollection("categories").insert([ {
     name: "Global Warming",
     __v: NumberInt("0")
 } ]);
+db.getCollection("categories").insert([ {
+    _id: ObjectId("60cae5a2ca0a973d68f9feb4"),
+    name: "Job",
+    __v: NumberInt("0")
+} ]);
 
 // ----------------------------
 // Collection structure for faqs
@@ -243,6 +248,14 @@ db.getCollection("faqs").insert([ {
     category: "Article",
     email: "aleksey@gmail.com",
     content: "Report",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("faqs").insert([ {
+    _id: ObjectId("60c9fa03c740912cdcce3fda"),
+    title: "Hello everybody",
+    category: "Article",
+    email: "hans@gmail.com",
+    content: "Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Cosby sweater eu banh mi, qui irure terry richardson ex squid Aliquip placeat salvia cillum iphone.\r\nDenim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.",
     __v: NumberInt("0")
 } ]);
 
@@ -449,6 +462,102 @@ db.getCollection("posts").insert([ {
     shared: NumberInt("0"),
     image: "post_60b63a7ad2a7ea368cf9cf0a_2021516134020.jpg",
     language: "GR",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("posts").insert([ {
+    _id: ObjectId("60cae4cf40576d324055e898"),
+    "category_id": "60c8c9d987e2dc2794257bb5",
+    category: "Freelancer",
+    title: "API integration",
+    content: "<p>I would like to integrate 2 different apis into 1 database and have that turn into an single api firebase or pub/sub<br />\nThen to test the data pulls and displays in android and ios properly by connecting to database or API whatever is best. Must be something better than or same as themeforest admin api themes . `We are recreating the 3 highly documented apis into 1 single api system to be used for websites/ios/android app and ready to use for apps with tokens, directory, urls of different api php and full system of combining 3 api systems to make it work under 1. api 1 should be the dominant while 2 and 3 are backup incase 1 is missing a team. This is for sports. 2 langauges will be made with this please . With 30 day support and fully functional.<br />\nthanks</p>\n\n<p>We will add admin panel to make sure we can see all data</p>\n\n<p>make sure all data visible all tables in admin</p>\n\n<p>This data needs to be ready for use in ios/android direct connect to db</p>\n\n<p>The point is to take data from 2 apis and have it in our own database then use that data in apps with data coming from 2 apis into databasea/admin panel (logic) and ready to be used properly in ios/android</p>\n",
+    poster: "Dmitriy Lotov",
+    "poster_id": "60b63a7ad2a7ea368cf9cf0a",
+    "poster_email": "hrm.2021@outlook.com",
+    "poster_phone": "+7501458786",
+    "created_at": ISODate("2021-06-17T05:59:43.11Z"),
+    shared: NumberInt("0"),
+    image: "post_60b63a7ad2a7ea368cf9cf0a_2021516225913204.jpg",
+    language: "EN",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("posts").insert([ {
+    _id: ObjectId("60cae595ca0a973d68f9feb3"),
+    "category_id": "60c8c9d987e2dc2794257bb5",
+    category: "Freelancer",
+    title: "Ενσωμάτωση API",
+    content: "<p>&Theta;&alpha; ή&theta;&epsilon;&lambda;&alpha; &nu;&alpha; &epsilon;&nu;&sigma;&omega;&mu;&alpha;&tau;ώ&sigma;&omega; 2 &delta;&iota;&alpha;&phi;&omicron;&rho;&epsilon;&tau;&iota;&kappa;ά Apis &sigma;&epsilon; 1 &beta;ά&sigma;&eta; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&omega;&nu; &kappa;&alpha;&iota; &nu;&alpha; &tau;&omicron; &mu;&epsilon;&tau;&alpha;&tau;&rho;έ&psi;&omega; &sigma;&epsilon; έ&nu;&alpha; api firebase ή pub / sub<br />\n&Sigma;&tau;&eta; &sigma;&upsilon;&nu;έ&chi;&epsilon;&iota;&alpha;, &gamma;&iota;&alpha; &nu;&alpha; &delta;&omicron;&kappa;&iota;&mu;ά&sigma;&epsilon;&tau;&epsilon; &tau;&alpha; &tau;&rho;&alpha;&beta;ή&gamma;&mu;&alpha;&tau;&alpha; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&omega;&nu; &kappa;&alpha;&iota; &tau;&iota;&sigmaf; &omicron;&theta;ό&nu;&epsilon;&sigmaf; &sigma;&tau;&omicron; Android &kappa;&alpha;&iota; &tau;&omicron; iOS &sigma;&omega;&sigma;&tau;ά &sigma;&upsilon;&nu;&delta;έ&omicron;&nu;&tau;&alpha;&sigmaf; &tau;&eta; &beta;ά&sigma;&eta; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&omega;&nu; ή &tau;&omicron; API ό, &tau;&iota; &epsilon;ί&nu;&alpha;&iota; &kappa;&alpha;&lambda;ύ&tau;&epsilon;&rho;&omicron;. &Pi;&rho;έ&pi;&epsilon;&iota; &nu;&alpha; &epsilon;ί&nu;&alpha;&iota; &kappa;ά&tau;&iota; &kappa;&alpha;&lambda;ύ&tau;&epsilon;&rho;&omicron; &alpha;&pi;ό ή &pi;&alpha;&rho;ό&mu;&omicron;&iota;&omicron; &mu;&epsilon; &tau;&alpha; &pi;&iota;&omicron; &delta;&eta;&mu;&omicron;&phi;&iota;&lambda;ή &theta;έ&mu;&alpha;&tau;&alpha; &delta;&iota;&alpha;&chi;&epsilon;&iota;&rho;&iota;&sigma;&tau;ή api. &laquo;&Alpha;&nu;&alpha;&delta;&eta;&mu;&iota;&omicron;&upsilon;&rho;&gamma;&omicron;ύ&mu;&epsilon; &tau;&alpha; 3 ά&kappa;&rho;&omega;&sigmaf; &tau;&epsilon;&kappa;&mu;&eta;&rho;&iota;&omega;&mu;έ&nu;&alpha; Apis &sigma;&epsilon; 1 &mu;&epsilon;&mu;&omicron;&nu;&omega;&mu;έ&nu;&omicron; &sigma;ύ&sigma;&tau;&eta;&mu;&alpha; api &gamma;&iota;&alpha; &chi;&rho;ή&sigma;&eta; &sigma;&epsilon; &iota;&sigma;&tau;ό&tau;&omicron;&pi;&omicron;&upsilon;&sigmaf; / iOS / Android &kappa;&alpha;&iota; έ&tau;&omicron;&iota;&mu;&alpha; &gamma;&iota;&alpha; &chi;&rho;ή&sigma;&eta; &mu;&epsilon; &epsilon;&phi;&alpha;&rho;&mu;&omicron;&gamma;έ&sigmaf; &mu;&epsilon; &delta;&iota;&alpha;&kappa;&rho;&iota;&tau;&iota;&kappa;ά, &kappa;&alpha;&tau;ά&lambda;&omicron;&gamma;&omicron;, &delta;&iota;&epsilon;&upsilon;&theta;ύ&nu;&sigma;&epsilon;&iota;&sigmaf; URL &delta;&iota;&alpha;&phi;&omicron;&rho;&epsilon;&tau;&iota;&kappa;ώ&nu; api php &kappa;&alpha;&iota; &pi;&lambda;ή&rho;&epsilon;&sigmaf; &sigma;ύ&sigma;&tau;&eta;&mu;&alpha; &sigma;&upsilon;&nu;&delta;&upsilon;&alpha;&sigma;&mu;&omicron;ύ 3 &sigma;&upsilon;&sigma;&tau;&eta;&mu;ά&tau;&omega;&nu; api &gamma;&iota;&alpha; &delta;&eta;&mu;&iota;&omicron;&upsilon;&rho;&gamma;ί&alpha; &lambda;&epsilon;&iota;&tau;&omicron;&upsilon;&rho;&gamma;&epsilon;ί &kappa;ά&tau;&omega; &alpha;&pi;ό &tau;&omicron; 1. api 1 &pi;&rho;έ&pi;&epsilon;&iota; &nu;&alpha; &epsilon;ί&nu;&alpha;&iota; &tau;&omicron; &kappa;&upsilon;&rho;ί&alpha;&rho;&chi;&omicron;, &epsilon;&nu;ώ &tau;&alpha; 2 &kappa;&alpha;&iota; 3 &epsilon;ί&nu;&alpha;&iota; &epsilon;&phi;&epsilon;&delta;&rho;&iota;&kappa;ά &sigma;&epsilon; &pi;&epsilon;&rho;ί&pi;&tau;&omega;&sigma;&eta; &pi;&omicron;&upsilon; 1 &lambda;&epsilon;ί&pi;&epsilon;&iota; &mu;&iota;&alpha; &omicron;&mu;ά&delta;&alpha;. &Alpha;&upsilon;&tau;ό &epsilon;ί&nu;&alpha;&iota; &gamma;&iota;&alpha; &sigma;&pi;&omicron;&rho;. 2 &gamma;&lambda;ώ&sigma;&sigma;&epsilon;&sigmaf; &theta;&alpha; &gamma;ί&nu;&omicron;&upsilon;&nu; &mu;&epsilon; &alpha;&upsilon;&tau;ό &pi;&alpha;&rho;&alpha;&kappa;&alpha;&lambda;ώ. &Mu;&epsilon; &upsilon;&pi;&omicron;&sigma;&tau;ή&rho;&iota;&xi;&eta; 30 &eta;&mu;&epsilon;&rho;ώ&nu; &kappa;&alpha;&iota; &pi;&lambda;ή&rho;&omega;&sigmaf; &lambda;&epsilon;&iota;&tau;&omicron;&upsilon;&rho;&gamma;&iota;&kappa;ό.<br />\n&epsilon;&upsilon;&chi;&alpha;&rho;&iota;&sigma;&tau;ώ</p>\n\n<p>&Theta;&alpha; &pi;&rho;&omicron;&sigma;&theta;έ&sigma;&omicron;&upsilon;&mu;&epsilon; &tau;&omicron;&nu; &pi;ί&nu;&alpha;&kappa;&alpha; &delta;&iota;&alpha;&chi;&epsilon;ί&rho;&iota;&sigma;&eta;&sigmaf; &gamma;&iota;&alpha; &nu;&alpha; &beta;&epsilon;&beta;&alpha;&iota;&omega;&theta;&omicron;ύ&mu;&epsilon; ό&tau;&iota; &mu;&pi;&omicron;&rho;&omicron;ύ&mu;&epsilon; &nu;&alpha; &delta;&omicron;ύ&mu;&epsilon; ό&lambda;&alpha; &tau;&alpha; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&alpha;</p>\n\n<p>&beta;&epsilon;&beta;&alpha;&iota;&omega;&theta;&epsilon;ί&tau;&epsilon; ό&tau;&iota; ό&lambda;&alpha; &tau;&alpha; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&alpha; &epsilon;ί&nu;&alpha;&iota; &omicron;&rho;&alpha;&tau;ά &sigma;&epsilon; ό&lambda;&omicron;&upsilon;&sigmaf; &tau;&omicron;&upsilon;&sigmaf; &pi;ί&nu;&alpha;&kappa;&epsilon;&sigmaf; &sigma;&tau;&omicron; &delta;&iota;&alpha;&chi;&epsilon;&iota;&rho;&iota;&sigma;&tau;ή</p>\n\n<p>&Alpha;&upsilon;&tau;ά &tau;&alpha; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&alpha; &pi;&rho;έ&pi;&epsilon;&iota; &nu;&alpha; &epsilon;ί&nu;&alpha;&iota; έ&tau;&omicron;&iota;&mu;&alpha; &gamma;&iota;&alpha; &chi;&rho;ή&sigma;&eta; &sigma;&tau;&omicron; ios / android &alpha;&pi;&epsilon;&upsilon;&theta;&epsilon;ί&alpha;&sigmaf; &sigma;ύ&nu;&delta;&epsilon;&sigma;&eta; &sigma;&tau;&omicron; db</p>\n\n<p>&Tau;&omicron; &theta;έ&mu;&alpha; &epsilon;ί&nu;&alpha;&iota; &nu;&alpha; &pi;ά&rho;&omicron;&upsilon;&mu;&epsilon; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&alpha; &alpha;&pi;ό 2 Apis &kappa;&alpha;&iota; &nu;&alpha; &tau;&alpha; έ&chi;&omicron;&upsilon;&mu;&epsilon; &sigma;&tau;&eta; &delta;&iota;&kappa;ή &mu;&alpha;&sigmaf; &beta;ά&sigma;&eta; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&omega;&nu; &kappa;&alpha;&iota; &sigma;&tau;&eta; &sigma;&upsilon;&nu;έ&chi;&epsilon;&iota;&alpha; &nu;&alpha; &chi;&rho;&eta;&sigma;&iota;&mu;&omicron;&pi;&omicron;&iota;ή&sigma;&omicron;&upsilon;&mu;&epsilon; &alpha;&upsilon;&tau;ά &tau;&alpha; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&alpha; &sigma;&epsilon; &epsilon;&phi;&alpha;&rho;&mu;&omicron;&gamma;έ&sigmaf; &mu;&epsilon; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&alpha; &pi;&omicron;&upsilon; &pi;&rho;&omicron;έ&rho;&chi;&omicron;&nu;&tau;&alpha;&iota; &alpha;&pi;ό 2 Apis &sigma;&tau;&eta; &beta;ά&sigma;&eta; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&omega;&nu;a / admin panel (&lambda;&omicron;&gamma;&iota;&kappa;ή) &kappa;&alpha;&iota; έ&tau;&omicron;&iota;&mu;&alpha; &nu;&alpha; &chi;&rho;&eta;&sigma;&iota;&mu;&omicron;&pi;&omicron;&iota;&eta;&theta;&omicron;ύ&nu; &sigma;&omega;&sigma;&tau;ά &sigma;&tau;&omicron; iOS / Android</p>\n",
+    poster: "Dmitriy Lotov",
+    "poster_id": "60b63a7ad2a7ea368cf9cf0a",
+    "poster_email": "hrm.2021@outlook.com",
+    "poster_phone": "+7501458786",
+    "created_at": ISODate("2021-06-17T06:03:01.207Z"),
+    shared: NumberInt("0"),
+    image: "post_60b63a7ad2a7ea368cf9cf0a_20215162325365.jpg",
+    language: "GR",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("posts").insert([ {
+    _id: ObjectId("60cae5aeca0a973d68f9feb5"),
+    "category_id": "60cae5a2ca0a973d68f9feb4",
+    category: "Job",
+    title: "Ενσωμάτωση API",
+    content: "<p>&Theta;&alpha; ή&theta;&epsilon;&lambda;&alpha; &nu;&alpha; &epsilon;&nu;&sigma;&omega;&mu;&alpha;&tau;ώ&sigma;&omega; 2 &delta;&iota;&alpha;&phi;&omicron;&rho;&epsilon;&tau;&iota;&kappa;ά Apis &sigma;&epsilon; 1 &beta;ά&sigma;&eta; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&omega;&nu; &kappa;&alpha;&iota; &nu;&alpha; &tau;&omicron; &mu;&epsilon;&tau;&alpha;&tau;&rho;έ&psi;&omega; &sigma;&epsilon; έ&nu;&alpha; api firebase ή pub / sub<br />\n&Sigma;&tau;&eta; &sigma;&upsilon;&nu;έ&chi;&epsilon;&iota;&alpha;, &gamma;&iota;&alpha; &nu;&alpha; &delta;&omicron;&kappa;&iota;&mu;ά&sigma;&epsilon;&tau;&epsilon; &tau;&alpha; &tau;&rho;&alpha;&beta;ή&gamma;&mu;&alpha;&tau;&alpha; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&omega;&nu; &kappa;&alpha;&iota; &tau;&iota;&sigmaf; &omicron;&theta;ό&nu;&epsilon;&sigmaf; &sigma;&tau;&omicron; Android &kappa;&alpha;&iota; &tau;&omicron; iOS &sigma;&omega;&sigma;&tau;ά &sigma;&upsilon;&nu;&delta;έ&omicron;&nu;&tau;&alpha;&sigmaf; &tau;&eta; &beta;ά&sigma;&eta; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&omega;&nu; ή &tau;&omicron; API ό, &tau;&iota; &epsilon;ί&nu;&alpha;&iota; &kappa;&alpha;&lambda;ύ&tau;&epsilon;&rho;&omicron;. &Pi;&rho;έ&pi;&epsilon;&iota; &nu;&alpha; &epsilon;ί&nu;&alpha;&iota; &kappa;ά&tau;&iota; &kappa;&alpha;&lambda;ύ&tau;&epsilon;&rho;&omicron; &alpha;&pi;ό ή &pi;&alpha;&rho;ό&mu;&omicron;&iota;&omicron; &mu;&epsilon; &tau;&alpha; &pi;&iota;&omicron; &delta;&eta;&mu;&omicron;&phi;&iota;&lambda;ή &theta;έ&mu;&alpha;&tau;&alpha; &delta;&iota;&alpha;&chi;&epsilon;&iota;&rho;&iota;&sigma;&tau;ή api. &laquo;&Alpha;&nu;&alpha;&delta;&eta;&mu;&iota;&omicron;&upsilon;&rho;&gamma;&omicron;ύ&mu;&epsilon; &tau;&alpha; 3 ά&kappa;&rho;&omega;&sigmaf; &tau;&epsilon;&kappa;&mu;&eta;&rho;&iota;&omega;&mu;έ&nu;&alpha; Apis &sigma;&epsilon; 1 &mu;&epsilon;&mu;&omicron;&nu;&omega;&mu;έ&nu;&omicron; &sigma;ύ&sigma;&tau;&eta;&mu;&alpha; api &gamma;&iota;&alpha; &chi;&rho;ή&sigma;&eta; &sigma;&epsilon; &iota;&sigma;&tau;ό&tau;&omicron;&pi;&omicron;&upsilon;&sigmaf; / iOS / Android &kappa;&alpha;&iota; έ&tau;&omicron;&iota;&mu;&alpha; &gamma;&iota;&alpha; &chi;&rho;ή&sigma;&eta; &mu;&epsilon; &epsilon;&phi;&alpha;&rho;&mu;&omicron;&gamma;έ&sigmaf; &mu;&epsilon; &delta;&iota;&alpha;&kappa;&rho;&iota;&tau;&iota;&kappa;ά, &kappa;&alpha;&tau;ά&lambda;&omicron;&gamma;&omicron;, &delta;&iota;&epsilon;&upsilon;&theta;ύ&nu;&sigma;&epsilon;&iota;&sigmaf; URL &delta;&iota;&alpha;&phi;&omicron;&rho;&epsilon;&tau;&iota;&kappa;ώ&nu; api php &kappa;&alpha;&iota; &pi;&lambda;ή&rho;&epsilon;&sigmaf; &sigma;ύ&sigma;&tau;&eta;&mu;&alpha; &sigma;&upsilon;&nu;&delta;&upsilon;&alpha;&sigma;&mu;&omicron;ύ 3 &sigma;&upsilon;&sigma;&tau;&eta;&mu;ά&tau;&omega;&nu; api &gamma;&iota;&alpha; &delta;&eta;&mu;&iota;&omicron;&upsilon;&rho;&gamma;ί&alpha; &lambda;&epsilon;&iota;&tau;&omicron;&upsilon;&rho;&gamma;&epsilon;ί &kappa;ά&tau;&omega; &alpha;&pi;ό &tau;&omicron; 1. api 1 &pi;&rho;έ&pi;&epsilon;&iota; &nu;&alpha; &epsilon;ί&nu;&alpha;&iota; &tau;&omicron; &kappa;&upsilon;&rho;ί&alpha;&rho;&chi;&omicron;, &epsilon;&nu;ώ &tau;&alpha; 2 &kappa;&alpha;&iota; 3 &epsilon;ί&nu;&alpha;&iota; &epsilon;&phi;&epsilon;&delta;&rho;&iota;&kappa;ά &sigma;&epsilon; &pi;&epsilon;&rho;ί&pi;&tau;&omega;&sigma;&eta; &pi;&omicron;&upsilon; 1 &lambda;&epsilon;ί&pi;&epsilon;&iota; &mu;&iota;&alpha; &omicron;&mu;ά&delta;&alpha;. &Alpha;&upsilon;&tau;ό &epsilon;ί&nu;&alpha;&iota; &gamma;&iota;&alpha; &sigma;&pi;&omicron;&rho;. 2 &gamma;&lambda;ώ&sigma;&sigma;&epsilon;&sigmaf; &theta;&alpha; &gamma;ί&nu;&omicron;&upsilon;&nu; &mu;&epsilon; &alpha;&upsilon;&tau;ό &pi;&alpha;&rho;&alpha;&kappa;&alpha;&lambda;ώ. &Mu;&epsilon; &upsilon;&pi;&omicron;&sigma;&tau;ή&rho;&iota;&xi;&eta; 30 &eta;&mu;&epsilon;&rho;ώ&nu; &kappa;&alpha;&iota; &pi;&lambda;ή&rho;&omega;&sigmaf; &lambda;&epsilon;&iota;&tau;&omicron;&upsilon;&rho;&gamma;&iota;&kappa;ό.<br />\n&epsilon;&upsilon;&chi;&alpha;&rho;&iota;&sigma;&tau;ώ</p>\n\n<p>&Theta;&alpha; &pi;&rho;&omicron;&sigma;&theta;έ&sigma;&omicron;&upsilon;&mu;&epsilon; &tau;&omicron;&nu; &pi;ί&nu;&alpha;&kappa;&alpha; &delta;&iota;&alpha;&chi;&epsilon;ί&rho;&iota;&sigma;&eta;&sigmaf; &gamma;&iota;&alpha; &nu;&alpha; &beta;&epsilon;&beta;&alpha;&iota;&omega;&theta;&omicron;ύ&mu;&epsilon; ό&tau;&iota; &mu;&pi;&omicron;&rho;&omicron;ύ&mu;&epsilon; &nu;&alpha; &delta;&omicron;ύ&mu;&epsilon; ό&lambda;&alpha; &tau;&alpha; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&alpha;</p>\n\n<p>&beta;&epsilon;&beta;&alpha;&iota;&omega;&theta;&epsilon;ί&tau;&epsilon; ό&tau;&iota; ό&lambda;&alpha; &tau;&alpha; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&alpha; &epsilon;ί&nu;&alpha;&iota; &omicron;&rho;&alpha;&tau;ά &sigma;&epsilon; ό&lambda;&omicron;&upsilon;&sigmaf; &tau;&omicron;&upsilon;&sigmaf; &pi;ί&nu;&alpha;&kappa;&epsilon;&sigmaf; &sigma;&tau;&omicron; &delta;&iota;&alpha;&chi;&epsilon;&iota;&rho;&iota;&sigma;&tau;ή</p>\n\n<p>&Alpha;&upsilon;&tau;ά &tau;&alpha; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&alpha; &pi;&rho;έ&pi;&epsilon;&iota; &nu;&alpha; &epsilon;ί&nu;&alpha;&iota; έ&tau;&omicron;&iota;&mu;&alpha; &gamma;&iota;&alpha; &chi;&rho;ή&sigma;&eta; &sigma;&tau;&omicron; ios / android &alpha;&pi;&epsilon;&upsilon;&theta;&epsilon;ί&alpha;&sigmaf; &sigma;ύ&nu;&delta;&epsilon;&sigma;&eta; &sigma;&tau;&omicron; db</p>\n\n<p>&Tau;&omicron; &theta;έ&mu;&alpha; &epsilon;ί&nu;&alpha;&iota; &nu;&alpha; &pi;ά&rho;&omicron;&upsilon;&mu;&epsilon; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&alpha; &alpha;&pi;ό 2 Apis &kappa;&alpha;&iota; &nu;&alpha; &tau;&alpha; έ&chi;&omicron;&upsilon;&mu;&epsilon; &sigma;&tau;&eta; &delta;&iota;&kappa;ή &mu;&alpha;&sigmaf; &beta;ά&sigma;&eta; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&omega;&nu; &kappa;&alpha;&iota; &sigma;&tau;&eta; &sigma;&upsilon;&nu;έ&chi;&epsilon;&iota;&alpha; &nu;&alpha; &chi;&rho;&eta;&sigma;&iota;&mu;&omicron;&pi;&omicron;&iota;ή&sigma;&omicron;&upsilon;&mu;&epsilon; &alpha;&upsilon;&tau;ά &tau;&alpha; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&alpha; &sigma;&epsilon; &epsilon;&phi;&alpha;&rho;&mu;&omicron;&gamma;έ&sigmaf; &mu;&epsilon; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&alpha; &pi;&omicron;&upsilon; &pi;&rho;&omicron;έ&rho;&chi;&omicron;&nu;&tau;&alpha;&iota; &alpha;&pi;ό 2 Apis &sigma;&tau;&eta; &beta;ά&sigma;&eta; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&omega;&nu;a / admin panel (&lambda;&omicron;&gamma;&iota;&kappa;ή) &kappa;&alpha;&iota; έ&tau;&omicron;&iota;&mu;&alpha; &nu;&alpha; &chi;&rho;&eta;&sigma;&iota;&mu;&omicron;&pi;&omicron;&iota;&eta;&theta;&omicron;ύ&nu; &sigma;&omega;&sigma;&tau;ά &sigma;&tau;&omicron; iOS / Android</p>\n",
+    poster: "Dmitriy Lotov",
+    "poster_id": "60b63a7ad2a7ea368cf9cf0a",
+    "poster_email": "hrm.2021@outlook.com",
+    "poster_phone": "+7501458786",
+    "created_at": ISODate("2021-06-17T06:03:26.33Z"),
+    shared: NumberInt("0"),
+    image: "post_60b63a7ad2a7ea368cf9cf0a_20215162325365.jpg",
+    language: "GR",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("posts").insert([ {
+    _id: ObjectId("60cae685ca0a973d68f9feb6"),
+    "category_id": "60c8c9d987e2dc2794257bb5",
+    category: "Freelancer",
+    title: "I need a webbased bot that will upload a video file to YOUTUBE, RUMBLE, ODYSEE AND BITCHUTE automatically",
+    content: "<p>The user will go to site and login. He/she gets a 1 week free trial, then can pay $10 per month to use the features. Once logged in, user must enter the username and password for his/her youtube, rumble, odysee and bitchute channels. That info is stored in our data base so user can enter that info one time and its saved. When the user wants to upload a video to YT, RUMB, ODYSEE AND BITCHUTE user logs into our site, clicks on the upload tab/button and sees TITLE FIELD, DESCRIPTION FIELD, UPOAD VIDEO BUTTON, AND UPLOAD THUMBNAIL BUTTON. After user enters that information he can chose to CHECK OFF 1 or all 4 of the sites. So for example the user checks off all 4. and presses start. The site/bot will one by one upload that video and details to each one of the sites listed above. (user can view the uploading process) (if the site has human captcha stop points, then THE USER can enter that info manually and press continue)</p>\n",
+    poster: "Dmitriy Lotov",
+    "poster_id": "60b63a7ad2a7ea368cf9cf0a",
+    "poster_email": "hrm.2021@outlook.com",
+    "poster_phone": "+7501458786",
+    "created_at": ISODate("2021-06-17T06:07:01.792Z"),
+    shared: NumberInt("0"),
+    image: "post_60b63a7ad2a7ea368cf9cf0a_202151623654762.jpg",
+    language: "EN",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("posts").insert([ {
+    _id: ObjectId("60cae6a2ca0a973d68f9feb7"),
+    "category_id": "60c8c9d987e2dc2794257bb5",
+    category: "Freelancer",
+    title: "Χρειάζομαι ένα διαδικτυακό bot που θα ανεβάσει αυτόματα ένα αρχείο βίντεο στο YOUTUBE, RUMBLE, ODYSEE και BITCHUTE",
+    content: "<p>&Omicron; &chi;&rho;ή&sigma;&tau;&eta;&sigmaf; &theta;&alpha; &mu;&epsilon;&tau;&alpha;&beta;&epsilon;ί &sigma;&tau;&omicron;&nu; &iota;&sigma;&tau;ό&tau;&omicron;&pi;&omicron; &kappa;&alpha;&iota; &theta;&alpha; &sigma;&upsilon;&nu;&delta;&epsilon;&theta;&epsilon;ί. &Pi;&alpha;ί&rho;&nu;&epsilon;&iota; &mu;&iota;&alpha; &delta;&omega;&rho;&epsilon;ά&nu; &delta;&omicron;&kappa;&iota;&mu;ή 1 &epsilon;&beta;&delta;&omicron;&mu;ά&delta;&alpha;&sigmaf; &kappa;&alpha;&iota; &mu;&epsilon;&tau;ά &mu;&pi;&omicron;&rho;&epsilon;ί &nu;&alpha; &pi;&lambda;&eta;&rho;ώ&sigma;&epsilon;&iota; 10 $ &alpha;&nu;ά &mu;ή&nu;&alpha; &gamma;&iota;&alpha; &nu;&alpha; &chi;&rho;&eta;&sigma;&iota;&mu;&omicron;&pi;&omicron;&iota;ή&sigma;&epsilon;&iota; &tau;&iota;&sigmaf; &delta;&upsilon;&nu;&alpha;&tau;ό&tau;&eta;&tau;&epsilon;&sigmaf;. &Mu;ό&lambda;&iota;&sigmaf; &sigma;&upsilon;&nu;&delta;&epsilon;&theta;&epsilon;ί, &omicron; &chi;&rho;ή&sigma;&tau;&eta;&sigmaf; &pi;&rho;έ&pi;&epsilon;&iota; &nu;&alpha; &epsilon;&iota;&sigma;&alpha;&gamma;ά&gamma;&epsilon;&iota; &tau;&omicron; ό&nu;&omicron;&mu;&alpha; &chi;&rho;ή&sigma;&tau;&eta; &kappa;&alpha;&iota; &tau;&omicron;&nu; &kappa;&omega;&delta;&iota;&kappa;ό &pi;&rho;ό&sigma;&beta;&alpha;&sigma;&eta;&sigmaf; &gamma;&iota;&alpha; &tau;&alpha; &kappa;&alpha;&nu;ά&lambda;&iota;&alpha; youtube, rumble, odysee &kappa;&alpha;&iota; bitchute. &Alpha;&upsilon;&tau;έ&sigmaf; &omicron;&iota; &pi;&lambda;&eta;&rho;&omicron;&phi;&omicron;&rho;ί&epsilon;&sigmaf; &alpha;&pi;&omicron;&theta;&eta;&kappa;&epsilon;ύ&omicron;&nu;&tau;&alpha;&iota; &sigma;&tau;&eta; &beta;ά&sigma;&eta; &delta;&epsilon;&delta;&omicron;&mu;έ&nu;&omega;&nu; &mu;&alpha;&sigmaf;, ώ&sigma;&tau;&epsilon; &omicron; &chi;&rho;ή&sigma;&tau;&eta;&sigmaf; &nu;&alpha; &mu;&pi;&omicron;&rho;&epsilon;ί &nu;&alpha; &epsilon;&iota;&sigma;&alpha;&gamma;ά&gamma;&epsilon;&iota; &alpha;&upsilon;&tau;έ&sigmaf; &tau;&iota;&sigmaf; &pi;&lambda;&eta;&rho;&omicron;&phi;&omicron;&rho;ί&epsilon;&sigmaf; &mu;ί&alpha; &phi;&omicron;&rho;ά &kappa;&alpha;&iota; &nu;&alpha; &alpha;&pi;&omicron;&theta;&eta;&kappa;&epsilon;&upsilon;&tau;&epsilon;ί. Ό&tau;&alpha;&nu; &omicron; &chi;&rho;ή&sigma;&tau;&eta;&sigmaf; &theta;έ&lambda;&epsilon;&iota; &nu;&alpha; &alpha;&nu;&epsilon;&beta;ά&sigma;&epsilon;&iota; έ&nu;&alpha; &beta;ί&nu;&tau;&epsilon;&omicron; &sigma;&tau;&omicron; YT, RUMB, ODYSEE &kappa;&alpha;&iota; BITCHUTE, &omicron; &chi;&rho;ή&sigma;&tau;&eta;&sigmaf; &sigma;&upsilon;&nu;&delta;έ&epsilon;&tau;&alpha;&iota; &sigma;&tau;&omicron;&nu; &iota;&sigma;&tau;ό&tau;&omicron;&pi;ό &mu;&alpha;&sigmaf;, &kappa;ά&nu;&epsilon;&iota; &kappa;&lambda;&iota;&kappa; &sigma;&tau;&eta;&nu; &kappa;&alpha;&rho;&tau;έ&lambda;&alpha; / &kappa;&omicron;&upsilon;&mu;&pi;ί &mu;&epsilon;&tau;&alpha;&phi;ό&rho;&tau;&omega;&sigma;&eta;&sigmaf; &kappa;&alpha;&iota; &beta;&lambda;έ&pi;&epsilon;&iota; &Tau;&Iota;&Tau;&Lambda;&Omicron;&Sigma; &Pi;&Epsilon;&Delta;&Iota;&Omicron;, &Pi;&Epsilon;&Delta;&Iota;&Omicron; &Pi;&Epsilon;&Rho;&Iota;&Gamma;&Rho;&Alpha;&Phi;&Eta;&Sigma;, &Alpha;&Nu;&Tau;&Iota;&Gamma;&Rho;&Alpha;&Phi;&Eta; &Kappa;&Omicron;&Upsilon;&Mu;&Pi;&Iota; &Beta;&Iota;&Nu;&Tau;&Epsilon;&Omicron; &Kappa;&Alpha;&Iota; &Alpha;&Pi;&Omicron;&Sigma;&Upsilon;&Nu;&Delta;&Epsilon;&Sigma;&Eta; &Kappa;&Omicron;&Upsilon;&Mu;&Pi;&Iota;&Omicron;&Upsilon;. &Alpha;&phi;&omicron;ύ &omicron; &chi;&rho;ή&sigma;&tau;&eta;&sigmaf; &epsilon;&iota;&sigma;&alpha;&gamma;ά&gamma;&epsilon;&iota; &alpha;&upsilon;&tau;έ&sigmaf; &tau;&iota;&sigmaf; &pi;&lambda;&eta;&rho;&omicron;&phi;&omicron;&rho;ί&epsilon;&sigmaf;, &mu;&pi;&omicron;&rho;&epsilon;ί &nu;&alpha; &epsilon;&pi;&iota;&lambda;έ&xi;&epsilon;&iota; &nu;&alpha; &Epsilon;&Lambda;&Epsilon;&Gamma;&Chi;&Epsilon;&Iota; 1 ή &kappa;&alpha;&iota; &tau;&omicron;&upsilon;&sigmaf; 4 &iota;&sigma;&tau;ό&tau;&omicron;&pi;&omicron;&upsilon;&sigmaf;. Έ&tau;&sigma;&iota;, &gamma;&iota;&alpha; &pi;&alpha;&rho;ά&delta;&epsilon;&iota;&gamma;&mu;&alpha;, &omicron; &chi;&rho;ή&sigma;&tau;&eta;&sigmaf; &epsilon;&lambda;έ&gamma;&chi;&epsilon;&iota; ό&lambda;&alpha; &tau;&alpha; 4. &kappa;&alpha;&iota; &pi;&alpha;&tau;ά &tau;&omicron; start &Omicron; &iota;&sigma;&tau;ό&tau;&omicron;&pi;&omicron;&sigmaf; / bot &theta;&alpha; &alpha;&nu;&epsilon;&beta;ά&sigma;&epsilon;&iota; έ&nu;&alpha; &pi;&rho;&omicron;&sigmaf; έ&nu;&alpha; &alpha;&upsilon;&tau;ό &tau;&omicron; &beta;ί&nu;&tau;&epsilon;&omicron; &kappa;&alpha;&iota; &lambda;&epsilon;&pi;&tau;&omicron;&mu;έ&rho;&epsilon;&iota;&epsilon;&sigmaf; &sigma;&epsilon; &kappa;&alpha;&theta;έ&nu;&alpha;&nu; &alpha;&pi;ό &tau;&omicron;&upsilon;&sigmaf; &iota;&sigma;&tau;ό&tau;&omicron;&pi;&omicron;&upsilon;&sigmaf; &pi;&omicron;&upsilon; &alpha;&nu;&alpha;&phi;έ&rho;&omicron;&nu;&tau;&alpha;&iota; &pi;&alpha;&rho;&alpha;&pi;ά&nu;&omega;. (&omicron; &chi;&rho;ή&sigma;&tau;&eta;&sigmaf; &mu;&pi;&omicron;&rho;&epsilon;ί &nu;&alpha; &delta;&epsilon;&iota; &tau;&eta; &delta;&iota;&alpha;&delta;&iota;&kappa;&alpha;&sigma;ί&alpha; &mu;&epsilon;&tau;&alpha;&phi;ό&rho;&tau;&omega;&sigma;&eta;&sigmaf;) (&epsilon;ά&nu; &omicron; &iota;&sigma;&tau;ό&tau;&omicron;&pi;&omicron;&sigmaf; έ&chi;&epsilon;&iota; &alpha;&nu;&theta;&rho;ώ&pi;&iota;&nu;&alpha; &sigma;&eta;&mu;&epsilon;ί&alpha; &sigma;&tau;ά&sigma;&eta;&sigmaf; captcha, &tau;ό&tau;&epsilon; &omicron; &Chi;&Rho;&Eta;&Sigma;&Tau;&Eta;&Sigma; &mu;&pi;&omicron;&rho;&epsilon;ί &nu;&alpha; &epsilon;&iota;&sigma;&alpha;&gamma;ά&gamma;&epsilon;&iota; &alpha;&upsilon;&tau;έ&sigmaf; &tau;&iota;&sigmaf; &pi;&lambda;&eta;&rho;&omicron;&phi;&omicron;&rho;ί&epsilon;&sigmaf; &mu;&epsilon; &mu;&eta; &alpha;&upsilon;&tau;ό&mu;&alpha;&tau;&omicron; &tau;&rho;ό&pi;&omicron; &kappa;&alpha;&iota; &pi;&alpha;&tau;ή&sigma;&tau;&epsilon; &sigma;&upsilon;&nu;έ&chi;&epsilon;&iota;&alpha;)</p>\n",
+    poster: "Dmitriy Lotov",
+    "poster_id": "60b63a7ad2a7ea368cf9cf0a",
+    "poster_email": "hrm.2021@outlook.com",
+    "poster_phone": "+7501458786",
+    "created_at": ISODate("2021-06-17T06:07:30.264Z"),
+    shared: NumberInt("0"),
+    image: "post_60b63a7ad2a7ea368cf9cf0a_202151623654762.jpg",
+    language: "GR",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("posts").insert([ {
+    _id: ObjectId("60cae72aca0a973d68f9feb8"),
+    "category_id": "60c8c9d987e2dc2794257bb5",
+    category: "Freelancer",
+    title: "Shopping Cart Application Shippo integration",
+    content: "<p>Request details I have a shopping cart application that I need to add shippo to for both the UI (React) and backend (Node and MongoDB). I need a developer who has done this before. The UI is very generic. Deliverables The shipping feature with Shippo should be able to do the following: UI to create labels and connect it to the customer Connect Shippo Tracking API to Order Status - right now the 3 types of statuses we have are Processing Shipped Delivered And add backend in ui to allow the customer to see the cost of shipping from shippo with the carrier they choose</p>\n",
+    poster: "Dmitriy Lotov",
+    "poster_id": "60b63a7ad2a7ea368cf9cf0a",
+    "poster_email": "hrm.2021@outlook.com",
+    "poster_phone": "+7501458786",
+    "created_at": ISODate("2021-06-17T06:09:46.576Z"),
+    shared: NumberInt("0"),
+    image: "post_60b63a7ad2a7ea368cf9cf0a_202151623654762.jpg",
+    language: "EN",
     __v: NumberInt("0")
 } ]);
 
@@ -671,17 +780,35 @@ db.createCollection("trainings");
 // Documents of trainings
 // ----------------------------
 db.getCollection("trainings").insert([ {
-    _id: ObjectId("60c6ae2109101f0eacff9001"),
-    title: "Begginer",
-    description: "Beginner's training",
-    url: "../../videos/trainings/begginer.mp4",
+    _id: ObjectId("60cb2fcf583c502fc4e45813"),
+    title: "Info",
+    type: "info",
+    description: "Information video",
+    url: "../../videos/info.mp4",
     __v: NumberInt("0")
 } ]);
 db.getCollection("trainings").insert([ {
-    _id: ObjectId("60c6b102017761217c04d19e"),
+    _id: ObjectId("60cb3024583c502fc4e45814"),
+    title: "Beginner",
+    type: "training",
+    description: "Training beginner video",
+    url: "../../videos/trainings/video_60b63a7ad2a7ea368cf9cf0a_20215174217552.mp4",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("trainings").insert([ {
+    _id: ObjectId("60cb3053583c502fc4e45815"),
     title: "Professional",
-    description: "Professional training",
-    url: "../../videos/trainings/professional.mp4",
+    type: "training",
+    description: "Training professional video",
+    url: "../../videos/trainings/video_60b63a7ad2a7ea368cf9cf0a_20215174215529.mp4",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("trainings").insert([ {
+    _id: ObjectId("60cb495c0cdc46162cf42c0c"),
+    title: "Ultimate",
+    type: "training",
+    description: "Training ultimate video",
+    url: "../../videos/trainings/video_60b63a7ad2a7ea368cf9cf0a_20215176844455.mp4",
     __v: NumberInt("0")
 } ]);
 
@@ -702,7 +829,7 @@ db.getCollection("users").insert([ {
     email: "hrm.2021@outlook.com",
     password: "$2a$08$XjjDIqTWHOBTP4mnPiG2XuBAL69sLQ9RUnuwh.yF2iINgubXTlRre",
     membership: NumberInt("4"),
-    "created_at": ISODate("2021-06-09T17:01:06.984Z"),
+    "created_at": ISODate("2021-06-16T14:47:40.826Z"),
     permission: NumberInt("1"),
     __v: NumberInt("0"),
     state: NumberInt("1"),
@@ -714,7 +841,8 @@ db.getCollection("users").insert([ {
     cvc: NumberInt("1545"),
     "expire_month": NumberInt("12"),
     "expire_year": NumberInt("2021"),
-    "shared_cnt": 0
+    "shared_cnt": 0,
+    ask: NumberInt("2")
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60b7c2a8f2667e2ea4ca3a2e"),
@@ -791,11 +919,11 @@ db.getCollection("users").insert([ {
     email: "codedarkhorse@gmail.com",
     password: "$2a$08$Xjl5qEgd0q2h14dpDZN9X.XZnyKXrpScJZ7/STV8VczPgeeMvN/H.",
     membership: NumberInt("4"),
-    "left_membership": NumberInt("2"),
+    "left_membership": NumberInt("4"),
     "card_number": "1232 2222 2222 1321",
     "expire_month": NumberInt("3"),
     cvc: NumberInt("3234"),
-    "created_at": ISODate("2021-06-09T06:09:46.553Z"),
+    "created_at": ISODate("2021-06-16T03:56:20.395Z"),
     "started_at": ISODate("2021-06-06T15:07:19.454Z"),
     permission: NumberInt("2"),
     photo: "60c04c4165536b1c58d2dc2d.png",
@@ -804,7 +932,7 @@ db.getCollection("users").insert([ {
     __v: NumberInt("0"),
     "expire_year": NumberInt("2021"),
     "shared_cnt": 0,
-    ask: 0
+    ask: NumberInt("2")
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("60c04cbd65536b1c58d2dc2e"),
@@ -978,17 +1106,40 @@ db.getCollection("users").insert([ {
     password: "$2a$08$yDPuLlHHlKPqmr14Ed0S2OS8u4fdPM3J972krMPGhaXSCMQif/eVi",
     membership: NumberInt("4"),
     "left_membership": NumberInt("4"),
-    ask: null,
+    ask: NumberInt("1"),
     "card_number": "4111 1111 1111 1111",
     "expire_month": NumberInt("11"),
     cvc: NumberInt("115"),
     "created_at": ISODate("2021-06-16T06:34:40.969Z"),
     "started_at": ISODate("2021-06-16T06:34:40.969Z"),
     permission: NumberInt("2"),
-    photo: "avatar.png",
+    photo: "60c99640de96cd444c43dd9d.png",
     introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
     state: NumberInt("1"),
     "shared_cnt": NumberInt("0"),
     __v: NumberInt("0"),
     "expire_year": NumberInt("2021")
+} ]);
+db.getCollection("users").insert([ {
+    _id: ObjectId("60c9c61bdb21ee3c0c700608"),
+    name: "que",
+    surname: "que",
+    phone: "+4579789897",
+    email: "que@gmail.com",
+    password: "$2a$08$y6gNxd3/pUoYaWWTmof84egqlmoAByjAkO/kPBlMdKqwA00jS/dIG",
+    membership: NumberInt("3"),
+    "left_membership": NumberInt("3"),
+    ask: NumberInt("1"),
+    "card_number": "4111 1111 1111 1111",
+    "expire_month": NumberInt("12"),
+    cvc: NumberInt("111"),
+    "created_at": ISODate("2021-06-16T09:37:17.429Z"),
+    "started_at": ISODate("2021-06-16T09:37:17.429Z"),
+    permission: NumberInt("2"),
+    photo: "avatar.png",
+    introduction: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.",
+    state: NumberInt("1"),
+    "shared_cnt": NumberInt("0"),
+    __v: NumberInt("0"),
+    "expire_year": NumberInt("2020")
 } ]);
