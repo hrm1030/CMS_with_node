@@ -129,13 +129,3 @@ exports.view_ajax = function(req, res) {
         }
     })
 }
-
-exports.edit = function(req, res) {
-    Category.find({}, (err, categories) => {
-        if(err) {
-            console.log(err);
-        } else {
-            res.render('pages/user/post/edit',{ title : 'CMS | Post Edit', session : req.session, categories : categories});
-        }
-    })
-};

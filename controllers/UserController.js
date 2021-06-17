@@ -244,7 +244,7 @@ exports.get_category = function(req, res) {
             } else {
                 res.json({categories : categories});
             }
-        });
+        }).sort({name : 1});
     } else {
         Category.find({}, (err, categories) => {
             if(err) {

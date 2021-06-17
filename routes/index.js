@@ -51,7 +51,6 @@ router.get('/post/list', auth_middleware.index, post.list);
 router.post('/post/selected_category', post.selected_category);
 router.get('/post/view', auth_middleware.index, post.view);
 router.post('/post/view_ajax', post.view_ajax);
-router.get('/post/edit', auth_middleware.index, auth_middleware.check_membership, post.edit);
 router.post('/post/filesupload', post.filesupload);
 
 router.post('/share/logo_upload', share.logo_upload);
