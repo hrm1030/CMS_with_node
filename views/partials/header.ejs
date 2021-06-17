@@ -33,7 +33,7 @@
                     <li <%if(recent_url == '/faq') {%> class="active" <%}%>><a href="/faq"><i class="icon-question"></i> FAQ</a></li>
                     <li <%if(recent_url == '/ask_for_post') {%> class="active" <%}%>><a href="/ask_for_post"><i class="icon-speech"></i> Ask for a post</a></li>
                     <li <%if(recent_url == '/recommend_category') {%> class="active" <%}%>><a href="/recommend_category"><i class="icon-like"></i> Recommend Category</a></li>
-                    <li><a href="/auth/profile/photo_generate"><i class="icon-picture"></i> Create your logo</a></li>
+                    <li><a href="/auth/profile/photo_generate" target="_blank"><i class="icon-picture"></i> Create your logo</a></li>
                     <li <%if(recent_url == '/search' || recent_url == 'post') {%> class="active" <%}%>><a href="/search"><i class="icon-magnifier"></i> Search</a></li>
                     <%}%>
                     <% if(session.permission == 1) {%>
