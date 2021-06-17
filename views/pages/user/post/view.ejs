@@ -68,9 +68,17 @@
               <!-- BEGIN RIGHT SIDEBAR -->            
               <div class="col-md-3 col-sm-3 blog-sidebar">
                 <!-- CATEGORIES START -->
-                <h2 class="no-top-space">Categories</h2>
+                <h2 class="no-top-space">Categories </h2>
+                <div class="row">
+                  <label class="control-label col-md-4 bold" style="padding-top: 7px; font-size: 16px;">Search : </label>
+                  <div class="col-md-8 input-icon">
+                    <i class="fa fa-search"></i>
+                    <input type="text" class="form-control" id="search" placeholder="Type category">
+                  </div>
+                </div><hr>
+                
                 <div class="scroller" style="height: 1000px;" data-always-visible="0" data-rail-visible1="0" data-handle-color="#D7DCE2">
-                    <ul class="nav sidebar-categories margin-bottom-40">
+                    <ul class="nav sidebar-categories margin-bottom-40" id="categories">
                         <% categories.forEach(function(category) {%>
                             <li><a href="/post/list?category=<%= category._id%>"><%= category.name%></a></li>
                         <%})%>
