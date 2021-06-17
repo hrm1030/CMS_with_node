@@ -253,7 +253,7 @@ exports.get_category = function(req, res) {
                 var new_categories = Array();
                 for(var i = 0 ; i < categories.length ; i ++) 
                 {
-                    if(categories[i].name.toLowerCase() == req.body.keyword.toLowerCase()) 
+                    if(categories[i].name.toLowerCase().match(req.body.keyword.toLowerCase()+'.*') || categories[i].name.toLowerCase().match('^.*'+req.body.keyword.toLowerCase())) 
                     {
                         new_categories.push(categories[i]);
                     }
