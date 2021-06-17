@@ -163,18 +163,35 @@ exports.post_delete = function(req, res) {
 }
 
 exports.training_save = function(req, res) {
-    Training.create({
-        title : req.body.title,
-        type : req.body.type,
-        description : req.body.description,
-        url : req.body.url
-    }, (err, training) => {
-        if(err) {
-            console.log(err);
-        } else {
-            res.json({video : training});
-        }
-    })
+    if(req.body.type === 'info')
+    {
+        Training.findOneAndUpdate({type : 'info'}, {$set : {
+            title : req.body.title,
+            type : req.body.type,
+            description : req.body.description,
+            url : req.body.url
+        }}, (err, training) => {
+            if(err) {
+                console.log(err);
+            } else {
+                res.json({video : training});
+            }
+        })
+    } else {
+        Training.create({
+            title : req.body.title,
+            type : req.body.type,
+            description : req.body.description,
+            url : req.body.url
+        }, (err, training) => {
+            if(err) {
+                console.log(err);
+            } else {
+                res.json({video : training});
+            }
+        })
+    }
+    
 }
 
 exports.videos = function(req, res) {
