@@ -27,7 +27,7 @@ exports.info = function(req, res) {
 }
 
 exports.training = function(req, res) {
-    Training.find({}, (err, trainings) => {
+    Training.find({type : 'training'}, (err, trainings) => {
         if(err) {
             console.log(err);
         } else {

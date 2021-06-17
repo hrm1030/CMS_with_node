@@ -4,7 +4,7 @@
         </ul>
 
         <div class="row">
-            <div class="col-md-push-3 col-md-6">
+            <div class="col-md-push-2 col-md-8">
                 <div class="portlet box green">
                     <div class="portlet-title">
                       <div class="caption">
@@ -21,9 +21,10 @@
                         <table class="table table-striped table-hover table-bordered" id="video_table">
                             <thead>
                                 <tr>
-                                    <th width="40%">Video</th>
-                                    <th width="15%">Title</th>
-                                    <th width="50%">Description</th>
+                                    <th width="30%">Video</th>
+                                    <th width="15%">Type</th>
+                                    <th width="20%">Title</th>
+                                    <th width="40%">Description</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -34,6 +35,9 @@
                                             <video style="width: 100%;" controls title="<%= training.description%>" class="video_li">
                                                 <source src="<%= training.url%>" type="video/mp4">
                                             </video>
+                                        </td>
+                                        <td style="padding-top: 65px;">
+                                            <span class="label <% if(training.type === 'info') {%>label-primary<%}else {%>label-danger<%}%>"><%= training.type%></span>                                            
                                         </td>
                                         <td style="padding-top: 65px;"><%= training.title%></td>
                                         <td style="padding-top: 65px;"><%= training.description%></td>
@@ -60,6 +64,15 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" role="form" id="videoForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Video type <span class="require">*</span></label>
+                        <div class="col-md-3">
+                            <select class="form-control" id="video_type">
+                                <option value="info">Info</option>
+                                <option value="training">Training</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-body">
                         <div class="form-group">
                             <label class="col-md-3 control-label">Video <span class="require">*</span></label>
@@ -97,7 +110,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label">Description <span class="require">*</span></label>
                             <div class="col-md-8">
-                                <textarea class="form-control" id="description" name="description" placeholder="Please type description."></textarea>
+                                <textarea class="form-control" id="description" name="description" rows="5" placeholder="Please type description."></textarea>
                             </div>
                         </div>
                     </div>

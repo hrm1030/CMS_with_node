@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const TrainingSchema = new mongoose.Schema({
     title : String,
+    type : String,
     description : String,
     url : String
 });

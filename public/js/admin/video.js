@@ -23,7 +23,7 @@ $(document).ready(function() {
                     "zeroRecords": "No matching records found"
                 },
                 "order": [
-                    [1, 'desc']
+                    [1, 'asc']
                 ],
                 "lengthMenu": [
                     [5, 15, 20, -1],
@@ -90,38 +90,78 @@ $(document).ready(function() {
                     $.each($('#video_file')[0].files, function(i, file) {
                         data.append('file-'+i, file);
                     });
-                    $.ajax({
-                        url: '/admin/videoupload',
-                        data: data,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        method: 'POST',
-                        type: 'POST', // For jQuery < 1.9
-                        success: function(data){
-                            var video_name = data.video_name;
-                            $.ajax({
-                                url : '/admin/training_save',
-                                method : 'post',
-                                data : {
-                                    title : title,
-                                    description : description,
-                                    url : '../../videos/trainings/'+video_name
-                                },
-                                success : function(data) {
-                                    toastr['success']('Successfully saved.');
-                                    var video_html = `<video style="width: 70%;" controls title="${data.video.description}" class="video_li">
-                                                        <source src="${data.video.url}" type="video/mp4">
-                                                    </video>`;
-                                    var button_html = `<button class="btn blue btn_edit"><i class="fa fa-pencil" title="edit"></i></button>&nbsp;
-                                    <button class="btn btn-danger btn_delete" title="delete"><i class="fa fa-trash"></i></button>`
-                                    oTable.fnAddData([video_html, button_html]);
-                                    $('#videoModal').modal('hide');
-                                }
-                            });
-                            
-                        }
-                    });
+                    
+                    var video_type = $('#video_type').val();
+                    if(video_type === 'info')
+                    {
+                        $.ajax({
+                            url: '/admin/infoupload',
+                            data: data,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            method: 'POST',
+                            type: 'POST', // For jQuery < 1.9
+                            success: function(data){
+                                var video_url = '../../videos/info.mp4';
+                                $.ajax({
+                                    url : '/admin/training_save',
+                                    method : 'post',
+                                    data : {
+                                        title : title,
+                                        type : video_type,
+                                        description : description,
+                                        url : video_url
+                                    },
+                                    success : function(data) {
+                                        toastr['success']('Successfully saved.');
+                                        var video_html = `<video style="width: 100%;" controls title="${data.video.description}" class="video_li">
+                                                            <source src="${data.video.url}" type="video/mp4">
+                                                        </video>`;
+                                        var button_html = `<button class="btn btn-danger btn_delete" title="delete"><i class="fa fa-trash"></i></button>`
+                                        oTable.fnAddData([video_html, `<span class="label label-primary">${video_type}</span>`, data.video.title, data.video.description, button_html]);
+                                        $('#videoModal').modal('hide');
+                                    }
+                                });
+                                
+                            }
+                        });
+                    } else {
+                        $.ajax({
+                            url: '/admin/trainingupload',
+                            data: data,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            method: 'POST',
+                            type: 'POST', // For jQuery < 1.9
+                            success: function(data){
+                                var video_name = data.video_name;
+                                var video_url = '../../videos/trainings/'+video_name;
+                                $.ajax({
+                                    url : '/admin/training_save',
+                                    method : 'post',
+                                    data : {
+                                        title : title,
+                                        type : video_type,
+                                        description : description,
+                                        url : video_url
+                                    },
+                                    success : function(data) {
+                                        toastr['success']('Successfully saved.');
+                                        var video_html = `<video style="width: 100%;" controls title="${data.video.description}" class="video_li">
+                                                            <source src="${data.video.url}" type="video/mp4">
+                                                        </video>`;
+                                        var button_html = `<button class="btn btn-danger btn_delete" title="delete"><i class="fa fa-trash"></i></button>`
+                                        oTable.fnAddData([video_html, `<span class="label label-danger">${video_type}</span>`, data.video.title, data.video.description, button_html]);
+                                        $('#videoModal').modal('hide');
+                                    }
+                                });
+                                
+                            }
+                        });
+                    }
+                    
                 }
             })
 

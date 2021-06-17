@@ -40,7 +40,8 @@ router.post('/admin/industry/delete', admin.industry_delete);
 router.post('/admin/post/delete', admin.post_delete);
 
 router.get('/admin/videos', auth_middleware.index, admin_middleware.index, admin.videos);
-router.post('/admin/videoupload', admin.videoupload);
+router.post('/admin/trainingupload', admin.trainingupload);
+router.post('/admin/infoupload', admin.infoupload);
 router.post('/admin/training_save', admin.training_save);
 router.post('/admin/video_delete', admin.video_delete);
 

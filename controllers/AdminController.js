@@ -165,6 +165,7 @@ exports.post_delete = function(req, res) {
 exports.training_save = function(req, res) {
     Training.create({
         title : req.body.title,
+        type : req.body.type,
         description : req.body.description,
         url : req.body.url
     }, (err, training) => {
@@ -186,9 +187,9 @@ exports.videos = function(req, res) {
     });    
 }
 
-exports.videoupload = function(req, res) {
+exports.trainingupload = function(req, res) {
     var form = new formidable.IncomingForm();
-    // console.log(req);
+    console.log(req);
     form.parse(req);
     var video_name = 'video_'+req.session.userid+'_'+new Date().getFullYear()+new Date().getMonth()+new Date().getDate() + new Date().getHours()+new Date().getMinutes() + new Date().getSeconds() + new Date().getMilliseconds() +".mp4";
 
@@ -202,6 +203,23 @@ exports.videoupload = function(req, res) {
     });
 
     res.json({msg:'success', video_name : video_name});
+}
+
+exports.infoupload = function(req, res) {
+    var form = new formidable.IncomingForm();
+    console.log(req);
+    form.parse(req);
+
+    form.on('fileBegin', function (name, file){
+        console.log(name)
+        file.path = 'public/videos/info.mp4';
+    });
+
+    form.on('file', function (name, file){
+        console.log('Uploaded ' + 'info.mp4');
+    });
+
+    res.json({msg:'success', video_name : 'info.mp4'});
 }
 
 exports.video_delete = function(req, res) {
