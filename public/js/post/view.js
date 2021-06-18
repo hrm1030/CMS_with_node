@@ -78,9 +78,9 @@ $(document).ready(function() {
     var share_img_url;
     if(share_img == '')
     {
-      share_img_url = `https://myurl/uploads/posts/${$('#image').val()}`;
+      share_img_url = `https://social-media-managment-builder.com/uploads/posts/${$('#image').val()}`;
     } else {
-      share_img_url = `https://myurl/uploads/shares/${share_img}`;
+      share_img_url = `https://social-media-managment-builder.com/uploads/shares/${share_img}`;
     }
     var left_membership = $('#left_membership').val();
     if(left_membership > 0){
@@ -109,9 +109,9 @@ $(document).ready(function() {
     var share_img_url;
     if(share_img == '')
     {
-      share_img_url = `https://myurl/uploads/posts/${$('#image').val()}`;
+      share_img_url = `https://social-media-managment-builder.com/uploads/posts/${$('#image').val()}`;
     } else {
-      share_img_url = `https://myurl/uploads/shares/${share_img}`;
+      share_img_url = `https://social-media-managment-builder.com/uploads/shares/${share_img}`;
     }
     var left_membership = $('#left_membership').val();
     if(left_membership > 0){
@@ -140,9 +140,9 @@ $(document).ready(function() {
     var share_img_url;
     if(share_img == '')
     {
-      share_img_url = `https://myurl/uploads/posts/${$('#image').val()}`;
+      share_img_url = `https://social-media-managment-builder.com/uploads/posts/${$('#image').val()}`;
     } else {
-      share_img_url = `https://myurl/uploads/shares/${share_img}`;
+      share_img_url = `https://social-media-managment-builder.com/uploads/shares/${share_img}`;
     }
     var left_membership = $('#left_membership').val();
     if(left_membership > 0){
