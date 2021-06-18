@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    const ws = new WebSocket('ws://10.10.11.130:9000/');
+    const ws = new WebSocket('ws://localhost:9000/');
     ws.onopen = function() {
         console.log('WebSocket Client Connected');
         ws.send('Hi this is web client.');
