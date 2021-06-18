@@ -46,6 +46,42 @@ exports.change_state = function(req, res) {
     });
 }
 
+exports.change_permission = function(req, res) {
+    User.findByIdAndUpdate(req.body.user_id, {$set : {
+        permission : req.body.permission
+    }}, (err, user) => {
+        if(err) {
+            console.log(err)
+        } else {
+            res.json({ msg : 'success'});
+        }
+    });
+}
+
+exports.user_close = function(req, res) {
+    User.findByIdAndUpdate(req.body.user_id, {$set : {
+        state : 3
+    }}, (err, user) => {
+        if(err) {
+            console.log(err)
+        } else {
+            res.json({ msg : 'success'});
+        }
+    });
+}
+
+exports.user_unclose = function(req, res) {
+    User.findByIdAndUpdate(req.body.user_id, {$set : {
+        state : 1
+    }}, (err, user) => {
+        if(err) {
+            console.log(err)
+        } else {
+            res.json({ msg : 'success'});
+        }
+    });
+}
+
 exports.user_delete = function(req, res) {
     User.findByIdAndDelete(req.body.user_id, (err) => {
         if(err) {

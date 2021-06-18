@@ -61,6 +61,59 @@ $(document).ready(function() {
                 })
             });
 
+            table.on('change', '.permission', function() {
+                $.ajax({
+                    url : '/admin/user/change_permission',
+                    method : 'post',
+                    data : {
+                        permission : $(this).val(),
+                        user_id : $(this).parents('tr').eq(0).attr('user_id')
+                    },
+                    success : function(data) {
+                        toastr['success']('Permission is changed successfully.');
+                    },
+                    error : function() {
+                        toastr['error']('Happening any errors in user permission');
+                    }
+                })
+            });
+
+            table.on('click', '.btn_close', function() {
+                $.ajax({
+                    url : '/admin/user/close',
+                    method : 'post',
+                    data : { user_id : $(this).parents('tr').eq(0).attr('user_id') },
+                    success : function(data) {
+                        $(this).removeClass('purple');
+                        $(this).removeClass('btn_close');
+                        $(this).addClass('btn-danger');
+                        $(this).addClass('btn_unclose');
+                        toastr['success']('This user successfully closed.');
+                    },
+                    error : function () {
+                        toastr['error']('Happenning any errors on user close.');
+                    }
+                })
+            });
+
+            table.on('click', '.btn_unclose', function() {
+                $.ajax({
+                    url : '/admin/user/unclose',
+                    method : 'post',
+                    data : { user_id : $(this).parents('tr').eq(0).attr('user_id') },
+                    success : function(data) {
+                        $(this).addClass('purple');
+                        $(this).addClass('btn_close');
+                        $(this).removeClass('btn-danger');
+                        $(this).removeClass('btn_unclose');
+                        toastr['success']('This user successfully unclosed.');
+                    },
+                    error : function () {
+                        toastr['error']('Happenning any errors on user close.');
+                    }
+                })
+            });
+
             table.on('click', '.btn_user_delete', function(e) {
                 var nRow = $(this).parents('tr')[0];
                 $.ajax({

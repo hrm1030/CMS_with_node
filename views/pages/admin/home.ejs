@@ -78,6 +78,9 @@
                                         <i class="fa fa-check"></i> State
                                     </th>
                                     <th>
+                                        Permission
+                                    </th>
+                                    <th>
                                         Action
                                     </th>
                                 </tr>
@@ -123,7 +126,19 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <button class="btn btn-sm purple">Close</button>
+                                        <select class="form-control input-small permission" name="permission">
+                                            <%if(user.permission == 1){%>
+                                                <option value="1" selected>Administrator</option>
+                                                <option value="2">Common user</option>
+                                            <%} else {%>
+                                                <option value="1">Administrator</option>
+                                                <option value="2" selected>Common user</option>
+                                            <%}%>                                            
+                                            
+                                        </select>
+                                    </td>
+                                    <td>
+                                        
                                         <button class="btn btn-sm btn-danger btn_user_delete"><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>

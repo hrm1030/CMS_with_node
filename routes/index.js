@@ -30,7 +30,10 @@ router.post('/ask_for_post_save', user.ask_for_post_save);
 /** Admin Router */
 router.get('/admin', auth_middleware.index, admin_middleware.index, admin.index);
 router.post('/admin/user/change_state', admin.change_state);
+router.post('/admin/user/change_permission', admin.change_permission);
 router.post('/admin/user/delete', admin.user_delete);
+router.post('/admin/user/close', admin.user_close);
+router.post('/admin/user/unclose', admin.user_unclose);
 
 router.post('/admin/category/save', admin.category_save);
 router.post('/admin/category/delete', admin.category_delete);
