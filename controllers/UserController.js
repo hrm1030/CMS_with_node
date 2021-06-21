@@ -129,7 +129,9 @@ exports.search_all = function(req, res) {
 }
 exports.get_category = function(req, res) {
     if(req.body.keyword == ''){
-        Category.find({}, (err, categories) => {
+        Category.find({
+            language : req.session.language
+        }, (err, categories) => {
             if(err) {
                 console.log(err);
             } else {
