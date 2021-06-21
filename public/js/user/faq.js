@@ -21,7 +21,7 @@ $(document).ready(function() {
                                     </div>
                                     <div class="panel-collapse collapse" id="faqs_${i+1}">
                                     <div class="panel-body">
-                                        ${data.faqs[i].content}
+                                        <p style="font-size : 15px;">${data.faqs[i].content}</p>
                                     </div>
                                     </div>
                                 </div>`;
