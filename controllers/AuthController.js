@@ -474,10 +474,9 @@ exports.signin = function (req, res, next) {
                             /** End */
                         }
                     }
-
                 }
             }
-        })
+        });
     }
 }
 

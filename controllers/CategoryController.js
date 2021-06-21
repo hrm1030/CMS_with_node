@@ -8,5 +8,5 @@ exports.save = function(req, res, next) {
         } else {
             res.status(200).send({ category : category });
         }
-    })
+    });
 }
