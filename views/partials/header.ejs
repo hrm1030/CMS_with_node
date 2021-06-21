@@ -42,7 +42,7 @@
                                 <%= session.name%> <%= session.surname %>
                             </a>
                             <ul class="dropdown-menu">
-                              <li><a href="/auth/profile"><i class="icon-user"></i> View Profile</a></li>
+                              <li <%if(recent_url == '/profile') {%> class="active" <%}%>><a href="/auth/profile"><i class="icon-user"></i> View Profile</a></li>
                               <li><a href="/auth/logout"><i class="icon-power"></i> Logout</a></li>
                             </ul>
                         </li>
