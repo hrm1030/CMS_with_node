@@ -305,7 +305,6 @@ exports.signin = function (req, res, next) {
                         res.render('pages/auth/login', { title: 'CMS | Login', errors: "Password is required.", session: req.session, recent_url : req.url  })
                     } else {
                         var passwordIsValid = bcrypt.compareSync(password, user.password);
-                        console.log(passwordIsValid + '=============')
                         if (!passwordIsValid) {
                             res.render('pages/auth/login', { title: 'CMS | Login', errors: "Please enter your password exactly.", session: req.session, recent_url : req.url  })
                         } else {
