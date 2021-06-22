@@ -31,7 +31,7 @@
                   <li><i class="fa fa-thumbs-up"></i> <span id="shared_span"><%= post.shared%></span></li>
                   <li><i class="fa fa-tags"></i> <%= post.category%></li>
                   <li><button class="btn btn-sm btn-default btn_preview" type="button"><i class="fa fa-eye"></i> Preview</button></li>
-                  <li><a class="btn btn-default btn-sm" href="/auth/profile/photo_generate"><i class="fa fa-paint-brush"></i> Logo Generate</a></li>
+                  <li><a class="btn btn-default btn-sm" href="/auth/profile/photo_generate"><i class="fa fa-paint-brush"></i> Logo Generate</a></li><br>
                   <li>
                     <div class="row" style="margin-bottom: -20px!important;">
                       <div class="col-md-9">
@@ -60,6 +60,13 @@
                       </div>
                       <input type="hidden" id="logo">
                     </div>
+                  </li><br>
+                  <li>
+                    <i class="fa fa-map-marker"></i> 
+                    <input type="radio" class="form-control" name="logo_position" id="tl" value="tl" checked> <label for="tl">Top left</label>
+                    <input type="radio" class="form-control" name="logo_position" id="tr" value="tr"> <label for="tr">Top right</label>
+                    <input type="radio" class="form-control" name="logo_position" id="bl" value="bl"> <label for="bl">Bottom left</label>
+                    <input type="radio" class="form-control" name="logo_position" id="br" value="br"> <label for="br">Bottom right</label>
                   </li>
                 </ul>
               </div>

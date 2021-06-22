@@ -38,7 +38,79 @@ exports.image_jimp = function(req, res) {
                     logo.resize(150, 150*(logo_h/logo_w));
                     img.resize(600, 600*(img_h/img_w));
                     var new_img_h = img.bitmap.height;
-                    img.blit(logo, 0, 0.85*new_img_h);
+                    var new_img_w = img.bitmap.width;
+                    var new_logo_h = logo.bitmap.height;
+                    var new_logo_w = logo.bitmap.width;
+                    var logo_position = req.query.logo_position;
+                    console.log((new_img_w - new_logo_w));
+
+                    if(logo_position === 'bl')
+                    {
+                        img.blit(logo, 0, 0.85*new_img_h);
+                    }
+                    if(logo_position === 'tl')
+                    {
+                        img.blit(logo, 0, 0);
+                    }
+                    if(logo_position === 'br')
+                    {
+                        img.blit(logo, 350, 0.85*new_img_h);
+                    }
+                    if(logo_position === 'tr')
+                    {
+                        img.blit(logo, 350, 0);
+                    }
+                    
+                    var current_time = new Date().getFullYear()+''+new Date().getMonth()+''+new Date().getDate()+''+new Date().getHours()+''+new Date().getMinutes()+''+new Date().getSeconds()+''+new Date().getMilliseconds();
+                    var share_img = 'share_'+req.session.userid+'_'+current_time+'.png';
+                    img.write('public/uploads/shares/'+share_img);
+                    res.json({ msg : 'success', share_img : share_img});
+                }
+            })
+        }
+    });
+}
+
+exports.image_jimp_position_change = function(req, res) {
+    console.log(req.query)
+    Jimp.read(`public/uploads/posts/${req.query.image}`, (err, img) => {
+        if(err) {
+            console.log(err);
+        } else {
+            Jimp.read(`public/uploads/logos/${req.query.logo}`, (err, logo) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                    var logo_w = logo.bitmap.width;
+                    var logo_h = logo.bitmap.height;
+                    var img_w = img.bitmap.width;
+                    var img_h = img.bitmap.height;
+
+                    logo.resize(150, 150*(logo_h/logo_w));
+                    img.resize(600, 600*(img_h/img_w));
+                    var new_img_h = img.bitmap.height;
+                    var new_img_w = img.bitmap.width;
+                    var new_logo_h = logo.bitmap.height;
+                    var new_logo_w = logo.bitmap.width;
+                    var logo_position = req.query.logo_position;
+                    console.log((new_img_w - new_logo_w));
+                    if(logo_position === 'bl')
+                    {
+                        img.blit(logo, 0, 0.85*new_img_h);
+                    }
+                    if(logo_position === 'tl')
+                    {
+                        img.blit(logo, 0, 0);
+                    }
+                    if(logo_position === 'br')
+                    {
+                        img.blit(logo, 350, 0.85*new_img_h);
+                    }
+                    if(logo_position === 'tr')
+                    {
+                        img.blit(logo, 350, 0);
+                    }
+                    
                     var current_time = new Date().getFullYear()+''+new Date().getMonth()+''+new Date().getDate()+''+new Date().getHours()+''+new Date().getMinutes()+''+new Date().getSeconds()+''+new Date().getMilliseconds();
                     var share_img = 'share_'+req.session.userid+'_'+current_time+'.png';
                     img.write('public/uploads/shares/'+share_img);

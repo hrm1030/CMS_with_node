@@ -65,5 +65,6 @@ router.post('/post/filesupload', post.filesupload);
 
 router.post('/share/logo_upload', share.logo_upload);
 router.get('/share/image_jimp', share.image_jimp);
+router.get('/share/image_jimp_position_change', share.image_jimp_position_change);
 router.get('/share', share.share);
 module.exports = router;

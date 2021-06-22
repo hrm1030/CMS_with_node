@@ -176,6 +176,7 @@ $(document).ready(function() {
       $.each($('#photo')[0].files, function(i, file) {
           data.append('file-'+i, file);
       });
+      var logo_position = $('input[name=logo_position]:checked').val();
       $.ajax({
           url: '/share/logo_upload',
           data: data,
@@ -193,7 +194,8 @@ $(document).ready(function() {
                 methdod : 'get',
                 data : {
                   image : $('#image').val(),
-                  logo : logo
+                  logo : logo,
+                  logo_position : logo_position
                 },
                 success : function(data) {
                   toastr['success']('Successfully image process.');
@@ -208,7 +210,40 @@ $(document).ready(function() {
       });
     }
     
-  })
+  });
+
+  $('input[name=logo_position]').change(function() {
+    var logo_position = $('input[name=logo_position]:checked').val();
+    var logo = $('#logo').val();
+    console.log(logo)
+    if(logo != '')
+    {
+      Metronic.blockUI({
+        boxed : true,
+        message: 'Image Processing...'
+      });
+      $.ajax({
+        url : '/share/image_jimp_position_change',
+        methdod : 'post',
+        data : {
+          image : $('#image').val(),
+          logo : logo,
+          logo_position : logo_position
+        },
+        success : function(data) {
+          Metronic.unblockUI();
+          toastr['success']('Successfully image process.');
+          $('#share_img').val(data.share_img);
+        },
+        error : function() {
+          Metronic.unblockUI();
+          toastr['error']('Happening any errors on position change.');
+        }
+      });
+    }
+    console.log(logo_position);
+    
+  });
 
   $('#search').keyup(function(){
     // Declare variables
