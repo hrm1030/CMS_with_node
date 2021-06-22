@@ -38,15 +38,12 @@ exports.image_jimp = function(req, res) {
                     logo.resize(150, 150*(logo_h/logo_w));
                     img.resize(600, 600*(img_h/img_w));
                     var new_img_h = img.bitmap.height;
-                    var new_img_w = img.bitmap.width;
                     var new_logo_h = logo.bitmap.height;
-                    var new_logo_w = logo.bitmap.width;
                     var logo_position = req.query.logo_position;
-                    console.log((new_img_w - new_logo_w));
 
                     if(logo_position === 'bl')
                     {
-                        img.blit(logo, 0, 0.85*new_img_h);
+                        img.blit(logo, 0, (new_img_h - new_logo_h));
                     }
                     if(logo_position === 'tl')
                     {
@@ -54,11 +51,11 @@ exports.image_jimp = function(req, res) {
                     }
                     if(logo_position === 'br')
                     {
-                        img.blit(logo, 350, 0.85*new_img_h);
+                        img.blit(logo, 450, (new_img_h - new_logo_h));
                     }
                     if(logo_position === 'tr')
                     {
-                        img.blit(logo, 350, 0);
+                        img.blit(logo, 450, 0);
                     }
                     
                     var current_time = new Date().getFullYear()+''+new Date().getMonth()+''+new Date().getDate()+''+new Date().getHours()+''+new Date().getMinutes()+''+new Date().getSeconds()+''+new Date().getMilliseconds();
@@ -89,14 +86,11 @@ exports.image_jimp_position_change = function(req, res) {
                     logo.resize(150, 150*(logo_h/logo_w));
                     img.resize(600, 600*(img_h/img_w));
                     var new_img_h = img.bitmap.height;
-                    var new_img_w = img.bitmap.width;
                     var new_logo_h = logo.bitmap.height;
-                    var new_logo_w = logo.bitmap.width;
                     var logo_position = req.query.logo_position;
-                    console.log((new_img_w - new_logo_w));
                     if(logo_position === 'bl')
                     {
-                        img.blit(logo, 0, 0.85*new_img_h);
+                        img.blit(logo, 0, (new_img_h - new_logo_h));
                     }
                     if(logo_position === 'tl')
                     {
@@ -104,11 +98,11 @@ exports.image_jimp_position_change = function(req, res) {
                     }
                     if(logo_position === 'br')
                     {
-                        img.blit(logo, 350, 0.85*new_img_h);
+                        img.blit(logo, 450, (new_img_h - new_logo_h));
                     }
                     if(logo_position === 'tr')
                     {
-                        img.blit(logo, 350, 0);
+                        img.blit(logo, 450, 0);
                     }
                     
                     var current_time = new Date().getFullYear()+''+new Date().getMonth()+''+new Date().getDate()+''+new Date().getHours()+''+new Date().getMinutes()+''+new Date().getSeconds()+''+new Date().getMilliseconds();
