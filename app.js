@@ -5,7 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
-var port = 8000;
+var port = 80;
 
 /** Websocket Server */
 var socket = require('./socket');
