@@ -8,7 +8,7 @@ var session = require('express-session');
 var port = 80;
 
 /** Websocket Server */
-var socket = require('./socket');
+// var socket = require('./socket');
 /** End Websocket */
 
 /** MongoDB connect */

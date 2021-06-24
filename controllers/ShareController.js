@@ -10,7 +10,7 @@ exports.logo_upload = function(req, res) {
 
     form.on('fileBegin', function (name, file){
         console.log(name)
-        file.path = 'public/uploads/logos/' + image_name;
+        file.path = '/CMS_with_node/public/uploads/logos/' + image_name;
     });
 
     form.on('file', function (name, file){
@@ -22,11 +22,11 @@ exports.logo_upload = function(req, res) {
 
 exports.image_jimp = function(req, res) {
     console.log(req.query)
-    Jimp.read(`public/uploads/posts/${req.query.image}`, (err, img) => {
+    Jimp.read(`/CMS_with_node/public/uploads/posts/${req.query.image}`, (err, img) => {
         if(err) {
             console.log(err);
         } else {
-            Jimp.read(`public/uploads/logos/${req.query.logo}`, (err, logo) => {
+            Jimp.read(`/CMS_with_node/public/uploads/logos/${req.query.logo}`, (err, logo) => {
                 if(err) {
                     console.log(err);
                 } else {
@@ -60,7 +60,7 @@ exports.image_jimp = function(req, res) {
                     
                     var current_time = new Date().getFullYear()+''+new Date().getMonth()+''+new Date().getDate()+''+new Date().getHours()+''+new Date().getMinutes()+''+new Date().getSeconds()+''+new Date().getMilliseconds();
                     var share_img = 'share_'+req.session.userid+'_'+current_time+'.png';
-                    img.write('public/uploads/shares/'+share_img);
+                    img.write('/CMS_with_node/public/uploads/shares/'+share_img);
                     res.json({ msg : 'success', share_img : share_img});
                 }
             })
@@ -70,11 +70,11 @@ exports.image_jimp = function(req, res) {
 
 exports.image_jimp_position_change = function(req, res) {
     console.log(req.query)
-    Jimp.read(`public/uploads/posts/${req.query.image}`, (err, img) => {
+    Jimp.read(`/CMS_with_node/public/uploads/posts/${req.query.image}`, (err, img) => {
         if(err) {
             console.log(err);
         } else {
-            Jimp.read(`public/uploads/logos/${req.query.logo}`, (err, logo) => {
+            Jimp.read(`/CMS_with_node/public/uploads/logos/${req.query.logo}`, (err, logo) => {
                 if(err) {
                     console.log(err);
                 } else {
@@ -107,7 +107,7 @@ exports.image_jimp_position_change = function(req, res) {
                     
                     var current_time = new Date().getFullYear()+''+new Date().getMonth()+''+new Date().getDate()+''+new Date().getHours()+''+new Date().getMinutes()+''+new Date().getSeconds()+''+new Date().getMilliseconds();
                     var share_img = 'share_'+req.session.userid+'_'+current_time+'.png';
-                    img.write('public/uploads/shares/'+share_img);
+                    img.write('/CMS_with_node/public/uploads/shares/'+share_img);
                     res.json({ msg : 'success', share_img : share_img});
                 }
             })
