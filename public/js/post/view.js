@@ -2,6 +2,7 @@ $(document).ready(function() {
 
   toastr['info']('To share post on social site, please follow as following steps.<br><br>1. Generate logo.<br>( If you have your logo, you can skip logo generating. )<br><br>2. Upload logo.<br><br>3. Preview the post.<br><br>4. Share on social site.');
 
+  var my_url = 'http://app.social-media-builder.com';
   $.ajax({
       url : '/post/view_ajax',
       method : 'post',
@@ -91,7 +92,7 @@ $(document).ready(function() {
         success : function(data){
           $('#left_membership').val(data.left_membership);
           $('#shared_span').text(data.shared);
-          window.open(`https://www.facebook.com/sharer.php?image=${share_img_url}&title=${title}&description=${content}`, 'NewWindow');
+          window.open(`https://www.facebook.com/sharer.php?link=${encodeURIComponent(my_url)}&picture=${encodeURIComponent(share_img_url)}&name=${encodeURIComponent(title)}&description=${encodeURIComponent(content)}&redirect_uri=https://www.facebook.com`, 'NewWindow');
         },
         error : function() {
           toastr['error']('Happening any errors on update membership');
@@ -122,7 +123,7 @@ $(document).ready(function() {
         success : function(data){
           $('#left_membership').val(data.left_membership);
           $('#shared_span').text(data.shared);
-          window.open(`https://twitter.com/share?image=${share_img_url}&title=${title}&text=${content}`, 'NewWindow');
+          window.open(`https://twitter.com/share?url=${my_url}&image=${share_img_url}&title=${title}&text=${content}`, 'NewWindow');
         },
         error : function() {
           toastr['error']('Happening any errors on update membership');
@@ -153,7 +154,7 @@ $(document).ready(function() {
         success : function(data){
           $('#left_membership').val(data.left_membership);
           $('#shared_span').text(data.shared);
-          window.open(`https://www.linkedin.com/sharing/share-offsite/?image=${share_img_url}&title=${title}&description=${content}`, 'NewWindow');
+          window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${my_url}&image=${share_img_url}&title=${title}&summary=${content}`, 'NewWindow');
         },
         error : function() {
           toastr['error']('Happening any errors on update membership');

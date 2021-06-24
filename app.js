@@ -7,10 +7,6 @@ var logger = require('morgan');
 var session = require('express-session');
 var port = 80;
 
-/** Websocket Server */
-// var socket = require('./socket');
-/** End Websocket */
-
 /** MongoDB connect */
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/cms', {useNewUrlParser: true, useUnifiedTopology: true});
