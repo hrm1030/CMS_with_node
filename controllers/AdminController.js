@@ -276,7 +276,7 @@ exports.trainingupload = function(req, res) {
 
     form.on('fileBegin', function (name, file){
         console.log(name)
-        file.path = 'public/videos/trainings/' + video_name;
+        file.path = '/CMS_with_node/public/videos/trainings/' + video_name;
     });
 
     form.on('file', function (name, file){
@@ -293,7 +293,7 @@ exports.infoupload = function(req, res) {
 
     form.on('fileBegin', function (name, file){
         console.log(name)
-        file.path = 'public/videos/info.mp4';
+        file.path = '/CMS_with_node/public/videos/info.mp4';
     });
 
     form.on('file', function (name, file){
@@ -311,9 +311,9 @@ exports.video_delete = function(req, res) {
             var urls = video.url.split('/');
             if(urls[4] == 'info.mp4')
             {
-                fs.unlinkSync('public/videos/'+ urls[4]);
+                fs.unlinkSync('/CMS_with_node/public/videos/'+ urls[4]);
             } else {
-                fs.unlinkSync('public/videos/trainings/'+ urls[4]);
+                fs.unlinkSync('/CMS_with_node/public/videos/trainings/'+ urls[4]);
             }
             res.json({msg : 'delete'});
         }

@@ -496,7 +496,7 @@ var storage = multer.diskStorage({
     destination: function (req, file, cb) {
 
         // Uploads is the Upload_folder_name
-        cb(null, "public/uploads/users")
+        cb(null, "/CMS_with_node/public/uploads/users")
     },
     filename: function (req, file, cb) {
         cb(null, req.session.userid + ".png")
