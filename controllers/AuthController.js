@@ -290,6 +290,30 @@ exports.membership_save = function (req, res) {
               res.redirect('/error');
             }
         });
+    }else {
+        var today = new Date();
+        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + '.' + today.getMilliseconds();
+        User.findByIdAndUpdate(req.body.user_id, {
+            $set: {
+                membership: req.body.membership,
+                left_membership: req.body.membership,
+                ask: 1,
+                created_at: date,
+                card_number: req.body.cardnumber,
+                expire_month: req.body.month,
+                expire_year: req.body.year,
+                cvc: req.body.cvc,
+                started_at: date,
+                state: 1
+            }
+        }, (err) => {
+            if (err) {
+                console.log(err);
+                res.redirect('/error');
+            } else {
+                res.json({ msg: 'success' });
+            }
+        });
     }
     
 }
@@ -591,7 +615,6 @@ exports.photo_generate = function (req, res, next) {
 exports.logout = function (req, res, next) {
     req.session.destroy((err) => {
         console.log(err)
-        res.redirect('/error');
     });
     res.redirect('/');
 }
