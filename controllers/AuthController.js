@@ -9,7 +9,7 @@ var fs = require('fs');
 const braintree = require("braintree");
 
 const gateway = new braintree.BraintreeGateway({
-  environment: braintree.Environment.Production,
+  environment: braintree.Environment.Sandbox,
   merchantId: "s4v9y5nc2tyf46xt",
   publicKey: "5fb9srb4qzz2gdkn",
   privateKey: "dce4bafe144194b6e8896116c0dcb63b"

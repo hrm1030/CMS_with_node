@@ -92,7 +92,9 @@ $(document).ready(function() {
         success : function(data){
           $('#left_membership').val(data.left_membership);
           $('#shared_span').text(data.shared);
-          window.open(`https://www.facebook.com/sharer.php?link=${encodeURIComponent(my_url)}&picture=${encodeURIComponent(share_img_url)}&name=${encodeURIComponent(title)}&description=${encodeURIComponent(content)}&redirect_uri=https://www.facebook.com`, 'NewWindow');
+          var total_url = encodeURIComponent(my_url+'?img='+share_img_url);
+          window.open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(total_url)}&t=${encodeURIComponent(title)}`,'','width=500, height=500, scrollbars=yes, resizable=no', 'NewWindow');
+          // window.open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(share_img_url)}&t=${encodeURIComponent(title)}`,'sharer','toolbar=0,status=0,width=626,height=436', 'NewWindow');
         },
         error : function() {
           toastr['error']('Happening any errors on update membership');
@@ -123,7 +125,8 @@ $(document).ready(function() {
         success : function(data){
           $('#left_membership').val(data.left_membership);
           $('#shared_span').text(data.shared);
-          window.open(`https://twitter.com/share?url=${my_url}&image=${share_img_url}&title=${title}&text=${content}`, 'NewWindow');
+          // window.open(`https://twitter.com/share?url=${my_url}&image=${share_img_url}&title=${title}&text=${content}`, 'NewWindow');
+          window.open(`https://twitter.com/share?url=${share_img_url}&title=${title}&text=${content}`, 'NewWindow');
         },
         error : function() {
           toastr['error']('Happening any errors on update membership');
