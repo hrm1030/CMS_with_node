@@ -26,6 +26,7 @@ exports.save = function(req, res, next) {
     }, (err, post) => {
         if(err){
             console.log(err)
+            res.redirect('/error');
         } else {
             res.json({post:post});
         }
@@ -40,7 +41,7 @@ exports.filesupload = function(req, res) {
 
     form.on('fileBegin', function (name, file){
         console.log(name)
-        file.path = 'public/uploads/posts/' + image_name;
+        file.path = '/CMS_with_node/public/uploads/posts/' + image_name;
     });
 
     form.on('file', function (name, file){
@@ -54,6 +55,7 @@ exports.get = function(req, res) {
     Post.find({}, (err, posts) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         }else {
             res.json({posts : posts});
         }
@@ -64,6 +66,7 @@ exports.preview = function(req, res) {
     Post.findById(req.body.post_id, (err, post) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             res.json({ post : post});
         }
@@ -75,10 +78,12 @@ exports.list = function(req, res) {
     Post.find({category_id : category_id}, (err, posts)=> {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             Category.find({language : req.session.language}, (err, categories) => {
                 if(err) {
                     console.log(err);
+                    res.redirect('/error');
                 } else {
                     var url_arr = req.url.split('/');
                     res.render('pages/user/post/list', {title : 'CMS | Post List', session : req.session, posts: posts, categories : categories, selected_cat_id : category_id, recent_url : url_arr[1]});
@@ -94,6 +99,7 @@ exports.selected_category = function(req, res) {
     Post.find({category_id : cat_id, language : req.session.language}, (err, posts) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             res.json({posts : posts});
         }
@@ -105,10 +111,12 @@ exports.view = function(req, res) {
     Category.find({language : req.session.language}, (err, categories) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             Post.findById(req.query.post, (err, post) => {
                 if(err) {
                     console.log(err);
+                    res.redirect('/error');
                 } else {
                     var url_arr = req.url.split('/');
                     res.render('pages/user/post/view', {title : 'CMS | Post View', post_id : post_id, session : req.session, categories : categories, post : post, recent_url : url_arr[1]});;
@@ -124,6 +132,7 @@ exports.view_ajax = function(req, res) {
     Post.findById(req.body.post_id, (err, post) => {
         if (err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             res.json({ post : post, session : req.session});
         }

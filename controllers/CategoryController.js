@@ -4,7 +4,7 @@ exports.save = function(req, res, next) {
         name : req.body.name,
     }, (err, category) => {
         if(err){
-            res.status(500).send(err);
+            res.redirect('/error');
         } else {
             res.status(200).send({ category : category });
         }

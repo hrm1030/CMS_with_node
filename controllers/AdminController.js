@@ -11,18 +11,22 @@ exports.index = function(req, res, next) {
     User.find({}, (err, users) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             Category.find({}, (err, categories) => {
                 if(err) {
                     console.log(err);
+                    res.redirect('/error');
                 } else {
                     Industry.find({}, (err, industries) => {
                         if(err) {
                             console.log(err);
+                            res.redirect('/error');
                         } else {
                             Post.find({}, (err, posts) => {
                                 if(err) {
                                     console.log(err)
+                                    res.redirect('/error');
                                 } else {
                                     res.render('pages/admin/home', {title : 'CMS | Admin', session : req.session, users : users, categories : categories, industries : industries, posts : posts, recent_url : req.url});
                                 }
@@ -41,6 +45,7 @@ exports.change_state = function(req, res) {
     }}, (err, user) => {
         if(err) {
             console.log(err)
+            res.redirect('/error');
         } else {
             res.json({ msg : 'success'});
         }
@@ -53,6 +58,7 @@ exports.change_permission = function(req, res) {
     }}, (err, user) => {
         if(err) {
             console.log(err)
+            res.redirect('/error');
         } else {
             res.json({ msg : 'success'});
         }
@@ -65,6 +71,7 @@ exports.user_close = function(req, res) {
     }}, (err, user) => {
         if(err) {
             console.log(err)
+            res.redirect('/error');
         } else {
             res.json({ msg : 'success'});
         }
@@ -77,6 +84,7 @@ exports.user_unclose = function(req, res) {
     }}, (err, user) => {
         if(err) {
             console.log(err)
+            res.redirect('/error');
         } else {
             res.json({ msg : 'success'});
         }
@@ -87,6 +95,7 @@ exports.user_delete = function(req, res) {
     User.findByIdAndDelete(req.body.user_id, (err) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             res.json({ msg : 'success'});
         }
@@ -105,6 +114,7 @@ exports.category_save = function(req, res) {
         }, (err, category)=> {
             if(err) {
                 console.log(err);
+                res.redirect('/error');
             } else {
                 res.json({msg: 'save', category: category});
             }
@@ -115,6 +125,7 @@ exports.category_save = function(req, res) {
         }}, (err) => {
             if(err) {
                 console.log(err);
+                res.redirect('/error');
             } else {
                 category = {
                     _id : cat_id,
@@ -134,6 +145,7 @@ exports.category_delete = function(req, res) {
     Category.findByIdAndDelete(cat_id, (err) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             category = {
                 _id : cat_id
@@ -154,6 +166,7 @@ exports.industry_save = function(req, res) {
         }, (err, industry)=> {
             if(err) {
                 console.log(err);
+                res.redirect('/error');
             } else {
                 res.json({msg: 'save', industry: industry});
             }
@@ -164,6 +177,7 @@ exports.industry_save = function(req, res) {
         }}, (err) => {
             if(err) {
                 console.log(err);
+                res.redirect('/error');
             } else {
                 industry = {
                     _id : industry_id,
@@ -182,6 +196,7 @@ exports.industry_delete = function(req, res) {
     Industry.findByIdAndDelete(industry_id, (err) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             industry = {
                 _id : industry_id
@@ -195,6 +210,7 @@ exports.post_delete = function(req, res) {
     Post.findByIdAndDelete(req.body.post_id, (err) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             res.json({ msg : 'success'});
         }
@@ -207,6 +223,7 @@ exports.training_save = function(req, res) {
         Training.findOne({type : 'info'}, (err, training) => {
             if(err) {
                 console.log(err);
+                res.redirect('/error');
             } else {
                 if(training) {
                     Training.findOneAndUpdate({type : 'info'}, {$set : {
@@ -218,6 +235,7 @@ exports.training_save = function(req, res) {
                     }}, (err, training) => {
                         if(err) {
                             console.log(err);
+                            res.redirect('/error');
                         } else {
                             res.json({video : training});
                         }
@@ -232,6 +250,7 @@ exports.training_save = function(req, res) {
                     }, (err, training) => {
                         if(err) {
                             console.log(err);
+                            res.redirect('/error');
                         } else {
                             res.json({video : training});
                         }
@@ -250,6 +269,7 @@ exports.training_save = function(req, res) {
         }, (err, training) => {
             if(err) {
                 console.log(err);
+                res.redirect('/error');
             } else {
                 res.json({video : training});
             }
@@ -262,6 +282,7 @@ exports.videos = function(req, res) {
     Training.find({}, (err, trainings) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             res.render('pages/admin/video', {title : 'CMS | Video Management', session : req.session, trainings : trainings, recent_url : req.url});
         }
@@ -293,7 +314,7 @@ exports.infoupload = function(req, res) {
 
     form.on('fileBegin', function (name, file){
         console.log(name)
-        file.path = '/CMS_with_node/public/videos/info.mp4';
+        file.path = 'public/videos/info.mp4';
     });
 
     form.on('file', function (name, file){
@@ -307,15 +328,28 @@ exports.video_delete = function(req, res) {
     Training.findByIdAndDelete(req.body.video_id, (err, video) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             var urls = video.url.split('/');
-            if(urls[4] == 'info.mp4')
+            console.log(urls[3]);
+            if(urls[3] == 'info.mp4')
             {
-                fs.unlinkSync('/CMS_with_node/public/videos/'+ urls[4]);
+                fs.unlinkSync('/CMS_with_node/public/videos/'+ urls[3], (err) =>{
+                    if(err) {
+                        res.redirect('/error');
+                    } else {
+                        res.json({msg : 'delete'});
+                    }
+                });
             } else {
-                fs.unlinkSync('/CMS_with_node/public/videos/trainings/'+ urls[4]);
+                fs.unlinkSync('/CMS_with_node/public/videos/trainings/'+ urls[3],  (err) =>{
+                    if(err) {
+                        res.redirect('/error');
+                    } else {
+                        res.json({msg : 'delete'});
+                    }
+                });
             }
-            res.json({msg : 'delete'});
         }
     });
 }
@@ -324,12 +358,14 @@ exports.faq = function(req, res) {
     Faq.find({}, (err, faqs) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             Category.find({
                 language : 'EN'
             }, (err, categories) => {
                 if(err) {
                     console.log(err);
+                    res.redirect('/error');
                 } else {
                     res.render('pages/admin/faq', {title : 'CMS | FAQ', session : req.session, categories : categories, faqs : faqs, recent_url : req.url});                   
                 }
@@ -344,6 +380,7 @@ exports.change_language = function(req, res) {
     }, (err, categories) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             res.json({categories : categories});
         }
@@ -360,6 +397,7 @@ exports.faq_save = function(req, res) {
     }, (err, faq) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             res.json({faq : faq});
         }
@@ -373,7 +411,11 @@ exports.faq_update = function(req, res) {
         title : req.body.title,
         content : req.body.content
     }}, (err, faq) => {
-        res.json({faq : faq});
+        if(err) {
+            res.redirect('/error');
+        } else{
+            res.json({faq : faq});
+        }
     })
 }
 
@@ -381,6 +423,7 @@ exports.faq_delete = function(req, res) {
     Faq.findByIdAndDelete(req.body.faq_id, (err) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             res.json({msg : 'success'});
         }

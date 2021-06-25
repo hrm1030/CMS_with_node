@@ -43,6 +43,7 @@ exports.training = function(req, res) {
     }, (err, trainings) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             console.log(trainings)
             res.render('pages/user/training', {title : 'CMS | Training', session : req.session, trainings : trainings, recent_url : req.url});
@@ -54,6 +55,7 @@ exports.get_training = function(req, res) {
     Training.findById(req.body.training_id, (err, training) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             res.json({training : training});
         }
@@ -72,6 +74,7 @@ exports.support_save = function(req, res) {
     }, (err) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             var mailOptions = {
                 from: `${master_email}`,
@@ -122,6 +125,7 @@ exports.search_all = function(req, res) {
     }, (err, categories) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             res.json({categories : categories});
         }
@@ -134,6 +138,7 @@ exports.get_category = function(req, res) {
         }, (err, categories) => {
             if(err) {
                 console.log(err);
+                res.redirect('/error');
             } else {
                 res.json({categories : categories});
             }
@@ -144,6 +149,7 @@ exports.get_category = function(req, res) {
         }, (err, categories) => {
             if(err) {
                 console.log(err);
+                res.redirect('/error');
             }else {
                 var new_categories = Array();
                 for(var i = 0 ; i < categories.length ; i ++) 
@@ -166,6 +172,7 @@ exports.faq = function(req, res) {
     }, (err, categories) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             
                 Faq.find({
@@ -173,6 +180,7 @@ exports.faq = function(req, res) {
                 }, (err, faqs) => {
                     if(err) {
                         console.log(err);
+                        res.redirect('/error');
                     } else {
                         res.render('pages/user/faq', {title : 'CMS | FAQ', session : req.session, faqs : faqs, categories : categories, recent_url : req.url});
                     }
@@ -187,6 +195,7 @@ exports.get_faqs = function(req, res) {
     Faq.find({category : req.body.category}, (err, faqs) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             res.json({ faqs : faqs});
         }
@@ -197,6 +206,7 @@ exports.recommend_category = function(req, res) {
     Category.find({}, (err, categories) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             res.render('pages/user/recommend_category', { title : 'CMS | Recommend Category', session : req.session, categories : categories, recent_url : req.url, error : ''});
         }
@@ -212,6 +222,7 @@ exports.recommend_category_save = function(req, res) {
     }, (err) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             var mailOptions = {
                 from: `${master_email}`,
@@ -270,6 +281,7 @@ exports.ask_for_post = function(req, res) {
     }, (err, categories) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             res.render('pages/user/ask_for_post', {title : 'CMS | Ask for a post', session : req.session, categories : categories, recent_url : req.url});
         }
@@ -286,16 +298,19 @@ exports.ask_for_post_save = function(req, res) {
     }, (err) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             User.findById(req.session.userid, (err, user) => {
                 if(err) {
                     console.log(err);
+                    res.redirect('/error');
                 } else {
                     User.findByIdAndUpdate(req.session.userid, { $set : {
                         ask : user.ask - 1
                     }}, (err) => {
                         if(err) {
                             console.log(err);
+                            res.redirect('/error');
                         } else {
                             req.session.ask = user.ask - 1;
                             res.redirect('/faq');
@@ -328,6 +343,7 @@ exports.membership_update = function(req, res) {
           }, function (err, result) {
             if (err) {
               // handle err
+              res.redirect('/error');
             }
           
             if (result.success) {
@@ -344,6 +360,7 @@ exports.membership_update = function(req, res) {
                   gateway.creditCard.create(creditCardParams, (err, response) => {
                       if(err) {
                           console.log(err);
+                          res.redirect('/error');
                       } else {
                         console.log(response);
 
@@ -393,6 +410,7 @@ exports.membership_update = function(req, res) {
                   });
             } else {
               console.error(result.message);
+              res.redirect('/error');
             }
         });
     }

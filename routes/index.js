@@ -11,6 +11,7 @@ var share = require('../controllers/ShareController');
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'CMS | Home', session : req.session, recent_url : req.url });
 });
+
 router.get('/info', user.info);
 router.get('/training', user.training);
 router.post('/get_training', user.get_training);

@@ -23,7 +23,7 @@ exports.login = function (req, res, next) {
 exports.register = function (req, res, next) {
     Industry.find({}, (err, industries) => {
         if (err) {
-            res.status(500).send(err);
+            res.redirect('/error');
         } else {
             res.render('pages/auth/register', { title: "CMS | Register", industries: industries, session: req.session, recent_url : req.url });
         }
@@ -98,6 +98,7 @@ exports.signup = function (req, res, next) {
                         User.findByIdAndDelete(user._id, (err) => {
                             if(err) {
                                 console.log(err);
+                                res.redirect('/error');
                             } else {
                                 if (password === confirm_password) {
                                     console.log(phone)
@@ -130,10 +131,12 @@ exports.signup = function (req, res, next) {
             
                                         if (err) {
                                             console.log(err)
+                                            res.redirect('/error');
                                         } else {
                                             fs.copyFile('public/uploads/users/avatar.png', 'public/uploads/users/' + user._id + '.png', (err) => {
                                                 if (err) {
                                                     console.log(err);
+                                                    res.redirect('/error');
                                                 } else {
                                                     res.json({ msg: 'success', errors: [], user_id: user._id });
                                                 }
@@ -180,10 +183,12 @@ exports.signup = function (req, res, next) {
 
                             if (err) {
                                 console.log(err)
+                                res.redirect('/error');
                             } else {
                                 fs.copyFile('public/uploads/users/avatar.png', 'public/uploads/users/' + user._id + '.png', (err) => {
                                     if (err) {
                                         console.log(err);
+                                        res.redirect('/error');
                                     } else {
                                         res.json({ msg: 'success', errors: [], user_id: user._id });
                                     }
@@ -218,6 +223,7 @@ exports.membership_save = function (req, res) {
           }, function (err, result) {
             if (err) {
               // handle err
+            res.redirect('/error');
             }
           
             if (result.success) {
@@ -234,6 +240,7 @@ exports.membership_save = function (req, res) {
                   gateway.creditCard.create(creditCardParams, (err, response) => {
                       if(err) {
                           console.log(err.message);
+                          res.redirect('/error');
                       } else {
                           console.log(response);
                             if(response.success === true)
@@ -265,6 +272,7 @@ exports.membership_save = function (req, res) {
                                 }, (err) => {
                                     if (err) {
                                         console.log(err);
+                                        res.redirect('/error');
                                     } else {
                                         res.json({ msg: 'success' });
                                     }
@@ -279,6 +287,7 @@ exports.membership_save = function (req, res) {
                   });
             } else {
               console.error(result.message);
+              res.redirect('/error');
             }
         });
     }
@@ -297,6 +306,7 @@ exports.signin = function (req, res, next) {
         }, (err, user) => {
             if (err) {
                 console.log(err);
+                res.redirect('/error');
             } else {
                 if (user == null) {
                     res.render('pages/auth/login', { title: 'CMS | Login', errors: "Please enter your email exactly. ", session: req.session, recent_url : req.url  })
@@ -312,6 +322,7 @@ exports.signin = function (req, res, next) {
                                 User.findByIdAndDelete(user._id, (err) => {
                                     if(err) {
                                         console.log(err);
+                                        res.redirect('/error');
                                     } else {
                                         res.render('pages/auth/login', { title: 'CMS | Login', errors: "You didn't buy membership. Your account is not allowed and deleted.", session: req.session, recent_url : req.url })
                                     }
@@ -381,6 +392,7 @@ exports.signin = function (req, res, next) {
                                           }, function (err, result) {
                                             if (err) {
                                               // handle err
+                                                res.redirect('/error');
                                             }
                                           
                                             if (result.success) {
@@ -397,6 +409,7 @@ exports.signin = function (req, res, next) {
                                                   gateway.creditCard.create(creditCardParams, (err, response) => {
                                                       if(err) {
                                                           console.log(err);
+                                                          res.redirect('/error');
                                                       } else {
                                                         console.log(response);
                                                         res.json({ response : response });
@@ -408,6 +421,7 @@ exports.signin = function (req, res, next) {
                                                         }, (err) => {
                                                             if (err) {
                                                                 console.log(err);
+                                                                res.redirect('/error');
                                                             } else {
                                                                 req.session.started_at = new Date(new Date(user.started_at).getTime() + 2592000000);
                                                                 if (user.permission == 1) {
@@ -421,6 +435,7 @@ exports.signin = function (req, res, next) {
                                                   });
                                             } else {
                                               console.error(result.message);
+                                              res.redirect('/error');
                                             }
                                           });
                                     } else {
@@ -442,6 +457,7 @@ exports.signin = function (req, res, next) {
                                             }, (err) => {
                                                 if (err) {
                                                     console.log(err);
+                                                    res.redirect('/error');
                                                 } else {
                                                     req.session.left_membership = user.membership;
                                                     req.session.created_at = new Date(new Date(user.created_at).getTime() + 596793842);
@@ -484,6 +500,7 @@ exports.profile = function (req, res, next) {
     Post.find({}, (err, posts) => {
         if (err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             var post_cnt = posts.length;
             res.render('pages/user/profile', { title: 'CMS | Profile', session: req.session, post_cnt: post_cnt, shared_cnt: req.session.shared_cnt, recent_url : req.url });
@@ -539,7 +556,7 @@ exports.profile_save = function (req, res) {
             // ERROR occured (here it can be occured due
             // to uploading image of size greater than
             // 1MB or uploading different file type)
-            res.send(err)
+            res.redirect('/error');
         }
         else {
             req.session.photo = req.session.userid + '.png';
@@ -553,6 +570,7 @@ exports.profile_save = function (req, res) {
             }, (err) => {
                 if (err) {
                     console.log(err);
+                    res.redirect('/error');
                 } else {
                     res.redirect('/auth/profile');
                 }
@@ -573,6 +591,7 @@ exports.photo_generate = function (req, res, next) {
 exports.logout = function (req, res, next) {
     req.session.destroy((err) => {
         console.log(err)
+        res.redirect('/error');
     });
     res.redirect('/');
 }

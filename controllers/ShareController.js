@@ -25,10 +25,12 @@ exports.image_jimp = function(req, res) {
     Jimp.read(`/CMS_with_node/public/uploads/posts/${req.query.image}`, (err, img) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             Jimp.read(`/CMS_with_node/public/uploads/logos/${req.query.logo}`, (err, logo) => {
                 if(err) {
                     console.log(err);
+                    res.redirect('/error');
                 } else {
                     var logo_w = logo.bitmap.width;
                     var logo_h = logo.bitmap.height;
@@ -60,8 +62,13 @@ exports.image_jimp = function(req, res) {
                     
                     var current_time = new Date().getFullYear()+''+new Date().getMonth()+''+new Date().getDate()+''+new Date().getHours()+''+new Date().getMinutes()+''+new Date().getSeconds()+''+new Date().getMilliseconds();
                     var share_img = 'share_'+req.session.userid+'_'+current_time+'.png';
-                    img.write('/CMS_with_node/public/uploads/shares/'+share_img);
-                    res.json({ msg : 'success', share_img : share_img});
+                    img.write('/CMS_with_node/public/uploads/shares/'+share_img, (err)=> {
+                        if(err) {
+                            res.redirect('/error');
+                        } else {
+                            res.json({ msg : 'success', share_img : share_img});
+                        }
+                    });
                 }
             })
         }
@@ -73,10 +80,12 @@ exports.image_jimp_position_change = function(req, res) {
     Jimp.read(`/CMS_with_node/public/uploads/posts/${req.query.image}`, (err, img) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             Jimp.read(`/CMS_with_node/public/uploads/logos/${req.query.logo}`, (err, logo) => {
                 if(err) {
                     console.log(err);
+                    res.redirect('/error');
                 } else {
                     var logo_w = logo.bitmap.width;
                     var logo_h = logo.bitmap.height;
@@ -107,8 +116,13 @@ exports.image_jimp_position_change = function(req, res) {
                     
                     var current_time = new Date().getFullYear()+''+new Date().getMonth()+''+new Date().getDate()+''+new Date().getHours()+''+new Date().getMinutes()+''+new Date().getSeconds()+''+new Date().getMilliseconds();
                     var share_img = 'share_'+req.session.userid+'_'+current_time+'.png';
-                    img.write('/CMS_with_node/public/uploads/shares/'+share_img);
-                    res.json({ msg : 'success', share_img : share_img});
+                    img.write('/CMS_with_node/public/uploads/shares/'+share_img, (err) => {
+                        if(err ) {
+                            res.redirect('/error');
+                        } else {
+                            res.json({ msg : 'success', share_img : share_img});
+                        }
+                    });
                 }
             })
         }
@@ -119,6 +133,7 @@ exports.share = function(req, res) {
     User.findById(req.session.userid, (err, user) => {
         if(err) {
             console.log(err);
+            res.redirect('/error');
         } else {
             User.findByIdAndUpdate(req.session.userid, {$set: {
                 left_membership : user.left_membership - 1,
@@ -126,17 +141,20 @@ exports.share = function(req, res) {
             }}, (err) => {
                 if(err) {
                     console.log(err);
+                    res.redirect('/error');
                 } else {
                     req.session.shared_cnt = user.shared_cnt + 1;
                     Post.findById(req.query.post_id, (err, post) => {
                         if(err) {
                             console.log(err);
+                            res.redirect('/error');
                         } else {
                             Post.findByIdAndUpdate(req.query.post_id, { $set : {
                                 shared : post.shared + 1
                             }}, (err) => {
                                 if(err) {
                                     console.log(err);
+                                    res.redirect('/error');
                                 } else {
                                     req.session.left_membership = user.left_membership - 1;
                                     res.json({msg : 'success', left_membership : req.session.left_membership, shared : post.shared+1});
