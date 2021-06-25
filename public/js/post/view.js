@@ -157,7 +157,8 @@ $(document).ready(function() {
         success : function(data){
           $('#left_membership').val(data.left_membership);
           $('#shared_span').text(data.shared);
-          window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${my_url}&image=${share_img_url}&title=${title}&summary=${content}`, 'NewWindow');
+          // window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${my_url}&image=${share_img_url}&title=${title}&summary=${content}`, 'NewWindow');
+          window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${share_img_url}&title=${title}&summary=${content}`, '', 'left=0,top=0,width=650,height=420,personalbar=0,toolbar=0,scrollbars=0,resizable=0', 'NewWindow');
         },
         error : function() {
           toastr['error']('Happening any errors on update membership');
