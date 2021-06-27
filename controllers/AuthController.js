@@ -9,8 +9,8 @@ var fs = require('fs');
 const braintree = require("braintree");
 var nodemailer = require('nodemailer');
 
-const master_email = '';
-const master_password = '';
+const master_email = 'governmentuseremail@gmail.com';
+const master_password = 'noBugsNow1';
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
