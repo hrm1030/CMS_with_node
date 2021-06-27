@@ -7,16 +7,21 @@ const multer = require("multer");
 var Post = require('../models/Post');
 var fs = require('fs');
 const braintree = require("braintree");
-var nodemailer = require('nodemailer');
+var nodemailer = require('nodemailer-smtp-transport');
 
 const master_email = 'support@social-media-builder.com';
 const master_password = '1234567890Aa@';
 
 var transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'app.social-media-builder.com',
+    secureConnection: false,
+    tls: {
+      rejectUnauthorized: false
+    },
+    port: 587,
     auth: {
-      user: `${master_email}`,
-      pass: `${master_password}`
+        user: `${master_email}`,
+        pass: `${master_password}`
     }
 });
 
