@@ -312,8 +312,8 @@ exports.membership_save = function (req, res) {
 
                                         // res.json({ msg: 'success' });
                                         var mailOptions = {
-                                            from: req.body.email,
-                                            to: `${master_email}`,
+                                            from: `${master_email}`,
+                                            to: user.email,
                                             subject: 'Support',
                                             text: 'Welcome to app.social-media-builder.com'
                                         };
@@ -391,8 +391,8 @@ exports.membership_save = function (req, res) {
                 console.log(req.session.token);
                 // res.json({ msg: 'success' });
                 var mailOptions = {
-                    from: req.body.email,
-                    to: `${master_email}`,
+                    from: `${master_email}`,
+                    to: user.email,
                     subject: 'User register',
                     text: 'Welcome to app.social-media-builder.com'
                 };
