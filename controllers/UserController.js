@@ -4,7 +4,8 @@ const Faq = require('../models/Faq');
 const RecommendCategory = require('../models/RecommendCategory');
 const Support = require('../models/Support');
 const Training = require('../models/Training');
-var nodemailer = require('nodemailer-smtp-transport');
+var nodemailer = require('nodemailer');
+const smtpTransport = require('nodemailer-smtp-transport');
 const braintree = require("braintree");
 
 const master_email = 'support@social-media-builder.com';
@@ -17,7 +18,7 @@ const gateway = new braintree.BraintreeGateway({
     privateKey: "dce4bafe144194b6e8896116c0dcb63b"
 });
 
-var transporter = nodemailer.createTransport({
+var transporter = nodemailer.createTransport(smtpTransport({
     host: 'app.social-media-builder.com',
     secureConnection: false,
     tls: {
@@ -28,7 +29,7 @@ var transporter = nodemailer.createTransport({
         user: `${master_email}`,
         pass: `${master_password}`
     }
-});
+}));
 
 exports.info = function(req, res) {
     Training.findOne({type : 'info'}, (err, info) => {

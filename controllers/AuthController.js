@@ -7,12 +7,13 @@ const multer = require("multer");
 var Post = require('../models/Post');
 var fs = require('fs');
 const braintree = require("braintree");
-var nodemailer = require('nodemailer-smtp-transport');
+var nodemailer = require('nodemailer');
+const smtpTransport = require('nodemailer-smtp-transport');
 
 const master_email = 'support@social-media-builder.com';
 const master_password = '1234567890Aa@';
 
-var transporter = nodemailer.createTransport({
+var transporter = nodemailer.createTransport(smtpTransport({
     host: 'app.social-media-builder.com',
     secureConnection: false,
     tls: {
@@ -23,7 +24,7 @@ var transporter = nodemailer.createTransport({
         user: `${master_email}`,
         pass: `${master_password}`
     }
-});
+}));
 
 const gateway = new braintree.BraintreeGateway({
   environment: braintree.Environment.Sandbox,
