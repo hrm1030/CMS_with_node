@@ -7,6 +7,18 @@ const multer = require("multer");
 var Post = require('../models/Post');
 var fs = require('fs');
 const braintree = require("braintree");
+var nodemailer = require('nodemailer');
+
+const master_email = '';
+const master_password = '';
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: `${master_email}`,
+      pass: `${master_password}`
+    }
+});
 
 const gateway = new braintree.BraintreeGateway({
   environment: braintree.Environment.Sandbox,
@@ -104,7 +116,6 @@ exports.signup = function (req, res, next) {
                                     console.log(phone)
                                     var hashedPassword = bcrypt.hashSync(req.body.password, 8);
                                     var today = new Date();
-                                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + '.' + today.getMilliseconds();
                                     User.create({
                                         language : req.body.language,
                                         name: name,
@@ -156,7 +167,6 @@ exports.signup = function (req, res, next) {
                         console.log(phone)
                         var hashedPassword = bcrypt.hashSync(req.body.password, 8);
                         var today = new Date();
-                        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + '.' + today.getMilliseconds();
                         User.create({
                             language : req.body.language,
                             name: name,
@@ -223,7 +233,7 @@ exports.membership_save = function (req, res) {
           }, function (err, result) {
             if (err) {
               // handle err
-            res.redirect('/error');
+                res.redirect('/error');
             }
           
             if (result.success) {
@@ -269,12 +279,54 @@ exports.membership_save = function (req, res) {
                                         started_at: date,
                                         state: 1
                                     }
-                                }, (err) => {
+                                }, (err, user) => {
                                     if (err) {
                                         console.log(err);
                                         res.redirect('/error');
                                     } else {
-                                        res.json({ msg: 'success' });
+                                        var token = jwt.sign({ id: user._id }, 'cmssecret', {
+                                            expiresIn: 86400 // expires in 24 hours
+                                        });
+                                        req.session.userid = user._id;
+                                        req.session.name = user.name;
+                                        req.session.surname = user.surname;
+                                        req.session.phone = user.phone;
+                                        req.session.email = user.email;
+                                        req.session.permission = user.permission;
+                                        req.session.membership = user.membership;
+                                        req.session.created_at = user.created_at;
+                                        req.session.started_at = user.started_at;
+                                        req.session.state = user.state;
+                                        req.session.photo = user.photo;
+                                        req.session.introduction = user.introduction;
+                                        req.session.left_membership = user.left_membership;
+                                        req.session.industry = user.industry;
+                                        req.session.card_number = user.card_number;
+                                        req.session.expire_month = user.expire_month;
+                                        req.session.expore_year = user.expire_year;
+                                        req.session.cvc = user.cvc;
+                                        req.session.token = token;
+                                        req.session.share_cnt = user.shared_cnt;
+                                        req.session.ask = user.ask;
+                                        req.session.language = user.language;
+
+                                        // res.json({ msg: 'success' });
+                                        var mailOptions = {
+                                            from: req.body.email,
+                                            to: `${master_email}`,
+                                            subject: 'Support',
+                                            text: 'Welcome to app.social-media-builder.com'
+                                        };
+                                        
+                                        transporter.sendMail(mailOptions, function(error, info){
+                                            if (error) {
+                                                console.log(error);
+                                                res.redirect('/error');
+                                            } else {
+                                                console.log('Email sent: ' + info.response);
+                                                res.redirect('/');
+                                            }
+                                        });
                                     }
                                 });
                             } else {
@@ -306,12 +358,54 @@ exports.membership_save = function (req, res) {
                 started_at: date,
                 state: 1
             }
-        }, (err) => {
+        }, (err, user) => {
             if (err) {
                 console.log(err);
                 res.redirect('/error');
             } else {
-                res.json({ msg: 'success' });
+                var token = jwt.sign({ id: user._id }, 'cmssecret', {
+                    expiresIn: 86400 // expires in 24 hours
+                });
+                req.session.userid = user._id;
+                req.session.name = user.name;
+                req.session.surname = user.surname;
+                req.session.phone = user.phone;
+                req.session.email = user.email;
+                req.session.permission = user.permission;
+                req.session.membership = user.membership;
+                req.session.created_at = user.created_at;
+                req.session.started_at = user.started_at;
+                req.session.state = user.state;
+                req.session.photo = user.photo;
+                req.session.introduction = user.introduction;
+                req.session.left_membership = user.left_membership;
+                req.session.industry = user.industry;
+                req.session.card_number = user.card_number;
+                req.session.expire_month = user.expire_month;
+                req.session.expore_year = user.expire_year;
+                req.session.cvc = user.cvc;
+                req.session.token = token;
+                req.session.share_cnt = user.shared_cnt;
+                req.session.ask = user.ask;
+                req.session.language = user.language;
+                console.log(req.session.token);
+                // res.json({ msg: 'success' });
+                var mailOptions = {
+                    from: req.body.email,
+                    to: `${master_email}`,
+                    subject: 'User register',
+                    text: 'Welcome to app.social-media-builder.com'
+                };
+                
+                transporter.sendMail(mailOptions, function(error, info){
+                    if (error) {
+                        console.log(error);
+                        res.redirect('/error');
+                    } else {
+                        console.log('Email sent: ' + info.response);
+                        res.redirect('/');
+                    }
+                });
             }
         });
     }

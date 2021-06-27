@@ -244,18 +244,20 @@
 
             <div class="row">
               <div class="col-md-push-1 col-md-10">
-                <form role="form">
+                <form role="form" action="/auth/membership_save" method="POST" id="paymentForm">
+                  <input type="hidden" name="user_id" id="user_id">
+                  <input type="hidden" name="membership" id="membership">
                   <div class="form-body">
                     <div class="form-group form-md-line-input has-error">
                       <div class="input-icon">
-                        <input type="text" class="form-control has-error" id="fullname">
+                        <input type="text" class="form-control has-error" id="fullname" name="fullname">
                         <label for="form_control_1">NAME</label>
                         <i class="icon-user-following"></i>
                       </div>
                     </div>
                     <div class="form-group form-md-line-input has-error">
                       <div class="input-icon">
-                        <input type="text" class="form-control" id="card_number">
+                        <input type="text" class="form-control" id="card_number" name="cardnumber">
                         <label for="form_control_1">CARD NUMBER</label>
                         <i class="icon-credit-card"></i>
                       </div>
@@ -264,7 +266,7 @@
                       <div class="col-md-4">
                         <div class="form-group form-md-line-input has-error">
                           <div class="input-icon">
-                            <input type="number" class="form-control" id="month" min="1" max="12">
+                            <input type="number" class="form-control" id="month" min="1" max="12" name="month">
                             <label for="form_control_1">MONTH</label>
                             <i class="icon-calendar"></i>
                           </div>
@@ -273,7 +275,7 @@
                       <div class="col-md-4">
                         <div class="form-group form-md-line-input has-error">
                           <div class="input-icon">
-                            <input type="number" class="form-control" id="year">
+                            <input type="number" class="form-control" id="year" name="year">
                             <label for="form_control_1">YEAR</label>
                             <i class="icon-calendar"></i>
                           </div>
@@ -282,13 +284,14 @@
                       <div class="col-md-4">
                         <div class="form-group form-md-line-input has-error">
                           <div class="input-icon">
-                            <input type="number" class="form-control" id="cvc">
+                            <input type="number" class="form-control" id="cvc" name="cvc">
                             <label for="form_control_1">CVC</label>
                             <i class="icon-lock"></i>
                           </div>
                         </div>
                       </div>
                     </div>
+                    <input type="hidden" id="amount" name="amount">
                     <h3 class="bold text-center ammount_row">Payment ammount : <span id="payment_ammount" class="text-danger payment_span"></span> <span class="text-danger payment_span"><i class="fa fa-eur payment_span"></i></span></h3>
                     <div class="row text-center payment_row">
                       <button type="button" class="btn btn-danger btn-lg" id="btn_confirm">PAY</button>

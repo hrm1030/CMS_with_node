@@ -175,16 +175,16 @@ exports.faq = function(req, res) {
             res.redirect('/error');
         } else {
             
-                Faq.find({
-                    language : req.session.language
-                }, (err, faqs) => {
-                    if(err) {
-                        console.log(err);
-                        res.redirect('/error');
-                    } else {
-                        res.render('pages/user/faq', {title : 'CMS | FAQ', session : req.session, faqs : faqs, categories : categories, recent_url : req.url});
-                    }
-                })
+            Faq.find({
+                language : req.session.language
+            }, (err, faqs) => {
+                if(err) {
+                    console.log(err);
+                    res.redirect('/error');
+                } else {
+                    res.render('pages/user/faq', {title : 'CMS | FAQ', session : req.session, faqs : faqs, categories : categories, recent_url : req.url});
+                }
+            })
             
         }
     })
