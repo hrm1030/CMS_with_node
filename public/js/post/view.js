@@ -93,7 +93,7 @@ $(document).ready(function() {
           $('#left_membership').val(data.left_membership);
           $('#shared_span').text(data.shared);
           var total_url = encodeURIComponent(my_url+'?img='+share_img_url);
-          window.open(`https://www.facebook.com/sharer.php?u=${share_img_url}&t=${title}&description=${content}`, 'NewWindow');
+          window.open(`https://www.facebook.com/sharer.php?u=${share_img_url}&t=${title}&summary=${content}`, 'NewWindow');
           // window.open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(share_img_url)}&t=${encodeURIComponent(title)}`,'sharer','toolbar=0,status=0,width=626,height=436', 'NewWindow');
         },
         error : function() {
@@ -157,7 +157,7 @@ $(document).ready(function() {
         success : function(data){
           $('#left_membership').val(data.left_membership);
           $('#shared_span').text(data.shared);
-          window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${share_img_url}&title=${title}&text=${content}`, 'NewWindow');
+          window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${share_img_url}&title=${title}&summary=${content}`, 'NewWindow');
           // window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(share_img_url)}&title=${encodeURIComponent(title)}&summary=${content}`, '', 'left=0,top=0,width=650,height=420,personalbar=0,toolbar=0,scrollbars=0,resizable=0', 'NewWindow');
         },
         error : function() {
