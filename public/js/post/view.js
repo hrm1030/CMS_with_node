@@ -93,7 +93,7 @@ $(document).ready(function() {
           $('#left_membership').val(data.left_membership);
           $('#shared_span').text(data.shared);
           var total_url = encodeURIComponent(my_url+'?img='+share_img_url);
-          window.open(`https://www.facebook.com/sharer.php?u=${share_img_url}&t=${title}&display=${content}`, 'NewWindow');
+          window.open(`https://www.facebook.com/sharer.php?u=${share_img_url}&t=${title}&text=${content}`, 'NewWindow');
           // window.open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(share_img_url)}&t=${encodeURIComponent(title)}`,'sharer','toolbar=0,status=0,width=626,height=436', 'NewWindow');
         },
         error : function() {
