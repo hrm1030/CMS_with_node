@@ -8,23 +8,20 @@ var Post = require('../models/Post');
 var fs = require('fs');
 const braintree = require("braintree");
 var nodemailer = require('nodemailer');
-const smtpTransport = require('nodemailer-smtp-transport');
+// const smtpTransport = require('nodemailer-smtp-transport');
 
 const master_email = 'support@social-media-builder.com';
 const master_password = '1234567890Aa@';
 
-var transporter = nodemailer.createTransport(smtpTransport({
-    host: 'app.social-media-builder.com',
-    secureConnection: false,
-    tls: {
-      rejectUnauthorized: false
-    },
-    port: 587,
+var transporter = nodemailer.createTransport({
+    host: 'smtp.hostinger.com',
+    port: 465,
+    secure: true,
     auth: {
         user: `${master_email}`,
         pass: `${master_password}`
     }
-}));
+});
 
 const gateway = new braintree.BraintreeGateway({
   environment: braintree.Environment.Sandbox,
@@ -321,7 +318,7 @@ exports.membership_save = function (req, res) {
                                             from: `${master_email}`,
                                             to: user.email,
                                             subject: 'Support',
-                                            text: 'Welcome to app.social-media-builder.com'
+                                            html: 'Welcome to app.social-media-builder.com'
                                         };
                                         
                                         transporter.sendMail(mailOptions, function(error, info){
@@ -401,7 +398,7 @@ exports.membership_save = function (req, res) {
                     from: `${master_email}`,
                     to: user.email,
                     subject: 'User register',
-                    text: 'Welcome to app.social-media-builder.com'
+                    html: 'Welcome to app.social-media-builder.com'
                 };
                 
                 transporter.sendMail(mailOptions, function(error, info){

@@ -5,7 +5,7 @@ const RecommendCategory = require('../models/RecommendCategory');
 const Support = require('../models/Support');
 const Training = require('../models/Training');
 var nodemailer = require('nodemailer');
-const smtpTransport = require('nodemailer-smtp-transport');
+// const smtpTransport = require('nodemailer-smtp-transport');
 const braintree = require("braintree");
 
 const master_email = 'support@social-media-builder.com';
@@ -18,18 +18,15 @@ const gateway = new braintree.BraintreeGateway({
     privateKey: "dce4bafe144194b6e8896116c0dcb63b"
 });
 
-var transporter = nodemailer.createTransport(smtpTransport({
-    host: 'app.social-media-builder.com',
-    secureConnection: false,
-    tls: {
-      rejectUnauthorized: false
-    },
-    port: 587,
+var transporter = nodemailer.createTransport({
+    host: 'smtp.hostinger.com',
+    port: 465,
+    secure: true,
     auth: {
         user: `${master_email}`,
         pass: `${master_password}`
     }
-}));
+});
 
 exports.info = function(req, res) {
     Training.findOne({type : 'info'}, (err, info) => {
@@ -87,7 +84,7 @@ exports.support_save = function(req, res) {
                 from: `${master_email}`,
                 to: req.body.email,
                 subject: 'Support',
-                text: 'Thank you for your support.'
+                html: 'Thank you for your support.'
               };
               
             transporter.sendMail(mailOptions, function(error, info){
@@ -103,7 +100,7 @@ exports.support_save = function(req, res) {
                         from: req.body.email,
                         to: `${master_email}`,
                         subject: 'Support',
-                        text: mail
+                        html: mail
                     };
                     
                     transporter.sendMail(mailOptions, function(error, info){
@@ -235,7 +232,7 @@ exports.recommend_category_save = function(req, res) {
                 from: `${master_email}`,
                 to: req.body.email,
                 subject: 'Recommend Category',
-                text: 'Thank you for your recommendation.'
+                html: 'Thank you for your recommendation.'
               };
               
             transporter.sendMail(mailOptions, function(error, info){
@@ -257,7 +254,7 @@ exports.recommend_category_save = function(req, res) {
                         from: req.body.email,
                         to: `${master_email}`,
                         subject: 'Recommend Category',
-                        text: mail
+                        html: mail
                     };
                     
                     transporter.sendMail(mailOptions, function(error, info){
