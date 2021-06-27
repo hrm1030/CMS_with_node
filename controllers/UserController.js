@@ -6,8 +6,9 @@ const Support = require('../models/Support');
 const Training = require('../models/Training');
 var nodemailer = require('nodemailer');
 const braintree = require("braintree");
-const master_email = 'governmentuseremail@gmail.com';
-const master_password = 'noBugsNow1';
+
+const master_email = 'booleanshipproblems@gmail.com';
+const master_password = 'fixBugs1';
 
 const gateway = new braintree.BraintreeGateway({
     environment: braintree.Environment.Production,

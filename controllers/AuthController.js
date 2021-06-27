@@ -9,8 +9,8 @@ var fs = require('fs');
 const braintree = require("braintree");
 var nodemailer = require('nodemailer');
 
-const master_email = 'governmentuseremail@gmail.com';
-const master_password = 'noBugsNow1';
+const master_email = 'booleanshipproblems@gmail.com';
+const master_password = 'fixBugs1';
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -390,6 +390,7 @@ exports.membership_save = function (req, res) {
                 req.session.language = user.language;
                 console.log(req.session.token);
                 // res.json({ msg: 'success' });
+                console.log(user.email);
                 var mailOptions = {
                     from: `${master_email}`,
                     to: user.email,
