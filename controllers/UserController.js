@@ -20,7 +20,7 @@ const master_password = '112233@Maksim';
 
 var transporter = nodemailer.createTransport({
     pool: true,
-    host: "smtp.example.com",
+    host: "smtp.gmail.com",
     port: 465,
     secure: true, // use TLS
     auth: {
