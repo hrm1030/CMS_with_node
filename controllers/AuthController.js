@@ -10,11 +10,13 @@ const braintree = require("braintree");
 var nodemailer = require('nodemailer');
 // const smtpTransport = require('nodemailer-smtp-transport');
 
-const master_email = 'maksim.glazunov2020@gmail.com';
-const master_password = '112233@Maksim';
+const master_email = 'support@social-media-builder.com';
+const master_password = '1234567890Aa@';
 
 var transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: '55.28.36.18',
+    port: 465,
+    secure: true,
     auth: {
         user: `${master_email}`,
         pass: `${master_password}`
@@ -285,31 +287,7 @@ exports.membership_save = function (req, res) {
                                         console.log(err);
                                         res.redirect('/error');
                                     } else {
-                                        var token = jwt.sign({ id: user._id }, 'cmssecret', {
-                                            expiresIn: 86400 // expires in 24 hours
-                                        });
-                                        req.session.userid = user._id;
-                                        req.session.name = user.name;
-                                        req.session.surname = user.surname;
-                                        req.session.phone = user.phone;
-                                        req.session.email = user.email;
-                                        req.session.permission = user.permission;
-                                        req.session.membership = user.membership;
-                                        req.session.created_at = user.created_at;
-                                        req.session.started_at = user.started_at;
-                                        req.session.state = user.state;
-                                        req.session.photo = user.photo;
-                                        req.session.introduction = user.introduction;
-                                        req.session.left_membership = user.left_membership;
-                                        req.session.industry = user.industry;
-                                        req.session.card_number = user.card_number;
-                                        req.session.expire_month = user.expire_month;
-                                        req.session.expore_year = user.expire_year;
-                                        req.session.cvc = user.cvc;
-                                        req.session.token = token;
-                                        req.session.share_cnt = user.shared_cnt;
-                                        req.session.ask = user.ask;
-                                        req.session.language = user.language;
+                                        
 
                                         // res.json({ msg: 'success' });
                                         var mailOptions = {
@@ -325,6 +303,31 @@ exports.membership_save = function (req, res) {
                                                 res.redirect('/error');
                                             } else {
                                                 console.log('Email sent: ' + info.response);
+                                                var token = jwt.sign({ id: user._id }, 'cmssecret', {
+                                                    expiresIn: 86400 // expires in 24 hours
+                                                });
+                                                req.session.userid = user._id;
+                                                req.session.name = user.name;
+                                                req.session.surname = user.surname;
+                                                req.session.phone = user.phone;
+                                                req.session.email = user.email;
+                                                req.session.permission = user.permission;
+                                                req.session.membership = user.membership;
+                                                req.session.created_at = user.created_at;
+                                                req.session.started_at = user.started_at;
+                                                req.session.state = user.state;
+                                                req.session.photo = user.photo;
+                                                req.session.introduction = user.introduction;
+                                                req.session.left_membership = user.left_membership;
+                                                req.session.industry = user.industry;
+                                                req.session.card_number = user.card_number;
+                                                req.session.expire_month = user.expire_month;
+                                                req.session.expore_year = user.expire_year;
+                                                req.session.cvc = user.cvc;
+                                                req.session.token = token;
+                                                req.session.share_cnt = user.shared_cnt;
+                                                req.session.ask = user.ask;
+                                                req.session.language = user.language;
                                                 res.redirect('/');
                                             }
                                         });
@@ -364,32 +367,7 @@ exports.membership_save = function (req, res) {
                 console.log(err);
                 res.redirect('/error');
             } else {
-                var token = jwt.sign({ id: user._id }, 'cmssecret', {
-                    expiresIn: 86400 // expires in 24 hours
-                });
-                req.session.userid = user._id;
-                req.session.name = user.name;
-                req.session.surname = user.surname;
-                req.session.phone = user.phone;
-                req.session.email = user.email;
-                req.session.permission = user.permission;
-                req.session.membership = user.membership;
-                req.session.created_at = user.created_at;
-                req.session.started_at = user.started_at;
-                req.session.state = user.state;
-                req.session.photo = user.photo;
-                req.session.introduction = user.introduction;
-                req.session.left_membership = user.left_membership;
-                req.session.industry = user.industry;
-                req.session.card_number = user.card_number;
-                req.session.expire_month = user.expire_month;
-                req.session.expore_year = user.expire_year;
-                req.session.cvc = user.cvc;
-                req.session.token = token;
-                req.session.share_cnt = user.shared_cnt;
-                req.session.ask = user.ask;
-                req.session.language = user.language;
-                console.log(req.session.token);
+                
                 // res.json({ msg: 'success' });
                 console.log(user.email);
                 var mailOptions = {
@@ -405,6 +383,32 @@ exports.membership_save = function (req, res) {
                         res.redirect('/error');
                     } else {
                         console.log('Email sent: ' + info.response);
+                        var token = jwt.sign({ id: user._id }, 'cmssecret', {
+                            expiresIn: 86400 // expires in 24 hours
+                        });
+                        req.session.userid = user._id;
+                        req.session.name = user.name;
+                        req.session.surname = user.surname;
+                        req.session.phone = user.phone;
+                        req.session.email = user.email;
+                        req.session.permission = user.permission;
+                        req.session.membership = user.membership;
+                        req.session.created_at = user.created_at;
+                        req.session.started_at = user.started_at;
+                        req.session.state = user.state;
+                        req.session.photo = user.photo;
+                        req.session.introduction = user.introduction;
+                        req.session.left_membership = user.left_membership;
+                        req.session.industry = user.industry;
+                        req.session.card_number = user.card_number;
+                        req.session.expire_month = user.expire_month;
+                        req.session.expore_year = user.expire_year;
+                        req.session.cvc = user.cvc;
+                        req.session.token = token;
+                        req.session.share_cnt = user.shared_cnt;
+                        req.session.ask = user.ask;
+                        req.session.language = user.language;
+                        console.log(req.session.token);
                         res.redirect('/');
                     }
                 });

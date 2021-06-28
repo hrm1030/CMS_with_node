@@ -8,9 +8,6 @@ var nodemailer = require('nodemailer');
 // const smtpTransport = require('nodemailer-smtp-transport');
 const braintree = require("braintree");
 
-const master_email = 'maksim.glazunov2020@gmail.com';
-const master_password = '112233@Maksim';
-
 const gateway = new braintree.BraintreeGateway({
     environment: braintree.Environment.Production,
     merchantId: "s4v9y5nc2tyf46xt",
@@ -18,11 +15,16 @@ const gateway = new braintree.BraintreeGateway({
     privateKey: "dce4bafe144194b6e8896116c0dcb63b"
 });
 
+const master_email = 'support@social-media-builder.com';
+const master_password = '1234567890Aa@';
+
 var transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: '55.28.36.18',
+    port: 465,
+    secure: true,
     auth: {
-        user: 'maksim.glazunov2020@gmail.com',
-        pass: '112233@Maksim'
+        user: `${master_email}`,
+        pass: `${master_password}`
     }
 });
 
@@ -84,7 +86,7 @@ exports.support_save = function(req, res) {
                 from: `${master_email}`,
                 to: req.body.email,
                 subject: 'Support',
-                text: 'Thank you for your support.'
+                html: 'Thank you for your support.'
               };
               
             transporter.sendMail(mailOptions, function(error, info){
@@ -100,7 +102,7 @@ exports.support_save = function(req, res) {
                         from: req.body.email,
                         to: `${master_email}`,
                         subject: 'Support',
-                        text: mail
+                        html: mail
                     };
                     
                     transporter.sendMail(mailOptions, function(error, info){
