@@ -21,7 +21,7 @@ const master_password = '1234567890Aa@';
 var transporter = nodemailer.createTransport({
     host: 'smtp.hostinger.com',
     port: 587,
-    secure : true,
+    secure : false,
     auth: {
         user: `${master_email}`,
         pass: `${master_password}`
