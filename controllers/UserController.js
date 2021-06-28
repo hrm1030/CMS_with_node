@@ -15,17 +15,18 @@ const gateway = new braintree.BraintreeGateway({
     privateKey: "dce4bafe144194b6e8896116c0dcb63b"
 });
 
-// const master_email = 'maksim.glazunov2020@gmail.com';
-// const master_password = '112233@Maksim';
+const master_email = 'support@social-media-builder.com';
+const master_password = '1234567890Aa@';
 
-// var transporter = nodemailer.createTransport({
-//     host: 'smtp.gmail.com',
-//     port: 2525,
-//     auth: {
-//         user: 'maksim.glazunov2020@gmail.com',
-//         pass: '112233@Maksim'
-//     }
-// });
+var transporter = nodemailer.createTransport({
+    host: 'smtp.hostinger.com',
+    port: 587,
+    secure : true,
+    auth: {
+        user: `${master_email}`,
+        pass: `${master_password}`
+    }
+});
 
 exports.info = function(req, res) {
     Training.findOne({type : 'info'}, (err, info) => {
@@ -81,42 +82,40 @@ exports.support_save = function(req, res) {
         } else {
             console.log(master_email);
             console.log(req.body.email);
-            // var mailOptions = {
-            //     from: `${master_email}`,
-            //     to: req.body.email,
-            //     subject: 'Support',
-            //     text: 'Thank you for your support.'
-            //   };
+            var mailOptions = {
+                from: `${master_email}`,
+                to: req.body.email,
+                subject: 'Support',
+                text: 'Thank you for your support.'
+              };
               
-            // transporter.sendMail(mailOptions, function(error, info){
-            //     if (error) {
-            //         console.log(error);
-            //         res.render('pages/user/support', {title : 'CMS | Support', session : req.session, recent_url : req.url, error : `Something went wrong. Your or Administrator's email is blocked.`});
-            //     } else {
-            //         console.log('Email sent: ' + info.response);
-            //         var mail = `Name : ${req.body.name}
-            //                     Email : ${req.body.email}
-            //                     ${req.body.content}`;
-            //         var mailOptions = {
-            //             from: req.body.email,
-            //             to: `${master_email}`,
-            //             subject: 'Support',
-            //             text: mail
-            //         };
+            transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                    console.log(error);
+                    res.render('pages/user/support', {title : 'CMS | Support', session : req.session, recent_url : req.url, error : `Something went wrong. Your or Administrator's email is blocked.`});
+                } else {
+                    console.log('Email sent: ' + info.response);
+                    var mail = `Name : ${req.body.name}
+                                Email : ${req.body.email}
+                                ${req.body.content}`;
+                    var mailOptions = {
+                        from: req.body.email,
+                        to: `${master_email}`,
+                        subject: 'Support',
+                        text: mail
+                    };
                     
-            //         transporter.sendMail(mailOptions, function(error, info){
-            //             if (error) {
-            //                 console.log(error);
-            //                 res.render('pages/user/support', {title : 'CMS | Support', session : req.session, recent_url : req.url, error : `Something went wrong. Your or Administrator's email is blocked.`});
-            //             } else {
-            //                 console.log('Email sent: ' + info.response);
-            //                 res.redirect('/support');
-            //             }
-            //         });
-            //     }
-            // });
-            
-            res.redirect('/support');
+                    transporter.sendMail(mailOptions, function(error, info){
+                        if (error) {
+                            console.log(error);
+                            res.render('pages/user/support', {title : 'CMS | Support', session : req.session, recent_url : req.url, error : `Something went wrong. Your or Administrator's email is blocked.`});
+                        } else {
+                            console.log('Email sent: ' + info.response);
+                            res.redirect('/support');
+                        }
+                    });
+                }
+            });
             
         }
     })

@@ -10,16 +10,18 @@ const braintree = require("braintree");
 var nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 
-const master_email = 'maksim.glazunov2020@gmail.com';
-const master_password = '112233@Maksim';
+const master_email = 'support@social-media-builder.com';
+const master_password = '1234567890Aa@';
 
-var transporter = nodemailer.createTransport(smtpTransport({
-    service: 'gmail',
+var transporter = nodemailer.createTransport({
+    host: 'smtp.hostinger.com',
+    port: 587,
+    secure : true,
     auth: {
         user: `${master_email}`,
         pass: `${master_password}`
     }
-}));
+});
 
 const gateway = new braintree.BraintreeGateway({
   environment: braintree.Environment.Sandbox,
