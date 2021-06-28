@@ -8,20 +8,23 @@ var Post = require('../models/Post');
 var fs = require('fs');
 const braintree = require("braintree");
 var nodemailer = require('nodemailer');
-// const smtpTransport = require('nodemailer-smtp-transport');
+const smtpTransport = require('nodemailer-smtp-transport');
 
 const master_email = 'support@social-media-builder.com';
 const master_password = '1234567890Aa@';
 
-var transporter = nodemailer.createTransport({
-    host: '55.28.36.18',
+var transporter = nodemailer.createTransport(smtpTransport({
+    host:'55.28.36.18',
+    secureConnection: false,
+    tls: {
+      rejectUnauthorized: false
+    },
     port: 465,
-    secure: true,
     auth: {
         user: `${master_email}`,
         pass: `${master_password}`
     }
-});
+}));
 
 const gateway = new braintree.BraintreeGateway({
   environment: braintree.Environment.Sandbox,

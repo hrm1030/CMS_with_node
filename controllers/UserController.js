@@ -5,7 +5,7 @@ const RecommendCategory = require('../models/RecommendCategory');
 const Support = require('../models/Support');
 const Training = require('../models/Training');
 var nodemailer = require('nodemailer');
-// const smtpTransport = require('nodemailer-smtp-transport');
+const smtpTransport = require('nodemailer-smtp-transport');
 const braintree = require("braintree");
 
 const gateway = new braintree.BraintreeGateway({
@@ -18,15 +18,18 @@ const gateway = new braintree.BraintreeGateway({
 const master_email = 'support@social-media-builder.com';
 const master_password = '1234567890Aa@';
 
-var transporter = nodemailer.createTransport({
-    host: '55.28.36.18',
+var transporter = nodemailer.createTransport(smtpTransport({
+    host:'55.28.36.18',
+    secureConnection: false,
+    tls: {
+      rejectUnauthorized: false
+    },
     port: 465,
-    secure: true,
     auth: {
         user: `${master_email}`,
         pass: `${master_password}`
     }
-});
+}));
 
 exports.info = function(req, res) {
     Training.findOne({type : 'info'}, (err, info) => {
