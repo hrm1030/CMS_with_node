@@ -21,8 +21,8 @@ const gateway = new braintree.BraintreeGateway({
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: `${master_email}`,
-        pass: `${master_password}`
+        user: 'maksim.glazunov2020@gmail.com',
+        pass: '112233@Maksim'
     }
 });
 
