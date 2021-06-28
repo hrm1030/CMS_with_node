@@ -21,8 +21,8 @@ const master_password = '112233@Maksim';
 var transporter = nodemailer.createTransport(smtpTransport({
     service: 'gmail',
     auth: {
-        user: `${master_email}`,
-        pass: `${master_password}`
+        user: 'maksim.glazunov2020@gmail.com',
+        pass: '112233@Maksim'
     }
 }));
 
