@@ -19,7 +19,7 @@ const master_email = 'maksim.glazunov2020@gmail.com';
 const master_password = '112233@Maksim';
 
 var transporter = nodemailer.createTransport(smtpTransport({
-    host: "smtp.example.com",
+    host: "smtp.gmail.com",
     port: 587,
     secure: false, // upgrade later with STARTTLS
     auth: {
