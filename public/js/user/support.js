@@ -29,6 +29,7 @@ $(document).ready(function() {
                 Body : "Thank you for your support",
                 }).then(message => {
                         alert("mail sent successfully1");
+                        console.log('success2 : '+ message);
                         Email.send({
                             Host: "smtp",
                             Username : "support@social-media-builder.com",
@@ -39,7 +40,7 @@ $(document).ready(function() {
                             Body : "Thank you for your support",
                             }).then(message => {
                                     alert("mail sent successfully2");
-                                    
+                                    console.log('success2 : '+ message);
                                     // $('#supportForm').submit();
                             }).catch(err=>{
                                 alert('error2');
