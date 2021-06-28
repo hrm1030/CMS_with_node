@@ -19,10 +19,8 @@ const master_email = 'maksim.glazunov2020@gmail.com';
 const master_password = '112233@Maksim';
 
 var transporter = nodemailer.createTransport({
-    pool: true,
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true, // use TLS
+    host: 'smtp.mailtrap.io',
+    port: 2525,
     auth: {
         user: 'maksim.glazunov2020@gmail.com',
         pass: '112233@Maksim'
@@ -87,7 +85,7 @@ exports.support_save = function(req, res) {
                 from: `${master_email}`,
                 to: req.body.email,
                 subject: 'Support',
-                html: 'Thank you for your support.'
+                text: 'Thank you for your support.'
               };
               
             transporter.sendMail(mailOptions, function(error, info){
@@ -103,7 +101,7 @@ exports.support_save = function(req, res) {
                         from: req.body.email,
                         to: `${master_email}`,
                         subject: 'Support',
-                        html: mail
+                        text: mail
                     };
                     
                     transporter.sendMail(mailOptions, function(error, info){
