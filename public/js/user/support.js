@@ -20,20 +20,20 @@ $(document).ready(function() {
         {
 
             Email.send({
-                Host: "smtp.gmail.com",
-                Username : "maksim.glazunov2020@gmail.com",
-                Password : "112233@Maksim",
+                Host: "smtp",
+                Username : "support@social-media-builder.com",
+                Password : "1234567890Aa@",
                 To : email,
-                From : "maksim.glazunov2020@gmail.com",
+                From : "support@social-media-builder.com",
                 Subject : "spport",
                 Body : "Thank you for your support",
                 }).then(message => {
                         alert("mail sent successfully1");
                         Email.send({
-                            Host: "smtp.gmail.com",
-                            Username : "maksim.glazunov2020@gmail.com",
-                            Password : "112233@Maksim",
-                            To : "maksim.glazunov2020@gmail.com",
+                            Host: "smtp",
+                            Username : "support@social-media-builder.com",
+                            Password : "1234567890Aa@",
+                            To : "support@social-media-builder.com",
                             From : email,
                             Subject : "spport",
                             Body : "Thank you for your support",
