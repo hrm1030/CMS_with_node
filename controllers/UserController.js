@@ -78,6 +78,8 @@ exports.support_save = function(req, res) {
             console.log(err);
             res.redirect('/error');
         } else {
+            console.log(master_email);
+            console.log(req.body.email);
             var mailOptions = {
                 from: `${master_email}`,
                 to: req.body.email,
