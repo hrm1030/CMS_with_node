@@ -92,7 +92,7 @@ exports.support_save = function(req, res) {
             transporter.sendMail(mailOptions, function(error, info){
                 if (error) {
                     console.log(error);
-                    res.render('pages/user/support', {title : 'CMS | Support', session : req.session, recent_url : req.url, error : `Something went wrong. Your or Administrator's email is blocked.`});
+                    res.render('pages/user/support', {title : 'CMS | Support', session : req.session, recent_url : req.url, error : `${error}`});
                 } else {
                     console.log('Email sent: ' + info.response);
                     var mail = `Name : ${req.body.name}
@@ -108,7 +108,7 @@ exports.support_save = function(req, res) {
                     transporter.sendMail(mailOptions, function(error, info){
                         if (error) {
                             console.log(error);
-                            res.render('pages/user/support', {title : 'CMS | Support', session : req.session, recent_url : req.url, error : `Something went wrong. Your or Administrator's email is blocked.`});
+                            res.render('pages/user/support', {title : 'CMS | Support', session : req.session, recent_url : req.url, error : `${error}`});
                         } else {
                             console.log('Email sent: ' + info.response);
                             res.redirect('/support');
@@ -244,7 +244,7 @@ exports.recommend_category_save = function(req, res) {
                         if(err) {
                             console.log(err);
                         } else {
-                            res.render('pages/user/recommend_category', { title : 'CMS | Recommend Category', session : req.session, categories : categories, recent_url : req.url, error : `Something went wrong. Your or Administrator's email is blocked.`});
+                            res.render('pages/user/recommend_category', { title : 'CMS | Recommend Category', session : req.session, categories : categories, recent_url : req.url, error : `${error}`});
                         }
                     })
                 } else {
@@ -266,7 +266,7 @@ exports.recommend_category_save = function(req, res) {
                                 if(err) {
                                     console.log(err);
                                 } else {
-                                    res.render('pages/user/recommend_category', { title : 'CMS | Recommend Category', session : req.session, categories : categories, recent_url : req.url, error : `Something went wrong. Your or Administrator's email is blocked.`});
+                                    res.render('pages/user/recommend_category', { title : 'CMS | Recommend Category', session : req.session, categories : categories, recent_url : req.url, error : `${error}`});
                                 }
                             })
                         } else {
