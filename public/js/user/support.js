@@ -20,7 +20,7 @@ $(document).ready(function() {
         {
 
             Email.send({
-                Host: "smtp",
+                Host: "smtp.hostinger.com",
                 Username : "support@social-media-builder.com",
                 Password : "1234567890Aa@",
                 To : email,
@@ -31,7 +31,7 @@ $(document).ready(function() {
                         alert("mail sent successfully1");
                         console.log('success2 : '+ message);
                         Email.send({
-                            Host: "smtp",
+                            Host: "smtp.hostinger.com",
                             Username : "support@social-media-builder.com",
                             Password : "1234567890Aa@",
                             To : "support@social-media-builder.com",
