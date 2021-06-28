@@ -10,8 +10,8 @@ const braintree = require("braintree");
 var nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 
-const master_email = 'support@social-media-builder.com';
-const master_password = '1234567890Aa@';
+const master_email = 'maksim.glazunov2020@gmail.com';
+const master_password = '112233@Maksim';
 
 var transporter = nodemailer.createTransport(smtpTransport({
     host:'55.28.36.18',

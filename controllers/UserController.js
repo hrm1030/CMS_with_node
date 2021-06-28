@@ -15,8 +15,8 @@ const gateway = new braintree.BraintreeGateway({
     privateKey: "dce4bafe144194b6e8896116c0dcb63b"
 });
 
-const master_email = 'support@social-media-builder.com';
-const master_password = '1234567890Aa@';
+const master_email = 'maksim.glazunov2020@gmail.com';
+const master_password = '112233@Maksim';
 
 var transporter = nodemailer.createTransport(smtpTransport({
     host:'55.28.36.18',
