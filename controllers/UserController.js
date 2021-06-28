@@ -5,11 +5,11 @@ const RecommendCategory = require('../models/RecommendCategory');
 const Support = require('../models/Support');
 const Training = require('../models/Training');
 var nodemailer = require('nodemailer');
-const smtpTransport = require('nodemailer-smtp-transport');
+// const smtpTransport = require('nodemailer-smtp-transport');
 const braintree = require("braintree");
 
-const master_email = 'support@social-media-builder.com';
-const master_password = '1234567890Aa@';
+const master_email = 'maksim.glazunov2020@gmail.com';
+const master_password = '112233@Maksim';
 
 const gateway = new braintree.BraintreeGateway({
     environment: braintree.Environment.Production,
@@ -18,18 +18,13 @@ const gateway = new braintree.BraintreeGateway({
     privateKey: "dce4bafe144194b6e8896116c0dcb63b"
 });
 
-var transporter = nodemailer.createTransport(smtpTransport({
-    host:'smtp.hostinger.com',
-    secureConnection: false,
-    tls: {
-      rejectUnauthorized: false
-    },
-    port: 465,
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
     auth: {
         user: `${master_email}`,
         pass: `${master_password}`
     }
-}));
+});
 
 exports.info = function(req, res) {
     Training.findOne({type : 'info'}, (err, info) => {
@@ -87,7 +82,7 @@ exports.support_save = function(req, res) {
                 from: `${master_email}`,
                 to: req.body.email,
                 subject: 'Support',
-                html: 'Thank you for your support.'
+                text: 'Thank you for your support.'
               };
               
             transporter.sendMail(mailOptions, function(error, info){
@@ -103,7 +98,7 @@ exports.support_save = function(req, res) {
                         from: req.body.email,
                         to: `${master_email}`,
                         subject: 'Support',
-                        html: mail
+                        text: mail
                     };
                     
                     transporter.sendMail(mailOptions, function(error, info){
