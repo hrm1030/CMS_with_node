@@ -98,32 +98,31 @@ $(document).ready(function() {
           // var total_url = encodeURIComponent(my_url+'?img='+share_img_url);
           // window.open(`https://www.facebook.com/sharer.php?u=${share_img_url}&t=${title}&u=${content}`, 'NewWindow');
           // window.open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(share_img_url)}&t=${encodeURIComponent(title)}`,'sharer','toolbar=0,status=0,width=626,height=436', 'NewWindow');
-          function init() {
-            FB.api(
-              '/l214.animaux',
-              {"fields":"fan_count"},
-              function(response) {
-                alert(response.fan_count);
-              }
-            );
-          }
-        
           window.fbAsyncInit = function() {
+            // FB JavaScript SDK configuration and setup
             FB.init({
-              appId      : '2839342499616311',
-              xfbml      : true,
-              version    : 'v2.5'
+              appId      : '2839342499616311', // FB App ID
+              cookie     : true,  // enable cookies to allow the server to access the session
+              xfbml      : true,  // parse social plugins on this page
+              version    : 'v3.2' // use graph api version 2.8
             });
-        
-            init();
+            
+            // Check whether the user already logged in
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    //display user data
+                    getFbUserData();
+                }
+            });
           };
-        
-          (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
+          
+          // Load the JavaScript SDK asynchronously
+          (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/sdk.js";
+              fjs.parentNode.insertBefore(js, fjs);
           }(document, 'script', 'facebook-jssdk'));
           
           FB.ui({
