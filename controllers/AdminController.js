@@ -6,6 +6,7 @@ const Training = require('../models/Training');
 var formidable = require('formidable');
 var fs = require('fs');
 const Faq = require('../models/Faq');
+const root_dir = '/CMS_with_node/';
 
 exports.index = function(req, res, next) {
     User.find({}, (err, users) => {
@@ -297,7 +298,7 @@ exports.trainingupload = function(req, res) {
 
     form.on('fileBegin', function (name, file){
         console.log(name)
-        file.path = '/CMS_with_node/public/videos/trainings/' + video_name;
+        file.path = root_dir+'public/videos/trainings/' + video_name;
     });
 
     form.on('file', function (name, file){
@@ -334,7 +335,7 @@ exports.video_delete = function(req, res) {
             console.log(urls[3]);
             if(urls[3] == 'info.mp4')
             {
-                fs.unlinkSync('/CMS_with_node/public/videos/'+ urls[3], (err) =>{
+                fs.unlinkSync(root_dir+'public/videos/'+ urls[3], (err) =>{
                     if(err) {
                         res.redirect('/error');
                     } else {
@@ -342,7 +343,7 @@ exports.video_delete = function(req, res) {
                     }
                 });
             } else {
-                fs.unlinkSync('/CMS_with_node/public/videos/trainings/'+ urls[3],  (err) =>{
+                fs.unlinkSync(root_dir+'public/videos/trainings/'+ urls[3],  (err) =>{
                     if(err) {
                         res.redirect('/error');
                     } else {

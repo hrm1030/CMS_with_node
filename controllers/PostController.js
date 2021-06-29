@@ -5,6 +5,7 @@ const User = require('../models/User');
 var path = require('path');
 var formidable = require('formidable');
 var fs = require('fs');
+const root_dir = '/CMS_with_node/';
 
 exports.save = function(req, res, next) {
     var today = new Date();
@@ -41,7 +42,7 @@ exports.filesupload = function(req, res) {
 
     form.on('fileBegin', function (name, file){
         console.log(name)
-        file.path = '/CMS_with_node/public/uploads/posts/' + image_name;
+        file.path = root_dir+'public/uploads/posts/' + image_name;
     });
 
     form.on('file', function (name, file){

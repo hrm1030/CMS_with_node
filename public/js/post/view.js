@@ -1,33 +1,5 @@
 $(document).ready(function() {
 
-  // function init() {
-  //   FB.api(
-  //     '/l214.animaux',
-  //     {"fields":"fan_count"},
-  //     function(response) {
-  //       alert(response.fan_count);
-  //     }
-  //   );
-  // }
-
-  // window.fbAsyncInit = function() {
-  //   FB.init({
-  //     appId      : 'your-app-id',
-  //     xfbml      : true,
-  //     version    : 'v2.5'
-  //   });
-
-  //   init();
-  // };
-
-  // (function(d, s, id){
-  //   var js, fjs = d.getElementsByTagName(s)[0];
-  //   if (d.getElementById(id)) {return;}
-  //   js = d.createElement(s); js.id = id;
-  //   js.src = "//connect.facebook.net/en_US/sdk.js";
-  //   fjs.parentNode.insertBefore(js, fjs);
-  // }(document, 'script', 'facebook-jssdk'));
-
   toastr['info']('To share post on social site, please follow as following steps.<br><br>1. Generate logo.<br>( If you have your logo, you can skip logo generating. )<br><br>2. Upload logo.<br><br>3. Preview the post.<br><br>4. Share on social site.');
 
   var my_url = 'http://app.social-media-builder.com';

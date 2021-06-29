@@ -2,6 +2,8 @@ var formidable = require('formidable');
 var Jimp = require('jimp');
 const Post = require('../models/Post');
 const User = require('../models/User');
+
+const root_dir = '/CMS_with_node/';
 exports.logo_upload = function(req, res) {
     var form = new formidable.IncomingForm();
     // console.log(req);
@@ -10,7 +12,7 @@ exports.logo_upload = function(req, res) {
 
     form.on('fileBegin', function (name, file){
         console.log(name)
-        file.path = '/CMS_with_node/public/uploads/logos/' + image_name;
+        file.path = root_dir+'public/uploads/logos/' + image_name;
     });
 
     form.on('file', function (name, file){
@@ -62,7 +64,7 @@ exports.image_jimp = function(req, res) {
                     
                     var current_time = new Date().getFullYear()+''+new Date().getMonth()+''+new Date().getDate()+''+new Date().getHours()+''+new Date().getMinutes()+''+new Date().getSeconds()+''+new Date().getMilliseconds();
                     var share_img = 'share_'+req.session.userid+'_'+current_time+'.png';
-                    img.write('/CMS_with_node/public/uploads/shares/'+share_img, (err)=> {
+                    img.write(root_dir+'public/uploads/shares/'+share_img, (err)=> {
                         if(err) {
                             res.redirect('/error');
                         } else {
@@ -116,7 +118,7 @@ exports.image_jimp_position_change = function(req, res) {
                     
                     var current_time = new Date().getFullYear()+''+new Date().getMonth()+''+new Date().getDate()+''+new Date().getHours()+''+new Date().getMinutes()+''+new Date().getSeconds()+''+new Date().getMilliseconds();
                     var share_img = 'share_'+req.session.userid+'_'+current_time+'.png';
-                    img.write('/CMS_with_node/public/uploads/shares/'+share_img, (err) => {
+                    img.write(root_dir+'public/uploads/shares/'+share_img, (err) => {
                         if(err ) {
                             res.redirect('/error');
                         } else {
