@@ -92,9 +92,24 @@ $(document).ready(function() {
         success : function(data){
           $('#left_membership').val(data.left_membership);
           $('#shared_span').text(data.shared);
-          var total_url = encodeURIComponent(my_url+'?img='+share_img_url);
-          window.open(`https://www.facebook.com/sharer.php?u=${share_img_url}&t=${title}&text=${content}`, 'NewWindow');
+          // var total_url = encodeURIComponent(my_url+'?img='+share_img_url);
+          // window.open(`https://www.facebook.com/sharer.php?u=${share_img_url}&t=${title}&text=${content}`, 'NewWindow');
           // window.open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(share_img_url)}&t=${encodeURIComponent(title)}`,'sharer','toolbar=0,status=0,width=626,height=436', 'NewWindow');
+
+          FB.ui({
+            method: 'share_open_graph',
+            action_type: 'og.shares',
+            action_properties: JSON.stringify({
+                object : {
+                   'og:url': 'http://app.social-media-builder.com/',
+                   'og:title': title,
+                   'og:description': content,
+                   'og:og:image:width': '600',
+                   'og:image:height': '400',
+                   'og:image': share_img_url
+                }
+            })
+        });
         },
         error : function() {
           toastr['error']('Happening any errors on update membership');
@@ -157,8 +172,15 @@ $(document).ready(function() {
         success : function(data){
           $('#left_membership').val(data.left_membership);
           $('#shared_span').text(data.shared);
-          window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${share_img_url}&title=${title}&summary=${content}`, 'NewWindow');
-          // window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(share_img_url)}&title=${encodeURIComponent(title)}&summary=${content}`, '', 'left=0,top=0,width=650,height=420,personalbar=0,toolbar=0,scrollbars=0,resizable=0', 'NewWindow');
+          // window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${share_img_url}&title=${title}&summary=${content}`, 'NewWindow');
+          // // window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(share_img_url)}&title=${encodeURIComponent(title)}&summary=${content}`, '', 'left=0,top=0,width=650,height=420,personalbar=0,toolbar=0,scrollbars=0,resizable=0', 'NewWindow');
+
+          navigator.share({
+            url: 'http://app.social-media-builder.com/',
+            title: title,
+            text: content,
+            image : share_img_url
+          });
         },
         error : function() {
           toastr['error']('Happening any errors on update membership');
