@@ -1,6 +1,31 @@
 $(document).ready(function() {
 
-
+  window.fbAsyncInit = function() {
+    // FB JavaScript SDK configuration and setup
+    FB.init({
+      appId      : '2839342499616311', // FB App ID
+      cookie     : true,  // enable cookies to allow the server to access the session
+      xfbml      : true,  // parse social plugins on this page
+      version    : 'v3.2' // use graph api version 2.8
+    });
+    
+    // Check whether the user already logged in
+    FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+            //display user data
+            getFbUserData();
+        }
+    });
+  };
+  
+  // Load the JavaScript SDK asynchronously
+  (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
   toastr['info']('To share post on social site, please follow as following steps.<br><br>1. Generate logo.<br>( If you have your logo, you can skip logo generating. )<br><br>2. Upload logo.<br><br>3. Preview the post.<br><br>4. Share on social site.');
 
@@ -98,32 +123,7 @@ $(document).ready(function() {
           // var total_url = encodeURIComponent(my_url+'?img='+share_img_url);
           // window.open(`https://www.facebook.com/sharer.php?u=${share_img_url}&t=${title}&u=${content}`, 'NewWindow');
           // window.open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(share_img_url)}&t=${encodeURIComponent(title)}`,'sharer','toolbar=0,status=0,width=626,height=436', 'NewWindow');
-          window.fbAsyncInit = function() {
-            // FB JavaScript SDK configuration and setup
-            FB.init({
-              appId      : '2839342499616311', // FB App ID
-              cookie     : true,  // enable cookies to allow the server to access the session
-              xfbml      : true,  // parse social plugins on this page
-              version    : 'v3.2' // use graph api version 2.8
-            });
-            
-            // Check whether the user already logged in
-            FB.getLoginStatus(function(response) {
-                if (response.status === 'connected') {
-                    //display user data
-                    getFbUserData();
-                }
-            });
-          };
           
-          // Load the JavaScript SDK asynchronously
-          (function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = "//connect.facebook.net/en_US/sdk.js";
-              fjs.parentNode.insertBefore(js, fjs);
-          }(document, 'script', 'facebook-jssdk'));
           
           FB.ui({
             method: 'share_open_graph',
