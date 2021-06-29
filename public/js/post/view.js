@@ -1,4 +1,31 @@
 $(document).ready(function() {
+  function init() {
+    FB.api(
+      '/l214.animaux',
+      {"fields":"fan_count"},
+      function(response) {
+        alert(response.fan_count);
+      }
+    );
+  }
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : 'your-app-id',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+
+    init();
+  };
+
+  (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
   toastr['info']('To share post on social site, please follow as following steps.<br><br>1. Generate logo.<br>( If you have your logo, you can skip logo generating. )<br><br>2. Upload logo.<br><br>3. Preview the post.<br><br>4. Share on social site.');
 
@@ -95,12 +122,7 @@ $(document).ready(function() {
           // var total_url = encodeURIComponent(my_url+'?img='+share_img_url);
           // window.open(`https://www.facebook.com/sharer.php?u=${share_img_url}&t=${title}&text=${content}`, 'NewWindow');
           // window.open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(share_img_url)}&t=${encodeURIComponent(title)}`,'sharer','toolbar=0,status=0,width=626,height=436', 'NewWindow');
-          FB.init({
-            appId: '######', // App ID
-            status: true, // check login status
-            cookie: true, // enable cookies to allow the server to access the session
-            xfbml: true  // parse XFBML
-          });
+          
           FB.ui({
             method: 'share_open_graph',
             action_type: 'og.shares',
