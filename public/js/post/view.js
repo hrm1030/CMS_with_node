@@ -95,7 +95,12 @@ $(document).ready(function() {
           // var total_url = encodeURIComponent(my_url+'?img='+share_img_url);
           // window.open(`https://www.facebook.com/sharer.php?u=${share_img_url}&t=${title}&text=${content}`, 'NewWindow');
           // window.open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(share_img_url)}&t=${encodeURIComponent(title)}`,'sharer','toolbar=0,status=0,width=626,height=436', 'NewWindow');
-
+          FB.init({
+            appId: '######', // App ID
+            status: true, // check login status
+            cookie: true, // enable cookies to allow the server to access the session
+            xfbml: true  // parse XFBML
+          });
           FB.ui({
             method: 'share_open_graph',
             action_type: 'og.shares',
