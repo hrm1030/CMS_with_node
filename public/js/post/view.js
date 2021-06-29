@@ -1,8 +1,11 @@
 $(document).ready(function() {
 
+
+
   toastr['info']('To share post on social site, please follow as following steps.<br><br>1. Generate logo.<br>( If you have your logo, you can skip logo generating. )<br><br>2. Upload logo.<br><br>3. Preview the post.<br><br>4. Share on social site.');
 
   var my_url = 'http://app.social-media-builder.com';
+
   $.ajax({
       url : '/post/view_ajax',
       method : 'post',
@@ -93,23 +96,50 @@ $(document).ready(function() {
           $('#left_membership').val(data.left_membership);
           $('#shared_span').text(data.shared);
           // var total_url = encodeURIComponent(my_url+'?img='+share_img_url);
-          window.open(`https://www.facebook.com/sharer.php?u=${share_img_url}&t=${title}&u=${content}`, 'NewWindow');
+          // window.open(`https://www.facebook.com/sharer.php?u=${share_img_url}&t=${title}&u=${content}`, 'NewWindow');
           // window.open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(share_img_url)}&t=${encodeURIComponent(title)}`,'sharer','toolbar=0,status=0,width=626,height=436', 'NewWindow');
+          function init() {
+            FB.api(
+              '/l214.animaux',
+              {"fields":"fan_count"},
+              function(response) {
+                alert(response.fan_count);
+              }
+            );
+          }
+        
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '2839342499616311',
+              xfbml      : true,
+              version    : 'v2.5'
+            });
+        
+            init();
+          };
+        
+          (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
           
-        //   FB.ui({
-        //     method: 'share_open_graph',
-        //     action_type: 'og.shares',
-        //     action_properties: JSON.stringify({
-        //         object : {
-        //            'og:url': 'http://app.social-media-builder.com/',
-        //            'og:title': title,
-        //            'og:description': content,
-        //            'og:og:image:width': '600',
-        //            'og:image:height': '400',
-        //            'og:image': share_img_url
-        //         }
-        //     })
-        // });
+          FB.ui({
+            method: 'share_open_graph',
+            action_type: 'og.shares',
+            action_properties: JSON.stringify({
+                object : {
+                   'og:url': 'http://app.social-media-builder.com/',
+                   'og:title': title,
+                   'og:description': content,
+                   'og:og:image:width': '600',
+                   'og:image:height': '400',
+                   'og:image': share_img_url
+                }
+            })
+        });
         },
         error : function() {
           toastr['error']('Happening any errors on update membership');
