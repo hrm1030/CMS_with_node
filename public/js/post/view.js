@@ -1,4 +1,11 @@
 $(document).ready(function() {
+
+  const shareData = {
+    title: 'MDN',
+    text: 'Learn web development on MDN!',
+    url: 'https://developer.mozilla.org',
+  }
+
   function init() {
     FB.api(
       '/l214.animaux',
@@ -199,15 +206,15 @@ $(document).ready(function() {
         success : function(data){
           $('#left_membership').val(data.left_membership);
           $('#shared_span').text(data.shared);
-          // window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${share_img_url}&title=${title}&summary=${content}`, 'NewWindow');
-          // // window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(share_img_url)}&title=${encodeURIComponent(title)}&summary=${content}`, '', 'left=0,top=0,width=650,height=420,personalbar=0,toolbar=0,scrollbars=0,resizable=0', 'NewWindow');
+          window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${share_img_url}&title=${title}&summary=${content}`, 'NewWindow');
+          // window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(share_img_url)}&title=${encodeURIComponent(title)}&summary=${content}`, '', 'left=0,top=0,width=650,height=420,personalbar=0,toolbar=0,scrollbars=0,resizable=0', 'NewWindow');
 
-          navigator.share({
-            url: 'http://app.social-media-builder.com/',
-            title: title,
-            text: content,
-            image : share_img_url
-          });
+          // navigator.share({
+          //   url: 'http://app.social-media-builder.com/',
+          //   title: title,
+          //   text: content,
+          //   image : share_img_url
+          // });
         },
         error : function() {
           toastr['error']('Happening any errors on update membership');
