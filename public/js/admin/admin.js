@@ -910,7 +910,7 @@ $(document).ready(function() {
                           email : $('#email').val(),
                           phone : $('#phone').val(),
                           file : image,
-                          language : $('#select_lang').val()
+                          language : $('#language').val()
                       },
                       success : function (data) {
                         //   window.location.reload();
