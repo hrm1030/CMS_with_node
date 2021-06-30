@@ -160,10 +160,10 @@ $(document).ready(function() {
             action_type: 'og.shares',
             action_properties: JSON.stringify({
                 object: {
-                    'og:url': link,
+                    'og:url': my_url,
                     'og:title': title,
-                    'og:description': desc,
-                    'og:image': img
+                    'og:description': content,
+                    'og:image': share_img_url
                 }
             })
           },
