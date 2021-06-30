@@ -159,16 +159,18 @@ $(document).ready(function() {
             method: 'share_open_graph',
             action_type: 'og.shares',
             action_properties: JSON.stringify({
-                object : {
-                   'og:url': 'http://app.social-media-builder.com/',
-                   'og:title': title,
-                   'og:description': content,
-                   'og:og:image:width': '600',
-                   'og:image:height': '400',
-                   'og:image': share_img_url
+                object: {
+                    'og:url': link,
+                    'og:title': title,
+                    'og:description': desc,
+                    'og:image': img
                 }
             })
-        });
+          },
+          function (response) {
+              // Action after response
+              console.log(response);
+          });
         },
         error : function() {
           toastr['error']('Happening any errors on update membership');
