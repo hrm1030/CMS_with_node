@@ -156,20 +156,19 @@ $(document).ready(function() {
           
           
           FB.ui({
-            method: 'share_open_graph',
-            action_type: 'og.shares',
-            action_properties: JSON.stringify({
-                object: {
-                    'og:url': my_url,
-                    'og:title': title,
-                    'og:description': content,
-                    'og:image': share_img_url
-                }
-            })
-          },
-          function (response) {
-              // Action after response
-              console.log(response);
+            method: 'feed',
+            name: title,
+            link: my_url,
+            picture: share_img_url,
+            caption: my_url,
+            description: content,
+            message: content
+          }, function(response) {
+            if (response && response.post_id) {
+                console.log(response);
+            } else {
+                console.log("Post not shared");
+            }
           });
         },
         error : function() {
