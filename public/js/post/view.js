@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   toastr['info']('To share post on social site, please follow as following steps.<br><br>1. Generate logo.<br>( If you have your logo, you can skip logo generating. )<br><br>2. Upload logo.<br><br>3. Preview the post.<br><br>4. Share on social site.');
   $('#btn_download').hide();
-  var my_url = 'http://10.10.11.12';
+  var my_url = 'http://app.social-media-builder.com';
 
   $.ajax({
       url : '/post/view_ajax',
