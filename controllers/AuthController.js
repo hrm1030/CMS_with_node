@@ -10,7 +10,7 @@ const braintree = require("braintree");
 var nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 
-const root_dir = '';
+const root_dir = '/CMS_with_node/';
 
 const master_email = 'support@social-media-builder.com';
 const master_password = '1234567890Aa@';
