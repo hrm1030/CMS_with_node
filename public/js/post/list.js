@@ -8,7 +8,7 @@ $(document).ready(function() {
         success : function(data) {
             paginate(data.posts);
         },
-        error : function(){
+        error : function() {
             toastr['error']('Happening any errors in getting post.')
         }
     });
