@@ -104,7 +104,7 @@ exports.selected_category = function(req, res) {
         } else {
             res.json({posts : posts});
         }
-    }).sort({ created_at : -1 });
+    }).sort({ rand : -1 });
 }
 
 exports.view = function(req, res) {
