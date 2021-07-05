@@ -202,7 +202,6 @@ exports.share = function(req, res) {
                                                     });
                                                 }
                                             });
-                                            
                                         }
                                     });
                                 }
