@@ -4,7 +4,6 @@ const Post = require('../models/Post');
 const User = require('../models/User');
 const http = require('http');
 const fs = require('fs');
-const download = require('download');
 const zipdir = require('zip-dir');
 
 const root_dir = '/CMS_with_node/';
