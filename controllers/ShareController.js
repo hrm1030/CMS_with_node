@@ -2,8 +2,12 @@ var formidable = require('formidable');
 var Jimp = require('jimp');
 const Post = require('../models/Post');
 const User = require('../models/User');
+const http = require('http');
+const fs = require('fs');
+const download = require('download');
+const zipdir = require('zip-dir');
 
-const root_dir = '/CMS_with_node/';
+const root_dir = '';
 exports.logo_upload = function(req, res) {
     var form = new formidable.IncomingForm();
     // console.log(req);
@@ -24,12 +28,12 @@ exports.logo_upload = function(req, res) {
 
 exports.image_jimp = function(req, res) {
     console.log(req.query)
-    Jimp.read(`/CMS_with_node/public/uploads/posts/${req.query.image}`, (err, img) => {
+    Jimp.read(`${root_dir}public/uploads/posts/${req.query.image}`, (err, img) => {
         if(err) {
             console.log(err);
             res.redirect('/error');
         } else {
-            Jimp.read(`/CMS_with_node/public/uploads/logos/${req.query.logo}`, (err, logo) => {
+            Jimp.read(`${root_dir}public/uploads/logos/${req.query.logo}`, (err, logo) => {
                 if(err) {
                     console.log(err);
                     res.redirect('/error');
@@ -64,7 +68,7 @@ exports.image_jimp = function(req, res) {
                     
                     var current_time = new Date().getFullYear()+''+new Date().getMonth()+''+new Date().getDate()+''+new Date().getHours()+''+new Date().getMinutes()+''+new Date().getSeconds()+''+new Date().getMilliseconds();
                     var share_img = 'share_'+req.session.userid+'_'+current_time+'.png';
-                    img.write(root_dir+'public/uploads/shares/'+share_img, (err)=> {
+                    img.write(root_dir+'public/uploads/shares/images/'+share_img, (err)=> {
                         if(err) {
                             res.redirect('/error');
                         } else {
@@ -118,7 +122,7 @@ exports.image_jimp_position_change = function(req, res) {
                     
                     var current_time = new Date().getFullYear()+''+new Date().getMonth()+''+new Date().getDate()+''+new Date().getHours()+''+new Date().getMinutes()+''+new Date().getSeconds()+''+new Date().getMilliseconds();
                     var share_img = 'share_'+req.session.userid+'_'+current_time+'.png';
-                    img.write(root_dir+'public/uploads/shares/'+share_img, (err) => {
+                    img.write(root_dir+'public/uploads/shares/images/'+share_img, (err) => {
                         if(err ) {
                             res.redirect('/error');
                         } else {
@@ -132,40 +136,82 @@ exports.image_jimp_position_change = function(req, res) {
 }
 
 exports.share = function(req, res) {
-    User.findById(req.session.userid, (err, user) => {
-        if(err) {
-            console.log(err);
+    var text_url = root_dir + 'public/uploads/shares/txt/'+req.query.title+'.txt';
+    var image_url = root_dir + 'public/' + req.query.image_url;
+
+    fs.writeFile(text_url, req.query.content, function (err) {
+        if (err) {
+            console.log(err+'.......................................');
             res.redirect('/error');
         } else {
-            User.findByIdAndUpdate(req.session.userid, {$set: {
-                left_membership : user.left_membership - 1,
-                shared_cnt : user.shared_cnt + 1
-            }}, (err) => {
+            User.findById(req.session.userid, (err, user) => {
                 if(err) {
                     console.log(err);
                     res.redirect('/error');
                 } else {
-                    req.session.shared_cnt = user.shared_cnt + 1;
-                    Post.findById(req.query.post_id, (err, post) => {
+                    User.findByIdAndUpdate(req.session.userid, {$set: {
+                        left_membership : user.left_membership - 1,
+                        shared_cnt : user.shared_cnt + 1
+                    }}, (err) => {
                         if(err) {
                             console.log(err);
                             res.redirect('/error');
                         } else {
-                            Post.findByIdAndUpdate(req.query.post_id, { $set : {
-                                shared : post.shared + 1
-                            }}, (err) => {
+                            req.session.shared_cnt = user.shared_cnt + 1;
+                            Post.findById(req.query.post_id, (err, post) => {
                                 if(err) {
                                     console.log(err);
                                     res.redirect('/error');
                                 } else {
-                                    req.session.left_membership = user.left_membership - 1;
-                                    res.json({msg : 'success', left_membership : req.session.left_membership, shared : post.shared+1});
+                                    Post.findByIdAndUpdate(req.query.post_id, { $set : {
+                                        shared : post.shared + 1
+                                    }}, (err) => {
+                                        if(err) {
+                                            console.log(err);
+                                            res.redirect('/error');
+                                        } else {
+                                            req.session.left_membership = user.left_membership - 1;
+                                            fs.mkdir(`${root_dir}public/uploads/shares/download/${req.query.title}`, { recursive: true }, function(err) {
+                                                if (err) {
+                                                  console.log(err)
+                                                } else {
+                                                    console.log("New directory successfully created.");
+                                                    fs.copyFile(`${text_url}`, `${root_dir}public/uploads/shares/download/${req.query.title}/${req.query.title}.txt`, (err) => {
+                                                        if (err) {
+                                                            console.log(err);
+                                                            res.redirect('/error');
+                                                        } else {
+                                                            fs.copyFile(`${image_url}`, `${root_dir}public/uploads/shares/download/${req.query.title}/${req.query.title}.png`, (err) => {
+                                                                if (err) {
+                                                                    console.log(err);
+                                                                    res.redirect('/error');
+                                                                } else {
+
+                                                                    var zip_url = `${root_dir}public/uploads/shares/download/${req.query.title}.zip`;
+
+                                                                    zipdir(`${root_dir}public/uploads/shares/download/${req.query.title}`, { saveTo: zip_url}, function (err, buffer) {
+                                                                        // `buffer` is the buffer of the zipped file
+                                                                        // And the buffer was saved to `~/myzip.zip`
+                                                                            res.json({msg : 'success', left_membership : req.session.left_membership, shared : post.shared+1, zip_url : `uploads/shares/download/${req.query.title}.zip`}); 
+                                                                    });                       
+                                                                        
+                                                                    
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                            
+                                        }
+                                    });
                                 }
-                            })
+                            });
                         }
-                    })
+                    });
                 }
             });
         }
     });
+    
 }

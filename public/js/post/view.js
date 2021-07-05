@@ -1,65 +1,8 @@
 $(document).ready(function() {
 
-  window.fbAsyncInit = function() {
-    // FB JavaScript SDK configuration and setup
-    FB.init({
-      appId      : '2839342499616311', // FB App ID
-      cookie     : true,  // enable cookies to allow the server to access the session
-      xfbml      : true,  // parse social plugins on this page
-      version    : 'v3.2' // use graph api version 2.8
-    });
-    
-    // Check whether the user already logged in
-    FB.getLoginStatus(function(response) {
-        if (response.status === 'connected') {
-            //display user data
-            getFbUserData();
-        }
-    });
-  };
-
-  function fbLogin() {
-    FB.login(function (response) {
-        if (response.authResponse) {
-            // Get and display the user profile data
-            getFbUserData();
-        } else {
-            document.getElementById('status').innerHTML = 'User cancelled login or did not fully authorize.';
-        }
-    }, {scope: 'email'});
-  }
-
-  function getFbUserData(){
-    FB.api('/me', {locale: 'en_US', fields: 'id,first_name,last_name,email,link,gender,locale,picture'},
-    function (response) {
-        document.getElementById('fbLink').setAttribute("onclick","fbLogout()");
-        document.getElementById('fbLink').innerHTML = 'Logout from Facebook';
-        document.getElementById('status').innerHTML = '<p>Thanks for logging in, ' + response.first_name + '!</p>';
-        document.getElementById('userData').innerHTML = '<h2>Facebook Profile Details</h2><p><img src="'+response.picture.data.url+'"/></p><p><b>FB ID:</b> '+response.id+'</p><p><b>Name:</b> '+response.first_name+' '+response.last_name+'</p><p><b>Email:</b> '+response.email+'</p><p><b>Gender:</b> '+response.gender+'</p><p><b>FB Profile:</b> <a target="_blank" href="'+response.link+'">click to view profile</a></p>';
-    });
-  }
-
-  function fbLogout() {
-    FB.logout(function() {
-        document.getElementById('fbLink').setAttribute("onclick","fbLogin()");
-        document.getElementById('fbLink').innerHTML = '<img src="images/fb-login-btn.png"/>';
-        document.getElementById('userData').innerHTML = '';
-        document.getElementById('status').innerHTML = '<p>You have successfully logout from Facebook.</p>';
-    });
-  }
-  
-  // Load the JavaScript SDK asynchronously
-  (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
   toastr['info']('To share post on social site, please follow as following steps.<br><br>1. Generate logo.<br>( If you have your logo, you can skip logo generating. )<br><br>2. Upload logo.<br><br>3. Preview the post.<br><br>4. Share on social site.');
-
-  var my_url = 'http://app.social-media-builder.com';
+  $('#btn_download').hide();
+  var my_url = 'http://10.10.11.12';
 
   $.ajax({
       url : '/post/view_ajax',
@@ -96,12 +39,14 @@ $(document).ready(function() {
 
 
   $('.btn_preview').click(function() {
+    $('#btn_download').hide();
+    $('#modal_title').html(`<i class="icon-eye" style="font-size: 23px;"></i> Preview post`);
     var share_img_url;
     if($('#share_img').val() == '')
     {
       share_img_url = `../../uploads/posts/${$('#image').val()}`;
     } else {
-      share_img_url = `../../uploads/shares/${$('#share_img').val()}`;
+      share_img_url = `../../uploads/shares/images/${$('#share_img').val()}`;
     }
       $('#preview_title').text($('#title').text());
       $('#preview_body').html($('#content').html());
@@ -130,81 +75,62 @@ $(document).ready(function() {
       }, 1000);
   });
 
-  $('#btn_facebook').click(function() {
+  $('#btn_purchase').click(function() {
     var share_img= $('#share_img').val();
     var title = $('#title').text();
     var content = $('#content').text();
     var share_img_url;
     if(share_img == '')
     {
-      share_img_url = `http://app.social-media-builder.com/uploads/posts/${$('#image').val()}`;
+      share_img_url = `uploads/posts/${$('#image').val()}`;
     } else {
-      share_img_url = `http://app.social-media-builder.com/uploads/shares/${share_img}`;
+      share_img_url = `uploads/shares/images/${share_img}`;
     }
     var left_membership = $('#left_membership').val();
     if(left_membership > 0){
       $.ajax({
         url : '/share',
         methdod : 'post',
-        data : { post_id : $('#post_id').val()},
+        data : { 
+          post_id : $('#post_id').val(),
+          title : title,
+          content : content,
+          image_url : share_img_url
+        },
         success : function(data){
           $('#left_membership').val(data.left_membership);
           $('#shared_span').text(data.shared);
-          // var total_url = encodeURIComponent(my_url+'?img='+share_img_url);
-          // window.open(`https://www.facebook.com/sharer.php?u=${share_img_url}&t=${title}&u=${content}`, 'NewWindow');
-          // window.open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(share_img_url)}&t=${encodeURIComponent(title)}`,'sharer','toolbar=0,status=0,width=626,height=436', 'NewWindow');
-          
-          
-          FB.ui({
-            method: 'feed',
-            name: title,
-            link: my_url,
-            picture: share_img_url,
-            caption: my_url,
-            description: content,
-            message: content
-          }, function(response) {
-            if (response && response.post_id) {
-                console.log(response);
-            } else {
-                console.log("Post not shared");
-            }
-          });
+          $('#modal_title').html(`<i class="icon-basket" style="font-size: 23px;"></i> Purchase post`);
+          var new_share_img_url;
+          if($('#share_img').val() == '')
+          {
+            new_share_img_url = `../../uploads/posts/${$('#image').val()}`;
+          } else {
+            new_share_img_url = `../../uploads/shares/images/${$('#share_img').val()}`;
+          }
+          $('#preview_title').text($('#title').text());
+          $('#preview_body').html($('#content').html());
+          var share_img_div = `<div class="blog-item-img">
+                                <!-- BEGIN CAROUSEL -->            
+                                <div class="front-carousel">
+                                  <div id="myCarousel" class="carousel slide">
+                                    <!-- Carousel items -->
+                                    <div class="carousel-inner">
+                                      <div class="item active">
+                                        <img src="${new_share_img_url}" style="height: 450px; width:100%;" alt="">
+                                      </div>
+                                    </div>
+                                  </div>                
+                                </div>
+                                <!-- END CAROUSEL -->
+                              </div>`;
+            $('#slide_div').html(share_img_div);
+            $('#btn_download').attr('href', `${my_url}/${data.zip_url}`);
+            $('#btn_download').show();
+            $('#previewModal').modal('show');
         },
-        error : function() {
-          toastr['error']('Happening any errors on update membership');
-        }
-      })
-    } else {
-      toastr['info'](`You can't share post. Your left membership is 0.`);
-    } 
-  });
-
-  $('#btn_twitter').click(function() {
-    var share_img= $('#share_img').val();
-    var title = $('#title').text();
-    var content = $('#content').text();
-    var share_img_url;
-    if(share_img == '')
-    {
-      share_img_url = `http://app.social-media-builder.com/uploads/posts/${$('#image').val()}`;
-    } else {
-      share_img_url = `http://app.social-media-builder.com/uploads/shares/${share_img}`;
-    }
-    var left_membership = $('#left_membership').val();
-    if(left_membership > 0){
-      $.ajax({
-        url : '/share',
-        methdod : 'post',
-        data : { post_id : $('#post_id').val()},
-        success : function(data){
-          $('#left_membership').val(data.left_membership);
-          $('#shared_span').text(data.shared);
-          // window.open(`https://twitter.com/share?url=${my_url}&image=${share_img_url}&title=${title}&text=${content}`, 'NewWindow');
-          window.open(`https://twitter.com/share?url=${share_img_url}&title=${title}&text=${content}`, 'NewWindow');
-        },
-        error : function() {
-          toastr['error']('Happening any errors on update membership');
+        error:function() {
+          toastr['error']('Happening any errors on sharing post');
         }
       });
     } else {
@@ -212,44 +138,126 @@ $(document).ready(function() {
     }
   });
 
-  $('#btn_linkedin').click(function() {
-    var share_img= $('#share_img').val();
-    var title = $('#title').text();
-    var content = $('#content').text();
-    var share_img_url;
-    if(share_img == '')
-    {
-      share_img_url = `http://app.social-media-builder.com/uploads/posts/${$('#image').val()}`;
-    } else {
-      share_img_url = `http://app.social-media-builder.com/uploads/shares/${share_img}`;
-    }
-    var left_membership = $('#left_membership').val();
-    if(left_membership > 0){
-      $.ajax({
-        url : '/share',
-        methdod : 'post',
-        data : { post_id : $('#post_id').val()},
-        success : function(data){
-          $('#left_membership').val(data.left_membership);
-          $('#shared_span').text(data.shared);
-          window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${share_img_url}&title=${title}&summary=${content}`, 'NewWindow');
-          // window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(share_img_url)}&title=${encodeURIComponent(title)}&summary=${content}`, '', 'left=0,top=0,width=650,height=420,personalbar=0,toolbar=0,scrollbars=0,resizable=0', 'NewWindow');
+  // $('#btn_facebook').click(function() {
+  //   var share_img= $('#share_img').val();
+  //   var title = $('#title').text();
+  //   var content = $('#content').text();
+  //   var share_img_url;
+  //   if(share_img == '')
+  //   {
+  //     share_img_url = `http://app.social-media-builder.com/uploads/posts/${$('#image').val()}`;
+  //   } else {
+  //     share_img_url = `http://app.social-media-builder.com/uploads/shares/${share_img}`;
+  //   }
+  //   var left_membership = $('#left_membership').val();
+  //   if(left_membership > 0){
+  //     $.ajax({
+  //       url : '/share',
+  //       methdod : 'post',
+  //       data : { post_id : $('#post_id').val()},
+  //       success : function(data){
+  //         $('#left_membership').val(data.left_membership);
+  //         $('#shared_span').text(data.shared);
+  //         // var total_url = encodeURIComponent(my_url+'?img='+share_img_url);
+  //         // window.open(`https://www.facebook.com/sharer.php?u=${share_img_url}&t=${title}&u=${content}`, 'NewWindow');
+  //         // window.open(`https://www.facebook.com/sharer.php?u=${encodeURIComponent(share_img_url)}&t=${encodeURIComponent(title)}`,'sharer','toolbar=0,status=0,width=626,height=436', 'NewWindow');
+          
+          
+  //         FB.ui({
+  //           method: 'feed',
+  //           name: title,
+  //           link: my_url,
+  //           picture: share_img_url,
+  //           caption: my_url,
+  //           description: content,
+  //           message: content
+  //         }, function(response) {
+  //           if (response && response.post_id) {
+  //               console.log(response);
+  //           } else {
+  //               console.log("Post not shared");
+  //           }
+  //         });
+  //       },
+  //       error : function() {
+  //         toastr['error']('Happening any errors on update membership');
+  //       }
+  //     })
+  //   } else {
+  //     toastr['info'](`You can't share post. Your left membership is 0.`);
+  //   } 
+  // });
 
-          // navigator.share({
-          //   url: 'http://app.social-media-builder.com/',
-          //   title: title,
-          //   text: content,
-          //   image : share_img_url
-          // });
-        },
-        error : function() {
-          toastr['error']('Happening any errors on update membership');
-        }
-      });
-    } else {
-      toastr['info'](`You can't share post. Your left membership is 0.`);
-    }
-  });
+  // $('#btn_twitter').click(function() {
+  //   var share_img= $('#share_img').val();
+  //   var title = $('#title').text();
+  //   var content = $('#content').text();
+  //   var share_img_url;
+  //   if(share_img == '')
+  //   {
+  //     share_img_url = `http://app.social-media-builder.com/uploads/posts/${$('#image').val()}`;
+  //   } else {
+  //     share_img_url = `http://app.social-media-builder.com/uploads/shares/${share_img}`;
+  //   }
+  //   var left_membership = $('#left_membership').val();
+  //   if(left_membership > 0){
+  //     $.ajax({
+  //       url : '/share',
+  //       methdod : 'post',
+  //       data : { post_id : $('#post_id').val()},
+  //       success : function(data){
+  //         $('#left_membership').val(data.left_membership);
+  //         $('#shared_span').text(data.shared);
+  //         // window.open(`https://twitter.com/share?url=${my_url}&image=${share_img_url}&title=${title}&text=${content}`, 'NewWindow');
+  //         window.open(`https://twitter.com/share?url=${share_img_url}&title=${title}&text=${content}`, 'NewWindow');
+  //       },
+  //       error : function() {
+  //         toastr['error']('Happening any errors on update membership');
+  //       }
+  //     });
+  //   } else {
+  //     toastr['info'](`You can't share post. Your left membership is 0.`);
+  //   }
+  // });
+
+  // $('#btn_linkedin').click(function() {
+  //   var share_img= $('#share_img').val();
+  //   var title = $('#title').text();
+  //   var content = $('#content').text();
+  //   var share_img_url;
+  //   if(share_img == '')
+  //   {
+  //     share_img_url = `http://app.social-media-builder.com/uploads/posts/${$('#image').val()}`;
+  //   } else {
+  //     share_img_url = `http://app.social-media-builder.com/uploads/shares/${share_img}`;
+  //   }
+  //   var left_membership = $('#left_membership').val();
+  //   if(left_membership > 0){
+  //     $.ajax({
+  //       url : '/share',
+  //       methdod : 'post',
+  //       data : { post_id : $('#post_id').val()},
+  //       success : function(data){
+  //         $('#left_membership').val(data.left_membership);
+  //         $('#shared_span').text(data.shared);
+  //         window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${share_img_url}&title=${title}&summary=${content}`, 'NewWindow');
+  //         // window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(share_img_url)}&title=${encodeURIComponent(title)}&summary=${content}`, '', 'left=0,top=0,width=650,height=420,personalbar=0,toolbar=0,scrollbars=0,resizable=0', 'NewWindow');
+
+  //         // navigator.share({
+  //         //   url: 'http://app.social-media-builder.com/',
+  //         //   title: title,
+  //         //   text: content,
+  //         //   image : share_img_url
+  //         // });
+  //       },
+  //       error : function() {
+  //         toastr['error']('Happening any errors on update membership');
+  //       }
+  //     });
+  //   } else {
+  //     toastr['info'](`You can't share post. Your left membership is 0.`);
+  //   }
+  // });
 
   $('#btn_upload').click(function() {
     if($('#photo').val() == '') {

@@ -40,6 +40,7 @@
     "read-chunk": "^3.2.0",
     "request": "^2.88.2",
     "sendmail": "^1.6.1",
-    "websocket": "^1.0.34"
+    "websocket": "^1.0.34",
+    "zip-dir": "^2.0.0"
   }
 }

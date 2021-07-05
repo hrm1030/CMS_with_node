@@ -10,6 +10,8 @@ const braintree = require("braintree");
 var nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 
+const root_dir = '';
+
 const master_email = 'support@social-media-builder.com';
 const master_password = '1234567890Aa@';
 
@@ -115,52 +117,7 @@ exports.signup = function (req, res, next) {
                                 console.log(err);
                                 res.redirect('/error');
                             } else {
-                                if (password === confirm_password) {
-                                    console.log(phone)
-                                    var hashedPassword = bcrypt.hashSync(req.body.password, 8);
-                                    var today = new Date();
-                                    User.create({
-                                        language : req.body.language,
-                                        name: name,
-                                        surname: surname,
-                                        phone: phone,
-                                        email: email,
-                                        password: hashedPassword,
-                                        membership: 0,
-                                        left_membership: 0,
-                                        ask: 0,
-                                        card_number: '',
-                                        expire_month: 0,
-                                        expore_year: 0,
-                                        cvc: 0,
-                                        created_at: today.toUTCString(),
-                                        started_at: '',
-                                        permission: 2,
-                                        photo: 'avatar.png',
-                                        introduction: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.',
-                                        state: 0,
-                                        industry: req.body.industry,
-                                        shared_cnt: 0,
-                                    }, (err, user) => {
-            
-                                        if (err) {
-                                            console.log(err)
-                                            res.redirect('/error');
-                                        } else {
-                                            fs.copyFile('public/uploads/users/avatar.png', 'public/uploads/users/' + user._id + '.png', (err) => {
-                                                if (err) {
-                                                    console.log(err);
-                                                    res.redirect('/error');
-                                                } else {
-                                                    res.json({ msg: 'success', errors: [], user_id: user._id });
-                                                }
-                                            });
-                                        }
-                                    })
-                                } else {
-                                    errors.push('Password is not confirmed.');
-                                    res.json({ errors: errors });
-                                }
+                                res.json({ errors: errors });
                             }
                         })
                         
@@ -198,7 +155,7 @@ exports.signup = function (req, res, next) {
                                 console.log(err)
                                 res.redirect('/error');
                             } else {
-                                fs.copyFile('public/uploads/users/avatar.png', 'public/uploads/users/' + user._id + '.png', (err) => {
+                                fs.copyFile(`${root_dir}public/uploads/users/avatar.png`, `${root_dir}public/uploads/users/` + user._id + '.png', (err) => {
                                     if (err) {
                                         console.log(err);
                                         res.redirect('/error');
