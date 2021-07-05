@@ -6,7 +6,17 @@ $(document).ready(function() {
             cat_id : $('#cat_id').val()
         },
         success : function(data) {
-            paginate(data.posts);
+            var posts = data.posts;
+            var new_posts = [];
+            var post_length = posts.length;
+            for(var i = 0 ; i < post_length ; i ++)
+            {
+                var len = posts.length;
+                var index = Math.floor(Math.random()*(len--));
+                new_posts.push(posts.slice(index, index+1));
+                posts.splice(index, 1);
+            }
+            paginate(new_posts);
         },
         error : function() {
             toastr['error']('Happening any errors in getting post.')
@@ -43,17 +53,17 @@ $(document).ready(function() {
             });
             var search_html = '';
             for(var i = 0 ; i < posts.length ; i ++) {
-                var content = posts[i].content.slice(0, 100);
+                var content = posts[i][0].content.slice(0, 100);
                 
                 var post = `<div class="row">
                                 <div class="col-md-4 col-sm-4">
                                     <!-- BEGIN CAROUSEL -->            
                                     <div class="front-carousel">
-                                        <div class="carousel slide" id="myCarousel${posts[i]._id}">
+                                        <div class="carousel slide" id="myCarousel${posts[i][0]._id}">
                                         <!-- Carousel items -->
                                             <div class="carousel-inner">
                                                 <div class="item active">
-                                                <img alt="" src="../../uploads/posts/${posts[i].image}" style="width:300px; height:150px;">
+                                                <img alt="" src="../../uploads/posts/${posts[i][0].image}" style="width:300px; height:150px;">
                                                 </div>
                                             </div>
                                         </div>                
@@ -61,14 +71,14 @@ $(document).ready(function() {
                                     <!-- END CAROUSEL -->
                                 </div>
                             <div class="col-md-8 col-sm-8">
-                            <h2><img src="../../uploads/users/${posts[i].poster_id}.png" style="width:45px; height:45px;"> ${posts[i].poster}</h2>
+                            <h2><img src="../../uploads/users/${posts[i][0].poster_id}.png" style="width:45px; height:45px;"> ${posts[i][0].poster}</h2>
                             <ul class="blog-info">
-                                <li><i class="fa fa-calendar"></i> ${new Date(posts[i].created_at).getFullYear()}-${new Date(posts[i].created_at).getMonth()+1}-${new Date(posts[i].created_at).getDate()} ${new Date(posts[i].created_at).getHours()}:${new Date(posts[i].created_at).getMinutes()}:${new Date(posts[i].created_at).getSeconds()}</li>
-                                <li><i class="fa fa-thumbs-up"></i> ${posts[i].shared}</li>
-                                <li><i class="fa fa-tags"></i> ${posts[i].category}</li>
+                                <li><i class="fa fa-calendar"></i> ${new Date(posts[i][0].created_at).getFullYear()}-${new Date(posts[i][0].created_at).getMonth()+1}-${new Date(posts[i][0].created_at).getDate()} ${new Date(posts[i][0].created_at).getHours()}:${new Date(posts[i][0].created_at).getMinutes()}:${new Date(posts[i][0].created_at).getSeconds()}</li>
+                                <li><i class="fa fa-thumbs-up"></i> ${posts[i][0].shared}</li>
+                                <li><i class="fa fa-tags"></i> ${posts[i][0].category}</li>
                             </ul>
-                            <p><h4>${posts[i].title}</h4></p><br>
-                            <a href="/post/view?post=${posts[i]._id}" class="more">Read more <i class="icon-angle-right"></i></a>
+                            <p><h4>${posts[i][0].title}</h4></p><br>
+                            <a href="/post/view?post=${posts[i][0]._id}" class="more">Read more <i class="icon-angle-right"></i></a>
                             </div>
                         </div>
                         <hr class="blog-post-sep">`;
@@ -96,16 +106,16 @@ $(document).ready(function() {
                     console.log('middle')
                     var search_html = '';
                     for(var i = (num-1)*5 ; i < 5*num ; i ++) {
-                        var content = posts[i].content.slice(0, 100);
+                        var content = posts[i][0].content.slice(0, 100);
                         var post = `<div class="row">
                                         <div class="col-md-4 col-sm-4">
                                             <!-- BEGIN CAROUSEL -->            
                                             <div class="front-carousel">
-                                                <div class="carousel slide" id="myCarousel${posts[i]._id}">
+                                                <div class="carousel slide" id="myCarousel${posts[i][0]._id}">
                                                     <!-- Carousel items -->
                                                     <div class="carousel-inner">
                                                         <div class="item active">
-                                                        <img alt="" src="../../uploads/posts/${posts[i].image}" style="width:300px; height:150px;">
+                                                        <img alt="" src="../../uploads/posts/${posts[i][0].image}" style="width:300px; height:150px;">
                                                         </div>
                                                     </div>
                                                 </div>                
@@ -113,14 +123,14 @@ $(document).ready(function() {
                                             <!-- END CAROUSEL -->
                                     </div>
                                     <div class="col-md-8 col-sm-8">
-                                    <h2><img src="../../uploads/users/${posts[i].poster_id}.png" style="width:45px; height:45px;"> ${posts[i].poster}</h2>
+                                    <h2><img src="../../uploads/users/${posts[i][0].poster_id}.png" style="width:45px; height:45px;"> ${posts[i][0].poster}</h2>
                                     <ul class="blog-info">
-                                        <li><i class="fa fa-calendar"></i> ${new Date(posts[i].created_at).getFullYear()}-${new Date(posts[i].created_at).getMonth()+1}-${new Date(posts[i].created_at).getDate()} ${new Date(posts[i].created_at).getHours()}:${new Date(posts[i].created_at).getMinutes()}:${new Date(posts[i].created_at).getSeconds()}</li>
-                                        <li><i class="fa fa-thumbs-up"></i> ${posts[i].shared}</li>
-                                        <li><i class="fa fa-tags"></i> ${posts[i].category}</li>
+                                        <li><i class="fa fa-calendar"></i> ${new Date(posts[i][0].created_at).getFullYear()}-${new Date(posts[i][0].created_at).getMonth()+1}-${new Date(posts[i][0].created_at).getDate()} ${new Date(posts[i][0].created_at).getHours()}:${new Date(posts[i][0].created_at).getMinutes()}:${new Date(posts[i][0].created_at).getSeconds()}</li>
+                                        <li><i class="fa fa-thumbs-up"></i> ${posts[i][0].shared}</li>
+                                        <li><i class="fa fa-tags"></i> ${posts[i][0].category}</li>
                                     </ul>
-                                    <p><h4>${posts[i].title}</h4></p><br>
-                                    <a href="/post/view?post=${posts[i]._id}" class="more">Read more <i class="icon-angle-right"></i></a>
+                                    <p><h4>${posts[i][0].title}</h4></p><br>
+                                    <a href="/post/view?post=${posts[i][0]._id}" class="more">Read more <i class="icon-angle-right"></i></a>
                                     </div>
                                 </div>
                                 <hr class="blog-post-sep">`;
@@ -130,16 +140,16 @@ $(document).ready(function() {
                     console.log('last')
                     var search_html = '';
                     for(var i = (num-1)*5 ; i < posts.length ; i ++) {
-                        var content = posts[i].content.slice(0, 100);
+                        var content = posts[i][0].content.slice(0, 100);
                         var post = `<div class="row">
                                         <div class="col-md-4 col-sm-4">
                                             <!-- BEGIN CAROUSEL -->            
                                             <div class="front-carousel">
-                                                <div class="carousel slide" id="myCarousel${posts[i]._id}">
+                                                <div class="carousel slide" id="myCarousel${posts[i][0]._id}">
                                                     <!-- Carousel items -->
                                                     <div class="carousel-inner">
                                                         <div class="item active">
-                                                        <img alt="" src="../../uploads/posts/${posts[i].image}" style="width:300px; height:150px;">
+                                                        <img alt="" src="../../uploads/posts/${posts[i][0].image}" style="width:300px; height:150px;">
                                                         </div>
                                                     </div>
                                                 </div>                
@@ -147,14 +157,14 @@ $(document).ready(function() {
                                             <!-- END CAROUSEL -->
                                         </div>
                                 <div class="col-md-8 col-sm-8">
-                                <h2><img src="../../uploads/users/${posts[i].poster_id}.png" style="width:45px; height:45px;"> ${posts[i].poster}</h2>
+                                <h2><img src="../../uploads/users/${posts[i][0].poster_id}.png" style="width:45px; height:45px;"> ${posts[i][0].poster}</h2>
                                 <ul class="blog-info">
-                                    <li><i class="fa fa-calendar"></i> ${new Date(posts[i].created_at).getFullYear()}-${new Date(posts[i].created_at).getMonth()+1}-${new Date(posts[i].created_at).getDate()} ${new Date(posts[i].created_at).getHours()}:${new Date(posts[i].created_at).getMinutes()}:${new Date(posts[i].created_at).getSeconds()}</li>
-                                    <li><i class="fa fa-thumbs-up"></i> ${posts[i].shared}</li>
-                                    <li><i class="fa fa-tags"></i> ${posts[i].category}</li>
+                                    <li><i class="fa fa-calendar"></i> ${new Date(posts[i][0].created_at).getFullYear()}-${new Date(posts[i][0].created_at).getMonth()+1}-${new Date(posts[i][0].created_at).getDate()} ${new Date(posts[i][0].created_at).getHours()}:${new Date(posts[i][0].created_at).getMinutes()}:${new Date(posts[i][0].created_at).getSeconds()}</li>
+                                    <li><i class="fa fa-thumbs-up"></i> ${posts[i][0].shared}</li>
+                                    <li><i class="fa fa-tags"></i> ${posts[i][0].category}</li>
                                 </ul>
-                                <p><h4>${posts[i].title}</h4></p><br>
-                                <a href="/post/view?post=${posts[i]._id}" class="more">Read more <i class="icon-angle-right"></i></a>
+                                <p><h4>${posts[i][0].title}</h4></p><br>
+                                <a href="/post/view?post=${posts[i][0]._id}" class="more">Read more <i class="icon-angle-right"></i></a>
                                 </div>
                             </div>
                             <hr class="blog-post-sep">`;
@@ -171,11 +181,11 @@ $(document).ready(function() {
                                 <div class="col-md-4 col-sm-4">
                                     <!-- BEGIN CAROUSEL -->            
                                     <div class="front-carousel">
-                                        <div class="carousel slide" id="myCarousel${posts[i]._id}">
+                                        <div class="carousel slide" id="myCarousel${posts[i][0]._id}">
                                             <!-- Carousel items -->
                                             <div class="carousel-inner">
                                                 <div class="item active">
-                                                <img alt="" src="../../uploads/posts/${posts[i].image}" style="width:300px; height:150px;">
+                                                <img alt="" src="../../uploads/posts/${posts[i][0].image}" style="width:300px; height:150px;">
                                                 </div>
                                             </div>
                                         </div>                
@@ -183,14 +193,14 @@ $(document).ready(function() {
                                     <!-- END CAROUSEL -->
                                 </div>
                             <div class="col-md-8 col-sm-8">
-                            <h2><img src="../../uploads/users/${posts[i].poster_id}.png" style="width:45px; height:45px;"> ${posts[i].poster}</h2>
+                            <h2><img src="../../uploads/users/${posts[i][0].poster_id}.png" style="width:45px; height:45px;"> ${posts[i][0].poster}</h2>
                             <ul class="blog-info">
-                                <li><i class="fa fa-calendar"></i> ${new Date(posts[i].created_at).getFullYear()}-${new Date(posts[i].created_at).getMonth()+1}-${new Date(posts[i].created_at).getDate()} ${new Date(posts[i].created_at).getHours()}:${new Date(posts[i].created_at).getMinutes()}:${new Date(posts[i].created_at).getSeconds()}</li>
-                                <li><i class="fa fa-thumbs-up"></i> ${posts[i].shared}</li>
-                                <li><i class="fa fa-tags"></i> ${posts[i].category}</li>
+                                <li><i class="fa fa-calendar"></i> ${new Date(posts[i][0].created_at).getFullYear()}-${new Date(posts[i][0].created_at).getMonth()+1}-${new Date(posts[i][0].created_at).getDate()} ${new Date(posts[i][0].created_at).getHours()}:${new Date(posts[i][0].created_at).getMinutes()}:${new Date(posts[i][0].created_at).getSeconds()}</li>
+                                <li><i class="fa fa-thumbs-up"></i> ${posts[i][0].shared}</li>
+                                <li><i class="fa fa-tags"></i> ${posts[i][0].category}</li>
                             </ul>
-                            <p><h4>${posts[i].title}</h4></p><br>
-                            <a href="/post/view?post=${posts[i]._id}" class="more">Read more <i class="icon-angle-right"></i></a>
+                            <p><h4>${posts[i][0].title}</h4></p><br>
+                            <a href="/post/view?post=${posts[i][0]._id}" class="more">Read more <i class="icon-angle-right"></i></a>
                             </div>
                         </div>
                         <hr class="blog-post-sep">`;
