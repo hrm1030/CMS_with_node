@@ -82,12 +82,12 @@ exports.image_jimp = function(req, res) {
 
 exports.image_jimp_position_change = function(req, res) {
     console.log(req.query)
-    Jimp.read(`/CMS_with_node/public/uploads/posts/${req.query.image}`, (err, img) => {
+    Jimp.read(`${root_dir}public/uploads/posts/${req.query.image}`, (err, img) => {
         if(err) {
             console.log(err);
             res.redirect('/error');
         } else {
-            Jimp.read(`/CMS_with_node/public/uploads/logos/${req.query.logo}`, (err, logo) => {
+            Jimp.read(`${root_dir}public/uploads/logos/${req.query.logo}`, (err, logo) => {
                 if(err) {
                     console.log(err);
                     res.redirect('/error');
