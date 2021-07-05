@@ -7,6 +7,7 @@ const fs = require('fs');
 const zipdir = require('zip-dir');
 
 const root_dir = '/CMS_with_node/';
+
 exports.logo_upload = function(req, res) {
     var form = new formidable.IncomingForm();
     // console.log(req);
