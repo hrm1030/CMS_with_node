@@ -143,6 +143,65 @@ $(document).ready(function() {
     }
   });
 
+  // @return Promise<boolean>
+  async function askWritePermission() {
+    try {
+      // The clipboard-write permission is granted automatically to pages 
+    // when they are the active tab. So it's not required, but it's more safe.
+      const { state } = await navigator.permissions.query({ name: 'clipboard-write' })
+      return state === 'granted'
+    } catch (error) {
+      // Browser compatibility / Security error (ONLY HTTPS) ...
+      return false
+    }
+  }
+
+  // @params blob - The ClipboardItem takes an object with the MIME type as key, and the actual blob as the value.
+  // @return Promise<void>
+  const setToClipboard = async blob => {
+    const data = [new ClipboardItem({ [blob.type]: blob })]
+    await navigator.clipboard.write(data)
+  }
+
+
+  $('#btn_copy_img').click(async function() {
+    
+
+    // Can we copy a text or an image ?
+    const canWriteToClipboard = await askWritePermission()
+
+    // Copy a PNG image to clipboard
+    if (canWriteToClipboard) {
+      var share_img= $('#share_img').val();
+
+      const response = await fetch(`/uploads/posts/${$('#image').val()}`)
+      var blob = await response.blob()
+      blob = blob.slice(0, blob.size, "image/png")
+      await setToClipboard(blob) 
+    }
+
+  });
+
+  
+
+  $('#btn_copy_text').click(async function() {
+    
+
+    // Can we copy a text or an image ?
+    const canWriteToClipboard = await askWritePermission()
+
+    
+
+    // Copy a text to clipboard
+    if (canWriteToClipboard) {
+      var title = $('#title').text();
+      var content = $('#content').text();
+      
+      const blob = new Blob([content], { type: 'text/plain' })
+      await setToClipboard(blob)
+    }
+  });
+
   // $('#btn_facebook').click(function() {
   //   var share_img= $('#share_img').val();
   //   var title = $('#title').text();

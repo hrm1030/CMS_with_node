@@ -5,6 +5,8 @@ const User = require('../models/User');
 const http = require('http');
 const fs = require('fs');
 const zipdir = require('zip-dir');
+const { clipboard } = require('electron');
+const { response } = require('express');
 
 const root_dir = '/CMS_with_node/';
 exports.logo_upload = function(req, res) {
