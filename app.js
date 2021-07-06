@@ -68,11 +68,11 @@ app.use(function(err, req, res, next) {
 var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
 
-httpServer.listen(80, function() {
-     console.log(`This app is running on localhost:${port}`);
-   });
+// httpServer.listen(80, function() {
+//      console.log(`This app is running on localhost:80`);
+//    });
 httpsServer.listen(8443, function() {
-  console.log(`This app is running on localhost:${port}`);
+  console.log(`This app is running on localhost:8443`);
 });
 
 module.exports = httpsServer;
