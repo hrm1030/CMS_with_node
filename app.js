@@ -1,3 +1,10 @@
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+
+var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
+var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+
 var createError = require('http-errors');
 var express = require('express');
 var expressLayouts = require('express-ejs-layouts');
@@ -7,6 +14,7 @@ var logger = require('morgan');
 var session = require('express-session');
 var port = 80;
 
+var credentials = {key: privateKey, cert: certificate};
 /** MongoDB connect */
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/cms', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -52,7 +60,19 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.listen(port, function() {
+// app.listen(port, function() {
+//   console.log(`This app is running on localhost:${port}`);
+// });
+
+
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
+
+httpServer.listen(80, function() {
+     console.log(`This app is running on localhost:${port}`);
+   });
+httpsServer.listen(8443, function() {
   console.log(`This app is running on localhost:${port}`);
 });
-module.exports = app;
+
+module.exports = httpsServer;
