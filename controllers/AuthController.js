@@ -412,8 +412,8 @@ exports.membership_save = function (req, res) {
                         req.session.language = user.language;
                         console.log(req.session.token);
                         res.redirect('/');
-                    }
-                });
+                //     }
+                // });
             }
         });
     }
