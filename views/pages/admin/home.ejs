@@ -224,6 +224,9 @@
                                                 <i class="fa fa-flag"></i> Language
                                             </th>
                                             <th>
+                                                <i class="fa fa-flag"></i> Industry
+                                            </th>
+                                            <th>
                                                 <i class="fa fa-tags"></i> Category
                                             </th>
                                             <th>
@@ -270,18 +273,27 @@
                                         <input type="hidden" id="phone" value="<%= session.phone%>">
                                         <div class="form-group">
                                             <label class="col-md-1 control-label">Category <span class="require">*</span></label>
-                                            <div class="col-md-5">
-                                                <select class="select2me input-xlarge" name="category" id="category">
+                                            <div class="col-md-3">
+                                                <select class="select2me" style="width: 100%;" name="category" id="category">
                                                     <% categories.forEach(function(category) {%>
                                                     <option value="<%= category._id%>"><%= category.name%></option>
                                                     <%});%>
                                                 </select>
                                             </div>
                                             <label class="col-md-1 control-label">Language <span class="require">*</span></label>
-                                            <div class="col-md-5">
+                                            <div class="col-md-2">
                                                 <select name="country" id="language">
                                                     <option value="GR">GR</option>
                                                     <option value="EN">EN</option>
+                                                </select>
+                                            </div>
+                                            <label class="col-md-1 control-label">Industry <span class="require">*</span></label>
+                                            <div class="col-md-3">
+                                                <select name="industry" id="industry" class="select2me" style="width: 100%;">
+                                                    <option value="all">All</option>
+                                                    <% industries.forEach(function(industry) {%>
+                                                        <option value="<%= industry.name%>"><%= industry.name%></option>
+                                                    <%});%>
                                                 </select>
                                             </div>
                                         </div>
@@ -368,6 +380,10 @@
                         <label class="col-md-3 bold" id="label_created_at"></label>
                         <i class="fa fa-tags pull-left text-danger"></i>
                         <label class="col-md-2 bold" id="label_category"></label>
+                        <i class="fa fa-flag pull-left text-danger"></i>
+                        <label class="col-md-2 bold" id="label_lang"></label>
+                        <i class="fa fa-flag pull-left text-danger"></i>
+                        <label class="col-md-2 bold" id="label_industry"></label>
                     </div>
                     
                 </div><hr>
@@ -416,6 +432,10 @@
                         <label class="col-md-3 bold" id="pre_label_created_at"></label>
                         <i class="fa fa-tags pull-left text-danger"></i>
                         <label class="col-md-2 bold" id="pre_label_category"></label>
+                        <i class="fa fa-flag pull-left text-danger"></i>
+                        <label class="col-md-2 bold" id="pre_label_lang"></label>
+                        <i class="fa fa-flag pull-left text-danger"></i>
+                        <label class="col-md-2 bold" id="pre_label_industry"></label>
                     </div>
                     
                 </div><hr>

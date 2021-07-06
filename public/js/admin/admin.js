@@ -712,13 +712,14 @@ $(document).ready(function() {
                 "columns": [
                     { "width": "5%" },
                     { "width": "10%" },
+                    { "width": "10%" },
                     { "width": "40%" },
-                    { "width": "15%" },
-                    { "width": "20%" },
+                    { "width": "10%" },
+                    { "width": "10%" },
                     { "width": "15%" },
                   ],
                 "order": [
-                    [4, 'desc']
+                    [5, 'desc']
                 ],
                 "lengthMenu": [
                     [5, 15, 20, -1],
@@ -776,7 +777,7 @@ $(document).ready(function() {
                         {
                             var color = 'text-danger';
                         }
-                        oTable.fnAddData([`<label class="${color} bold">${data.posts[i].language}</label>`, data.posts[i].category, content, data.posts[i].poster, new Date(data.posts[i].created_at).getFullYear()+'-'+(new Date(data.posts[i].created_at).getMonth()+1)+'-'+new Date(data.posts[i].created_at).getDate()+' '+new Date(data.posts[i].created_at).getHours()+':'+new Date(data.posts[i].created_at).getMinutes()+':'+new Date(data.posts[i].created_at).getSeconds(), '<button class="btn btn-sm blue btn_view" post_id="'+data.posts[i]._id+'"><i class="icon-eye"></i> View</button>&nbsp;<button class="btn btn-sm btn-danger btn_post_delete" post_id="'+data.posts[i]._id+'"><i class="fa fa-trash"></i></button>']);
+                        oTable.fnAddData([`<label class="${color} bold">${data.posts[i].language}</label>`, `<label class="bold">${data.posts[i].industry}</label>`, data.posts[i].category, content, data.posts[i].poster, new Date(data.posts[i].created_at).getFullYear()+'-'+(new Date(data.posts[i].created_at).getMonth()+1)+'-'+new Date(data.posts[i].created_at).getDate()+' '+new Date(data.posts[i].created_at).getHours()+':'+new Date(data.posts[i].created_at).getMinutes()+':'+new Date(data.posts[i].created_at).getSeconds(), '<button class="btn btn-sm blue btn_view" post_id="'+data.posts[i]._id+'"><i class="icon-eye"></i> View</button>&nbsp;<button class="btn btn-sm btn-danger btn_post_delete" post_id="'+data.posts[i]._id+'"><i class="fa fa-trash"></i></button>']);
                         
                     }
                 },
@@ -854,6 +855,8 @@ $(document).ready(function() {
                         $('#label_phone').html(data.post.poster_phone);
                         $('#label_created_at').html(new Date(data.post.created_at).getFullYear()+'-'+(new Date(data.post.created_at).getMonth()+1)+'-'+new Date(data.post.created_at).getDate()+' '+new Date(data.post.created_at).getHours()+':'+new Date(data.post.created_at).getMinutes()+':'+new Date(data.post.created_at).getSeconds());
                         $('#label_category').html(data.post.category);
+                        $('#label_lang').html(data.post.language);
+                        $('#label_industry').html(data.post.industry);
                         $('#preview').modal('show');
                     },
                     error : function() {
@@ -874,6 +877,8 @@ $(document).ready(function() {
                 var fullname = $('#fullname').val();
                 var email = $('#email').val();
                 var phone = $('#phone').val();
+                var industry = $('#industry').val();
+
                 if(fullname == '')
                 {
                   toastr['warning']('Please enter Full Name.');
@@ -910,7 +915,8 @@ $(document).ready(function() {
                           email : $('#email').val(),
                           phone : $('#phone').val(),
                           file : image,
-                          language : $('#language').val()
+                          language : $('#language').val(),
+                          industry : industry
                       },
                       success : function (data) {
                         //   window.location.reload();
@@ -924,7 +930,7 @@ $(document).ready(function() {
                         }
                         var content = get_skip_content(data.post.content);
                         var created_at = new Date(data.post.created_at).getFullYear()+'-'+(new Date(data.post.created_at).getMonth()+1)+'-'+new Date(data.post.created_at).getDate()+' '+new Date(data.post.created_at).getHours()+':'+new Date(data.post.created_at).getMinutes()+':'+new Date(data.post.created_at).getSeconds();
-                        oTable.fnAddData([`<label class="${color} bold">${data.post.language}</label>`, data.post.category, content, data.post.poster, created_at, '<button class="btn btn-sm blue btn_view" post_id="'+data.post._id+'"><i class="icon-eye"></i> View</button>&nbsp;<button class="btn btn-sm btn-danger btn_post_delete" post_id="'+data.post._id+'"><i class="fa fa-trash"></i></button>'])
+                        oTable.fnAddData([`<label class="${color} bold">${data.post.language}</label>`, `<label class="bold">${data.post.industry}</label>`, data.post.category, content, data.post.poster, created_at, '<button class="btn btn-sm blue btn_view" post_id="'+data.post._id+'"><i class="icon-eye"></i> View</button>&nbsp;<button class="btn btn-sm btn-danger btn_post_delete" post_id="'+data.post._id+'"><i class="fa fa-trash"></i></button>'])
                         toastr['success']('Successfully posted.');
                         $('#title').val('');
                         CKEDITOR.instances.content.setData('');
@@ -966,6 +972,8 @@ $(document).ready(function() {
                 $('#pre_label_email').html($('#email').val());
                 $('#pre_label_phone').html($('#phone').val());
                 $('#pre_label_name').html($('#fullname').val());
+                $('#pre_label_lang').html($('#language').val());
+                $('#pre_label_industry').html($('#industry').val());
                 var count = 0;
                 setInterval(function(){ 
                     count++;

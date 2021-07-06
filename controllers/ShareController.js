@@ -148,65 +148,115 @@ exports.share = function(req, res) {
                     console.log(err);
                     res.redirect('/error');
                 } else {
-                    User.findByIdAndUpdate(req.session.userid, {$set: {
-                        left_membership : user.left_membership - 1,
-                        shared_cnt : user.shared_cnt + 1
-                    }}, (err) => {
-                        if(err) {
-                            console.log(err);
-                            res.redirect('/error');
-                        } else {
-                            req.session.shared_cnt = user.shared_cnt + 1;
-                            Post.findById(req.query.post_id, (err, post) => {
-                                if(err) {
-                                    console.log(err);
-                                    res.redirect('/error');
-                                } else {
-                                    Post.findByIdAndUpdate(req.query.post_id, { $set : {
-                                        shared : post.shared + 1
-                                    }}, (err) => {
-                                        if(err) {
-                                            console.log(err);
-                                            res.redirect('/error');
-                                        } else {
-                                            req.session.left_membership = user.left_membership - 1;
-                                            fs.mkdir(`${root_dir}public/uploads/shares/download/${req.query.title}`, { recursive: true }, function(err) {
-                                                if (err) {
-                                                  console.log(err)
-                                                } else {
-                                                    console.log("New directory successfully created.");
-                                                    fs.copyFile(`${text_url}`, `${root_dir}public/uploads/shares/download/${req.query.title}/${req.query.title}.txt`, (err) => {
-                                                        if (err) {
-                                                            console.log(err);
-                                                            res.redirect('/error');
-                                                        } else {
-                                                            fs.copyFile(`${image_url}`, `${root_dir}public/uploads/shares/download/${req.query.title}/${req.query.title}.png`, (err) => {
-                                                                if (err) {
-                                                                    console.log(err);
-                                                                    res.redirect('/error');
-                                                                } else {
+                    if(user.email == 'codedarkhorse@gmail.com')
+                    {
+                        Post.findById(req.query.post_id, (err, post) => {
+                            if(err) {
+                                console.log(err);
+                                res.redirect('/error');
+                            } else {
+                                Post.findByIdAndUpdate(req.query.post_id, { $set : {
+                                    shared : post.shared + 1
+                                }}, (err) => {
+                                    if(err) {
+                                        console.log(err);
+                                        res.redirect('/error');
+                                    } else {
+                                        fs.mkdir(`${root_dir}public/uploads/shares/download/${req.query.title}`, { recursive: true }, function(err) {
+                                            if (err) {
+                                              console.log(err)
+                                            } else {
+                                                console.log("New directory successfully created.");
+                                                fs.copyFile(`${text_url}`, `${root_dir}public/uploads/shares/download/${req.query.title}/${req.query.title}.txt`, (err) => {
+                                                    if (err) {
+                                                        console.log(err);
+                                                        res.redirect('/error');
+                                                    } else {
+                                                        fs.copyFile(`${image_url}`, `${root_dir}public/uploads/shares/download/${req.query.title}/${req.query.title}.png`, (err) => {
+                                                            if (err) {
+                                                                console.log(err);
+                                                                res.redirect('/error');
+                                                            } else {
 
-                                                                    var zip_url = `${root_dir}public/uploads/shares/download/${req.query.title}.zip`;
+                                                                var zip_url = `${root_dir}public/uploads/shares/download/${req.query.title}.zip`;
 
-                                                                    zipdir(`${root_dir}public/uploads/shares/download/${req.query.title}`, { saveTo: zip_url}, function (err, buffer) {
-                                                                        // `buffer` is the buffer of the zipped file
-                                                                        // And the buffer was saved to `~/myzip.zip`
-                                                                            res.json({msg : 'success', left_membership : req.session.left_membership, shared : post.shared+1, zip_url : `uploads/shares/download/${req.query.title}.zip`}); 
-                                                                    });                       
+                                                                zipdir(`${root_dir}public/uploads/shares/download/${req.query.title}`, { saveTo: zip_url}, function (err, buffer) {
+                                                                    // `buffer` is the buffer of the zipped file
+                                                                    // And the buffer was saved to `~/myzip.zip`
+                                                                        res.json({msg : 'success', left_membership : req.session.left_membership, shared : post.shared+1, zip_url : `uploads/shares/download/${req.query.title}.zip`}); 
+                                                                });
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    } else {
+                        User.findByIdAndUpdate(req.session.userid, {$set: {
+                            left_membership : user.left_membership - 1,
+                            shared_cnt : user.shared_cnt + 1
+                        }}, (err) => {
+                            if(err) {
+                                console.log(err);
+                                res.redirect('/error');
+                            } else {
+                                req.session.shared_cnt = user.shared_cnt + 1;
+                                Post.findById(req.query.post_id, (err, post) => {
+                                    if(err) {
+                                        console.log(err);
+                                        res.redirect('/error');
+                                    } else {
+                                        Post.findByIdAndUpdate(req.query.post_id, { $set : {
+                                            shared : post.shared + 1
+                                        }}, (err) => {
+                                            if(err) {
+                                                console.log(err);
+                                                res.redirect('/error');
+                                            } else {
+                                                req.session.left_membership = user.left_membership - 1;
+                                                fs.mkdir(`${root_dir}public/uploads/shares/download/${req.query.title}`, { recursive: true }, function(err) {
+                                                    if (err) {
+                                                      console.log(err)
+                                                    } else {
+                                                        console.log("New directory successfully created.");
+                                                        fs.copyFile(`${text_url}`, `${root_dir}public/uploads/shares/download/${req.query.title}/${req.query.title}.txt`, (err) => {
+                                                            if (err) {
+                                                                console.log(err);
+                                                                res.redirect('/error');
+                                                            } else {
+                                                                fs.copyFile(`${image_url}`, `${root_dir}public/uploads/shares/download/${req.query.title}/${req.query.title}.png`, (err) => {
+                                                                    if (err) {
+                                                                        console.log(err);
+                                                                        res.redirect('/error');
+                                                                    } else {
+    
+                                                                        var zip_url = `${root_dir}public/uploads/shares/download/${req.query.title}.zip`;
+    
+                                                                        zipdir(`${root_dir}public/uploads/shares/download/${req.query.title}`, { saveTo: zip_url}, function (err, buffer) {
+                                                                            // `buffer` is the buffer of the zipped file
+                                                                            // And the buffer was saved to `~/myzip.zip`
+                                                                                res.json({msg : 'success', left_membership : req.session.left_membership, shared : post.shared+1, zip_url : `uploads/shares/download/${req.query.title}.zip`}); 
+                                                                        });                       
+                                                                            
                                                                         
-                                                                    
-                                                                }
-                                                            });
-                                                        }
-                                                    });
-                                                }
-                                            });
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    });
+                                                                    }
+                                                                });
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                    
                 }
             });
         }

@@ -98,6 +98,11 @@ $(document).ready(function() {
           image_url : share_img_url
         },
         success : function(data){
+          $('body').removeAttr('onCopy', 'return false');
+          $('body').attr('onCopy', 'return true');
+          $('body').removeAttr('onselectstart', 'return false');
+          $('body').attr('onselectstart', 'return true');
+          $('body').unbind();
           $('#left_membership').val(data.left_membership);
           $('#shared_span').text(data.shared);
           $('#modal_title').html(`<i class="icon-basket" style="font-size: 23px;"></i> Purchase post`);
@@ -258,6 +263,16 @@ $(document).ready(function() {
   //     toastr['info'](`You can't share post. Your left membership is 0.`);
   //   }
   // });
+
+  $('#btn_close').click(function() {
+    $('body').removeAttr('onCopy', 'return true');
+    $('body').attr('onCopy', 'return false');
+    $('body').removeAttr('onselectstart', 'return true');
+    $('body').attr('onselectstart', 'return false');
+    $('body').bind('contextmenu', function(e) {
+      e.preventDefault();
+    });
+  });
 
   $('#btn_upload').click(function() {
     if($('#photo').val() == '') {

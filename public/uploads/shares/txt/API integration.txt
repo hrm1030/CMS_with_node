@@ -1,0 +1,11 @@
+I would like to integrate 2 different apis into 1 database and have that turn into an single api firebase or pub/sub
+Then to test the data pulls and displays in android and ios properly by connecting to database or API whatever is best. Must be something better than or same as themeforest admin api themes . `We are recreating the 3 highly documented apis into 1 single api system to be used for websites/ios/android app and ready to use for apps with tokens, directory, urls of different api php and full system of combining 3 api systems to make it work under 1. api 1 should be the dominant while 2 and 3 are backup incase 1 is missing a team. This is for sports. 2 langauges will be made with this please . With 30 day support and fully functional.
+thanks
+
+We will add admin panel to make sure we can see all data
+
+make sure all data visible all tables in admin
+
+This data needs to be ready for use in ios/android direct connect to db
+
+The point is to take data from 2 apis and have it in our own database then use that data in apps with data coming from 2 apis into databasea/admin panel (logic) and ready to be used properly in ios/android

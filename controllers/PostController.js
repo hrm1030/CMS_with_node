@@ -23,7 +23,8 @@ exports.save = function(req, res, next) {
         created_at : date,
         shared: 0,
         image : req.body.file,
-        language : req.body.language
+        language : req.body.language,
+        industry : req.body.industry
     }, (err, post) => {
         if(err){
             console.log(err)
@@ -76,7 +77,8 @@ exports.preview = function(req, res) {
 
 exports.list = function(req, res) {
     var category_id = req.query.category;
-    Post.find({category_id : category_id}, (err, posts)=> {
+    console.log(req.session.industry)
+    Post.find({ $and : [ {category_id : category_id}, { $or : [{industry : req.session.industry}, {industry : 'all'}]}]}, (err, posts)=> {
         if(err) {
             console.log(err);
             res.redirect('/error');
@@ -97,7 +99,7 @@ exports.list = function(req, res) {
 
 exports.selected_category = function(req, res) {
     var cat_id = req.body.cat_id;
-    Post.find({category_id : cat_id, language : req.session.language}, (err, posts) => {
+    Post.find({ $and : [{category_id : cat_id}, {language : req.session.language}, { $or : [{industry : req.session.industry}, {industry : 'all'}]}]}, (err, posts) => {
         if(err) {
             console.log(err);
             res.redirect('/error');

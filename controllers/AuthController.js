@@ -379,12 +379,12 @@ exports.membership_save = function (req, res) {
                     text: 'Welcome to app.social-media-builder.com'
                 };
                 
-                transporter.sendMail(mailOptions, function(error, info){
-                    if (error) {
-                        console.log(error);
-                        res.redirect('/error');
-                    } else {
-                        console.log('Email sent: ' + info.response);
+                // transporter.sendMail(mailOptions, function(error, info){
+                //     if (error) {
+                //         console.log(error);
+                //         res.redirect('/error');
+                //     } else {
+                        // console.log('Email sent: ' + info.response);
                         var token = jwt.sign({ id: user._id }, 'cmssecret', {
                             expiresIn: 86400 // expires in 24 hours
                         });
@@ -639,7 +639,7 @@ var storage = multer.diskStorage({
     destination: function (req, file, cb) {
 
         // Uploads is the Upload_folder_name
-        cb(null, "/CMS_with_node/public/uploads/users")
+        cb(null, root_dir+"public/uploads/users")
     },
     filename: function (req, file, cb) {
         cb(null, req.session.userid + ".png")

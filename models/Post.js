@@ -4,6 +4,7 @@ const PostSchema = new mongoose.Schema({
     category_id : String,
     category : String,
     language : String,
+    industry : String,
     title : String,
     content : String,
     poster : String,
