@@ -22,7 +22,7 @@ $(document).ready(function() {
                                   <div class="carousel-inner">
                                     <div class="item active">
                                     <input type="hidden" id="image" value="${post.image}">
-                                      <img src="../../uploads/posts/${post.image}" style="height: 450px; width:100%;" alt="">
+                                      <img src="../../uploads/posts/${post.image}" style="height: 100%; width:100%;" alt="">
                                     </div>
                                   </div>
                                 </div>                
@@ -57,7 +57,7 @@ $(document).ready(function() {
                                 <!-- Carousel items -->
                                 <div class="carousel-inner">
                                   <div class="item active">
-                                    <img src="${share_img_url}" style="height: 450px; width:100%;" alt="">
+                                    <img src="${share_img_url}" style="height: 100%; width:100%;" alt="">
                                   </div>
                                 </div>
                               </div>                
@@ -122,7 +122,7 @@ $(document).ready(function() {
                                     <!-- Carousel items -->
                                     <div class="carousel-inner">
                                       <div class="item active">
-                                        <img src="${new_share_img_url}" style="height: 450px; width:100%;" alt="">
+                                        <img src="${new_share_img_url}" style="height: 100%; width:100%;" alt="">
                                       </div>
                                     </div>
                                   </div>                

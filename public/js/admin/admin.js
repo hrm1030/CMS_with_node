@@ -840,7 +840,7 @@ $(document).ready(function() {
                                                         <!-- Carousel items -->
                                                         <div class="carousel-inner" id="carousel_image">
                                                             <div class="item active">
-                                                                <img src="../../uploads/posts/${data.post.image}" style="height: 350px; width:100%;" alt="">
+                                                                <img src="../../uploads/posts/${data.post.image}" style="height: 100%; width:100%;" alt="">
                                                             </div>
                                                         </div>
                                                     </div>                
@@ -953,7 +953,7 @@ $(document).ready(function() {
                                             <!-- Carousel items -->
                                             <div class="carousel-inner" id="carousel_image">
                                                 <div class="item active">
-                                                    <img src="../../uploads/posts/${$('#file').val()}" style="height: 350px; width:100%;" alt="">
+                                                    <img src="../../uploads/posts/${$('#file').val()}" style="height: 100%; width:100%;" alt="">
                                                 </div>
                                             </div>
                                         </div>                
