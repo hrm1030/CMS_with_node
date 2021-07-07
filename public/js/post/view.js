@@ -1,8 +1,7 @@
 $(document).ready(function() {
 
   toastr['info']('To share post on social site, please follow as following steps.<br><br>1. Generate logo.<br>( If you have your logo, you can skip logo generating. )<br><br>2. Upload logo.<br><br>3. Preview the post.<br><br>4. Share on social site.');
-  $('#btn_copy_text').hide();
-  $('#btn_copy_img').hide();
+  $('#btn_copy').hide();
   var my_url = 'http://app.social-media-builder.com';
 
   $.ajax({
@@ -40,8 +39,7 @@ $(document).ready(function() {
 
 
   $('.btn_preview').click(function() {
-    $('#btn_copy_text').hide();
-    $('#btn_copy_img').hide();
+    $('#btn_copy').hide();
     $('#modal_title').html(`<i class="icon-eye" style="font-size: 23px;"></i> Preview post`);
     var share_img_url;
     if($('#share_img').val() == '')
@@ -133,8 +131,7 @@ $(document).ready(function() {
                               </div>`;
             $('#slide_div').html(share_img_div);
             $('#btn_download').attr('href', `${my_url}/${data.zip_url}`);
-            $('#btn_copy_text').show();
-            $('#btn_copy_img').show();
+            $('#btn_copy').show();
             $('#previewModal').modal('show');
         },
         error:function() {
