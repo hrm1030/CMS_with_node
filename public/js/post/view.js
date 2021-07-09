@@ -183,19 +183,19 @@ $(document).ready(function() {
 
   });
 
-  $('#btn_copy_img').click( async function() {
+  $('#btn_copy_img').click(async function() {
     const canWriteToClipboard = await askWritePermission();
 
     // Copy a PNG image to clipboard
     if (canWriteToClipboard) {
      
-      const response = await fetch($('#img_purchase').attr('src'))
-      var blob = await response.blob()
-      blob = blob.slice(0, blob.size, "image/png")
+      const response = await fetch($('#img_purchase').attr('src'));
+      var blob = await response.blob();
+      blob = blob.slice(0, blob.size, "image/png");
 
-      await setToClipboard(blob) 
+      await setToClipboard(blob);
     }
-  })
+  });
 
   // $('#btn_facebook').click(function() {
   //   var share_img= $('#share_img').val();
