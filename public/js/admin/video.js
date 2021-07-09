@@ -130,7 +130,7 @@ $(document).ready(function() {
                                             var text_color = 'text-primary';
                                         }
                                         var button_html = `<button class="btn btn-danger btn_delete" title="delete"><i class="fa fa-trash"></i></button>`
-                                        oTable.fnAddData([video_html, `<label class="bold ${text_color}">${data.video.language}</label>`, `<span class="label label-primary">${video_type}</span>`, data.video.title, data.video.description, button_html]);
+                                        oTable.fnAddData([video_html, `<label class="bold ${text_color}">${data.video.language}</label>`, `<span class="label label-primary">${video_type}</span>`, `<label class="bold">${page_type}</label>`, data.video.title, data.video.description, button_html]);
                                         $('#videoModal').modal('hide');
                                         window.location.reload();
                                     },
@@ -178,7 +178,7 @@ $(document).ready(function() {
                                             var text_color = 'text-primary';
                                         }
                                         var button_html = `<button class="btn btn-danger btn_delete" title="delete"><i class="fa fa-trash"></i></button>`
-                                        oTable.fnAddData([video_html, `<label class="bold ${text_color}">${data.video.language}</label>`, `<span class="label label-danger">${video_type}</span>`, data.video.title, data.video.description, button_html]);
+                                        oTable.fnAddData([video_html, `<label class="bold ${text_color}">${data.video.language}</label>`, `<span class="label label-danger">${video_type}</span>`, `<label class="bold">${page_type}</label>`, data.video.title, data.video.description, button_html]);
                                         $('#videoModal').modal('hide');
                                         window.location.reload();
                                     },
