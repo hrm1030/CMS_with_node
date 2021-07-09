@@ -41,6 +41,7 @@ $(document).ready(function() {
   $('.btn_preview').click(function() {
     $('#btn_copy_img').hide();
     $('#btn_copy_text').hide();
+    $('#btn_download').hide();
     $('#modal_title').html(`<i class="icon-eye" style="font-size: 23px;"></i> Preview post`);
     var share_img_url;
     if($('#share_img').val() == '')
@@ -134,6 +135,7 @@ $(document).ready(function() {
             $('#btn_download').attr('href', `${my_url}/${data.zip_url}`);
             $('#btn_copy_img').show();
             $('#btn_copy_text').show();
+            $('#btn_download').show();
             $('#previewModal').modal('show');
         },
         error:function() {

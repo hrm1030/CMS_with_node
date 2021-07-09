@@ -902,7 +902,10 @@ $(document).ready(function() {
                 if(fullname != '' && email != '' && phone != '' && title != '' && content != '')
                 {
                   var image = $('#file').val();
-                  
+                  Metronic.blockUI({
+                    boxed : true,
+                    message: 'Post saving...'
+                    });
                   $.ajax({
                       url : '/post/save',
                       method : 'post',
@@ -935,6 +938,7 @@ $(document).ready(function() {
                         $('#title').val('');
                         CKEDITOR.instances.content.setData('');
                         $('#postForm').html('<input type="hidden" id="file" value="">');
+                        Metronic.unblockUI();
                       },
                       error : function () {
                           toastr['error']('Happening any errors in server.');
@@ -998,6 +1002,10 @@ $(document).ready(function() {
                 $.each($('#photo')[0].files, function(i, file) {
                     data.append('file-'+i, file);
                 });
+                Metronic.blockUI({
+                    boxed : true,
+                    message: 'Image uploading...'
+                });
                 $.ajax({
                     url: '/post/filesupload',
                     data: data,
@@ -1008,6 +1016,7 @@ $(document).ready(function() {
                     type: 'POST', // For jQuery < 1.9
                     success: function(data){
                         toastr['success']('Successfully uploaded.');
+                        Metronic.unblockUI();
                         $('#postForm').html('<input type="hidden" id="file" value="'+data.image_name+'">');
                     }
                 });
