@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   toastr['info']('To share post on social site, please follow as following steps.<br><br>1. Generate logo.<br>( If you have your logo, you can skip logo generating. )<br><br>2. Upload logo.<br><br>3. Preview the post.<br><br>4. Share on social site.');
-  $('#btn_copy').hide();
+  
   var my_url = 'http://app.social-media-builder.com';
 
   $.ajax({
@@ -39,7 +39,8 @@ $(document).ready(function() {
 
 
   $('.btn_preview').click(function() {
-    $('#btn_copy').hide();
+    $('#btn_copy_img').hide();
+    $('#btn_copy_text').hide();
     $('#modal_title').html(`<i class="icon-eye" style="font-size: 23px;"></i> Preview post`);
     var share_img_url;
     if($('#share_img').val() == '')
@@ -122,7 +123,7 @@ $(document).ready(function() {
                                     <!-- Carousel items -->
                                     <div class="carousel-inner">
                                       <div class="item active">
-                                        <img src="${new_share_img_url}" style="height: 100%; width:100%;" alt="">
+                                        <img src="${new_share_img_url}" id="img_purchase" style="height: 100%; width:100%;" alt="">
                                       </div>
                                     </div>
                                   </div>                
@@ -131,7 +132,8 @@ $(document).ready(function() {
                               </div>`;
             $('#slide_div').html(share_img_div);
             $('#btn_download').attr('href', `${my_url}/${data.zip_url}`);
-            $('#btn_copy').show();
+            $('#btn_copy_img').show();
+            $('#btn_copy_text').show();
             $('#previewModal').modal('show');
         },
         error:function() {
@@ -143,19 +145,57 @@ $(document).ready(function() {
     }
   });
 
-  $('#btn_copy').click(async function() {
+  async function askWritePermission() {
+    try {
+      // The clipboard-write permission is granted automatically to pages 
+    // when they are the active tab. So it's not required, but it's more safe.
+      const { state } = await navigator.permissions.query({ name: 'clipboard-write' })
+      return state === 'granted'
+    } catch (error) {
+      // Browser compatibility / Security error (ONLY HTTPS) ...
+      return false
+    }
+  }
+
+  const setToClipboard = async blob => {
+    const data = [new ClipboardItem({ [blob.type]: blob })]
+    await navigator.clipboard.write(data)
+  }
+
+  $('#btn_copy_text').click(async function() {
     
-    var element = document.getElementById('modal_body');
-    // var img = document.getElementById('post_img');
-    var r = document.createRange();
-    r.selectNode(element);
-    var s = window.getSelection();
-    s.removeAllRanges();
-    s.addRange(r);
-    // Copy - requires clipboardWrite permission + crbug.com/395376 must be fixed
-    document.execCommand('copy');
+    // var element = document.getElementById('modal_body');
+    // // var img = document.getElementById('post_img');
+    // var r = document.createRange();
+    // r.selectNode(element);
+    // var s = window.getSelection();
+    // s.removeAllRanges();
+    // s.addRange(r);
+    // // Copy - requires clipboardWrite permission + crbug.com/395376 must be fixed
+    // document.execCommand('copy');
+
+    const canWriteToClipboard = await askWritePermission()
+    // Copy a text to clipboard
+    if (canWriteToClipboard) {
+      const blob = new Blob([$('#preview_body').text()], { type: 'text/plain' })
+      await setToClipboard(blob)
+    }
 
   });
+
+  $('#btn_copy_img').click( async function() {
+    const canWriteToClipboard = await askWritePermission();
+
+    // Copy a PNG image to clipboard
+    if (canWriteToClipboard) {
+     
+      const response = await fetch($('#img_purchase').attr('src'))
+      var blob = await response.blob()
+      blob = blob.slice(0, blob.size, "image/png")
+
+      await setToClipboard(blob) 
+    }
+  })
 
   // $('#btn_facebook').click(function() {
   //   var share_img= $('#share_img').val();
