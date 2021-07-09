@@ -39,7 +39,7 @@ exports.filesupload = function(req, res) {
     var form = new formidable.IncomingForm();
     // console.log(req);
     form.parse(req);
-    var image_name = 'post_'+req.session.userid+'_'+new Date().getFullYear()+new Date().getMonth()+new Date().getDate() + new Date().getHours()+new Date().getMinutes() + new Date().getSeconds() + new Date().getMilliseconds() +".jpg";
+    var image_name = 'post_'+req.session.userid+'_'+new Date().getFullYear()+new Date().getMonth()+new Date().getDate() + new Date().getHours()+new Date().getMinutes() + new Date().getSeconds() + new Date().getMilliseconds() +".png";
 
     form.on('fileBegin', function (name, file){
         console.log(name)

@@ -191,7 +191,7 @@ $(document).ready(function() {
      
       const response = await fetch($('#img_purchase').attr('src'));
       var blob = await response.blob();
-      blob = blob.slice(0, blob.size, "image/png");
+      // blob = blob.slice(0, blob.size, "image/png");
 
       await setToClipboard(blob);
     }
