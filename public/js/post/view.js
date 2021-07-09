@@ -180,6 +180,7 @@ $(document).ready(function() {
     // Copy a text to clipboard
     if (canWriteToClipboard) {
       const blob = new Blob([$('#preview_body').text()], { type: 'text/plain' })
+      toastr['success']('Copied text');
       await setToClipboard(blob)
     }
 
@@ -194,7 +195,7 @@ $(document).ready(function() {
       const response = await fetch($('#img_purchase').attr('src'));
       var blob = await response.blob();
       // blob = blob.slice(0, blob.size, "image/png");
-
+      toastr['success']('Copied image');
       await setToClipboard(blob);
     }
   });
