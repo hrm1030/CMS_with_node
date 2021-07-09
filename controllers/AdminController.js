@@ -231,6 +231,7 @@ exports.training_save = function(req, res) {
                         language : req.body.video_lang,
                         title : req.body.title,
                         type : req.body.type,
+                        page_type : req.body.page_type,
                         description : req.body.description,
                         url : req.body.url
                     }}, (err, training) => {
@@ -246,6 +247,7 @@ exports.training_save = function(req, res) {
                         language : req.body.video_lang,
                         title : req.body.title,
                         type : req.body.type,
+                        page_type : req.body.page_type,
                         description : req.body.description,
                         url : req.body.url
                     }, (err, training) => {
@@ -265,6 +267,7 @@ exports.training_save = function(req, res) {
             language : req.body.video_lang,
             title : req.body.title,
             type : req.body.type,
+            page_type : req.body.page_type,
             description : req.body.description,
             url : req.body.url
         }, (err, training) => {

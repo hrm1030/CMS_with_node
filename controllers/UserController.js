@@ -41,18 +41,37 @@ exports.training = function(req, res) {
     } else {
         var language = 'EN';
     }
-    Training.find({
-        type : 'training',
-        language : language
-    }, (err, trainings) => {
-        if(err) {
-            console.log(err);
-            res.redirect('/error');
-        } else {
-            console.log(trainings)
-            res.render('pages/user/training', {title : 'CMS | Training', session : req.session, trainings : trainings, recent_url : req.url});
-        }
-    });
+    if(req.session.token)
+    {
+        Training.find({
+            type : 'training',
+            page_type : 'Userpage',
+            language : language
+        }, (err, trainings) => {
+            if(err) {
+                console.log(err);
+                res.redirect('/error');
+            } else {
+                console.log(trainings)
+                res.render('pages/user/training', {title : 'CMS | Training', session : req.session, trainings : trainings, recent_url : req.url});
+            }
+        });
+    } else {
+        Training.find({
+            type : 'training',
+            page_type : 'Homepage',
+            language : language
+        }, (err, trainings) => {
+            if(err) {
+                console.log(err);
+                res.redirect('/error');
+            } else {
+                console.log(trainings)
+                res.render('pages/user/training', {title : 'CMS | Training', session : req.session, trainings : trainings, recent_url : req.url});
+            }
+        });
+    }
+    
 }
 
 exports.get_training = function(req, res) {

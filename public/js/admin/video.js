@@ -92,6 +92,7 @@ $(document).ready(function() {
                     });
                     
                     var video_type = $('#video_type').val();
+                    var page_type = $('#page_type').val();
                     if(video_type === 'info')
                     {
                         $.ajax({
@@ -111,6 +112,7 @@ $(document).ready(function() {
                                         video_lang : $('#video_lang').val(),
                                         title : title,
                                         type : video_type,
+                                        page_type : page_type,
                                         description : description,
                                         url : video_url
                                     },
@@ -158,6 +160,7 @@ $(document).ready(function() {
                                         video_lang : $('#video_lang').val(),
                                         title : title,
                                         type : video_type,
+                                        page_type : page_type,
                                         description : description,
                                         url : video_url
                                     },

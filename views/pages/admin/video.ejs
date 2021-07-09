@@ -23,7 +23,8 @@
                                 <tr>
                                     <th width="25%"><i class="fa fa-film"></i> Video</th>
                                     <th widtg="15%"><i class="fa fa-flag"></i> Language</th>
-                                    <th width="15%"><i class="fa fa-sort-numeric-desc"></i> Type</th>
+                                    <th width="15%"><i class="fa fa-sort-numeric-desc"></i> Video Type</th>
+                                    <th width="15%"><i class="fa fa-sort-numeric-desc"></i> Page Type</th>
                                     <th width="20%"><i class="fa fa-file"></i> Title</th>
                                     <th width="25%"><i class="fa fa-comments"></i> Description</th>
                                     <th><i class="fa fa-magic"></i> Action</th>
@@ -40,8 +41,12 @@
                                         <td style="padding-top: 60px;">
                                             <label class="bold <% if(training.language == 'EN') {%>text-danger<%} else {%>text-primary<%}%>"><%= training.language %></label>
                                         </td>
+                                        
                                         <td style="padding-top: 65px;">
                                             <span class="label <% if(training.type === 'info') {%>label-primary<%}else {%>label-danger<%}%>"><%= training.type%></span>                                            
+                                        </td>
+                                        <td style="padding-top: 60px;">
+                                            <label class="bold"><%= training.page_type%></label>
                                         </td>
                                         <td style="padding-top: 65px;"><%= training.title%></td>
                                         <td style="padding-top: 65px;"><%= training.description%></td>
@@ -85,6 +90,16 @@
                             <select class="form-control" id="video_type">
                                 <option value="info">Info</option>
                                 <option value="training">Training</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Page type <span class="require">*</span></label>
+                        <div class="col-md-3">
+                            <select class="form-control" id="page_type">
+                                <option value="Homepage">Homepage</option>
+                                <option value="Userpage">Userpage</option>
                             </select>
                         </div>
                     </div>
