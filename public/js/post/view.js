@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   toastr['info']('To share post on social site, please follow as following steps.<br><br>1. Generate logo.<br>( If you have your logo, you can skip logo generating. )<br><br>2. Upload logo.<br><br>3. Preview the post.<br><br>4. Share on social site.');
   
-  var my_url = 'https://app.social-media-builder.com';
+  // var my_url = 'https://app.social-media-builder.com';
 
   $.ajax({
       url : '/post/view_ajax',
@@ -132,7 +132,7 @@ $(document).ready(function() {
                                 <!-- END CAROUSEL -->
                               </div>`;
             $('#slide_div').html(share_img_div);
-            $('#btn_download').attr('href', `${my_url}/${data.zip_url}`);
+            $('#btn_download').attr('href', `/${data.zip_url}`);
             $('#btn_copy_img').show();
             $('#btn_copy_text').show();
             $('#btn_download').show();
