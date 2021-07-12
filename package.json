@@ -25,6 +25,7 @@
     "file-type": "^16.5.0",
     "formidable": "^1.2.2",
     "fs": "0.0.1-security",
+    "greenlock-express": "^4.0.3",
     "http": "0.0.1-security",
     "http-errors": "~1.6.3",
     "https": "^1.0.0",
