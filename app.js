@@ -39,15 +39,17 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(__dirname, { dotfiles: 'allow' } ));
 app.set('view engine', 'ejs');
 
-// const privateKey = fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/privkey.pem', 'utf8');
-// const certificate = fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/cert.pem', 'utf8');
-// const ca = fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/chain.pem', 'utf8');
+const domain = 'social-media-builder.com';
 
-// const credentials = {
-// 	key: privateKey,
-// 	cert: certificate,
-// 	ca: ca
-// };
+const privateKey = fs.readFileSync(`/etc/letsencrypt/live/${domain}/privkey.pem`, 'utf8');
+const certificate = fs.readFileSync(`/etc/letsencrypt/live/${domain}/cert.pem`, 'utf8');
+const ca = fs.readFileSync(`/etc/letsencrypt/live/${domain}/chain.pem`, 'utf8');
+
+const credentials = {
+	key: privateKey,
+	cert: certificate,
+	ca: ca
+};
 
 app.use(session({secret: 'ssshhhhh',saveUninitialized: true,resave: true}));
 app.use(logger('dev'));
@@ -90,13 +92,13 @@ app.use(function(err, req, res, next) {
 // module.exports = httpsServer;
 
 // Starting both http & https servers
-const httpServer = http.createServer(app);
-// const httpsServer = https.createServer(credentials, app);
+// const httpServer = http.createServer(app);
+const httpsServer = https.createServer(credentials, app);
 
-httpServer.listen(80, () => {
-	console.log('HTTP Server running on port 80');
-});
-
-// httpsServer.listen(443, () => {
-// 	console.log('HTTPS Server running on port 443');
+// httpServer.listen(80, () => {
+// 	console.log('HTTP Server running on port 80');
 // });
+
+httpsServer.listen(443, () => {
+	console.log('HTTPS Server running on port 443');
+});
