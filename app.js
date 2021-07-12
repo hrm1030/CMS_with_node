@@ -12,7 +12,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
-var redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
+// var redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 var port = 8443;
 
 var credentials = {key: privateKey, cert: certificate};
@@ -30,7 +30,7 @@ var authRouter = require('./routes/auth');
 
 var app = express();
 
-app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301));
+// app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301));
 
 // view engine setup
 app.use(expressLayouts);
