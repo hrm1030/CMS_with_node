@@ -12,9 +12,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
-var port = 80;
+var redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
+var port = 8443;
 
 var credentials = {key: privateKey, cert: certificate};
+
 /** MongoDB connect */
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/cms', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -27,6 +29,9 @@ var authRouter = require('./routes/auth');
 
 
 var app = express();
+
+app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301));
+
 // view engine setup
 app.use(expressLayouts);
 app.set('layout', './layouts/main');
@@ -68,7 +73,7 @@ app.use(function(err, req, res, next) {
 var httpsServer = https.createServer(credentials, app);
 
 httpsServer.listen(443, function() {
-  console.log(`This app is running on localhost:80`);
+  console.log(`This app is running on https://www.social-media-builder.com`);
 });
 
 module.exports = httpsServer;
