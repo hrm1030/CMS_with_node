@@ -2,8 +2,8 @@ var fs = require('fs');
 var http = require('http');
 var https = require('https');
 
-var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
-var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+// var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
+// var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
 
 var createError = require('http-errors');
 var express = require('express');
@@ -15,7 +15,7 @@ var session = require('express-session');
 var redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 var port = 8443;
 
-var credentials = {key: privateKey, cert: certificate};
+// var credentials = {key: privateKey, cert: certificate};
 
 /** MongoDB connect */
 var mongoose = require('mongoose');
@@ -65,15 +65,15 @@ app.use(function(err, req, res, next) {
 });
 
 
-// app.listen(port, function() {
-//   console.log(`This app is running on localhost:${port}`);
-// });
-// module.exports = app;
-
-var httpsServer = https.createServer(credentials, app);
-
-httpsServer.listen(443, function() {
-  console.log(`This app is running on https://www.social-media-builder.com`);
+app.listen(port, function() {
+  console.log(`This app is running on localhost:${port}`);
 });
+module.exports = app;
+
+// var httpsServer = https.createServer(credentials, app);
+
+// httpsServer.listen(443, function() {
+//   console.log(`This app is running on https://www.social-media-builder.com`);
+// });
 
 module.exports = httpsServer;
