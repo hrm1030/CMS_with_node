@@ -166,50 +166,38 @@ $(document).ready(function() {
 
   $('#btn_copy_text').click(async function() {
     
-    var element = document.getElementById('preview_body');
-    // var img = document.getElementById('post_img');
-    var r = document.createRange();
-    r.selectNode(element);
-    var s = window.getSelection();
-    s.removeAllRanges();
-    s.addRange(r);
-    // Copy - requires clipboardWrite permission + crbug.com/395376 must be fixed
-    document.execCommand('copy');
-    toastr['success']('Copied text');
+    // var element = document.getElementById('modal_body');
+    // // var img = document.getElementById('post_img');
+    // var r = document.createRange();
+    // r.selectNode(element);
+    // var s = window.getSelection();
+    // s.removeAllRanges();
+    // s.addRange(r);
+    // // Copy - requires clipboardWrite permission + crbug.com/395376 must be fixed
+    // document.execCommand('copy');
 
-    // const canWriteToClipboard = await askWritePermission()
-    // // Copy a text to clipboard
-    // if (canWriteToClipboard) {
-    //   const blob = new Blob([$('#preview_body').text()], { type: 'text/plain' })
-    //   await setToClipboard(blob)
-    // }
+    const canWriteToClipboard = await askWritePermission()
+    // Copy a text to clipboard
+    if (canWriteToClipboard) {
+      const blob = new Blob([$('#preview_body').text()], { type: 'text/plain' })
+      toastr['success']('Copied text');
+      await setToClipboard(blob)
+    }
 
   });
 
   $('#btn_copy_img').click(async function() {
+    const canWriteToClipboard = await askWritePermission();
 
-    var element = document.getElementById('img_purchase');
-    // var img = document.getElementById('post_img');
-    var r = document.createRange();
-    r.selectNode(element);
-    var s = window.getSelection();
-    s.removeAllRanges();
-    s.addRange(r);
-    // Copy - requires clipboardWrite permission + crbug.com/395376 must be fixed
-    document.execCommand('copy');
-    toastr['success']('Copied image');
-
-    // const canWriteToClipboard = await askWritePermission();
-
-    // // Copy a PNG image to clipboard
-    // if (canWriteToClipboard) {
+    // Copy a PNG image to clipboard
+    if (canWriteToClipboard) {
      
-    //   const response = await fetch($('#img_purchase').attr('src'));
-    //   var blob = await response.blob();
-    //   // blob = blob.slice(0, blob.size, "image/png");
-    //   toastr['success']('Copied image');
-    //   await setToClipboard(blob);
-    // }
+      const response = await fetch($('#img_purchase').attr('src'));
+      var blob = await response.blob();
+      // blob = blob.slice(0, blob.size, "image/png");
+      toastr['success']('Copied image');
+      await setToClipboard(blob);
+    }
   });
 
   // $('#btn_facebook').click(function() {
