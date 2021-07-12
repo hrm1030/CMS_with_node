@@ -13,7 +13,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 // var redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
-var port = 8443;
+var port = 80;
 
 // var credentials = {key: privateKey, cert: certificate};
 
